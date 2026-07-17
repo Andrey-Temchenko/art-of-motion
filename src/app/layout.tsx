@@ -15,7 +15,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Art Of Motion',
   description:
-    'Art Of Motion: Fitness training platform. Group and individual sessions in Strength, Stretching, MFR, Gym, and Balance Boards. Book your workout online!'
+    'Art Of Motion: Fitness training platform. Group and individual sessions in Strength, Stretching, MFR, Gym, and Balance Boards. Book your workout online!',
+  appleWebApp: {
+    title: 'ArtOfMotion',
+    statusBarStyle: 'default'
+  }
 };
 
 export default function RootLayout({
