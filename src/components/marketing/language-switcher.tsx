@@ -2,11 +2,27 @@
 
 import type {JSX} from 'react';
 import {usePathname, useRouter} from 'next/navigation';
+import {ChevronDown, Globe} from 'lucide-react';
 
 import {locales, localeNames, type Locale} from '@/lib/i18n/config';
+import {Button} from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
 
 const LOCALE_COOKIE = 'NEXT_LOCALE';
 const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
+
+/** Short uppercase labels for the trigger button */
+const localeShortLabels: Record<Locale, string> = {
+  uk: 'UA',
+  ru: 'RU',
+  en: 'EN'
+};
 
 function setLocaleCookie(locale: string) {
   document.cookie = `${LOCALE_COOKIE}=${locale}; path=/; max-age=${LOCALE_COOKIE_MAX_AGE}`;
@@ -16,33 +32,36 @@ export function LanguageSwitcher({current}: {current: Locale}): JSX.Element {
   const pathname = usePathname();
   const router = useRouter();
 
-  function switchLocale(next: Locale) {
-    if (next === current) return;
+  function switchLocale(next: string) {
+    const nextLocale = next as Locale;
+    if (nextLocale === current) return;
 
-    setLocaleCookie(next);
+    setLocaleCookie(nextLocale);
 
     const segments = pathname.split('/');
-    segments[1] = next; // segments[0] is an empty string before the leading slash
+    segments[1] = nextLocale;
     router.push(segments.join('/'));
   }
 
   return (
-    <div role="group" aria-label="Language" className="flex items-center gap-2">
-      {locales.map(locale => (
-        <button
-          key={locale}
-          type="button"
-          onClick={() => switchLocale(locale)}
-          aria-current={locale === current ? 'true' : undefined}
-          className={`rounded-md px-2 py-1 text-xs font-semibold transition-all ${
-            locale === current
-              ? 'bg-primary text-primary-foreground shadow-sm'
-              : 'text-muted-foreground hover:bg-secondary hover:text-secondary-foreground'
-          }`}
-        >
-          {localeNames[locale]}
-        </button>
-      ))}
-    </div>
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        render={<Button variant="outline" size="sm" className="cursor-pointer gap-1.5 rounded-full px-3" />}
+      >
+        <Globe className="size-3.5" />
+        <span className="text-xs font-semibold">{localeShortLabels[current]}</span>
+        <ChevronDown className="size-3 opacity-60" />
+      </DropdownMenuTrigger>
+
+      <DropdownMenuContent align="end" sideOffset={8} className="min-w-28">
+        <DropdownMenuRadioGroup value={current} onValueChange={switchLocale}>
+          {locales.map(locale => (
+            <DropdownMenuRadioItem key={locale} value={locale} className="cursor-pointer px-3 py-2">
+              {localeNames[locale]}
+            </DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

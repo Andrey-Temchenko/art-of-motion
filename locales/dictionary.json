@@ -12,6 +12,26 @@
     }
   },
   "nav": {
+    "about": {
+      "uk": "Про мене",
+      "ru": "Обо мне",
+      "en": "About"
+    },
+    "services": {
+      "uk": "Напрямки",
+      "ru": "Направления",
+      "en": "Disciplines"
+    },
+    "gallery": {
+      "uk": "Галерея",
+      "ru": "Галерея",
+      "en": "Gallery"
+    },
+    "contact": {
+      "uk": "Контакти",
+      "ru": "Контакты",
+      "en": "Contact"
+    },
     "schedule": {
       "uk": "Розклад",
       "ru": "Расписание",
@@ -21,23 +41,70 @@
       "uk": "Увійти",
       "ru": "Войти",
       "en": "Log in"
+    },
+    "cta": {
+      "uk": "Почати тренування",
+      "ru": "Начать тренировки",
+      "en": "Start Training"
     }
   },
   "hero": {
+    "badge": {
+      "uk": "Персональний тренінг преміум-класу",
+      "ru": "Персональный тренинг премиум-класса",
+      "en": "Premium Personal Training"
+    },
     "title": {
-      "uk": "Тренування, які дають результат",
-      "ru": "Тренировки, которые дают результат",
-      "en": "Training that delivers results"
+      "uk": "Опануй своє тіло.",
+      "ru": "Овладей своим телом.",
+      "en": "Master Your Body."
     },
     "subtitle": {
-      "uk": "Індивідуальний підхід, зручний онлайн-запис і розклад, який підлаштовується під вас.",
-      "ru": "Индивидуальный подход, удобная онлайн-запись и расписание, которое подстраивается под вас.",
-      "en": "A personal approach, easy online booking, and a schedule that fits your life."
+      "uk": "Знайди свій рух.",
+      "ru": "Найди свое движение.",
+      "en": "Find Your Motion."
+    },
+    "desc": {
+      "uk": "Персональні тренування, що поєднують силу, гнучкість та відновлення для збалансованого життя.",
+      "ru": "Персональные тренировки, объединяющие силу, гибкость и восстановление для сбалансированной жизни.",
+      "en": "Personalized training combining strength, flexibility, and recovery for a balanced life."
     },
     "cta": {
       "uk": "Забронювати тренування",
       "ru": "Забронировать тренировку",
       "en": "Book a workout"
+    },
+    "cta1": {
+      "uk": "Почати тренування",
+      "ru": "Начать тренировки",
+      "en": "Start Training"
+    },
+    "cta2": {
+      "uk": "Дивитись відео",
+      "ru": "Смотреть видео",
+      "en": "Watch Video"
+    },
+    "stats": {
+      "clients": {
+        "uk": "500+",
+        "ru": "500+",
+        "en": "500+"
+      },
+      "clientsLabel": {
+        "uk": "Задоволених клієнтів",
+        "ru": "Довольных клиентов",
+        "en": "Happy Clients"
+      },
+      "exp": {
+        "uk": "8+",
+        "ru": "8+",
+        "en": "8+"
+      },
+      "expLabel": {
+        "uk": "Років досвіду",
+        "ru": "Лет опыта",
+        "en": "Years Exp."
+      }
     }
   },
   "about": {
@@ -46,10 +113,47 @@
       "ru": "О тренере",
       "en": "About the trainer"
     },
+    "tag": {
+      "uk": "Про тренера",
+      "ru": "О тренере",
+      "en": "About Trainer"
+    },
+    "title": {
+      "uk": "Привіт, я Алекс",
+      "ru": "Привет, я Алекс",
+      "en": "Hi, I am Alex"
+    },
     "bio": {
       "uk": "Багаторічний досвід у силових тренуваннях, реабілітації та роботі з поставою. Індивідуальні програми під ваші цілі — від першого заняття до змагального рівня.",
       "ru": "Многолетний опыт в силовых тренировках, реабилитации и работе с осанкой. Индивидуальные программы под ваши цели — от первого занятия до соревновательного уровня.",
       "en": "Years of experience in strength training, rehabilitation, and posture work. Individual programs tailored to your goals — from your first session to competition level."
+    },
+    "p1": {
+      "uk": "Я вірю, що справжній фітнес — це не лише про підняття ваги; це про розуміння механіки вашого тіла. Мій підхід поєднує силові тренування з важливими техніками відновлення.",
+      "ru": "Я верю, что настоящий фитнес — это не просто поднятие тяжестей; это понимание механики вашего тела. Мой подход сочетает силовые тренировки с важными техниками восстановления.",
+      "en": "I believe that true fitness is not just about lifting weights; it is about understanding your body's mechanics. My approach blends high-intensity strength training with crucial recovery techniques."
+    },
+    "p2": {
+      "uk": "Чи хочете ви наростити м'язи, покращити гнучкість або відновитися після травми, ми побудуємо індивідуальний шлях спеціально для вас.",
+      "ru": "Хотите ли вы нарастить мышцы, улучшить гибкость или восстановиться после травмы, мы построим индивидуальный путь специально для вас.",
+      "en": "Whether you want to build muscle, improve flexibility, or recover from an injury, we will build a custom path tailored specifically for you."
+    },
+    "achievements": {
+      "item1": {
+        "uk": "Сертифікований тренер",
+        "ru": "Сертифицированный тренер",
+        "en": "Certified Personal Trainer"
+      },
+      "item2": {
+        "uk": "Спеціаліст з реабілітації",
+        "ru": "Специалист по реабилитации",
+        "en": "Rehabilitation Specialist"
+      },
+      "item3": {
+        "uk": "Нутриціолог",
+        "ru": "Нутрициолог",
+        "en": "Nutrition Coach"
+      }
     }
   },
   "disciplines": {
@@ -63,6 +167,16 @@
       "ru": "Выберите формат, который подходит именно вам",
       "en": "Choose the format that suits you"
     },
+    "tag": {
+      "uk": "Методологія",
+      "ru": "Методология",
+      "en": "Methodology"
+    },
+    "title": {
+      "uk": "Чотири стовпи руху",
+      "ru": "Четыре столпа движения",
+      "en": "Four Pillars of Motion"
+    },
     "items": {
       "strength": {
         "title": {
@@ -71,21 +185,21 @@
           "en": "Strength Training"
         },
         "description": {
-          "uk": "Функціональні та класичні силові тренування для розвитку сили та витривалості.",
-          "ru": "Функциональные и классические силовые тренировки для развития силы и выносливости.",
-          "en": "Functional and classic strength training to build power and endurance."
+          "uk": "Побудова м'язової бази, підвищення щільності кісток та прискорення метаболізму за допомогою вільних ваг та механіки тіла.",
+          "ru": "Построение мышечной базы, повышение плотности костей и ускорение метаболизма с помощью свободных весов и механики тела.",
+          "en": "Build foundational muscle, increase bone density, and boost metabolism using free weights and bodyweight mechanics."
         }
       },
       "stretching": {
         "title": {
-          "uk": "Розтяжка",
-          "ru": "Растяжка",
-          "en": "Stretching"
+          "uk": "Стретчинг та гнучкість",
+          "ru": "Стретчинг и гибкость",
+          "en": "Stretching & Flexibility"
         },
         "description": {
-          "uk": "Розвиток гнучкості та рухливості суглобів у безпечному темпі.",
-          "ru": "Развитие гибкости и подвижности суставов в безопасном темпе.",
-          "en": "Improving flexibility and joint mobility at a safe pace."
+          "uk": "Збільшення амплітуди рухів, зменшення скутості м'язів та покращення постави через керовані сесії мобільності.",
+          "ru": "Увеличение амплитуды движений, уменьшение скованности мышц и улучшение осанки через управляемые сессии мобильности.",
+          "en": "Enhance your range of motion, reduce muscle stiffness, and improve overall posture through guided mobility sessions."
         }
       },
       "mfr": {
@@ -95,21 +209,21 @@
           "en": "MFR & Recovery"
         },
         "description": {
-          "uk": "Міофасціальний реліз для зняття напруги та прискорення відновлення.",
-          "ru": "Миофасциальный релиз для снятия напряжения и ускорения восстановления.",
-          "en": "Myofascial release to relieve tension and speed up recovery."
+          "uk": "Техніки міофасціального релізу для полегшення болю, відновлення еластичності тканин та прискорення відновлення після тренувань.",
+          "ru": "Техники миофасциального релиза для облегчения боли, восстановления эластичности тканей и ускорения восстановления после тренировок.",
+          "en": "Myofascial release techniques to alleviate pain, restore tissue elasticity, and speed up post-workout recovery."
         }
       },
       "balance": {
         "title": {
-          "uk": "Баланс-борди",
-          "ru": "Балансборды",
-          "en": "Balance Boards"
+          "uk": "Баланс та кор",
+          "ru": "Баланс и кор",
+          "en": "Balance & Core"
         },
         "description": {
-          "uk": "Тренування балансу та стабільності кора на спеціальному обладнанні.",
-          "ru": "Тренировка баланса и стабильности кора на специальном оборудовании.",
-          "en": "Balance and core stability training on specialized equipment."
+          "uk": "Використання балансбордів та функціональних рухів для стабілізації кору та покращення щоденної функціональної активності.",
+          "ru": "Использование балансбордов и функциональных движений для стабилизации кора и улучшения ежедневной функциональной активности.",
+          "en": "Utilize balance boards and functional movements to stabilize your core, improving daily functional fitness."
         }
       }
     }
@@ -126,6 +240,54 @@
       "uk": "Відгуки клієнтів",
       "ru": "Отзывы клиентов",
       "en": "Client testimonials"
+    },
+    "tag": {
+      "uk": "Історії успіху",
+      "ru": "Истории успеха",
+      "en": "Success Stories"
+    },
+    "title": {
+      "uk": "Що кажуть мої клієнти",
+      "ru": "Что говорят мои клиенты",
+      "en": "What My Clients Say"
+    },
+    "reviews": {
+      "review1": {
+        "name": {
+          "uk": "Сара Д.",
+          "ru": "Сара Д.",
+          "en": "Sarah J."
+        },
+        "text": {
+          "uk": "Поєднання сили та МФР повністю змінило мою поставу. У мене більше не болить спина!",
+          "ru": "Сочетание силы и МФР полностью изменило мою осанку. У меня больше не болит спина!",
+          "en": "The combination of strength and MFR completely changed my posture. I no longer have back pain!"
+        }
+      },
+      "review2": {
+        "name": {
+          "uk": "Максим Т.",
+          "ru": "Максим Т.",
+          "en": "Mike T."
+        },
+        "text": {
+          "uk": "Підхід Алекса унікальний. Я прийшов за масою, але здобув гнучкість та баланс, про які навіть не мріяв.",
+          "ru": "Подход Алекса уникален. Я пришел за массой, но обрел гибкость и баланс, о которых даже не мечтал.",
+          "en": "Alex's approach is unique. I came to get big, but I gained flexibility and balance I never thought possible."
+        }
+      },
+      "review3": {
+        "name": {
+          "uk": "Олена Р.",
+          "ru": "Елена Р.",
+          "en": "Elena R."
+        },
+        "text": {
+          "uk": "Найкращий тренер, який у мене був. Увага до деталей та відновлення просто неперевершена.",
+          "ru": "Лучший тренер, который у меня был. Внимание к деталям и восстановлению просто непревзойденное.",
+          "en": "Best trainer I have ever had. The attention to detail and recovery is unmatched."
+        }
+      }
     }
   },
   "contact": {
@@ -134,10 +296,60 @@
       "ru": "Контакты",
       "en": "Contact"
     },
+    "title": {
+      "uk": "Готові до руху?",
+      "ru": "Готовы к движению?",
+      "en": "Ready to Move?"
+    },
+    "desc": {
+      "uk": "Забронюйте своє перше тренування сьогодні або зв'яжіться для консультації.",
+      "ru": "Забронируйте свою первую тренировку сегодня или свяжитесь для консультации.",
+      "en": "Book your first session today or reach out for a consultation."
+    },
+    "locationLabel": {
+      "uk": "Локація",
+      "ru": "Локация",
+      "en": "Location"
+    },
     "address": {
-      "uk": "Київ, вул. Прикладна, 1",
-      "ru": "Киев, ул. Примерная, 1",
-      "en": "Kyiv, Example St. 1"
+      "uk": "Київ, Sport Hub Center",
+      "ru": "Киев, Sport Hub Center",
+      "en": "Kyiv, Sport Hub Center"
+    },
+    "timeLabel": {
+      "uk": "Графік",
+      "ru": "График",
+      "en": "Hours"
+    },
+    "time": {
+      "uk": "Пн-Сб: 8:00 - 21:00",
+      "ru": "Пн-Сб: 8:00 - 21:00",
+      "en": "Mon-Sat: 8AM - 9PM"
+    },
+    "formName": {
+      "uk": "Ім'я",
+      "ru": "Имя",
+      "en": "Name"
+    },
+    "formNamePlaceholder": {
+      "uk": "Ваше ім'я",
+      "ru": "Ваше имя",
+      "en": "John Doe"
+    },
+    "formPhone": {
+      "uk": "Телефон або Telegram",
+      "ru": "Телефон или Telegram",
+      "en": "Phone or Telegram"
+    },
+    "formPhonePlaceholder": {
+      "uk": "+380...",
+      "ru": "+380...",
+      "en": "+380..."
+    },
+    "cta": {
+      "uk": "Надіслати повідомлення",
+      "ru": "Отправить сообщение",
+      "en": "Send Message"
     },
     "telegram": {
       "uk": "Написати в Telegram",
