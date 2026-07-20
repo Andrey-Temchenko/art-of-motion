@@ -1,0 +1,165 @@
+{
+  "meta": {
+    "siteName": {
+      "uk": "ArtOfMotion — персональний тренер",
+      "ru": "ArtOfMotion — персональный тренер",
+      "en": "ArtOfMotion — Personal Trainer"
+    },
+    "description": {
+      "uk": "Силові тренування, розтяжка, МФР та баланс-борди з персональним тренером. Записуйтесь на індивідуальні та групові заняття онлайн.",
+      "ru": "Силовые тренировки, растяжка, МФР и балансборды с персональным тренером. Записывайтесь на индивидуальные и групповые занятия онлайн.",
+      "en": "Strength training, stretching, MFR and balance boards with a personal trainer. Book individual and group sessions online."
+    }
+  },
+  "nav": {
+    "schedule": {
+      "uk": "Розклад",
+      "ru": "Расписание",
+      "en": "Schedule"
+    },
+    "login": {
+      "uk": "Увійти",
+      "ru": "Войти",
+      "en": "Log in"
+    }
+  },
+  "hero": {
+    "title": {
+      "uk": "Тренування, які дають результат",
+      "ru": "Тренировки, которые дают результат",
+      "en": "Training that delivers results"
+    },
+    "subtitle": {
+      "uk": "Індивідуальний підхід, зручний онлайн-запис і розклад, який підлаштовується під вас.",
+      "ru": "Индивидуальный подход, удобная онлайн-запись и расписание, которое подстраивается под вас.",
+      "en": "A personal approach, easy online booking, and a schedule that fits your life."
+    },
+    "cta": {
+      "uk": "Забронювати тренування",
+      "ru": "Забронировать тренировку",
+      "en": "Book a workout"
+    }
+  },
+  "about": {
+    "heading": {
+      "uk": "Про тренера",
+      "ru": "О тренере",
+      "en": "About the trainer"
+    },
+    "bio": {
+      "uk": "Багаторічний досвід у силових тренуваннях, реабілітації та роботі з поставою. Індивідуальні програми під ваші цілі — від першого заняття до змагального рівня.",
+      "ru": "Многолетний опыт в силовых тренировках, реабилитации и работе с осанкой. Индивидуальные программы под ваши цели — от первого занятия до соревновательного уровня.",
+      "en": "Years of experience in strength training, rehabilitation, and posture work. Individual programs tailored to your goals — from your first session to competition level."
+    }
+  },
+  "disciplines": {
+    "heading": {
+      "uk": "Напрямки тренувань",
+      "ru": "Направления тренировок",
+      "en": "Training disciplines"
+    },
+    "subheading": {
+      "uk": "Оберіть формат, який підходить саме вам",
+      "ru": "Выберите формат, который подходит именно вам",
+      "en": "Choose the format that suits you"
+    },
+    "items": {
+      "strength": {
+        "title": {
+          "uk": "Силові тренування",
+          "ru": "Силовые тренировки",
+          "en": "Strength Training"
+        },
+        "description": {
+          "uk": "Функціональні та класичні силові тренування для розвитку сили та витривалості.",
+          "ru": "Функциональные и классические силовые тренировки для развития силы и выносливости.",
+          "en": "Functional and classic strength training to build power and endurance."
+        }
+      },
+      "stretching": {
+        "title": {
+          "uk": "Розтяжка",
+          "ru": "Растяжка",
+          "en": "Stretching"
+        },
+        "description": {
+          "uk": "Розвиток гнучкості та рухливості суглобів у безпечному темпі.",
+          "ru": "Развитие гибкости и подвижности суставов в безопасном темпе.",
+          "en": "Improving flexibility and joint mobility at a safe pace."
+        }
+      },
+      "mfr": {
+        "title": {
+          "uk": "МФР та відновлення",
+          "ru": "МФР и восстановление",
+          "en": "MFR & Recovery"
+        },
+        "description": {
+          "uk": "Міофасціальний реліз для зняття напруги та прискорення відновлення.",
+          "ru": "Миофасциальный релиз для снятия напряжения и ускорения восстановления.",
+          "en": "Myofascial release to relieve tension and speed up recovery."
+        }
+      },
+      "balance": {
+        "title": {
+          "uk": "Баланс-борди",
+          "ru": "Балансборды",
+          "en": "Balance Boards"
+        },
+        "description": {
+          "uk": "Тренування балансу та стабільності кора на спеціальному обладнанні.",
+          "ru": "Тренировка баланса и стабильности кора на специальном оборудовании.",
+          "en": "Balance and core stability training on specialized equipment."
+        }
+      }
+    }
+  },
+  "gallery": {
+    "heading": {
+      "uk": "Галерея",
+      "ru": "Галерея",
+      "en": "Gallery"
+    }
+  },
+  "testimonials": {
+    "heading": {
+      "uk": "Відгуки клієнтів",
+      "ru": "Отзывы клиентов",
+      "en": "Client testimonials"
+    }
+  },
+  "contact": {
+    "heading": {
+      "uk": "Контакти",
+      "ru": "Контакты",
+      "en": "Contact"
+    },
+    "address": {
+      "uk": "Київ, вул. Прикладна, 1",
+      "ru": "Киев, ул. Примерная, 1",
+      "en": "Kyiv, Example St. 1"
+    },
+    "telegram": {
+      "uk": "Написати в Telegram",
+      "ru": "Написать в Telegram",
+      "en": "Message on Telegram"
+    },
+    "instagram": {
+      "uk": "Instagram",
+      "ru": "Instagram",
+      "en": "Instagram"
+    },
+    "whatsapp": {
+      "uk": "WhatsApp",
+      "ru": "WhatsApp",
+      "en": "WhatsApp"
+    }
+  },
+  "footer": {
+    "rights": {
+      "uk": "Усі права захищено.",
+      "ru": "Все права защищены.",
+      "en": "All rights reserved."
+    }
+  }
+}
