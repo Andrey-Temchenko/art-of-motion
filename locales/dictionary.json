@@ -6,9 +6,9 @@
       "en": "ArtOfMotion — Personal Trainer"
     },
     "description": {
-      "uk": "Силові тренування, розтяжка, МФР та баланс-борди з персональним тренером. Записуйтесь на індивідуальні та групові заняття онлайн.",
-      "ru": "Силовые тренировки, растяжка, МФР и балансборды с персональным тренером. Записывайтесь на индивидуальные и групповые занятия онлайн.",
-      "en": "Strength training, stretching, MFR and balance boards with a personal trainer. Book individual and group sessions online."
+      "uk": "Персональні офлайн-тренування. Трансформація жіночого стану через тіло та увагу. Рух для легкості та відчуття життя.",
+      "ru": "Персональные офлайн-тренировки. Трансформация женского состояния через тело и внимание. Движение для легкости и ощущения жизни.",
+      "en": "Personal offline training. Transformation of the female state through the body and attention. Movement for lightness and feeling alive."
     }
   },
   "nav": {
@@ -50,29 +50,29 @@
   },
   "hero": {
     "badge": {
-      "uk": "Персональний тренінг преміум-класу",
-      "ru": "Персональный тренинг премиум-класса",
-      "en": "Premium Personal Training"
+      "uk": "Персональні та групові тренування",
+      "ru": "Персональные и групповые тренировки",
+      "en": "Personal & Group Training"
     },
     "title": {
-      "uk": "Опануй своє тіло.",
-      "ru": "Овладей своим телом.",
-      "en": "Master Your Body."
+      "uk": "Трансформація через тіло.",
+      "ru": "Трансформация через тело.",
+      "en": "Transformation through the body."
     },
     "subtitle": {
-      "uk": "Знайди свій рух.",
-      "ru": "Найди свое движение.",
-      "en": "Find Your Motion."
+      "uk": "Рух заради життя.",
+      "ru": "Движение ради жизни.",
+      "en": "Movement for life."
     },
     "desc": {
-      "uk": "Персональні тренування, що поєднують силу, гнучкість та відновлення для збалансованого життя.",
-      "ru": "Персональные тренировки, объединяющие силу, гибкость и восстановление для сбалансированной жизни.",
-      "en": "Personalized training combining strength, flexibility, and recovery for a balanced life."
+      "uk": "Тренування для жінок, де на першому місці стоїть турбота про тіло. Без сорому, порівнянь і фітнес-насильства.",
+      "ru": "Тренировки для женщин, где во главе стоит забота о теле. Без стыда, сравнений и фитнес-насилия.",
+      "en": "Workouts for women where body care comes first. Without shame, comparisons, or fitness violence."
     },
     "cta": {
-      "uk": "Забронювати тренування",
-      "ru": "Забронировать тренировку",
-      "en": "Book a workout"
+      "uk": "Записатися на тренування",
+      "ru": "Записаться на тренировку",
+      "en": "Book a Workout"
     },
     "cta1": {
       "uk": "Почати тренування",
@@ -80,89 +80,89 @@
       "en": "Start Training"
     },
     "cta2": {
-      "uk": "Дивитись відео",
-      "ru": "Смотреть видео",
-      "en": "Watch Video"
+      "uk": "Дізнатися більше",
+      "ru": "Узнать больше",
+      "en": "Learn More"
     },
     "stats": {
       "clients": {
-        "uk": "500+",
-        "ru": "500+",
-        "en": "500+"
+        "uk": "10+",
+        "ru": "10+",
+        "en": "10+"
       },
       "clientsLabel": {
-        "uk": "Задоволених клієнтів",
-        "ru": "Довольных клиентов",
-        "en": "Happy Clients"
-      },
-      "exp": {
-        "uk": "8+",
-        "ru": "8+",
-        "en": "8+"
-      },
-      "expLabel": {
         "uk": "Років досвіду",
         "ru": "Лет опыта",
         "en": "Years Exp."
+      },
+      "exp": {
+        "uk": "100%",
+        "ru": "100%",
+        "en": "100%"
+      },
+      "expLabel": {
+        "uk": "Без болю",
+        "ru": "Без боли",
+        "en": "Pain Free"
       }
     },
     "floatingBadgeTitle": {
-      "uk": "Збалансований підхід",
-      "ru": "Сбалансированный подход",
-      "en": "Balanced Approach"
+      "uk": "Функціональне тіло",
+      "ru": "Функциональное тело",
+      "en": "Functional Body"
     },
     "floatingBadgeDesc": {
-      "uk": "Тіло та розум",
-      "ru": "Тело и разум",
-      "en": "Mind & Body"
+      "uk": "Тіло та свідомість",
+      "ru": "Тело и сознание",
+      "en": "Body & Mind"
     }
   },
   "about": {
     "heading": {
-      "uk": "Про тренера",
-      "ru": "О тренере",
-      "en": "About the trainer"
+      "uk": "Про мене",
+      "ru": "Обо мне",
+      "en": "About me"
     },
     "tag": {
-      "uk": "Про тренера",
-      "ru": "О тренере",
-      "en": "About Trainer"
+      "uk": "Експерт з руху",
+      "ru": "Эксперт по движению",
+      "en": "Movement Expert"
     },
     "title": {
-      "uk": "Привіт, я Алекс",
-      "ru": "Привет, я Алекс",
-      "en": "Hi, I am Alex"
+      "uk": "Я знаю шлях, бо мені не байдуже",
+      "ru": "Я знаю путь, потому что мне не всё равно",
+      "en": "I know the way, because I care"
     },
     "bio": {
-      "uk": "Багаторічний досвід у силових тренуваннях, реабілітації та роботі з поставою. Індивідуальні програми під ваші цілі — від першого заняття до змагального рівня.",
-      "ru": "Многолетний опыт в силовых тренировках, реабилитации и работе с осанкой. Индивидуальные программы под ваши цели — от первого занятия до соревновательного уровня.",
-      "en": "Years of experience in strength training, rehabilitation, and posture work. Individual programs tailored to your goals — from your first session to competition level."
+      "uk": "Я — експерт з руху. Фитнес — не заради схуднення до літа, а для трансформації стану через тіло. Моє тіло — це тіло живої жінки, і це нормально.",
+      "ru": "Я — эксперт по движению. Фитнес — не ради похудения к лету, а для трансформации состояния через тело. Мое тело — это тело живой женщины, и это нормально.",
+      "en": "I am a movement expert. Fitness is not for losing weight for summer, but for transforming the state through the body. My body is the body of a living woman, and that's normal."
     },
     "p1": {
-      "uk": "Я вірю, що справжній фітнес — це не лише про підняття ваги; це про розуміння механіки вашого тіла. Мій підхід поєднує силові тренування з важливими техніками відновлення.",
-      "ru": "Я верю, что настоящий фитнес — это не просто поднятие тяжестей; это понимание механики вашего тела. Мой подход сочетает силовые тренировки с важными техниками восстановления.",
-      "en": "I believe that true fitness is not just about lifting weights; it is about understanding your body's mechanics. My approach blends high-intensity strength training with crucial recovery techniques."
+      "uk": "10 років я вивчаю, як працює жіноче тіло. Виявилося, що випираючий живіт — це часто питання дихання, тазу і постави, а не жир. А слабкість — результат затисків, а не відсутності дисципліни.",
+      "ru": "10 лет я изучаю, как работает женское тело. Оказалось, что выпирающий живот — это часто вопрос дыхания, таза и осанки, а не жир. А слабость — результат зажимов, а не отсутствия дисциплины.",
+      "en": "For 10 years I have been studying how the female body works. It turned out that a protruding belly is often a matter of breathing, pelvis, and posture, not fat. And weakness is the result of clamps, not lack of discipline."
     },
     "p2": {
-      "uk": "Чи хочете ви наростити м'язи, покращити гнучкість або відновитися після травми, ми побудуємо індивідуальний шлях спеціально для вас.",
-      "ru": "Хотите ли вы нарастить мышцы, улучшить гибкость или восстановиться после травмы, мы построим индивидуальный путь специально для вас.",
-      "en": "Whether you want to build muscle, improve flexibility, or recover from an injury, we will build a custom path tailored specifically for you."
+      "uk": "Мій результат — це функціональне тіло і впевнений погляд. Я не продаю ілюзію ідеального тіла та швидких результатів. Ми будуємо фундамент: працюємо з суглобами, осанкою і диханням.",
+      "ru": "Мой результат — это функциональное тело и уверенный взгляд. Я не продаю иллюзию идеального тела и быстрых результатов. Мы строим фундамент: работаем с суставами, осанкой и дыханием.",
+      "en": "My result is a functional body and a confident look. I do not sell the illusion of a perfect body and fast results. We build a foundation: working with joints, posture, and breathing."
     },
     "achievements": {
       "item1": {
-        "uk": "Сертифікований тренер",
-        "ru": "Сертифицированный тренер",
-        "en": "Certified Personal Trainer"
+        "uk": "Експерт з руху",
+        "ru": "Эксперт по движению",
+        "en": "Movement Expert"
       },
       "item2": {
-        "uk": "Спеціаліст з реабілітації",
-        "ru": "Специалист по реабилитации",
-        "en": "Rehabilitation Specialist"
+        "uk": "Сертифікат REPs",
+        "ru": "Сертификат REPs",
+        "en": "REPs Certified"
       },
       "item3": {
-        "uk": "Нутриціолог",
-        "ru": "Нутрициолог",
-        "en": "Nutrition Coach"
+        "uk": "10 років практики",
+        "ru": "10 лет практики",
+        "en": "10 Years Practice"
       }
     }
   },
@@ -173,9 +173,9 @@
       "en": "Training disciplines"
     },
     "subheading": {
-      "uk": "Оберіть формат, який підходить саме вам",
-      "ru": "Выберите формат, который подходит именно вам",
-      "en": "Choose the format that suits you"
+      "uk": "Тренування, ПІСЛЯ яких є сили жити",
+      "ru": "Тренировки, ПОСЛЕ которых есть силы жить",
+      "en": "Workouts AFTER which you have the energy to live"
     },
     "tag": {
       "uk": "Методологія",
@@ -183,9 +183,9 @@
       "en": "Methodology"
     },
     "title": {
-      "uk": "Чотири стовпи руху",
-      "ru": "Четыре столпа движения",
-      "en": "Four Pillars of Motion"
+      "uk": "Ми не руйнуємо — ми будуємо фундамент",
+      "ru": "Мы не разрушаем — мы строим фундамент",
+      "en": "We don't destroy — we build a foundation"
     },
     "personal": {
       "title": {
@@ -197,25 +197,25 @@
         "stretching": {
           "title": {"uk": "Стретчинг", "ru": "Стретчинг", "en": "Stretching"},
           "description": {
-            "uk": "Глибоке розслаблення м'язів, поліпшення постави та збільшення рухливості суглобів.",
-            "ru": "Глубокое расслабление мышц, улучшение осанки и увеличение подвижности суставов.",
-            "en": "Deep muscle relaxation, posture improvement, and increased joint mobility."
+            "uk": "Глибоке розслаблення м'язів, робота з осанкою та зняття затисків без болю і насильства.",
+            "ru": "Глубокое расслабление мышц, работа с осанкой и снятие зажимов без боли и насилия.",
+            "en": "Deep muscle relaxation, working with posture, and relieving tension without pain or violence."
           }
         },
         "hotIron": {
           "title": {"uk": "Хот айрон", "ru": "Хот айрон", "en": "Hot Iron"},
           "description": {
-            "uk": "Програма силової витривалості з міні-штангами для спалювання жиру та тонусу.",
-            "ru": "Программа силовой выносливости с мини-штангами для сжигания жира и тонуса.",
-            "en": "Strength endurance program with mini-barbells for fat burning and muscle tone."
+            "uk": "Силові тренування з міні-штангами для створення м'язового фундаменту та здорового тонусу.",
+            "ru": "Силовые тренировки с мини-штангами для создания мышечного фундамента и здорового тонуса.",
+            "en": "Strength training with mini-barbells to create a muscle foundation and healthy tone."
           }
         },
         "gym": {
-          "title": {"uk": "Тренер тренажерного залу", "ru": "Тренер тренажёрного зала", "en": "Gym Trainer"},
+          "title": {"uk": "Тренажерний зал", "ru": "Тренажерный зал", "en": "Gym Trainer"},
           "description": {
-            "uk": "Персоналізовані тренування на тренажерах для набору маси або досягнення конкретних цілей.",
-            "ru": "Персонализированные тренировки на тренажерах для набора массы или достижения конкретных целей.",
-            "en": "Personalized gym equipment workouts to build mass or achieve specific fitness goals."
+            "uk": "Персональні тренування на основі біомеханіки. Жодних вправ «заради вправ».",
+            "ru": "Персональные тренировки на основе биомеханики. Никаких упражнений «ради упражнений».",
+            "en": "Personal training based on biomechanics. No exercises just for the sake of exercises."
           }
         }
       }
@@ -230,41 +230,41 @@
         "strength": {
           "title": {"uk": "Силова", "ru": "Силовая", "en": "Strength"},
           "description": {
-            "uk": "Високоінтенсивні тренування для розвитку сили та витривалості з вільною вагою.",
-            "ru": "Высокоинтенсивные тренировки для развития силы и выносливости со свободным весом.",
-            "en": "High-intensity workouts to develop strength and endurance using free weights."
+            "uk": "Розвиток сили для тих, хто втомився від гонки і хоче відчувати тіло живим і функціональним.",
+            "ru": "Развитие силы для тех, кто устал от гонки и хочет чувствовать тело живым и функциональным.",
+            "en": "Strength development for those tired of the race and wanting to feel their body alive and functional."
           }
         },
         "stretch": {
           "title": {"uk": "Розтяжка", "ru": "Растяжка", "en": "Stretching"},
           "description": {
-            "uk": "Групові сесії для м'якої розтяжки, покращення гнучкості та відновлення.",
-            "ru": "Групповые сессии для мягкой растяжки, улучшения гибкости и восстановления.",
-            "en": "Group sessions for gentle stretching, flexibility improvement, and recovery."
+            "uk": "М'яка розтяжка для поліпшення гнучкості. Ми шукаємо причину болю і працюємо з суглобами.",
+            "ru": "Мягкая растяжка для улучшения гибкости. Мы ищем причину боли и работаем с суставами.",
+            "en": "Gentle stretching for flexibility. We look for the cause of pain and work with joints."
           }
         },
         "boards": {
           "title": {"uk": "Борди", "ru": "Борды", "en": "Balance Boards"},
           "description": {
-            "uk": "Тренування на балансбордах для стабілізації кору та покращення координації.",
-            "ru": "Тренировки на балансбордах для стабилизации кора и улучшения координации.",
-            "en": "Balance board workouts for core stabilization and coordination improvement."
+            "uk": "Тренування на балансбордах для стабілізації кора, дихання та відчуття контролю над тілом.",
+            "ru": "Тренировки на балансбордах для стабилизации кора, дыхания и ощущения контроля над телом.",
+            "en": "Balance board training for core stabilization, breathing, and body control."
           }
         },
         "trx": {
           "title": {"uk": "ТРХ", "ru": "ТРХ", "en": "TRX"},
           "description": {
-            "uk": "Підвісні тренування з власною вагою для розвитку сили, балансу та гнучкості.",
-            "ru": "Подвесные тренировки с собственным весом для развития силы, баланса и гибкости.",
-            "en": "Suspension training with your own body weight to develop strength, balance, and flexibility."
+            "uk": "Підвісні тренування з власною вагою. Розвиток сили і балансу без роботи «на знос».",
+            "ru": "Подвесные тренировки с собственным весом. Развитие силы и баланса без работы «на износ».",
+            "en": "Suspension training with body weight. Developing strength and balance without working to exhaustion."
           }
         },
         "mfr": {
           "title": {"uk": "МФР", "ru": "МФР", "en": "MFR"},
           "description": {
-            "uk": "Міофасціальний реліз з ролами для зняття болю в м'язах та прискорення відновлення.",
-            "ru": "Миофасциальный релиз с роллами для снятия боли в мышцах и ускорения восстановления.",
-            "en": "Myofascial release using rollers to relieve muscle pain and speed up recovery."
+            "uk": "Міофасціальний реліз для зняття болю в м'язах. Відновлення клітин і турбота про нервову систему.",
+            "ru": "Миофасциальный релиз для снятия боли в мышцах. Восстановление клеток и забота о нервной системе.",
+            "en": "Myofascial release for muscle pain relief. Cellular recovery and nervous system care."
           }
         }
       }
@@ -282,9 +282,9 @@
       "en": "Gym Atmosphere"
     },
     "desc": {
-      "uk": "Подивіться, як проходять наші тренування, та відчуйте енергію руху.",
-      "ru": "Посмотрите, как проходят наши тренировки, и почувствуйте энергию движения.",
-      "en": "Take a look at our training sessions and feel the energy of motion."
+      "uk": "Подивіться, як проходять наші тренування, та відчуйте енергію бережного руху.",
+      "ru": "Посмотрите, как проходят наши тренировки, и почувствуйте энергию бережного движения.",
+      "en": "Take a look at our workouts and feel the energy of mindful movement."
     }
   },
   "testimonials": {
@@ -409,14 +409,14 @@
       "en": "Contact"
     },
     "title": {
-      "uk": "Готові до руху?",
-      "ru": "Готовы к движению?",
-      "en": "Ready to Move?"
+      "uk": "Створимо твій новий стан разом?",
+      "ru": "Создадим твое новое состояние вместе?",
+      "en": "Shall we create your new state together?"
     },
     "desc": {
-      "uk": "Забронюйте своє перше тренування сьогодні або зв'яжіться для консультації.",
-      "ru": "Забронируйте свою первую тренировку сегодня или свяжитесь для консультации.",
-      "en": "Book your first session today or reach out for a consultation."
+      "uk": "Запишіться на своє перше тренування вже сьогодні або зв'яжіться зі мною для консультації.",
+      "ru": "Запишитесь на свою первую тренировку уже сегодня или свяжитесь со мной для консультации.",
+      "en": "Book your first workout today or contact me for a consultation."
     },
     "locationLabel": {
       "uk": "Локації тренувань",
