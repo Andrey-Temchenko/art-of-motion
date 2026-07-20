@@ -72,8 +72,8 @@ export function GallerySection({dict}: {dict: Dictionary}) {
 
             {/* Custom positioned navigation buttons */}
             <div className="hidden md:block">
-              <CarouselPrevious className="border-border hover:bg-primary hover:text-primary-foreground -left-6 size-12 cursor-pointer shadow-lg transition-all hover:scale-110" />
-              <CarouselNext className="border-border hover:bg-primary hover:text-primary-foreground -right-6 size-12 cursor-pointer shadow-lg transition-all hover:scale-110" />
+              <CarouselPrevious className="border-border bg-background text-foreground hover:bg-primary hover:text-primary-foreground focus-visible:bg-primary focus-visible:text-primary-foreground dark:bg-background dark:hover:bg-primary dark:hover:text-primary-foreground dark:focus-visible:bg-primary dark:focus-visible:text-primary-foreground -left-6 size-12 cursor-pointer shadow-lg transition-all hover:scale-110 focus-visible:scale-110" />
+              <CarouselNext className="border-border bg-background text-foreground hover:bg-primary hover:text-primary-foreground focus-visible:bg-primary focus-visible:text-primary-foreground dark:bg-background dark:hover:bg-primary dark:hover:text-primary-foreground dark:focus-visible:bg-primary dark:focus-visible:text-primary-foreground -right-6 size-12 cursor-pointer shadow-lg transition-all hover:scale-110 focus-visible:scale-110" />
             </div>
           </Carousel>
         </div>

@@ -12,6 +12,7 @@ import {cn} from '@/lib/utils';
 import {Button} from '@/components/ui/button';
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetClose} from '@/components/ui/sheet';
 import {LanguageSwitcher} from '@/components/marketing/LanguageSwitcher';
+import {ThemeToggle} from '@/components/marketing/ThemeToggle';
 
 interface NavbarProps {
   dict: Dictionary;
@@ -59,7 +60,7 @@ export function Navbar({dict, locale}: NavbarProps) {
               className="object-cover transition-transform group-hover:scale-105"
             />
           </div>
-          <span className="text-foreground text-lg font-bold tracking-tight md:text-xl">
+          <span className="text-foreground hidden text-lg font-bold tracking-tight sm:inline-block md:text-xl">
             ArtOf<span className="text-primary">Motion</span>
           </span>
         </Link>
@@ -80,6 +81,7 @@ export function Navbar({dict, locale}: NavbarProps) {
         {/* Right Actions */}
         <div className="flex items-center gap-3 md:gap-4">
           <LanguageSwitcher current={locale} />
+          <ThemeToggle />
 
           <Button
             className="hidden cursor-pointer rounded-full px-5 py-2.5 font-medium lg:inline-flex"

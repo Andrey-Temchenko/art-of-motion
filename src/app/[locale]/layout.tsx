@@ -5,6 +5,7 @@ import {Geist, Geist_Mono} from 'next/font/google';
 
 import {locales, type Locale} from '@/lib/i18n/config';
 import {getDictionary} from '@/lib/i18n/get-dictionary';
+import {ThemeProvider} from '@/providers/theme-provider';
 
 import '../globals.css';
 
@@ -59,8 +60,16 @@ export default async function RootLocaleLayout({
   }
 
   return (
-    <html lang={locale} className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">{children}</body>
+    <html
+      lang={locale}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+    >
+      <body className="flex min-h-full flex-col">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
