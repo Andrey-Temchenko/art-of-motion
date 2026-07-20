@@ -5,51 +5,17 @@ import type {Locale} from '@/lib/i18n/config';
 
 import {HeroSection} from '@/components/marketing/HeroSection';
 import {AboutSection} from '@/components/marketing/AboutSection';
+import {DisciplinesSection} from '@/components/marketing/DisciplinesSection';
 
 export default async function LandingPage({params}: {params: Promise<{locale: string}>}): Promise<JSX.Element> {
   const {locale} = await params;
   const dict = await getDictionary(locale as Locale);
 
-  const disciplines = [
-    dict.disciplines.items.strength,
-    dict.disciplines.items.stretching,
-    dict.disciplines.items.mfr,
-    dict.disciplines.items.balance
-  ];
-
   return (
     <div className="flex min-h-[calc(100vh-4rem)] flex-col">
       <HeroSection dict={dict} />
       <AboutSection dict={dict} />
-
-      {/* Disciplines Section */}
-      <section id="disciplines" className="py-[var(--spacing-section-sm)] sm:py-[var(--spacing-section)]">
-        <div className="container mx-auto max-w-6xl space-y-12 px-4">
-          <div className="space-y-4 text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-[var(--font-size-h2)]">
-              {dict.disciplines.heading}
-            </h2>
-            <p className="text-muted-foreground text-xl">{dict.disciplines.subheading}</p>
-          </div>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            {disciplines.map(item => (
-              <div
-                key={item.title}
-                className="group border-border bg-card relative flex flex-col justify-between overflow-hidden rounded-[var(--radius-2xl)] border p-8 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl"
-              >
-                <div className="relative z-10 space-y-4">
-                  <h3 className="group-hover:text-primary text-2xl font-bold tracking-tight transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-muted-foreground text-lg">{item.description}</p>
-                </div>
-                {/* Decorative background accent */}
-                <div className="bg-primary/5 group-hover:bg-primary/10 absolute -right-24 -bottom-24 h-48 w-48 rounded-full blur-3xl transition-colors"></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <DisciplinesSection dict={dict} />
 
       {/* Gallery Placeholder */}
       <section id="gallery" className="bg-muted/30 py-[var(--spacing-section-sm)]">

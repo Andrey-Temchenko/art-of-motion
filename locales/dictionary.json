@@ -187,53 +187,85 @@
       "ru": "Четыре столпа движения",
       "en": "Four Pillars of Motion"
     },
-    "items": {
-      "strength": {
-        "title": {
-          "uk": "Силові тренування",
-          "ru": "Силовые тренировки",
-          "en": "Strength Training"
-        },
-        "description": {
-          "uk": "Побудова м'язової бази, підвищення щільності кісток та прискорення метаболізму за допомогою вільних ваг та механіки тіла.",
-          "ru": "Построение мышечной базы, повышение плотности костей и ускорение метаболизма с помощью свободных весов и механики тела.",
-          "en": "Build foundational muscle, increase bone density, and boost metabolism using free weights and bodyweight mechanics."
-        }
+    "personal": {
+      "title": {
+        "uk": "Індивідуальні та парні",
+        "ru": "Индивидуальные и парные",
+        "en": "Personal & Pair Training"
       },
-      "stretching": {
-        "title": {
-          "uk": "Стретчинг та гнучкість",
-          "ru": "Стретчинг и гибкость",
-          "en": "Stretching & Flexibility"
+      "items": {
+        "stretching": {
+          "title": {"uk": "Стретчинг", "ru": "Стретчинг", "en": "Stretching"},
+          "description": {
+            "uk": "Глибоке розслаблення м'язів, поліпшення постави та збільшення рухливості суглобів.",
+            "ru": "Глубокое расслабление мышц, улучшение осанки и увеличение подвижности суставов.",
+            "en": "Deep muscle relaxation, posture improvement, and increased joint mobility."
+          }
         },
-        "description": {
-          "uk": "Збільшення амплітуди рухів, зменшення скутості м'язів та покращення постави через керовані сесії мобільності.",
-          "ru": "Увеличение амплитуды движений, уменьшение скованности мышц и улучшение осанки через управляемые сессии мобильности.",
-          "en": "Enhance your range of motion, reduce muscle stiffness, and improve overall posture through guided mobility sessions."
+        "hotIron": {
+          "title": {"uk": "Хот айрон", "ru": "Хот айрон", "en": "Hot Iron"},
+          "description": {
+            "uk": "Програма силової витривалості з міні-штангами для спалювання жиру та тонусу.",
+            "ru": "Программа силовой выносливости с мини-штангами для сжигания жира и тонуса.",
+            "en": "Strength endurance program with mini-barbells for fat burning and muscle tone."
+          }
+        },
+        "gym": {
+          "title": {"uk": "Тренер тренажерного залу", "ru": "Тренер тренажёрного зала", "en": "Gym Trainer"},
+          "description": {
+            "uk": "Персоналізовані тренування на тренажерах для набору маси або досягнення конкретних цілей.",
+            "ru": "Персонализированные тренировки на тренажерах для набора массы или достижения конкретных целей.",
+            "en": "Personalized gym equipment workouts to build mass or achieve specific fitness goals."
+          }
         }
+      }
+    },
+    "group": {
+      "title": {
+        "uk": "Групові",
+        "ru": "Групповые",
+        "en": "Group Classes"
       },
-      "mfr": {
-        "title": {
-          "uk": "МФР та відновлення",
-          "ru": "МФР и восстановление",
-          "en": "MFR & Recovery"
+      "items": {
+        "strength": {
+          "title": {"uk": "Силова", "ru": "Силовая", "en": "Strength"},
+          "description": {
+            "uk": "Високоінтенсивні тренування для розвитку сили та витривалості з вільною вагою.",
+            "ru": "Высокоинтенсивные тренировки для развития силы и выносливости со свободным весом.",
+            "en": "High-intensity workouts to develop strength and endurance using free weights."
+          }
         },
-        "description": {
-          "uk": "Техніки міофасціального релізу для полегшення болю, відновлення еластичності тканин та прискорення відновлення після тренувань.",
-          "ru": "Техники миофасциального релиза для облегчения боли, восстановления эластичности тканей и ускорения восстановления после тренировок.",
-          "en": "Myofascial release techniques to alleviate pain, restore tissue elasticity, and speed up post-workout recovery."
-        }
-      },
-      "balance": {
-        "title": {
-          "uk": "Баланс та кор",
-          "ru": "Баланс и кор",
-          "en": "Balance & Core"
+        "stretch": {
+          "title": {"uk": "Розтяжка", "ru": "Растяжка", "en": "Stretching"},
+          "description": {
+            "uk": "Групові сесії для м'якої розтяжки, покращення гнучкості та відновлення.",
+            "ru": "Групповые сессии для мягкой растяжки, улучшения гибкости и восстановления.",
+            "en": "Group sessions for gentle stretching, flexibility improvement, and recovery."
+          }
         },
-        "description": {
-          "uk": "Використання балансбордів та функціональних рухів для стабілізації кору та покращення щоденної функціональної активності.",
-          "ru": "Использование балансбордов и функциональных движений для стабилизации кора и улучшения ежедневной функциональной активности.",
-          "en": "Utilize balance boards and functional movements to stabilize your core, improving daily functional fitness."
+        "boards": {
+          "title": {"uk": "Борди", "ru": "Борды", "en": "Balance Boards"},
+          "description": {
+            "uk": "Тренування на балансбордах для стабілізації кору та покращення координації.",
+            "ru": "Тренировки на балансбордах для стабилизации кора и улучшения координации.",
+            "en": "Balance board workouts for core stabilization and coordination improvement."
+          }
+        },
+        "trx": {
+          "title": {"uk": "ТРХ", "ru": "ТРХ", "en": "TRX"},
+          "description": {
+            "uk": "Підвісні тренування з власною вагою для розвитку сили, балансу та гнучкості.",
+            "ru": "Подвесные тренировки с собственным весом для развития силы, баланса и гибкости.",
+            "en": "Suspension training with your own body weight to develop strength, balance, and flexibility."
+          }
+        },
+        "mfr": {
+          "title": {"uk": "МФР", "ru": "МФР", "en": "MFR"},
+          "description": {
+            "uk": "Міофасціальний реліз з ролами для зняття болю в м'язах та прискорення відновлення.",
+            "ru": "Миофасциальный релиз с роллами для снятия боли в мышцах и ускорения восстановления.",
+            "en": "Myofascial release using rollers to relieve muscle pain and speed up recovery."
+          }
         }
       }
     }
