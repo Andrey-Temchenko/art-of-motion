@@ -31,7 +31,7 @@ export function HeroSection({dict}: {dict: Dictionary}) {
             render={<Link href="#contact" />}
             nativeButton={false}
             size="lg"
-            className="group cursor-pointer rounded-full px-8 py-6 text-lg font-bold shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl"
+            className="group hover:bg-brand-balance cursor-pointer rounded-full bg-[#111111] px-8 py-7 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:shadow-xl"
           >
             {dict.hero.cta1}
             <ArrowRight className="ml-2 size-5 transition-transform group-hover:translate-x-1" />
@@ -42,10 +42,10 @@ export function HeroSection({dict}: {dict: Dictionary}) {
             nativeButton={false}
             variant="outline"
             size="lg"
-            className="group hover:border-primary hover:text-primary cursor-pointer rounded-full border-2 px-8 py-6 text-lg font-bold transition-colors hover:bg-transparent"
+            className="group border-border/60 hover:border-brand-balance hover:text-brand-balance bg-background cursor-pointer rounded-full border-2 px-8 py-7 text-lg font-bold shadow-sm transition-all duration-300"
           >
-            <div className="bg-primary/10 group-hover:bg-primary/20 mr-1 flex size-8 items-center justify-center rounded-full transition-colors">
-              <Play className="text-primary ml-0.5 size-4 fill-current" />
+            <div className="bg-brand-balance/10 group-hover:bg-brand-balance/20 mr-3 flex size-8 items-center justify-center rounded-full transition-colors">
+              <Play className="text-brand-balance ml-0.5 size-4 fill-current" />
             </div>
             {dict.hero.cta2}
           </Button>

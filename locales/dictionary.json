@@ -419,49 +419,24 @@
       "en": "Book your first session today or reach out for a consultation."
     },
     "locationLabel": {
-      "uk": "Локація",
-      "ru": "Локация",
-      "en": "Location"
+      "uk": "Локації тренувань",
+      "ru": "Локации тренировок",
+      "en": "Training Locations"
     },
-    "address": {
-      "uk": "Київ, Sport Hub Center",
-      "ru": "Киев, Sport Hub Center",
-      "en": "Kyiv, Sport Hub Center"
+    "clubs": {
+      "alfa": {
+        "name": {"uk": "ALFA Elit Fitness", "ru": "ALFA Elit Fitness", "en": "ALFA Elit Fitness"},
+        "address": {"uk": "Дніпро", "ru": "Днепр", "en": "Dnipro"}
+      },
+      "topgun": {
+        "name": {"uk": "TOP GUN Fitness Club", "ru": "TOP GUN Fitness Club", "en": "TOP GUN Fitness Club"},
+        "address": {"uk": "Дніпро", "ru": "Днепр", "en": "Dnipro"}
+      }
     },
-    "timeLabel": {
-      "uk": "Графік",
-      "ru": "График",
-      "en": "Hours"
-    },
-    "time": {
-      "uk": "Пн-Сб: 8:00 - 21:00",
-      "ru": "Пн-Сб: 8:00 - 21:00",
-      "en": "Mon-Sat: 8AM - 9PM"
-    },
-    "formName": {
-      "uk": "Ім'я",
-      "ru": "Имя",
-      "en": "Name"
-    },
-    "formNamePlaceholder": {
-      "uk": "Ваше ім'я",
-      "ru": "Ваше имя",
-      "en": "John Doe"
-    },
-    "formPhone": {
-      "uk": "Телефон або Telegram",
-      "ru": "Телефон или Telegram",
-      "en": "Phone or Telegram"
-    },
-    "formPhonePlaceholder": {
-      "uk": "+380...",
-      "ru": "+380...",
-      "en": "+380..."
-    },
-    "cta": {
-      "uk": "Надіслати повідомлення",
-      "ru": "Отправить сообщение",
-      "en": "Send Message"
+    "connectLabel": {
+      "uk": "Зв'язатися зі мною",
+      "ru": "Связаться со мной",
+      "en": "Connect With Me"
     },
     "telegram": {
       "uk": "Написати в Telegram",
@@ -469,14 +444,9 @@
       "en": "Message on Telegram"
     },
     "instagram": {
-      "uk": "Instagram",
-      "ru": "Instagram",
-      "en": "Instagram"
-    },
-    "whatsapp": {
-      "uk": "WhatsApp",
-      "ru": "WhatsApp",
-      "en": "WhatsApp"
+      "uk": "Мій Instagram",
+      "ru": "Мой Instagram",
+      "en": "My Instagram"
     }
   },
   "footer": {
@@ -484,6 +454,16 @@
       "uk": "Усі права захищено.",
       "ru": "Все права защищены.",
       "en": "All rights reserved."
+    },
+    "trainerName": {
+      "uk": "Андрій Темченко",
+      "ru": "Андрей Темченко",
+      "en": "Andrew Temchenko"
+    },
+    "backToTop": {
+      "uk": "Нагору",
+      "ru": "Наверх",
+      "en": "Back to top"
     }
   }
 }
