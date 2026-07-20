@@ -4,6 +4,7 @@ import {getDictionary} from '@/lib/i18n/get-dictionary';
 import type {Locale} from '@/lib/i18n/config';
 
 import {HeroSection} from '@/components/marketing/HeroSection';
+import {AboutSection} from '@/components/marketing/AboutSection';
 
 export default async function LandingPage({params}: {params: Promise<{locale: string}>}): Promise<JSX.Element> {
   const {locale} = await params;
@@ -19,14 +20,7 @@ export default async function LandingPage({params}: {params: Promise<{locale: st
   return (
     <div className="flex min-h-[calc(100vh-4rem)] flex-col">
       <HeroSection dict={dict} />
-
-      {/* About Section */}
-      <section id="about" className="bg-secondary/50 py-[var(--spacing-section-sm)] sm:py-[var(--spacing-section)]">
-        <div className="container mx-auto max-w-5xl space-y-6 px-4 text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-[var(--font-size-h2)]">{dict.about.heading}</h2>
-          <p className="text-muted-foreground mx-auto max-w-3xl text-lg leading-relaxed sm:text-xl">{dict.about.bio}</p>
-        </div>
-      </section>
+      <AboutSection dict={dict} />
 
       {/* Disciplines Section */}
       <section id="disciplines" className="py-[var(--spacing-section-sm)] sm:py-[var(--spacing-section)]">
