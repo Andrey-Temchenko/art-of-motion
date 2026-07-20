@@ -7,6 +7,7 @@ import {HeroSection} from '@/components/marketing/HeroSection';
 import {AboutSection} from '@/components/marketing/AboutSection';
 import {DisciplinesSection} from '@/components/marketing/DisciplinesSection';
 import {GallerySection} from '@/components/marketing/GallerySection';
+import {TestimonialsSection} from '@/components/marketing/TestimonialsSection';
 
 export default async function LandingPage({params}: {params: Promise<{locale: string}>}): Promise<JSX.Element> {
   const {locale} = await params;
@@ -20,15 +21,7 @@ export default async function LandingPage({params}: {params: Promise<{locale: st
 
       <GallerySection dict={dict} />
 
-      {/* Testimonials Placeholder */}
-      <section id="testimonials" className="py-[var(--spacing-section-sm)]">
-        <div className="container px-4 text-center">
-          <h2 className="mb-8 text-3xl font-bold">{dict.testimonials.heading}</h2>
-          <div className="border-border/50 text-muted-foreground flex h-40 items-center justify-center rounded-xl border-2 border-dashed">
-            [ Testimonials coming soon ]
-          </div>
-        </div>
-      </section>
+      <TestimonialsSection dict={dict} />
 
       {/* Contact & Footer */}
       <section id="contact" className="bg-card border-border border-t py-[var(--spacing-section)]">

@@ -306,38 +306,98 @@
     "reviews": {
       "review1": {
         "name": {
-          "uk": "Сара Д.",
-          "ru": "Сара Д.",
-          "en": "Sarah J."
+          "uk": "Марія",
+          "ru": "Мария",
+          "en": "Maria"
         },
         "text": {
-          "uk": "Поєднання сили та МФР повністю змінило мою поставу. У мене більше не болить спина!",
-          "ru": "Сочетание силы и МФР полностью изменило мою осанку. У меня больше не болит спина!",
-          "en": "The combination of strength and MFR completely changed my posture. I no longer have back pain!"
+          "uk": "Добрий вечір! Все гаразд, почуваюся добре, приємно відчуваються деякі м'язи 🙂 дякую! 🤗",
+          "ru": "Добрый вечер! Всё в порядке, чувствую себя хорошо, приятно чувствуются некоторые мышцы 🙂 спасибо! 🤗",
+          "en": "Good evening! Everything is fine, I feel good, some muscles feel pleasantly sore 🙂 thank you! 🤗"
         }
       },
       "review2": {
         "name": {
-          "uk": "Максим Т.",
-          "ru": "Максим Т.",
-          "en": "Mike T."
+          "uk": "Анна",
+          "ru": "Анна",
+          "en": "Anna"
         },
         "text": {
-          "uk": "Підхід Алекса унікальний. Я прийшов за масою, але здобув гнучкість та баланс, про які навіть не мріяв.",
-          "ru": "Подход Алекса уникален. Я пришел за массой, но обрел гибкость и баланс, о которых даже не мечтал.",
-          "en": "Alex's approach is unique. I came to get big, but I gained flexibility and balance I never thought possible."
+          "uk": "100% працюють! А головне - з тобою можна нічого не соромитись і бути собою ) Наші тренування мені дуже допомогли у подоланні страху 🫶🏼",
+          "ru": "100% работают! А главное - с тобой можно ничего не стесняться и быть собой ) Наши тренировки мне очень помогли в преодолении страха 🫶🏼",
+          "en": "100% working! And most importantly - with you I can be myself and not feel shy ) Our trainings helped me a lot to overcome my fear 🫶🏼"
         }
       },
       "review3": {
         "name": {
-          "uk": "Олена Р.",
-          "ru": "Елена Р.",
-          "en": "Elena R."
+          "uk": "Ірина",
+          "ru": "Ирина",
+          "en": "Irina"
         },
         "text": {
-          "uk": "Найкращий тренер, який у мене був. Увага до деталей та відновлення просто неперевершена.",
-          "ru": "Лучший тренер, который у меня был. Внимание к деталям и восстановлению просто непревзойденное.",
-          "en": "Best trainer I have ever had. The attention to detail and recovery is unmatched."
+          "uk": "Привіт, трохи болять лопатки. Відмінно, коли наступне тренування?",
+          "ru": "Привет, немного болят лопатки. Отлично, когда следующая тренировка?",
+          "en": "Hi, my shoulder blades hurt a bit. Awesome, when is the next workout?"
+        }
+      },
+      "review4": {
+        "name": {
+          "uk": "Олена",
+          "ru": "Елена",
+          "en": "Elena"
+        },
+        "text": {
+          "uk": "Привіт! Відмінно!) Ноги і спина нагадують про тренування 😁, але загалом все добре)",
+          "ru": "Привет! Отлично!) Ноги и спина напоминают о тренировке 😁, но в общем все хорошо)",
+          "en": "Hi! Awesome!) My legs and back are reminding me of the workout 😁, but overall everything is good)"
+        }
+      },
+      "review5": {
+        "name": {"uk": "Клієнт 5", "ru": "Клиент 5", "en": "Client 5"},
+        "text": {
+          "uk": "Це тестовий відгук для заповнення бігучої стрічки. Потім ми його замінимо на реальний.",
+          "ru": "Это тестовый отзыв для заполнения бегущей строки. Потом мы его заменим на реальный.",
+          "en": "This is a dummy review to fill the marquee. We will replace it with a real one later."
+        }
+      },
+      "review6": {
+        "name": {"uk": "Клієнт 6", "ru": "Клиент 6", "en": "Client 6"},
+        "text": {
+          "uk": "Ще один тестовий відгук. Тренування просто супер, результати перевершили очікування!",
+          "ru": "Еще один тестовый отзыв. Тренировки просто супер, результаты превзошли ожидания!",
+          "en": "Another dummy review. The workouts are simply super, results exceeded expectations!"
+        }
+      },
+      "review7": {
+        "name": {"uk": "Клієнт 7", "ru": "Клиент 7", "en": "Client 7"},
+        "text": {
+          "uk": "Чудовий підхід до кожного клієнта. Дуже рекомендую!",
+          "ru": "Отличный подход к каждому клиенту. Очень рекомендую!",
+          "en": "Great approach to every client. Highly recommend!"
+        }
+      },
+      "review8": {
+        "name": {"uk": "Клієнт 8", "ru": "Клиент 8", "en": "Client 8"},
+        "text": {
+          "uk": "Тестовий відгук номер вісім. Усе працює як треба, дизайн виглядає чудово.",
+          "ru": "Тестовый отзыв номер восемь. Всё работает как надо, дизайн выглядит отлично.",
+          "en": "Dummy review number eight. Everything works as it should, the design looks great."
+        }
+      },
+      "review9": {
+        "name": {"uk": "Клієнт 9", "ru": "Клиент 9", "en": "Client 9"},
+        "text": {
+          "uk": "Біль у спині зникла вже після перших двох тижнів.",
+          "ru": "Боль в спине исчезла уже после первых двух недель.",
+          "en": "The back pain disappeared after just the first two weeks."
+        }
+      },
+      "review10": {
+        "name": {"uk": "Клієнт 10", "ru": "Клиент 10", "en": "Client 10"},
+        "text": {
+          "uk": "Атмосфера на тренуваннях завжди заряджає позитивом на весь день.",
+          "ru": "Атмосфера на тренировках всегда заряжает позитивом на весь день.",
+          "en": "The atmosphere at the workouts always charges you with positivity for the whole day."
         }
       }
     }
