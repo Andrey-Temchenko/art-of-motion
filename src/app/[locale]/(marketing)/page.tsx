@@ -3,6 +3,8 @@ import type {JSX} from 'react';
 import {getDictionary} from '@/lib/i18n/get-dictionary';
 import type {Locale} from '@/lib/i18n/config';
 
+import {HeroSection} from '@/components/marketing/HeroSection';
+
 export default async function LandingPage({params}: {params: Promise<{locale: string}>}): Promise<JSX.Element> {
   const {locale} = await params;
   const dict = await getDictionary(locale as Locale);
@@ -16,29 +18,7 @@ export default async function LandingPage({params}: {params: Promise<{locale: st
 
   return (
     <div className="flex min-h-[calc(100vh-4rem)] flex-col">
-      {/* Hero Section */}
-      <section
-        id="hero"
-        className="relative flex flex-col items-center justify-center overflow-hidden px-4 py-[var(--spacing-section)] text-center sm:py-[calc(var(--spacing-section)*1.2)]"
-      >
-        <div className="from-primary/20 via-background to-background absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))]"></div>
-        <div className="animate-in fade-in slide-in-from-bottom-8 container max-w-4xl space-y-8 duration-1000">
-          <h1 className="text-foreground text-4xl leading-tight font-extrabold tracking-tight sm:text-[var(--font-size-h1)] md:text-[var(--font-size-display)]">
-            {dict.hero.title}
-          </h1>
-          <p className="text-muted-foreground mx-auto max-w-2xl text-xl leading-relaxed sm:text-2xl">
-            {dict.hero.subtitle}
-          </p>
-          <div className="pt-8">
-            <a
-              href={`/${locale}/login`}
-              className="bg-primary text-primary-foreground shadow-primary/30 inline-flex h-14 items-center justify-center rounded-full px-10 text-lg font-bold shadow-lg transition-transform hover:scale-105 active:scale-95"
-            >
-              {dict.hero.cta}
-            </a>
-          </div>
-        </div>
-      </section>
+      <HeroSection dict={dict} />
 
       {/* About Section */}
       <section id="about" className="bg-secondary/50 py-[var(--spacing-section-sm)] sm:py-[var(--spacing-section)]">

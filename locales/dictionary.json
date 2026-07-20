@@ -105,6 +105,16 @@
         "ru": "Лет опыта",
         "en": "Years Exp."
       }
+    },
+    "floatingBadgeTitle": {
+      "uk": "Збалансований підхід",
+      "ru": "Сбалансированный подход",
+      "en": "Balanced Approach"
+    },
+    "floatingBadgeDesc": {
+      "uk": "Тіло та розум",
+      "ru": "Тело и разум",
+      "en": "Mind & Body"
     }
   },
   "about": {

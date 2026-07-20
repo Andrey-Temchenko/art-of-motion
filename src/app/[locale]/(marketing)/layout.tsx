@@ -3,7 +3,7 @@ import type {ReactNode} from 'react';
 import {getDictionary} from '@/lib/i18n/get-dictionary';
 import type {Locale} from '@/lib/i18n/config';
 
-import {Navbar} from '@/components/marketing/navbar';
+import {Navbar} from '@/components/marketing/Navbar';
 
 export default async function MarketingLayout({
   children,

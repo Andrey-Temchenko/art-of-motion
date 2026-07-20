@@ -11,7 +11,7 @@ import {cn} from '@/lib/utils';
 
 import {Button} from '@/components/ui/button';
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetClose} from '@/components/ui/sheet';
-import {LanguageSwitcher} from '@/components/marketing/language-switcher';
+import {LanguageSwitcher} from '@/components/marketing/LanguageSwitcher';
 
 interface NavbarProps {
   dict: Dictionary;
@@ -84,6 +84,7 @@ export function Navbar({dict, locale}: NavbarProps) {
           <Button
             className="hidden cursor-pointer rounded-full px-5 py-2.5 font-medium lg:inline-flex"
             render={<Link href={`/${locale}#contact`} />}
+            nativeButton={false}
           >
             {dict.nav.cta}
           </Button>
@@ -129,6 +130,7 @@ export function Navbar({dict, locale}: NavbarProps) {
             <Button
               className="w-full cursor-pointer rounded-full font-medium"
               render={<Link href={`/${locale}#contact`} />}
+              nativeButton={false}
               onClick={() => setMobileOpen(false)}
             >
               {dict.nav.cta}

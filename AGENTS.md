@@ -23,6 +23,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## 3. UI Components
 
+- **Naming Convention**: All React component files must be named using **PascalCase** (e.g., `HeroSection.tsx`, `LanguageSwitcher.tsx`). Do not use kebab-case for components.
 - We use **Shadcn UI** (installed in `src/components/ui/`).
 - When proposing UI changes, prioritize using or adding Shadcn components via `npx shadcn@latest add <component>`.
 
