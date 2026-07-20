@@ -98,7 +98,7 @@ export function DisciplinesSection({dict}: {dict: Dictionary}) {
   );
 
   return (
-    <section id="disciplines" className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
+    <section id="disciplines" className="mx-auto w-full max-w-7xl px-6 py-16 md:px-10 md:py-24">
       <div className="mb-12 space-y-4 text-center">
         <p className="text-primary text-sm font-bold tracking-widest uppercase">{dict.disciplines.tag}</p>
         <h2 className="text-foreground text-4xl font-extrabold tracking-tight md:text-5xl">{dict.disciplines.title}</h2>

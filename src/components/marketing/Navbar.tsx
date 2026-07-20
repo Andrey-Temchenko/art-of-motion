@@ -47,7 +47,7 @@ export function Navbar({dict, locale}: NavbarProps) {
           : 'bg-transparent py-4 md:py-5'
       )}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 md:px-10">
+      <div className="mx-auto flex w-full items-center justify-between px-6 md:px-12 lg:px-16">
         {/* Logo */}
         <Link href={`/${locale}`} className="group flex items-center gap-2.5">
           <div className="relative h-9 w-9 overflow-hidden rounded-full md:h-10 md:w-10">
@@ -118,7 +118,7 @@ export function Navbar({dict, locale}: NavbarProps) {
 
           <nav className="flex flex-col gap-1 px-4 py-4">
             {navLinks.map(link => (
-              <SheetClose key={link.href} render={<Link href={link.href} />}>
+              <SheetClose key={link.href} render={<Link href={link.href} />} nativeButton={false}>
                 <span className="text-foreground hover:bg-muted block rounded-lg px-3 py-3 text-base font-medium transition-colors">
                   {link.label}
                 </span>

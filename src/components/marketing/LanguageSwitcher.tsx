@@ -53,10 +53,10 @@ export function LanguageSwitcher({current}: {current: Locale}): JSX.Element {
         <ChevronDown className="size-3 opacity-60" />
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="end" sideOffset={8} className="min-w-28">
+      <DropdownMenuContent align="end" sideOffset={8} className="min-w-32">
         <DropdownMenuRadioGroup value={current} onValueChange={switchLocale}>
           {locales.map(locale => (
-            <DropdownMenuRadioItem key={locale} value={locale} className="cursor-pointer px-3 py-2">
+            <DropdownMenuRadioItem key={locale} value={locale} className="cursor-pointer py-2 pr-8 pl-3">
               {localeNames[locale]}
             </DropdownMenuRadioItem>
           ))}

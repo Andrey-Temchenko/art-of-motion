@@ -7,12 +7,12 @@ import {Button} from '@/components/ui/button';
 
 export function HeroSection({dict}: {dict: Dictionary}) {
   return (
-    <section className="relative mx-auto flex max-w-7xl flex-col items-center gap-12 overflow-hidden px-6 pt-32 pb-20 md:px-10 lg:flex-row lg:gap-16">
+    <section className="relative mx-auto flex w-full max-w-7xl flex-col items-center gap-12 overflow-hidden px-6 pt-32 pb-20 md:px-10 lg:flex-row lg:gap-16">
       {/* Background abstract element */}
       <div className="from-primary/10 via-brand-stretch/5 absolute top-0 right-0 -z-10 h-[800px] w-full rounded-bl-[100px] bg-gradient-to-br to-transparent opacity-70 md:w-[60%] md:rounded-bl-[200px]" />
 
-      {/* TEXT: 40-45% width */}
-      <div className="z-10 w-full shrink-0 space-y-8 lg:w-[45%]">
+      {/* TEXT: 50% width */}
+      <div className="z-10 w-full shrink-0 space-y-8 lg:w-[50%]">
         <div className="bg-secondary border-border text-primary mb-4 inline-block rounded-full border px-4 py-1.5 text-sm font-semibold">
           {dict.hero.badge}
         </div>
@@ -26,7 +26,7 @@ export function HeroSection({dict}: {dict: Dictionary}) {
 
         <p className="text-muted-foreground text-lg leading-relaxed md:text-xl">{dict.hero.desc}</p>
 
-        <div className="flex flex-col gap-4 pt-4 sm:flex-row">
+        <div className="flex flex-col gap-4 pt-4 sm:flex-row sm:flex-wrap lg:flex-nowrap">
           <Button
             render={<Link href="#contact" />}
             nativeButton={false}
