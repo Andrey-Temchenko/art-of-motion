@@ -26,7 +26,7 @@ export function AboutSection({dict}: {dict: Dictionary}) {
   ];
 
   return (
-    <section id="about" className="bg-secondary relative overflow-hidden py-20 md:py-32">
+    <section id="about" className="bg-secondary relative overflow-hidden py-12 md:py-16">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-12 px-6 md:px-10 lg:flex-row lg:items-center lg:gap-16">
         {/* IMAGE: Left side (55%) */}
         <div className="flex w-full flex-1 items-center justify-center lg:justify-start">

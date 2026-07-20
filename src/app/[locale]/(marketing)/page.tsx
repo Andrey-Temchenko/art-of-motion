@@ -6,6 +6,7 @@ import type {Locale} from '@/lib/i18n/config';
 import {HeroSection} from '@/components/marketing/HeroSection';
 import {AboutSection} from '@/components/marketing/AboutSection';
 import {DisciplinesSection} from '@/components/marketing/DisciplinesSection';
+import {GallerySection} from '@/components/marketing/GallerySection';
 
 export default async function LandingPage({params}: {params: Promise<{locale: string}>}): Promise<JSX.Element> {
   const {locale} = await params;
@@ -17,15 +18,7 @@ export default async function LandingPage({params}: {params: Promise<{locale: st
       <AboutSection dict={dict} />
       <DisciplinesSection dict={dict} />
 
-      {/* Gallery Placeholder */}
-      <section id="gallery" className="bg-muted/30 py-[var(--spacing-section-sm)]">
-        <div className="container px-4 text-center">
-          <h2 className="mb-8 text-3xl font-bold">{dict.gallery.heading}</h2>
-          <div className="border-border/50 text-muted-foreground flex h-64 items-center justify-center rounded-xl border-2 border-dashed">
-            [ Gallery coming soon ]
-          </div>
-        </div>
-      </section>
+      <GallerySection dict={dict} />
 
       {/* Testimonials Placeholder */}
       <section id="testimonials" className="py-[var(--spacing-section-sm)]">

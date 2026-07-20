@@ -271,10 +271,20 @@
     }
   },
   "gallery": {
-    "heading": {
-      "uk": "Галерея",
-      "ru": "Галерея",
-      "en": "Gallery"
+    "tag": {
+      "uk": "Моменти тренувань",
+      "ru": "Моменты тренировок",
+      "en": "Training Moments"
+    },
+    "title": {
+      "uk": "Атмосфера в залі",
+      "ru": "Атмосфера в зале",
+      "en": "Gym Atmosphere"
+    },
+    "desc": {
+      "uk": "Подивіться, як проходять наші тренування, та відчуйте енергію руху.",
+      "ru": "Посмотрите, как проходят наши тренировки, и почувствуйте энергию движения.",
+      "en": "Take a look at our training sessions and feel the energy of motion."
     }
   },
   "testimonials": {
