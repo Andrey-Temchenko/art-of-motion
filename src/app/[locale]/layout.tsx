@@ -3,6 +3,7 @@ import type {ReactNode} from 'react';
 import {notFound} from 'next/navigation';
 import {Geist, Geist_Mono} from 'next/font/google';
 
+import {siteConfig} from '@/config/site';
 import {locales, type Locale} from '@/lib/i18n/config';
 import {getDictionary} from '@/lib/i18n/get-dictionary';
 import {ThemeProvider} from '@/providers/theme-provider';
@@ -11,12 +12,12 @@ import '../globals.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
-  subsets: ['latin']
+  subsets: ['latin', 'cyrillic']
 });
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
-  subsets: ['latin']
+  subsets: ['latin', 'cyrillic']
 });
 
 export function generateStaticParams() {
@@ -26,10 +27,28 @@ export function generateStaticParams() {
 export async function generateMetadata({params}: {params: Promise<{locale: string}>}): Promise<Metadata> {
   const {locale} = await params;
   const dict = await getDictionary(locale as Locale);
+  const baseUrl = siteConfig.baseUrl;
 
   return {
-    title: dict.meta.siteName,
+    title: {
+      default: dict.meta.siteName,
+      template: `%s | ArtOfMotion`
+    },
     description: dict.meta.description,
+    metadataBase: new URL(baseUrl),
+    openGraph: {
+      title: dict.meta.siteName,
+      description: dict.meta.description,
+      url: `${baseUrl}/${locale}`,
+      siteName: 'ArtOfMotion',
+      locale: locale,
+      type: 'website'
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: dict.meta.siteName,
+      description: dict.meta.description
+    },
     appleWebApp: {
       title: 'ArtOfMotion',
       statusBarStyle: 'default'

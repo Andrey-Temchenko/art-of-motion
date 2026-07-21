@@ -2,6 +2,7 @@ import type {JSX} from 'react';
 
 import {getDictionary} from '@/lib/i18n/get-dictionary';
 import type {Locale} from '@/lib/i18n/config';
+import {siteConfig} from '@/config/site';
 
 import {HeroSection} from '@/components/marketing/HeroSection';
 import {AboutSection} from '@/components/marketing/AboutSection';
@@ -14,16 +15,32 @@ export default async function LandingPage({params}: {params: Promise<{locale: st
   const {locale} = await params;
   const dict = await getDictionary(locale as Locale);
 
+  // JSON-LD structured data
+  const baseUrl = siteConfig.baseUrl;
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'ArtOfMotion',
+    description: dict.meta.description,
+    url: `${baseUrl}/${locale}`,
+    // Links to official social profiles
+    sameAs: [siteConfig.links.instagram, siteConfig.links.telegram].filter(Boolean)
+  };
+
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] flex-col">
-      <HeroSection dict={dict} />
-      <AboutSection dict={dict} />
-      <DisciplinesSection dict={dict} />
-
-      <GallerySection dict={dict} />
-
-      <TestimonialsSection dict={dict} />
-      <ContactSection dict={dict} />
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd).replace(/</g, '\\u003c')}}
+      />
+      <div className="flex min-h-[calc(100vh-4rem)] flex-col">
+        <HeroSection dict={dict} />
+        <AboutSection dict={dict} />
+        <DisciplinesSection dict={dict} />
+        <GallerySection dict={dict} />
+        <TestimonialsSection dict={dict} />
+        <ContactSection dict={dict} />
+      </div>
+    </>
   );
 }

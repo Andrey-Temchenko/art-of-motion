@@ -482,5 +482,52 @@
       "ru": "Не удалось загрузить видео. Пожалуйста, попробуйте позже.",
       "en": "Video could not be loaded. Please try again later."
     }
+  },
+  "ui": {
+    "loading": {
+      "uk": "Завантаження...",
+      "ru": "Загрузка...",
+      "en": "Loading..."
+    },
+    "errorTitle": {
+      "uk": "Ой! Щось пішло не так",
+      "ru": "Ой! Что-то пошло не так",
+      "en": "Oops! Something went wrong"
+    },
+    "errorDesc": {
+      "uk": "Ми зіткнулися з непередбачуваною помилкою. Будь ласка, спробуйте ще раз або поверніться на головну.",
+      "ru": "Мы столкнулись с непредвиденной ошибкой. Пожалуйста, попробуйте еще раз или вернитесь на главную.",
+      "en": "We encountered an unexpected error. Please try again or return to the homepage."
+    },
+    "errorRetry": {
+      "uk": "Спробувати знову",
+      "ru": "Попробовать снова",
+      "en": "Try again"
+    },
+    "globalErrorTitle": {
+      "uk": "Критична помилка",
+      "ru": "Критическая ошибка",
+      "en": "Critical Error"
+    },
+    "globalErrorDesc": {
+      "uk": "Сталася непередбачувана помилка додатку. Будь ласка, перезавантажте сторінку.",
+      "ru": "Произошла непредвиденная ошибка приложения. Пожалуйста, перезагрузите страницу.",
+      "en": "An unexpected application error occurred. Please refresh the page."
+    },
+    "notFoundTitle": {
+      "uk": "Сторінку не знайдено",
+      "ru": "Страница не найдена",
+      "en": "Page Not Found"
+    },
+    "notFoundDesc": {
+      "uk": "Здається, ви перейшли за неправильним посиланням або ця сторінка була видалена.",
+      "ru": "Кажется, вы перешли по неверной ссылке или эта страница была удалена.",
+      "en": "It looks like you followed a bad link or this page was removed."
+    },
+    "backHome": {
+      "uk": "Повернутися на головну",
+      "ru": "Вернуться на главную",
+      "en": "Return Home"
+    }
   }
 }

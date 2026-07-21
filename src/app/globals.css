@@ -96,7 +96,7 @@
   --card-foreground: hsl(150deg 20% 6%);
   --popover: hsl(0deg 0% 100%);
   --popover-foreground: hsl(150deg 20% 6%);
-  --primary: hsl(145deg 65% 35%); /* Darker green for light mode contrast */
+  --primary: hsl(145deg 65% 28%); /* Darkened for WCAG AA contrast with white text */
   --primary-foreground: hsl(0deg 0% 100%);
   --secondary: hsl(150deg 10% 96%);
   --secondary-foreground: hsl(150deg 20% 6%);
@@ -132,7 +132,7 @@
   --popover: hsl(150deg 20% 8%);
   --popover-foreground: hsl(0deg 0% 98%);
   --primary: hsl(145deg 65% 45%);
-  --primary-foreground: hsl(0deg 0% 100%);
+  --primary-foreground: hsl(150deg 20% 6%); /* Dark text for high contrast against bright green button */
   --secondary: hsl(150deg 30% 20%);
   --secondary-foreground: hsl(0deg 0% 98%);
   --muted: hsl(150deg 15% 15%);

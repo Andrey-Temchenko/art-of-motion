@@ -33,11 +33,13 @@ export function GallerySection({dict}: {dict: Dictionary}) {
             <CarouselContent className="-ml-4">
               {siteConfig.images.gallery.map((image, index) => (
                 <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="group border-border/50 bg-card relative aspect-[4/5] overflow-hidden rounded-[2rem] border shadow-md transition-all hover:shadow-xl">
+                  {/* bg-muted/50 acts as a skeleton placeholder while the image loads */}
+                  <div className="group border-border/50 bg-muted/50 relative aspect-[4/5] overflow-hidden rounded-[2rem] border shadow-md transition-all hover:shadow-xl">
                     <Image
                       src={image.src}
                       alt={image.alt}
                       fill
+                      priority={index < 3}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                     />

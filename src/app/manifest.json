@@ -1,6 +1,8 @@
 {
   "name": "Art Of Motion",
   "short_name": "ArtOfMotion",
+  "description": "Персональні офлайн-тренування. Трансформація жіночого стану через тіло та увагу.",
+  "start_url": "/uk",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,7 +17,8 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  "theme_color": "#09090b",
+  "background_color": "#09090b",
+  "display": "standalone",
+  "lang": "uk"
 }

@@ -22,6 +22,7 @@ export interface ImagesConfig {
 }
 
 export interface SiteConfig {
+  baseUrl: string;
   links: SocialLinks;
   clubs: {
     alfa: ClubLocation;
@@ -32,6 +33,7 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
+  baseUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.artofmotion.fit',
   links: {
     telegram: 'https://t.me/placeholder_username',
     instagram: 'https://instagram.com/placeholder_username'

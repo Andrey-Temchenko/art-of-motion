@@ -29,6 +29,12 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
+  // Phase 2: When protected routes (admin, dashboard, etc.) are added,
+  // generate a strict nonce-based CSP here instead of returning NextResponse.next().
+  // Nonce-based CSP forces dynamic rendering, so it should only be applied
+  // to routes that are already dynamic (session/RLS). Public marketing pages
+  // must remain static — their CSP comes from headers() in next.config.ts.
+
   // Lightweight check for future /admin and /(dashboard) routes:
   // here we only check for the presence of a session cookie + redirect to /{locale}/login.
   // Full role verification is done in the Server Component layout,
