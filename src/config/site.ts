@@ -15,6 +15,12 @@ export interface DemoVideoConfig {
   poster: string;
 }
 
+export interface ImagesConfig {
+  hero: string;
+  about: string;
+  gallery: Array<{src: string; alt: string}>;
+}
+
 export interface SiteConfig {
   links: SocialLinks;
   clubs: {
@@ -22,6 +28,7 @@ export interface SiteConfig {
     topgun: ClubLocation;
   };
   demoVideo: DemoVideoConfig;
+  images: ImagesConfig;
 }
 
 export const siteConfig: SiteConfig = {
@@ -40,5 +47,13 @@ export const siteConfig: SiteConfig = {
   demoVideo: {
     src: getSupabasePublicUrl(SUPABASE_BUCKETS.MARKETING_MEDIA, 'videos/demo_video.mp4'),
     poster: '/images/demo-poster.jpg'
+  },
+  images: {
+    hero: getSupabasePublicUrl(SUPABASE_BUCKETS.MARKETING_MEDIA, 'gallery/hero.jpg'),
+    about: getSupabasePublicUrl(SUPABASE_BUCKETS.MARKETING_MEDIA, 'gallery/about.jpg'),
+    gallery: Array.from({length: 9}).map((_, i) => ({
+      src: getSupabasePublicUrl(SUPABASE_BUCKETS.MARKETING_MEDIA, `gallery/workout-0${i + 1}.jpg`),
+      alt: `Training session ${i + 1}`
+    }))
   }
 };

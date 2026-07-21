@@ -6,6 +6,8 @@ import type {Dictionary} from '@/lib/i18n/types';
 import {Button} from '@/components/ui/button';
 import {DemoVideoModal} from '@/components/marketing/DemoVideoModal';
 
+import {siteConfig} from '@/config/site';
+
 export function HeroSection({dict}: {dict: Dictionary}) {
   return (
     <section className="relative mx-auto flex w-full max-w-7xl flex-col items-center gap-12 overflow-hidden px-6 pt-32 pb-12 md:px-10 md:pb-16 lg:flex-row lg:gap-16">
@@ -74,7 +76,7 @@ export function HeroSection({dict}: {dict: Dictionary}) {
         <div className="relative w-full max-w-[420px] xl:max-w-[480px]">
           <div className="group border-border/50 relative aspect-[4/5] overflow-hidden rounded-[2rem] border shadow-2xl">
             <Image
-              src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=1200"
+              src={siteConfig.images.hero}
               alt="Trainer in action"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"

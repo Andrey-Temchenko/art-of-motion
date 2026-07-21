@@ -3,6 +3,8 @@ import {Award, Activity, Heart} from 'lucide-react';
 
 import type {Dictionary} from '@/lib/i18n/types';
 
+import {siteConfig} from '@/config/site';
+
 export function AboutSection({dict}: {dict: Dictionary}) {
   const achievements = [
     {
@@ -33,7 +35,7 @@ export function AboutSection({dict}: {dict: Dictionary}) {
           <div className="relative w-full max-w-[420px] xl:max-w-[480px]">
             <div className="group border-border/50 relative aspect-[4/5] overflow-hidden rounded-[2rem] border shadow-2xl">
               <Image
-                src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=1200"
+                src={siteConfig.images.about}
                 alt="Trainer portrait"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"

@@ -3,29 +3,7 @@ import {Camera} from 'lucide-react';
 
 import type {Dictionary} from '@/lib/i18n/types';
 import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from '@/components/ui/carousel';
-
-const GALLERY_IMAGES = [
-  {
-    src: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=1200',
-    alt: 'High intensity workout'
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&q=80&w=1200',
-    alt: 'Personal training stretching'
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=1200',
-    alt: 'Core and balance training'
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80&w=1200',
-    alt: 'Strength and conditioning'
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=1200',
-    alt: 'Focused personal trainer'
-  }
-];
+import {siteConfig} from '@/config/site';
 
 export function GallerySection({dict}: {dict: Dictionary}) {
   return (
@@ -53,7 +31,7 @@ export function GallerySection({dict}: {dict: Dictionary}) {
             className="w-full"
           >
             <CarouselContent className="-ml-4">
-              {GALLERY_IMAGES.map((image, index) => (
+              {siteConfig.images.gallery.map((image, index) => (
                 <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
                   <div className="group border-border/50 bg-card relative aspect-[4/5] overflow-hidden rounded-[2rem] border shadow-md transition-all hover:shadow-xl">
                     <Image
