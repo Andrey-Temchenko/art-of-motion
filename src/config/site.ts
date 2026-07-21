@@ -1,3 +1,6 @@
+import {getSupabasePublicUrl} from '@/lib/supabase/storage';
+import {SUPABASE_BUCKETS} from '@/lib/supabase/constants';
+
 export interface SocialLinks {
   telegram: string;
   instagram: string;
@@ -35,7 +38,7 @@ export const siteConfig: SiteConfig = {
     }
   },
   demoVideo: {
-    src: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    src: getSupabasePublicUrl(SUPABASE_BUCKETS.MARKETING_MEDIA, 'videos/demo_video.mp4'),
     poster: '/images/demo-poster.jpg'
   }
 };

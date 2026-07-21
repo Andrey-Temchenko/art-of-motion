@@ -1,0 +1,1 @@
+drop policy "Marketing media is publicly readable" on storage.objects;
