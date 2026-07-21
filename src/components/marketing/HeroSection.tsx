@@ -4,6 +4,7 @@ import {ArrowRight, HeartPulse, Play} from 'lucide-react';
 
 import type {Dictionary} from '@/lib/i18n/types';
 import {Button} from '@/components/ui/button';
+import {DemoVideoModal} from '@/components/marketing/DemoVideoModal';
 
 export function HeroSection({dict}: {dict: Dictionary}) {
   return (
@@ -37,18 +38,18 @@ export function HeroSection({dict}: {dict: Dictionary}) {
             <ArrowRight className="ml-2 size-5 transition-transform group-hover:translate-x-1" />
           </Button>
 
-          <Button
-            render={<Link href="#video" />}
-            nativeButton={false}
-            variant="outline"
-            size="lg"
-            className="group border-border/60 hover:border-brand-balance hover:text-brand-balance bg-background cursor-pointer rounded-full border-2 px-8 py-7 text-lg font-bold shadow-sm transition-all duration-300"
-          >
-            <div className="bg-brand-balance/10 group-hover:bg-brand-balance/20 mr-3 flex size-8 items-center justify-center rounded-full transition-colors">
-              <Play className="text-brand-balance ml-0.5 size-4 fill-current" />
-            </div>
-            {dict.hero.cta2}
-          </Button>
+          <DemoVideoModal dict={dict.videoModal}>
+            <Button
+              variant="outline"
+              size="lg"
+              className="group border-border/60 hover:border-brand-balance hover:text-brand-balance bg-background cursor-pointer rounded-full border-2 px-8 py-7 text-lg font-bold shadow-sm transition-all duration-300"
+            >
+              <div className="bg-brand-balance/10 group-hover:bg-brand-balance/20 mr-3 flex size-8 items-center justify-center rounded-full transition-colors">
+                <Play className="text-brand-balance ml-0.5 size-4 fill-current" />
+              </div>
+              {dict.hero.cta2}
+            </Button>
+          </DemoVideoModal>
         </div>
 
         <div className="border-border flex items-center gap-8 border-t pt-8">

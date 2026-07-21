@@ -7,12 +7,18 @@ export interface ClubLocation {
   instagram: string;
 }
 
+export interface DemoVideoConfig {
+  src: string;
+  poster: string;
+}
+
 export interface SiteConfig {
   links: SocialLinks;
   clubs: {
     alfa: ClubLocation;
     topgun: ClubLocation;
   };
+  demoVideo: DemoVideoConfig;
 }
 
 export const siteConfig: SiteConfig = {
@@ -27,5 +33,9 @@ export const siteConfig: SiteConfig = {
     topgun: {
       instagram: 'https://www.instagram.com/top_gun_fitness_club'
     }
+  },
+  demoVideo: {
+    src: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    poster: '/images/demo-poster.jpg'
   }
 };
