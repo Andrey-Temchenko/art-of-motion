@@ -28,9 +28,9 @@ function InstagramIcon({className}: {className?: string}) {
 
 export function ContactSection({dict}: {dict: Dictionary}) {
   return (
-    <section id="contact" className="bg-secondary relative py-16 md:py-24">
+    <section id="contact" className="bg-secondary relative pt-12 pb-6 md:pt-20 md:pb-12">
       <div className="mx-auto w-full max-w-7xl px-6 md:px-10">
-        <div className="grid gap-16 md:grid-cols-[1fr_1.5fr] lg:gap-24">
+        <div className="grid gap-10 md:grid-cols-[1fr_1.5fr] lg:gap-20">
           {/* Left: Huge Typography & Brand */}
           <div className="flex flex-col justify-between space-y-12">
             <div className="space-y-6">
@@ -51,7 +51,7 @@ export function ContactSection({dict}: {dict: Dictionary}) {
               href={siteConfig.clubs.alfa.instagram}
               target="_blank"
               rel="noreferrer"
-              className="group border-border/50 hover:border-foreground flex items-center justify-between border-b py-6 transition-colors sm:py-8"
+              className="group border-border/50 hover:border-foreground flex items-center justify-between border-b py-5 transition-colors sm:py-7"
               onClick={() => analytics.trackClubAlfa(siteConfig.clubs.alfa.instagram)}
             >
               <div className="flex items-center gap-6">
@@ -72,7 +72,7 @@ export function ContactSection({dict}: {dict: Dictionary}) {
               href={siteConfig.clubs.top_gun.instagram}
               target="_blank"
               rel="noreferrer"
-              className="group border-border/50 hover:border-foreground flex items-center justify-between border-b py-6 transition-colors sm:py-8"
+              className="group border-border/50 hover:border-foreground flex items-center justify-between border-b py-5 transition-colors sm:py-7"
               onClick={() => analytics.trackClubTopGun(siteConfig.clubs.top_gun.instagram)}
             >
               <div className="flex items-center gap-6">
@@ -89,7 +89,7 @@ export function ContactSection({dict}: {dict: Dictionary}) {
               <ArrowUpRight className="text-muted-foreground group-hover:text-foreground size-8 -translate-x-4 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
             </a>
 
-            <h3 className="text-muted-foreground mt-16 mb-4 text-xs font-bold tracking-[0.2em] uppercase">
+            <h3 className="text-muted-foreground mt-10 mb-4 text-xs font-bold tracking-[0.2em] uppercase md:mt-14">
               {dict.contact.connectLabel}
             </h3>
 
@@ -97,7 +97,7 @@ export function ContactSection({dict}: {dict: Dictionary}) {
               href={siteConfig.links.telegram}
               target="_blank"
               rel="noreferrer"
-              className="group border-border/50 hover:border-foreground flex items-center justify-between border-b py-6 transition-colors sm:py-8"
+              className="group border-border/50 hover:border-foreground flex items-center justify-between border-b py-5 transition-colors sm:py-7"
             >
               <div className="flex items-center gap-6">
                 <Send className="text-muted-foreground size-6 transition-colors group-hover:text-[#0088cc] sm:size-8" />
@@ -112,7 +112,7 @@ export function ContactSection({dict}: {dict: Dictionary}) {
               href={siteConfig.links.instagram}
               target="_blank"
               rel="noreferrer"
-              className="group border-border/50 hover:border-foreground flex items-center justify-between border-b py-6 transition-colors sm:py-8"
+              className="group border-border/50 hover:border-foreground flex items-center justify-between border-b py-5 transition-colors sm:py-7"
               onClick={() => analytics.trackInstagramPersonal(siteConfig.links.instagram)}
             >
               <div className="flex items-center gap-6">

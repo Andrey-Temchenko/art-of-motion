@@ -13,7 +13,7 @@ import {DemoVideoModal} from '@/components/marketing/DemoVideoModal';
 
 export function HeroSection({dict}: {dict: Dictionary}) {
   return (
-    <section className="relative mx-auto flex w-full max-w-7xl flex-col items-center gap-12 overflow-hidden px-6 pt-32 pb-12 md:px-10 md:pb-16 lg:flex-row lg:gap-16">
+    <section className="relative mx-auto flex w-full max-w-7xl flex-col items-center gap-12 overflow-hidden px-6 pt-20 pb-12 md:px-10 md:pt-28 md:pb-16 lg:flex-row lg:gap-16">
       {/* Background abstract element */}
       <div className="from-primary/10 via-brand-stretch/5 absolute top-0 right-0 -z-10 h-[800px] w-full rounded-bl-[100px] bg-gradient-to-br to-transparent opacity-70 md:w-[60%] md:rounded-bl-[200px]" />
 
