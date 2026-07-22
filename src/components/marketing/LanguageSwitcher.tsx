@@ -4,7 +4,7 @@ import type {JSX} from 'react';
 import {usePathname, useRouter} from 'next/navigation';
 import {ChevronDown, Globe} from 'lucide-react';
 
-import {locales, localeNames, type Locale} from '@/lib/i18n/config';
+import {locales, localeNames, LOCALE_COOKIE, LOCALE_COOKIE_MAX_AGE, type Locale} from '@/lib/i18n/config';
 import {Button} from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -13,9 +13,6 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-
-const LOCALE_COOKIE = 'NEXT_LOCALE';
-const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
 /** Short uppercase labels for the trigger button */
 const localeShortLabels: Record<Locale, string> = {
