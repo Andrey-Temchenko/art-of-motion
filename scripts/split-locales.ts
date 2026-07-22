@@ -18,6 +18,10 @@ function isLeaf(node: unknown): node is LocaleLeaf {
 }
 
 function splitByLocale(node: DictionaryNode, locale: Locale, path: string[]): unknown {
+  if (typeof node === 'boolean' || typeof node === 'number') {
+    return node;
+  }
+
   if (isLeaf(node)) {
     const value = node[locale];
     if (typeof value !== 'string' || value.trim() === '') {

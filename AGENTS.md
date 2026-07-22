@@ -2,7 +2,7 @@
 
 # This is NOT the Next.js you know
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+This version has breaking changes - APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
 # Project Architecture & Guidelines (Art Of Motion)
@@ -25,6 +25,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 - **Component Naming Convention**: All React component files must be named using **PascalCase** (e.g., `HeroSection.tsx`, `LanguageSwitcher.tsx`). Do not use kebab-case for components.
 - **Hook Naming Convention**: Custom hook files and function names MUST be written in **camelCase** (e.g., `useClientDictionary.ts`, `useWindowSize.ts`).
+- **React Import Convention**: **NEVER** use `import * as React from 'react'` or call hooks via `React.useState`, `React.useEffect`. Always import React and named hooks explicitly in curly braces (e.g., `import React, { useState, useEffect, useCallback } from 'react';`).
 - We use **Shadcn UI** (installed in `src/components/ui/`).
 - When proposing UI changes, prioritize using or adding Shadcn components via `npx shadcn@latest add <component>`.
 
@@ -33,6 +34,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - **Prettier**: `prettier-plugin-tailwindcss` is active. Let Prettier format and sort Tailwind classes automatically.
 - **Commits**: We strictly use **Conventional Commits** (`feat:`, `fix:`, `chore:`, etc.). `commitlint` and `husky` are active and will reject badly formatted commit messages.
 - **Validation**: AI Agents MUST run `npm run check` after performing any coding tasks. All TypeScript errors and ESLint warnings MUST be completely fixed before presenting the result to the user. A clean terminal is mandatory.
+- **No Linter Bypassing (`eslint-disable`)**: **NEVER** use `eslint-disable`, `eslint-disable-next-line`, `@ts-ignore`, or similar linter suppression comments to mute warnings or errors (especially regarding React hooks or `useState` inside `useEffect`). All issues must be fixed cleanly according to React best practices.
 
 ## 5. Localization (i18n)
 
@@ -46,3 +48,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - **Source of Truth**: All hardcoded links (social media, external URLs) and static project-wide configurations MUST be stored inside the `src/config/` directory (e.g., `src/config/site.ts`).
 - **Typings**: The configuration must be strictly typed using TypeScript interfaces to ensure reliable IDE autocompletion across components.
 - **Avoid Hardcoding**: Never hardcode external URLs or static identifiers directly into React components. Always import them from the appropriate config file in `@/config/*`.
+
+## 7. Punctuation & Formatting Rules
+
+- **No Em-Dashes (—)**: **NEVER** use em-dashes (`—`) anywhere in the project. Always use standard hyphens (`-`) instead. This applies strictly to all UI texts, content in `locales/dictionary.json`, code comments, documentation, metadata, and responses.

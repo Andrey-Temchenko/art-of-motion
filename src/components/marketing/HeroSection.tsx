@@ -23,7 +23,7 @@ export function HeroSection({dict}: {dict: Dictionary}) {
           {dict.hero.badge}
         </div>
 
-        <h1 className="text-foreground text-5xl leading-[1.1] font-extrabold tracking-tight md:text-6xl lg:text-[4rem]">
+        <h1 className="text-foreground text-3xl leading-[1.1] font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-[4rem]">
           {dict.hero.title} <br className="hidden lg:block" />
           <span className="from-primary to-brand-strength bg-gradient-to-r bg-clip-text text-transparent">
             {dict.hero.subtitle}

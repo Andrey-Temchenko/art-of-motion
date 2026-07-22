@@ -34,7 +34,7 @@ export function ContactSection({dict}: {dict: Dictionary}) {
           {/* Left: Huge Typography & Brand */}
           <div className="flex flex-col justify-between space-y-12">
             <div className="space-y-6">
-              <h2 className="text-foreground text-5xl font-black tracking-tighter uppercase sm:text-6xl lg:text-7xl">
+              <h2 className="text-foreground text-3xl font-black tracking-tighter uppercase sm:text-5xl md:text-6xl lg:text-7xl">
                 {dict.contact.title}
               </h2>
               <p className="text-muted-foreground max-w-sm text-lg leading-relaxed md:text-xl">{dict.contact.desc}</p>
