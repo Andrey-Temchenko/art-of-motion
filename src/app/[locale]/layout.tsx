@@ -4,6 +4,7 @@ import {notFound} from 'next/navigation';
 import {Geist, Geist_Mono} from 'next/font/google';
 import {GoogleAnalytics} from '@next/third-parties/google';
 import {Analytics} from '@vercel/analytics/next';
+import {SpeedInsights} from '@vercel/speed-insights/next';
 
 import {siteConfig} from '@/config/site';
 import {isAnalyticsEnabled} from '@/lib/analytics';
@@ -92,6 +93,7 @@ export default async function RootLocaleLayout({
           <>
             <GoogleAnalytics gaId={siteConfig.gaMeasurementId} />
             <Analytics />
+            <SpeedInsights />
           </>
         ) : null}
 
