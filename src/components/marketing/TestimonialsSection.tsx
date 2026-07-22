@@ -1,6 +1,10 @@
+'use client';
+
+import React, {useState} from 'react';
 import type {Dictionary} from '@/lib/i18n/types';
 import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
 import {Quote, Star} from 'lucide-react';
+import {cn} from '@/lib/utils';
 
 export function TestimonialsSection({dict}: {dict: Dictionary}) {
   const allReviews = Object.values(dict.testimonials.reviews);
@@ -9,6 +13,9 @@ export function TestimonialsSection({dict}: {dict: Dictionary}) {
   const half = Math.ceil(allReviews.length / 2);
   const row1 = allReviews.slice(0, half);
   const row2 = allReviews.slice(half);
+
+  const [isPausedRow1, setIsPausedRow1] = useState(false);
+  const [isPausedRow2, setIsPausedRow2] = useState(false);
 
   return (
     <section id="testimonials" className="bg-background relative overflow-hidden py-12 md:py-16">
@@ -29,11 +36,17 @@ export function TestimonialsSection({dict}: {dict: Dictionary}) {
         <div className="from-background pointer-events-none absolute inset-y-0 right-0 z-20 w-1/12 bg-gradient-to-l to-transparent" />
 
         {/* Row 1 - Moves Left */}
-        <div className="group flex py-4">
+        <div
+          className="group flex cursor-pointer touch-pan-y py-4 select-none"
+          onClick={() => setIsPausedRow1(prev => !prev)}
+        >
           {[0, 1].map(i => (
             <div
               key={i}
-              className="animate-marquee flex min-w-full shrink-0 gap-6 px-3 group-hover:[animation-play-state:paused]"
+              className={cn(
+                'animate-marquee flex min-w-full shrink-0 gap-6 px-3 group-hover:[animation-play-state:paused] group-active:[animation-play-state:paused] active:[animation-play-state:paused]',
+                isPausedRow1 && '[animation-play-state:paused]'
+              )}
             >
               {row1.map((review, idx) => (
                 <ReviewCard key={idx} review={review} />
@@ -43,11 +56,17 @@ export function TestimonialsSection({dict}: {dict: Dictionary}) {
         </div>
 
         {/* Row 2 - Moves Right (Reverse) */}
-        <div className="group flex py-4">
+        <div
+          className="group flex cursor-pointer touch-pan-y py-4 select-none"
+          onClick={() => setIsPausedRow2(prev => !prev)}
+        >
           {[0, 1].map(i => (
             <div
               key={i}
-              className="animate-marquee-reverse flex min-w-full shrink-0 gap-6 px-3 group-hover:[animation-play-state:paused]"
+              className={cn(
+                'animate-marquee-reverse flex min-w-full shrink-0 gap-6 px-3 group-hover:[animation-play-state:paused] group-active:[animation-play-state:paused] active:[animation-play-state:paused]',
+                isPausedRow2 && '[animation-play-state:paused]'
+              )}
             >
               {row2.map((review, idx) => (
                 <ReviewCard key={idx} review={review} />
