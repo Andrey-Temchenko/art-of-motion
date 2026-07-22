@@ -35,8 +35,8 @@ export interface SiteConfig {
 export const siteConfig: SiteConfig = {
   baseUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.artofmotion.fit',
   links: {
-    telegram: 'https://t.me/placeholder_username',
-    instagram: 'https://instagram.com/placeholder_username'
+    telegram: 'https://t.me/elena_meeva',
+    instagram: 'https://www.instagram.com/elena_meeva'
   },
   clubs: {
     alfa: {
@@ -47,8 +47,8 @@ export const siteConfig: SiteConfig = {
     }
   },
   demoVideo: {
-    src: getSupabasePublicUrl(SUPABASE_BUCKETS.MARKETING_MEDIA, 'videos/demo_video.mp4'),
-    poster: '/images/demo-poster.jpg'
+    src: getSupabasePublicUrl(SUPABASE_BUCKETS.MARKETING_MEDIA, 'videos/demo-video.mp4'),
+    poster: getSupabasePublicUrl(SUPABASE_BUCKETS.MARKETING_MEDIA, 'videos/demo-poster.jpg')
   },
   images: {
     hero: getSupabasePublicUrl(SUPABASE_BUCKETS.MARKETING_MEDIA, 'gallery/hero.jpg'),

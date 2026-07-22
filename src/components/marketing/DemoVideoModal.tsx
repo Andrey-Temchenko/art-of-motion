@@ -45,14 +45,14 @@ export function DemoVideoModal({children, trigger, dict}: DemoVideoModalProps) {
         <DialogTitle className="sr-only">{dict.title}</DialogTitle>
 
         {/* Aspect ratio container */}
-        <div className="relative flex aspect-video w-full items-center justify-center bg-black">
+        <div className="relative flex h-[90vh] w-full items-center justify-center bg-black">
           {isOpen && !hasError && (
             <video
               src={src}
               poster={poster}
               controls
               autoPlay
-              className="h-full w-full object-cover"
+              className="max-h-full max-w-full object-contain"
               aria-label={dict.title}
               onLoadedData={() => setIsLoading(false)}
               onError={() => {
