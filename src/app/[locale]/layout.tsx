@@ -3,6 +3,7 @@ import type {ReactNode} from 'react';
 import {notFound} from 'next/navigation';
 import {Geist, Geist_Mono} from 'next/font/google';
 import {GoogleAnalytics} from '@next/third-parties/google';
+import {Analytics} from '@vercel/analytics/next';
 
 import {siteConfig} from '@/config/site';
 import {isAnalyticsEnabled} from '@/lib/analytics';
@@ -87,7 +88,13 @@ export default async function RootLocaleLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
-        {isAnalyticsEnabled ? <GoogleAnalytics gaId={siteConfig.gaMeasurementId} /> : null}
+        {isAnalyticsEnabled ? (
+          <>
+            <GoogleAnalytics gaId={siteConfig.gaMeasurementId} />
+            <Analytics />
+          </>
+        ) : null}
+
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>
