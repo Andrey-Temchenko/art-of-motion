@@ -23,10 +23,13 @@ export interface ImagesConfig {
 
 export interface SiteConfig {
   baseUrl: string;
+  gaMeasurementId: string;
+  isProd: boolean;
+  isDev: boolean;
   links: SocialLinks;
   clubs: {
     alfa: ClubLocation;
-    topgun: ClubLocation;
+    top_gun: ClubLocation;
   };
   demoVideo: DemoVideoConfig;
   images: ImagesConfig;
@@ -34,6 +37,9 @@ export interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
   baseUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.artofmotion.fit',
+  gaMeasurementId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '',
+  isProd: process.env.NODE_ENV === 'production',
+  isDev: process.env.NODE_ENV === 'development',
   links: {
     telegram: 'https://t.me/elena_meeva',
     instagram: 'https://www.instagram.com/elena_meeva'
@@ -42,7 +48,7 @@ export const siteConfig: SiteConfig = {
     alfa: {
       instagram: 'https://www.instagram.com/alfa_elitfitness/'
     },
-    topgun: {
+    top_gun: {
       instagram: 'https://www.instagram.com/top_gun_fitness_club'
     }
   },

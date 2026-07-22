@@ -2,8 +2,10 @@ import type {Metadata} from 'next';
 import type {ReactNode} from 'react';
 import {notFound} from 'next/navigation';
 import {Geist, Geist_Mono} from 'next/font/google';
+import {GoogleAnalytics} from '@next/third-parties/google';
 
 import {siteConfig} from '@/config/site';
+import {isAnalyticsEnabled} from '@/lib/analytics';
 import {locales, type Locale} from '@/lib/i18n/config';
 import {getDictionary} from '@/lib/i18n/get-dictionary';
 import {ThemeProvider} from '@/providers/theme-provider';
@@ -85,6 +87,7 @@ export default async function RootLocaleLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
+        {isAnalyticsEnabled ? <GoogleAnalytics gaId={siteConfig.gaMeasurementId} /> : null}
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>

@@ -1,12 +1,15 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import {ArrowRight, HeartPulse, Play} from 'lucide-react';
 
 import type {Dictionary} from '@/lib/i18n/types';
+import {analytics} from '@/lib/analytics';
+import {siteConfig} from '@/config/site';
+
 import {Button} from '@/components/ui/button';
 import {DemoVideoModal} from '@/components/marketing/DemoVideoModal';
-
-import {siteConfig} from '@/config/site';
 
 export function HeroSection({dict}: {dict: Dictionary}) {
   return (
@@ -35,6 +38,7 @@ export function HeroSection({dict}: {dict: Dictionary}) {
             nativeButton={false}
             size="lg"
             className="group hover:bg-brand-balance cursor-pointer rounded-full bg-[#111111] px-8 py-7 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:shadow-xl"
+            onClick={() => analytics.trackStartTraining('hero_section')}
           >
             {dict.hero.cta1}
             <ArrowRight className="ml-2 size-5 transition-transform group-hover:translate-x-1" />

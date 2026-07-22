@@ -7,6 +7,7 @@ import {Menu} from 'lucide-react';
 
 import type {Dictionary} from '@/lib/i18n/types';
 import type {Locale} from '@/lib/i18n/config';
+import {analytics} from '@/lib/analytics';
 import {cn} from '@/lib/utils';
 
 import {Button} from '@/components/ui/button';
@@ -87,6 +88,7 @@ export function Navbar({dict, locale}: NavbarProps) {
             className="hidden cursor-pointer rounded-full px-5 py-2.5 font-medium lg:inline-flex"
             render={<Link href={`/${locale}#contact`} />}
             nativeButton={false}
+            onClick={() => analytics.trackStartTraining('navbar_desktop')}
           >
             {dict.nav.cta}
           </Button>
@@ -133,7 +135,10 @@ export function Navbar({dict, locale}: NavbarProps) {
               className="w-full cursor-pointer rounded-full font-medium"
               render={<Link href={`/${locale}#contact`} />}
               nativeButton={false}
-              onClick={() => setMobileOpen(false)}
+              onClick={() => {
+                setMobileOpen(false);
+                analytics.trackStartTraining('navbar_mobile');
+              }}
             >
               {dict.nav.cta}
             </Button>

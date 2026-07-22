@@ -1,4 +1,7 @@
+'use client';
+
 import type {Dictionary} from '@/lib/i18n/types';
+import {analytics} from '@/lib/analytics';
 import {siteConfig} from '@/config/site';
 import {MapPin, Send, ArrowUpRight} from 'lucide-react';
 
@@ -49,6 +52,7 @@ export function ContactSection({dict}: {dict: Dictionary}) {
               target="_blank"
               rel="noreferrer"
               className="group border-border/50 hover:border-foreground flex items-center justify-between border-b py-6 transition-colors sm:py-8"
+              onClick={() => analytics.trackClubAlfa(siteConfig.clubs.alfa.instagram)}
             >
               <div className="flex items-center gap-6">
                 <MapPin className="text-muted-foreground group-hover:text-primary size-6 transition-colors sm:size-8" />
@@ -65,10 +69,11 @@ export function ContactSection({dict}: {dict: Dictionary}) {
             </a>
 
             <a
-              href={siteConfig.clubs.topgun.instagram}
+              href={siteConfig.clubs.top_gun.instagram}
               target="_blank"
               rel="noreferrer"
               className="group border-border/50 hover:border-foreground flex items-center justify-between border-b py-6 transition-colors sm:py-8"
+              onClick={() => analytics.trackClubTopGun(siteConfig.clubs.top_gun.instagram)}
             >
               <div className="flex items-center gap-6">
                 <MapPin className="text-muted-foreground group-hover:text-primary size-6 transition-colors sm:size-8" />
@@ -108,6 +113,7 @@ export function ContactSection({dict}: {dict: Dictionary}) {
               target="_blank"
               rel="noreferrer"
               className="group border-border/50 hover:border-foreground flex items-center justify-between border-b py-6 transition-colors sm:py-8"
+              onClick={() => analytics.trackInstagramPersonal(siteConfig.links.instagram)}
             >
               <div className="flex items-center gap-6">
                 <InstagramIcon className="text-muted-foreground size-6 transition-colors group-hover:text-pink-500 sm:size-8" />
