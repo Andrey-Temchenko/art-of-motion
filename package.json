@@ -14,6 +14,7 @@
     "check": "npm run tscheck && npm run lint",
     "format": "prettier --write .",
     "locales:split": "tsx scripts/split-locales.ts",
+    "types:generate": "supabase gen types typescript --project-id ofasewgyeurvywflhctd --schema public > src/types/database.types.ts && prettier --write src/types/database.types.ts",
     "prepare": "husky"
   },
   "dependencies": {

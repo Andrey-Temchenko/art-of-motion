@@ -1,2 +1,6 @@
 npm run tscheck
 npx lint-staged
+
+echo "Checking if database types are up-to-date..."
+npm run types:generate
+git diff --exit-code src/types/database.types.ts || (echo "❌ Error: src/types/database.types.ts is out of sync. Please commit the updated types." && exit 1)
