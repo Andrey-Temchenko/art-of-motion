@@ -24,7 +24,7 @@ const nextConfig: NextConfig = {
       "default-src 'self'",
       `script-src 'self' 'unsafe-inline' https://www.googletagmanager.com${isDev ? " 'unsafe-eval'" : ''}`,
       "style-src 'self' 'unsafe-inline'",
-      `img-src 'self' blob: data: https://${SUPABASE_HOST} https://www.google-analytics.com https://*.google-analytics.com https://*.googletagmanager.com`,
+      `img-src 'self' blob: data: https://${SUPABASE_HOST} https://*.googleusercontent.com https://www.google-analytics.com https://*.google-analytics.com https://*.googletagmanager.com`,
       `media-src 'self' blob: data: https://${SUPABASE_HOST}`,
       `connect-src 'self' https://${SUPABASE_HOST} wss://${SUPABASE_HOST} https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com`,
       "font-src 'self'",

@@ -25,6 +25,7 @@ This version has breaking changes - APIs, conventions, and file structure may al
 
 - **Component Naming Convention**: All React component files must be named using **PascalCase** (e.g., `HeroSection.tsx`, `LanguageSwitcher.tsx`). Do not use kebab-case for components.
 - **Hook Naming Convention**: Custom hook files and function names MUST be written in **camelCase** (e.g., `useClientDictionary.ts`, `useWindowSize.ts`).
+- **Helper & Service Naming Convention**: Helper and service files MUST be written in **camelCase** starting with a lowercase letter (e.g., `themeProvider.ts` instead of `theme-provider.ts`).
 - **React Import Convention**: **NEVER** use `import * as React from 'react'` or call hooks via `React.useState`, `React.useEffect`. Always import React and named hooks explicitly in curly braces (e.g., `import React, { useState, useEffect, useCallback } from 'react';`).
 - We use **Shadcn UI** (installed in `src/components/ui/`).
 - When proposing UI changes, prioritize using or adding Shadcn components via `npx shadcn@latest add <component>`.

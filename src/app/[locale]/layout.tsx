@@ -9,8 +9,8 @@ import {SpeedInsights} from '@vercel/speed-insights/next';
 import {siteConfig} from '@/config/site';
 import {isAnalyticsEnabled} from '@/lib/analytics';
 import {locales, type Locale} from '@/lib/i18n/config';
-import {getDictionary} from '@/lib/i18n/get-dictionary';
-import {ThemeProvider} from '@/providers/theme-provider';
+import {getDictionary} from '@/lib/i18n/getDictionary';
+import {ThemeProvider} from '@/providers/themeProvider';
 
 import '../globals.css';
 

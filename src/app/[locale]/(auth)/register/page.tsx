@@ -1,22 +1,22 @@
 'use client';
 
 import React, {useState, useTransition} from 'react';
-import {useRouter} from 'next/navigation';
 import Link from 'next/link';
 import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {useRouter} from 'next/navigation';
 import {Eye, EyeOff} from 'lucide-react';
 
-import {signInWithGoogle, signInWithEmail} from '@/actions/auth';
+import {signInWithGoogle, signUpWithEmail} from '@/actions/auth';
 import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
-import {loginSchema, type LoginInput} from '@/lib/validators/auth';
+import {registerSchema, type RegisterInput} from '@/lib/validators/auth';
 
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const {dict, locale} = useClientDictionary();
   const [errorMsg, setErrorMsg] = useState('');
   const [isPending, startTransition] = useTransition();
@@ -27,16 +27,16 @@ export default function LoginPage() {
     register,
     handleSubmit,
     formState: {errors}
-  } = useForm<LoginInput>({
-    resolver: zodResolver(loginSchema)
+  } = useForm<RegisterInput>({
+    resolver: zodResolver(registerSchema)
   });
 
-  const onSubmit = (data: LoginInput) => {
+  const onSubmit = (data: RegisterInput) => {
     setErrorMsg('');
     startTransition(async () => {
-      const res = await signInWithEmail(data);
+      const res = await signUpWithEmail(data);
       if (res?.error) {
-        setErrorMsg(dict.auth.errors.loginFailed || res.error);
+        setErrorMsg(dict.auth.errors.registerFailed || res.error);
       } else {
         router.push(`/${locale}`);
       }
@@ -47,12 +47,30 @@ export default function LoginPage() {
     <Card className="border-border/50 bg-card w-full rounded-[2rem] p-2 shadow-2xl sm:p-4">
       <CardHeader className="space-y-3 pt-8 text-center">
         <CardTitle className="text-foreground text-3xl font-extrabold tracking-tight sm:text-4xl">
-          {dict.auth.login}
+          {dict.auth.register}
         </CardTitle>
-        <CardDescription className="text-muted-foreground text-base">{dict.auth.haveAccount}</CardDescription>
+        <CardDescription className="text-muted-foreground text-base">{dict.auth.noAccount}</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="mb-4 space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="fullName" className="font-semibold">
+              {dict.auth.fullName}
+            </Label>
+            <Input
+              id="fullName"
+              type="text"
+              placeholder={dict.auth.fullNamePlaceholder}
+              aria-invalid={!!errors.fullName}
+              {...register('fullName')}
+              className="bg-background/50 focus-visible:ring-ring h-12 rounded-xl"
+            />
+            {errors.fullName && (
+              <p className="text-destructive text-sm font-medium">
+                {dict.auth.errors[errors.fullName.message as keyof typeof dict.auth.errors]}
+              </p>
+            )}
+          </div>
           <div className="space-y-2">
             <Label htmlFor="email" className="font-semibold">
               {dict.auth.email}
@@ -72,14 +90,9 @@ export default function LoginPage() {
             )}
           </div>
           <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <Label htmlFor="password" className="font-semibold">
-                {dict.auth.password}
-              </Label>
-              <Link href={`/${locale}/reset-password`} className="text-primary text-sm font-medium hover:underline">
-                {dict.auth.forgotPassword}
-              </Link>
-            </div>
+            <Label htmlFor="password" className="font-semibold">
+              {dict.auth.password}
+            </Label>
             <div className="relative">
               <Input
                 id="password"
@@ -110,7 +123,7 @@ export default function LoginPage() {
               className="bg-primary hover:bg-brand-balance text-primary-foreground h-14 w-full rounded-full text-lg font-bold shadow-lg transition-all duration-300"
               disabled={isPending}
             >
-              {isPending ? '...' : dict.auth.login}
+              {isPending ? '...' : dict.auth.register}
             </Button>
           </div>
         </form>
@@ -150,9 +163,9 @@ export default function LoginPage() {
         </form>
 
         <div className="text-muted-foreground mt-8 pb-4 text-center text-sm font-medium">
-          {dict.auth.noAccount}{' '}
-          <Link href={`/${locale}/register`} className="text-primary font-bold transition-colors hover:underline">
-            {dict.auth.register}
+          {dict.auth.haveAccount}{' '}
+          <Link href={`/${locale}/login`} className="text-primary font-bold transition-colors hover:underline">
+            {dict.auth.login}
           </Link>
         </div>
       </CardContent>

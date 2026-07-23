@@ -563,5 +563,139 @@
       "ru": "Вернуться на главную",
       "en": "Return Home"
     }
+  },
+  "auth": {
+    "login": {
+      "uk": "Увійти",
+      "ru": "Войти",
+      "en": "Sign In"
+    },
+    "register": {
+      "uk": "Зареєструватися",
+      "ru": "Зарегистрироваться",
+      "en": "Sign Up"
+    },
+    "email": {
+      "uk": "Електронна пошта",
+      "ru": "Электронная почта",
+      "en": "Email"
+    },
+    "password": {
+      "uk": "Пароль",
+      "ru": "Пароль",
+      "en": "Password"
+    },
+    "fullName": {
+      "uk": "Ім'я та прізвище",
+      "ru": "Имя и фамилия",
+      "en": "Full Name"
+    },
+    "resetPassword": {
+      "uk": "Скинути пароль",
+      "ru": "Сбросить пароль",
+      "en": "Reset Password"
+    },
+    "forgotPassword": {
+      "uk": "Забули пароль?",
+      "ru": "Забыли пароль?",
+      "en": "Forgot password?"
+    },
+    "updatePassword": {
+      "uk": "Оновити пароль",
+      "ru": "Обновить пароль",
+      "en": "Update Password"
+    },
+    "newPassword": {
+      "uk": "Новий пароль",
+      "ru": "Новый пароль",
+      "en": "New Password"
+    },
+    "confirmPassword": {
+      "uk": "Підтвердіть пароль",
+      "ru": "Подтвердите пароль",
+      "en": "Confirm Password"
+    },
+    "updatePasswordSuccess": {
+      "uk": "Пароль успішно оновлено.",
+      "ru": "Пароль успешно обновлен.",
+      "en": "Password updated successfully."
+    },
+    "resetPasswordDesc": {
+      "uk": "Введіть вашу електронну пошту, щоб отримати посилання для скидання пароля",
+      "ru": "Введите вашу электронную почту, чтобы получить ссылку для сброса пароля",
+      "en": "Enter your email to receive a password reset link"
+    },
+    "resetPasswordSuccess": {
+      "uk": "Перевірте вашу пошту для скидання пароля.",
+      "ru": "Проверьте вашу почту для сброса пароля.",
+      "en": "Check your email for a password reset link."
+    },
+    "backToLogin": {
+      "uk": "Повернутися до входу",
+      "ru": "Вернуться к логину",
+      "en": "Back to login"
+    },
+    "emailPlaceholder": {
+      "uk": "name@example.com",
+      "ru": "name@example.com",
+      "en": "name@example.com"
+    },
+    "passwordPlaceholder": {
+      "uk": "••••••••",
+      "ru": "••••••••",
+      "en": "••••••••"
+    },
+    "fullNamePlaceholder": {
+      "uk": "Іван Іванов",
+      "ru": "Иван Иванов",
+      "en": "John Doe"
+    },
+    "haveAccount": {
+      "uk": "Вже є акаунт?",
+      "ru": "Уже есть аккаунт?",
+      "en": "Already have an account?"
+    },
+    "noAccount": {
+      "uk": "Немає акаунту?",
+      "ru": "Нет аккаунта?",
+      "en": "Don't have an account?"
+    },
+    "logout": {
+      "uk": "Вийти",
+      "ru": "Выйти",
+      "en": "Log out"
+    },
+    "errors": {
+      "invalidEmail": {
+        "uk": "Невірний формат email",
+        "ru": "Неверный формат email",
+        "en": "Invalid email format"
+      },
+      "shortPassword": {
+        "uk": "Пароль має містити щонайменше 6 символів",
+        "ru": "Пароль должен содержать не менее 6 символов",
+        "en": "Password must be at least 6 characters"
+      },
+      "required": {
+        "uk": "Це поле є обов'язковим",
+        "ru": "Это поле обязательно",
+        "en": "This field is required"
+      },
+      "loginFailed": {
+        "uk": "Невірний email або пароль",
+        "ru": "Неверный email или пароль",
+        "en": "Invalid email or password"
+      },
+      "registerFailed": {
+        "uk": "Помилка реєстрації. Можливо, email вже використовується.",
+        "ru": "Ошибка регистрации. Возможно, email уже используется.",
+        "en": "Registration failed. Email might already be in use."
+      },
+      "passwordsDoNotMatch": {
+        "uk": "Паролі не співпадають",
+        "ru": "Пароли не совпадают",
+        "en": "Passwords do not match"
+      }
+    }
   }
 }

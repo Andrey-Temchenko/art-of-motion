@@ -6,8 +6,8 @@ import {LOCALE_COOKIE} from '@/lib/i18n/config';
 export async function GET(request: Request) {
   const {searchParams, origin} = new URL(request.url);
   const code = searchParams.get('code');
-  // if "next" is in param, use it as the redirect URL
-  const next = searchParams.get('next') ?? '/';
+  // if "next" or "redirect_to" is in param, use it as the redirect URL
+  const next = searchParams.get('next') ?? searchParams.get('redirect_to') ?? '/';
 
   const cookieStore = await cookies();
   const locale = cookieStore.get(LOCALE_COOKIE)?.value;

@@ -1,6 +1,6 @@
 import type {ReactNode} from 'react';
 
-import {getDictionary} from '@/lib/i18n/get-dictionary';
+import {getDictionary} from '@/lib/i18n/getDictionary';
 import type {Locale} from '@/lib/i18n/config';
 
 import {Navbar} from '@/components/marketing/Navbar';

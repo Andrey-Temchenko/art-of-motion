@@ -1,9 +1,15 @@
 'use server';
 
-import {createClient} from '@/lib/supabase/server';
 import {redirect} from 'next/navigation';
 import {headers} from 'next/headers';
+
+import {createClient} from '@/lib/supabase/server';
 import {siteConfig} from '@/config/site';
+
+type AuthActionResponse = {
+  success?: boolean;
+  error?: string;
+};
 
 export async function signInWithGoogle() {
   const supabase = await createClient();
@@ -34,4 +40,82 @@ export async function signInWithGoogle() {
   if (data.url) {
     redirect(data.url);
   }
+}
+
+export async function signInWithEmail(data: {email: string; password: string}): Promise<AuthActionResponse> {
+  const supabase = await createClient();
+
+  const {error} = await supabase.auth.signInWithPassword({
+    email: data.email,
+    password: data.password
+  });
+
+  if (error) {
+    return {error: error.message};
+  }
+
+  return {success: true};
+}
+
+export async function signUpWithEmail(data: {
+  fullName: string;
+  email: string;
+  password: string;
+}): Promise<AuthActionResponse> {
+  const supabase = await createClient();
+
+  const {error} = await supabase.auth.signUp({
+    email: data.email,
+    password: data.password,
+    options: {
+      data: {
+        full_name: data.fullName
+      }
+    }
+  });
+
+  if (error) {
+    return {error: error.message};
+  }
+
+  return {success: true};
+}
+
+export async function resetPassword(data: {email: string}): Promise<AuthActionResponse> {
+  const supabase = await createClient();
+
+  const headersList = await headers();
+  const origin = headersList.get('origin') || siteConfig.baseUrl;
+
+  const {error} = await supabase.auth.resetPasswordForEmail(data.email, {
+    redirectTo: `${origin}/api/auth/callback?next=/reset-password/update`
+  });
+
+  if (error) {
+    return {error: error.message};
+  }
+
+  return {success: true};
+}
+
+export async function signOut(): Promise<AuthActionResponse> {
+  const supabase = await createClient();
+
+  await supabase.auth.signOut();
+
+  return {success: true};
+}
+
+export async function updatePassword(data: {password: string}): Promise<AuthActionResponse> {
+  const supabase = await createClient();
+
+  const {error} = await supabase.auth.updateUser({
+    password: data.password
+  });
+
+  if (error) {
+    return {error: error.message};
+  }
+
+  return {success: true};
 }

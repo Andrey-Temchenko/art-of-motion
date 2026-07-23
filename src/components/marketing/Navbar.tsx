@@ -3,15 +3,28 @@
 import {useEffect, useState} from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import {Menu} from 'lucide-react';
+import {useRouter} from 'next/navigation';
+import {Menu, LogOut} from 'lucide-react';
+import type {User} from '@supabase/supabase-js';
 
 import type {Dictionary} from '@/lib/i18n/types';
 import type {Locale} from '@/lib/i18n/config';
-import {analytics} from '@/lib/analytics';
 import {cn} from '@/lib/utils';
+import {createClient} from '@/lib/supabase/client';
+import {signOut} from '@/actions/auth';
 
 import {Button} from '@/components/ui/button';
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetClose} from '@/components/ui/sheet';
+import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
 import {LanguageSwitcher} from '@/components/marketing/LanguageSwitcher';
 import {ThemeToggle} from '@/components/marketing/ThemeToggle';
 
@@ -25,6 +38,16 @@ const NAV_SCROLL_THRESHOLD = 20;
 export function Navbar({dict, locale}: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut(); // Clear client state
+    await signOut(); // Clear server cookies
+    router.refresh();
+  };
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > NAV_SCROLL_THRESHOLD);
@@ -32,6 +55,32 @@ export function Navbar({dict, locale}: NavbarProps) {
     window.addEventListener('scroll', handleScroll, {passive: true});
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const supabase = createClient();
+    const fetchUser = async () => {
+      const {data} = await supabase.auth.getUser();
+      setUser(data.user);
+      setIsAuthLoading(false);
+    };
+    fetchUser();
+
+    const {data: authListener} = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => authListener.subscription.unsubscribe();
+  }, []);
+
+  const getInitials = (name?: string) => {
+    if (!name) return 'U';
+    return name
+      .split(' ')
+      .map(n => n[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
 
   const navLinks = [
     {href: `/${locale}#about`, label: dict.nav.about},
@@ -84,14 +133,39 @@ export function Navbar({dict, locale}: NavbarProps) {
           <LanguageSwitcher current={locale} />
           <ThemeToggle />
 
-          <Button
-            className="hidden cursor-pointer rounded-full px-5 py-2.5 font-medium lg:inline-flex"
-            render={<Link href={`/${locale}#contact`} />}
-            nativeButton={false}
-            onClick={() => analytics.trackStartTraining('navbar_desktop')}
-          >
-            {dict.nav.cta}
-          </Button>
+          {isAuthLoading ? null : user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger className="focus-visible:ring-ring relative hidden h-10 w-10 cursor-pointer rounded-full border-none bg-transparent p-0 focus:outline-none focus-visible:ring-2 lg:flex">
+                <Avatar className="h-10 w-10">
+                  <AvatarImage src={user.user_metadata?.avatar_url} alt={user.user_metadata?.full_name} />
+                  <AvatarFallback>{getInitials(user.user_metadata?.full_name)}</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56" align="end">
+                <DropdownMenuGroup>
+                  <DropdownMenuLabel className="font-normal">
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm leading-none font-medium">{user.user_metadata?.full_name || 'User'}</p>
+                      <p className="text-muted-foreground text-xs leading-none">{user.email}</p>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer" variant="destructive">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    {dict.auth?.logout || 'Log out'}
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button
+              className="hidden cursor-pointer rounded-full px-5 py-2.5 font-medium lg:inline-flex"
+              render={<Link href={`/${locale}/login`} />}
+              nativeButton={false}
+            >
+              {dict.auth?.login || 'Log in'}
+            </Button>
+          )}
 
           {/* Mobile hamburger */}
           <Button
@@ -131,17 +205,40 @@ export function Navbar({dict, locale}: NavbarProps) {
           </nav>
 
           <div className="border-border mt-auto border-t px-6 py-5">
-            <Button
-              className="w-full cursor-pointer rounded-full font-medium"
-              render={<Link href={`/${locale}#contact`} />}
-              nativeButton={false}
-              onClick={() => {
-                setMobileOpen(false);
-                analytics.trackStartTraining('navbar_mobile');
-              }}
-            >
-              {dict.nav.cta}
-            </Button>
+            {isAuthLoading ? null : user ? (
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center gap-3">
+                  <Avatar className="h-10 w-10">
+                    <AvatarImage src={user.user_metadata?.avatar_url} alt={user.user_metadata?.full_name} />
+                    <AvatarFallback>{getInitials(user.user_metadata?.full_name)}</AvatarFallback>
+                  </Avatar>
+                  <div className="flex flex-col gap-1">
+                    <p className="text-sm leading-none font-medium">{user.user_metadata?.full_name || 'User'}</p>
+                    <p className="text-muted-foreground text-xs leading-none">{user.email}</p>
+                  </div>
+                </div>
+                <Button
+                  variant="destructive"
+                  className="w-full cursor-pointer rounded-full font-medium"
+                  onClick={() => {
+                    setMobileOpen(false);
+                    handleSignOut();
+                  }}
+                >
+                  <LogOut className="mr-2 h-4 w-4" />
+                  {dict.auth?.logout || 'Log out'}
+                </Button>
+              </div>
+            ) : (
+              <Button
+                className="w-full cursor-pointer rounded-full font-medium"
+                render={<Link href={`/${locale}/login`} />}
+                nativeButton={false}
+                onClick={() => setMobileOpen(false)}
+              >
+                {dict.auth?.login || 'Log in'}
+              </Button>
+            )}
           </div>
         </SheetContent>
       </Sheet>
