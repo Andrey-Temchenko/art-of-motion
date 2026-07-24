@@ -527,6 +527,38 @@
       "en": "Video could not be loaded. Please try again later."
     }
   },
+  "workouts": {
+    "strength": {
+      "uk": "Силова",
+      "ru": "Силовая",
+      "en": "Strength"
+    },
+    "stretching": {
+      "uk": "Стретчинг",
+      "ru": "Растяжка",
+      "en": "Stretching"
+    },
+    "mfr": {
+      "uk": "МФР",
+      "ru": "МФР",
+      "en": "MFR"
+    },
+    "balance_board": {
+      "uk": "Балансборд",
+      "ru": "Балансборд",
+      "en": "Balance Board"
+    },
+    "trx": {
+      "uk": "TRX",
+      "ru": "TRX",
+      "en": "TRX"
+    },
+    "gym": {
+      "uk": "Тренажерний зал",
+      "ru": "Тренажерный зал",
+      "en": "Gym"
+    }
+  },
   "ui": {
     "loading": {
       "uk": "Завантаження...",
@@ -730,6 +762,117 @@
         "ru": "Шаблоны",
         "en": "Templates"
       }
+    },
+    "slotsPage": {
+      "title": {
+        "uk": "Управління розкладом",
+        "ru": "Управление расписанием",
+        "en": "Manage Slots"
+      },
+      "subtitle": {
+        "uk": "Створюйте та керуйте майбутніми тренуваннями.",
+        "ru": "Создавайте и управляйте предстоящими тренировками.",
+        "en": "Create and manage upcoming workout slots."
+      },
+      "createSlot": {
+        "uk": "Створити слот",
+        "ru": "Создать слот",
+        "en": "Create Slot"
+      },
+      "upcomingSlots": {
+        "uk": "Майбутні слоти",
+        "ru": "Предстоящие слоты",
+        "en": "Upcoming Slots"
+      },
+      "noSlots": {
+        "uk": "Немає майбутніх слотів",
+        "ru": "Нет предстоящих слотов",
+        "en": "No upcoming slots"
+      },
+      "form": {
+        "workoutType": {
+          "uk": "Тип тренування",
+          "ru": "Тип тренировки",
+          "en": "Workout Type"
+        },
+        "selectWorkout": {
+          "uk": "Оберіть тип тренування",
+          "ru": "Выберите тип тренировки",
+          "en": "Select a workout type"
+        },
+        "location": {
+          "uk": "Локація",
+          "ru": "Локация",
+          "en": "Location"
+        },
+        "selectLocation": {
+          "uk": "Оберіть локацію",
+          "ru": "Выберите локацию",
+          "en": "Select location"
+        },
+        "dateTime": {
+          "uk": "Дата та час",
+          "ru": "Дата и время",
+          "en": "Date & Time"
+        },
+        "pickDate": {
+          "uk": "Оберіть дату",
+          "ru": "Выберите дату",
+          "en": "Pick a date"
+        },
+        "duration": {
+          "uk": "Тривалість (хвилин)",
+          "ru": "Длительность (минут)",
+          "en": "Duration (minutes)"
+        },
+        "capacity": {
+          "uk": "Максимальна кількість місць",
+          "ru": "Максимальное количество мест",
+          "en": "Max Capacity"
+        },
+        "price": {
+          "uk": "Ціна",
+          "ru": "Цена",
+          "en": "Price"
+        },
+        "buttonCreating": {
+          "uk": "Створення...",
+          "ru": "Создание...",
+          "en": "Creating..."
+        },
+        "buttonCreate": {
+          "uk": "Створити слот",
+          "ru": "Создать слот",
+          "en": "Create Slot"
+        }
+      },
+      "table": {
+        "dateTime": {
+          "uk": "Дата та Час (Київ)",
+          "ru": "Дата и Время (Киев)",
+          "en": "Date & Time (Kyiv)"
+        },
+        "workout": {
+          "uk": "Тренування",
+          "ru": "Тренировка",
+          "en": "Workout"
+        },
+        "location": {
+          "uk": "Локація",
+          "ru": "Локация",
+          "en": "Location"
+        },
+        "bookings": {
+          "uk": "Броні",
+          "ru": "Брони",
+          "en": "Bookings"
+        },
+        "status": {
+          "uk": "Статус",
+          "ru": "Статус",
+          "en": "Status"
+        }
+      }
     }
   },
   "dashboardArea": {
@@ -743,6 +886,139 @@
         "uk": "Мої броні",
         "ru": "Мои брони",
         "en": "My Bookings"
+      }
+    },
+    "homePage": {
+      "title": {
+        "uk": "Особистий кабінет",
+        "ru": "Личный кабинет",
+        "en": "Dashboard"
+      },
+      "welcome": {
+        "uk": "Вітаємо,",
+        "ru": "Добро пожаловать,",
+        "en": "Welcome,"
+      },
+      "subtitle": {
+        "uk": "! Це ваш безпечний особистий кабінет.",
+        "ru": "! Это ваш безопасный личный кабинет.",
+        "en": "! This is your secure dashboard."
+      },
+      "defaultClient": {
+        "uk": "Клієнт",
+        "ru": "Клиент",
+        "en": "Client"
+      },
+      "scheduleTitle": {
+        "uk": "Ваш розклад",
+        "ru": "Ваше расписание",
+        "en": "Your Schedule"
+      },
+      "noBookings": {
+        "uk": "Поки що немає майбутніх тренувань.",
+        "ru": "Пока нет предстоящих тренировок.",
+        "en": "No upcoming bookings yet."
+      }
+    },
+    "schedulePage": {
+      "title": {
+        "uk": "Розклад",
+        "ru": "Расписание",
+        "en": "Schedule"
+      },
+      "subtitle": {
+        "uk": "Забронюйте своє наступне тренування.",
+        "ru": "Забронируйте свою следующую тренировку.",
+        "en": "Book your next workout."
+      },
+      "noSlots": {
+        "uk": "Немає доступних тренувань на найближчі 7 днів.",
+        "ru": "Нет доступных тренировок на ближайшие 7 дней.",
+        "en": "No upcoming slots found for the next 7 days."
+      },
+      "currency": {
+        "uk": "грн",
+        "ru": "грн",
+        "en": "UAH"
+      },
+      "spots": {
+        "uk": "місць",
+        "ru": "мест",
+        "en": "spots"
+      }
+    },
+    "myBookingsPage": {
+      "title": {
+        "uk": "Мої броні",
+        "ru": "Мои брони",
+        "en": "My Bookings"
+      },
+      "subtitle": {
+        "uk": "Тут будуть відображатися ваші заброньовані тренування.",
+        "ru": "Здесь будут отображаться ваши забронированные тренировки.",
+        "en": "Here will be displayed your booked workouts."
+      },
+      "inDevelopment": {
+        "uk": "Список броней у розробці...",
+        "ru": "Список броней в разработке...",
+        "en": "Bookings list is in development..."
+      }
+    },
+    "booking": {
+      "buttonBooked": {
+        "uk": "Заброньовано",
+        "ru": "Забронировано",
+        "en": "Booked"
+      },
+      "buttonFull": {
+        "uk": "Місць немає",
+        "ru": "Мест нет",
+        "en": "Full"
+      },
+      "buttonBooking": {
+        "uk": "Бронювання...",
+        "ru": "Бронирование...",
+        "en": "Booking..."
+      },
+      "buttonBookNow": {
+        "uk": "Забронювати",
+        "ru": "Забронировать",
+        "en": "Book Now"
+      },
+      "errorGeneric": {
+        "uk": "Помилка бронювання",
+        "ru": "Ошибка бронирования",
+        "en": "Error booking slot"
+      },
+      "errorUnauthorized": {
+        "uk": "Неавторизований доступ",
+        "ru": "Неавторизованный доступ",
+        "en": "Unauthorized access"
+      },
+      "errorInvalidSlot": {
+        "uk": "Некоректний ID слоту",
+        "ru": "Некорректный ID слота",
+        "en": "Invalid slot ID"
+      },
+      "errorSlotFull": {
+        "uk": "Вибачте, це тренування щойно заповнилось!",
+        "ru": "Извините, эта тренировка только что заполнилась!",
+        "en": "Sorry, this slot just filled up!"
+      },
+      "errorAlreadyBooked": {
+        "uk": "Ви вже забронювали це тренування",
+        "ru": "Вы уже забронировали эту тренировку",
+        "en": "You have already booked this slot"
+      },
+      "errorDatabase": {
+        "uk": "Помилка бази даних під час бронювання",
+        "ru": "Ошибка базы данных при бронировании",
+        "en": "Database error occurred while booking"
+      },
+      "successBooked": {
+        "uk": "Тренування успішно заброньовано!",
+        "ru": "Тренировка успешно забронирована!",
+        "en": "Slot booked successfully!"
       }
     }
   }

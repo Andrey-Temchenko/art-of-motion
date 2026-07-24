@@ -8,6 +8,45 @@ export type Database = {
   };
   public: {
     Tables: {
+      bookings: {
+        Row: {
+          client_id: string;
+          created_at: string;
+          id: string;
+          slot_id: string;
+          status: Database['public']['Enums']['booking_status'];
+        };
+        Insert: {
+          client_id: string;
+          created_at?: string;
+          id?: string;
+          slot_id: string;
+          status?: Database['public']['Enums']['booking_status'];
+        };
+        Update: {
+          client_id?: string;
+          created_at?: string;
+          id?: string;
+          slot_id?: string;
+          status?: Database['public']['Enums']['booking_status'];
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'bookings_client_id_fkey';
+            columns: ['client_id'];
+            isOneToOne: false;
+            referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'bookings_slot_id_fkey';
+            columns: ['slot_id'];
+            isOneToOne: false;
+            referencedRelation: 'slots';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
       profiles: {
         Row: {
           avatar_url: string | null;
@@ -41,6 +80,80 @@ export type Database = {
         };
         Relationships: [];
       };
+      slots: {
+        Row: {
+          created_at: string;
+          end_time: string;
+          id: string;
+          location: Database['public']['Enums']['club_location'];
+          max_capacity: number;
+          price: number;
+          start_time: string;
+          status: Database['public']['Enums']['slot_status'];
+          workout_type_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          end_time: string;
+          id?: string;
+          location: Database['public']['Enums']['club_location'];
+          max_capacity?: number;
+          price: number;
+          start_time: string;
+          status?: Database['public']['Enums']['slot_status'];
+          workout_type_id: string;
+        };
+        Update: {
+          created_at?: string;
+          end_time?: string;
+          id?: string;
+          location?: Database['public']['Enums']['club_location'];
+          max_capacity?: number;
+          price?: number;
+          start_time?: string;
+          status?: Database['public']['Enums']['slot_status'];
+          workout_type_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'slots_workout_type_id_fkey';
+            columns: ['workout_type_id'];
+            isOneToOne: false;
+            referencedRelation: 'workout_types';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      workout_types: {
+        Row: {
+          created_at: string;
+          default_price: number;
+          description: string | null;
+          duration_minutes: number;
+          id: string;
+          image_url: string | null;
+          title: string;
+        };
+        Insert: {
+          created_at?: string;
+          default_price?: number;
+          description?: string | null;
+          duration_minutes?: number;
+          id?: string;
+          image_url?: string | null;
+          title: string;
+        };
+        Update: {
+          created_at?: string;
+          default_price?: number;
+          description?: string | null;
+          duration_minutes?: number;
+          id?: string;
+          image_url?: string | null;
+          title?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;
@@ -49,6 +162,9 @@ export type Database = {
       is_admin: {Args: never; Returns: boolean};
     };
     Enums: {
+      booking_status: 'confirmed' | 'cancelled';
+      club_location: 'alpha' | 'top_gun';
+      slot_status: 'scheduled' | 'cancelled' | 'completed';
       user_role: 'client' | 'admin';
     };
     CompositeTypes: {
@@ -167,6 +283,9 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      booking_status: ['confirmed', 'cancelled'],
+      club_location: ['alpha', 'top_gun'],
+      slot_status: ['scheduled', 'cancelled', 'completed'],
       user_role: ['client', 'admin']
     }
   }
