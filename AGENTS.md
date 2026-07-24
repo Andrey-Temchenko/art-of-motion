@@ -69,3 +69,8 @@ This version has breaking changes - APIs, conventions, and file structure may al
 ## 10. Project Documentation
 
 - **Docs Folder**: For detailed setup, development workflows, and testing instructions, always refer to the files in the `docs/` directory (e.g., `docs/development.md`). AI Agents must use this folder to understand local environment requirements (like Docker and Supabase) before attempting to run complex tasks or E2E tests.
+
+## 11. Navigation & Routing
+
+- **No Hardcoded Routes**: NEVER hardcode routing paths or URLs directly in components. All internal navigation routes must be defined in `src/config/navigation.ts`.
+- **Navigation Config**: Always use the `ROUTES` object and helpers (e.g. `buildRoute`, `getDefaultDashboardRoute`) from `src/config/navigation.ts` to construct navigation links and redirect paths.

@@ -7,9 +7,11 @@ import {zodResolver} from '@hookform/resolvers/zod';
 import {useRouter} from 'next/navigation';
 import {Eye, EyeOff} from 'lucide-react';
 
+import {useRedirectUrl} from '@/hooks/useRedirectUrl';
 import {signInWithGoogle, signUpWithEmail} from '@/actions/auth';
 import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
 import {registerSchema, type RegisterInput} from '@/lib/validators/auth';
+import {ROUTES, buildRoute, getDefaultDashboardRoute} from '@/config/navigation';
 
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Button} from '@/components/ui/button';
@@ -21,6 +23,7 @@ export default function RegisterPage() {
   const [errorMsg, setErrorMsg] = useState('');
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  const redirectUrl = useRedirectUrl(locale);
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -38,7 +41,11 @@ export default function RegisterPage() {
       if (res?.error) {
         setErrorMsg(dict.auth.errors.registerFailed || res.error);
       } else {
-        router.push(`/${locale}`);
+        if (redirectUrl === `/${locale}`) {
+          router.push(buildRoute(locale, getDefaultDashboardRoute(res.role || 'client')));
+        } else {
+          router.push(redirectUrl);
+        }
       }
     });
   };
@@ -136,6 +143,7 @@ export default function RegisterPage() {
         </div>
 
         <form action={signInWithGoogle}>
+          <input type="hidden" name="redirectUrl" value={redirectUrl} />
           <Button
             type="submit"
             variant="outline"
@@ -159,7 +167,9 @@ export default function RegisterPage() {
 
         <div className="text-muted-foreground mt-8 pb-4 text-center text-sm font-medium">
           {dict.auth.haveAccount}{' '}
-          <Link href={`/${locale}/login`} className="text-primary font-bold transition-colors hover:underline">
+          <Link
+            href={buildRoute(locale, ROUTES.AUTH.LOGIN)}
+            className="text-primary font-bold transition-colors hover:underline">
             {dict.auth.login}
           </Link>
         </div>

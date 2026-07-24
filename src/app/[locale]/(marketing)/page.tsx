@@ -34,7 +34,7 @@ export default async function LandingPage({params}: {params: Promise<{locale: st
         dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd).replace(/</g, '\\u003c')}}
       />
       <div className="flex min-h-[calc(100vh-4rem)] flex-col">
-        <HeroSection dict={dict} />
+        <HeroSection dict={dict} locale={locale as Locale} />
         <AboutSection dict={dict} />
         <DisciplinesSection dict={dict} />
         <GallerySection dict={dict} />

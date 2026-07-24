@@ -46,6 +46,16 @@
       "uk": "Почати тренування",
       "ru": "Начать тренировки",
       "en": "Start Training"
+    },
+    "adminPanel": {
+      "uk": "Адмін-панель",
+      "ru": "Админ-панель",
+      "en": "Admin Panel"
+    },
+    "dashboard": {
+      "uk": "Особистий кабінет",
+      "ru": "Личный кабинет",
+      "en": "Dashboard"
     }
   },
   "hero": {
@@ -695,6 +705,44 @@
         "uk": "Паролі не співпадають",
         "ru": "Пароли не совпадают",
         "en": "Passwords do not match"
+      }
+    }
+  },
+  "admin": {
+    "nav": {
+      "dashboard": {
+        "uk": "Огляд",
+        "ru": "Обзор",
+        "en": "Dashboard"
+      },
+      "clients": {
+        "uk": "Клієнти",
+        "ru": "Клиенты",
+        "en": "Clients"
+      },
+      "slots": {
+        "uk": "Розклад",
+        "ru": "Расписание",
+        "en": "Schedule"
+      },
+      "templates": {
+        "uk": "Шаблони",
+        "ru": "Шаблоны",
+        "en": "Templates"
+      }
+    }
+  },
+  "dashboardArea": {
+    "nav": {
+      "schedule": {
+        "uk": "Розклад",
+        "ru": "Расписание",
+        "en": "Schedule"
+      },
+      "myBookings": {
+        "uk": "Мої броні",
+        "ru": "Мои брони",
+        "en": "My Bookings"
       }
     }
   }

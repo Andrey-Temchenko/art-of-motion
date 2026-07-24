@@ -3,15 +3,36 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import {ArrowRight, HeartPulse, Play} from 'lucide-react';
+import {useEffect, useState} from 'react';
 
 import type {Dictionary} from '@/lib/i18n/types';
+import type {Locale} from '@/lib/i18n/config';
+import {createClient} from '@/lib/supabase/client';
+import {ROUTES, buildRoute} from '@/config/navigation';
 import {analytics} from '@/lib/analytics';
 import {siteConfig} from '@/config/site';
 
 import {Button} from '@/components/ui/button';
 import {DemoVideoModal} from '@/components/marketing/DemoVideoModal';
 
-export function HeroSection({dict}: {dict: Dictionary}) {
+export function HeroSection({dict, locale}: {dict: Dictionary; locale: Locale}) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getSession().then(({data: {session}}) => {
+      setIsAuthenticated(!!session);
+      setIsLoading(false);
+    });
+  }, []);
+
+  const ctaHref = isLoading
+    ? `#`
+    : isAuthenticated
+      ? buildRoute(locale, ROUTES.DASHBOARD.SCHEDULE)
+      : `${buildRoute(locale, ROUTES.AUTH.LOGIN)}?redirect=${buildRoute(locale, ROUTES.DASHBOARD.SCHEDULE)}`;
+
   return (
     <section className="relative mx-auto flex w-full max-w-7xl flex-col items-center gap-12 overflow-hidden px-6 pt-20 pb-12 md:px-10 md:pt-28 md:pb-16 lg:flex-row lg:gap-16">
       {/* Background abstract element */}
@@ -34,11 +55,12 @@ export function HeroSection({dict}: {dict: Dictionary}) {
 
         <div className="flex flex-col gap-4 pt-4 sm:flex-row sm:flex-wrap lg:flex-nowrap">
           <Button
-            render={<Link href="#contact" />}
+            render={<Link href={ctaHref} />}
             nativeButton={false}
             size="lg"
             className="group hover:bg-brand-balance cursor-pointer rounded-full bg-[#111111] px-8 py-7 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:shadow-xl"
-            onClick={() => analytics.trackStartTraining('hero_section')}>
+            onClick={() => analytics.trackStartTraining('hero_section')}
+            disabled={isLoading}>
             {dict.hero.cta1}
             <ArrowRight className="ml-2 size-5 transition-transform group-hover:translate-x-1" />
           </Button>

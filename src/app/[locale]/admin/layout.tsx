@@ -1,9 +1,13 @@
 import React from 'react';
+import {LayoutDashboard, Users, Calendar, LayoutTemplate} from 'lucide-react';
 
 import {requireRole} from '@/lib/supabase/session';
 import {USER_ROLES} from '@/lib/supabase/constants';
+import {getDictionary} from '@/lib/i18n/getDictionary';
+import type {Locale} from '@/lib/i18n/config';
+import {ROUTES, buildRoute} from '@/config/navigation';
 
-import {BackButton} from '@/components/shared/BackButton';
+import {Layout} from '@/components/shared/Layout';
 
 export default async function AdminLayout({
   children,
@@ -13,29 +17,37 @@ export default async function AdminLayout({
   params: Promise<{locale: string}>;
 }) {
   const {locale} = await params;
+  const dict = await getDictionary(locale as Locale);
 
   // Authoritative server check: ONLY admins can access this boundary.
-  await requireRole([USER_ROLES.ADMIN]);
+  const {user, profile} = await requireRole([USER_ROLES.ADMIN]);
+
+  const navItems = [
+    {
+      label: dict.admin.nav.dashboard,
+      href: buildRoute(locale, ROUTES.ADMIN.DASHBOARD),
+      icon: <LayoutDashboard className="h-4 w-4" />
+    },
+    {
+      label: dict.admin.nav.clients,
+      href: buildRoute(locale, ROUTES.ADMIN.CLIENTS),
+      icon: <Users className="h-4 w-4" />
+    },
+    {
+      label: dict.admin.nav.slots,
+      href: buildRoute(locale, ROUTES.ADMIN.SLOTS),
+      icon: <Calendar className="h-4 w-4" />
+    },
+    {
+      label: dict.admin.nav.templates,
+      href: buildRoute(locale, ROUTES.ADMIN.TEMPLATES),
+      icon: <LayoutTemplate className="h-4 w-4" />
+    }
+  ];
 
   return (
-    <div className="bg-background relative flex min-h-screen">
-      <BackButton href={`/${locale}/dashboard`} ariaLabel="Back to dashboard" />
-      {/* Admin Sidebar will go here */}
-      <aside className="border-border bg-card hidden w-64 border-r p-6 pt-24 md:block">
-        <h2 className="text-h3 text-foreground mb-8 font-bold">Admin Panel</h2>
-        <nav className="space-y-4">
-          <a href="#" className="text-primary block font-medium">
-            Dashboard
-          </a>
-          <a href="#" className="text-muted-foreground hover:text-foreground block transition-colors">
-            Users
-          </a>
-          <a href="#" className="text-muted-foreground hover:text-foreground block transition-colors">
-            Schedule
-          </a>
-        </nav>
-      </aside>
-      <main className="flex-1 p-8 pt-24">{children}</main>
-    </div>
+    <Layout navItems={navItems} dict={dict} locale={locale as Locale} user={user} role={profile?.role}>
+      {children}
+    </Layout>
   );
 }

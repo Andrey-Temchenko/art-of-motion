@@ -2,6 +2,9 @@ import {NextResponse} from 'next/server';
 import {createClient} from '@/lib/supabase/server';
 import {cookies} from 'next/headers';
 import {LOCALE_COOKIE} from '@/lib/i18n/config';
+import {getDefaultDashboardRoute} from '@/config/navigation';
+import {getUserRoleServer} from '@/lib/supabase/session';
+import {USER_ROLES} from '@/lib/supabase/constants';
 
 export async function GET(request: Request) {
   const {searchParams, origin} = new URL(request.url);
@@ -16,12 +19,20 @@ export async function GET(request: Request) {
   if (code) {
     const supabase = await createClient();
 
-    const {error} = await supabase.auth.exchangeCodeForSession(code);
+    const {data: sessionData, error} = await supabase.auth.exchangeCodeForSession(code);
 
     if (!error) {
-      // NOTE: We could fetch user role here and redirect accordingly,
-      // but for Ticket 1 we just establish the session and redirect to next/home.
-      const redirectUrl = next.startsWith(`/${locale}`) ? next : `${localePrefix}${next}`;
+      let finalNext = next;
+
+      if (next === '/' || next === '') {
+        let role = USER_ROLES.CLIENT;
+        if (sessionData.user) {
+          role = await getUserRoleServer(sessionData.user.id);
+        }
+        finalNext = getDefaultDashboardRoute(role);
+      }
+
+      const redirectUrl = finalNext.startsWith(`/${locale}`) ? finalNext : `${localePrefix}${finalNext}`;
       return NextResponse.redirect(`${origin}${redirectUrl === '' ? '/' : redirectUrl}`);
     }
     console.error('OAuth Callback Error:', error.message);

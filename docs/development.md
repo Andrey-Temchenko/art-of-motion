@@ -13,6 +13,7 @@ This document outlines the essential steps for local development and running tes
    Copy the example file and fill in the required values (Supabase URLs, test users, etc.):
    ```bash
    cp .env.example .env.local
+   cp .env.example .env.test # Used specifically for Playwright E2E tests
    ```
 2. **Install Dependencies**:
    ```bash

@@ -3,6 +3,7 @@ import {User} from '@supabase/supabase-js';
 
 import {createClient} from './server';
 import {UserRole, Profile} from './types';
+import {USER_ROLES} from './constants';
 
 /**
  * Internal helper to get the authenticated user and initialized client.
@@ -63,4 +64,14 @@ export async function requireRole(allowedRoles: UserRole[]): Promise<{user: User
   }
 
   return {user, profile};
+}
+
+/**
+ * Gets the role for a specific user ID, defaulting to CLIENT.
+ */
+export async function getUserRoleServer(userId: string): Promise<UserRole> {
+  const supabase = await createClient();
+  const {data: profile} = await supabase.from('profiles').select('role').eq('id', userId).single();
+
+  return profile?.role || USER_ROLES.CLIENT;
 }

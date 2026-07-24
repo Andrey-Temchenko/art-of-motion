@@ -2,8 +2,7 @@ import {defineConfig, devices} from '@playwright/test';
 import dotenv from 'dotenv';
 import path from 'path';
 
-dotenv.config({path: path.resolve(__dirname, '.env.local')});
-dotenv.config({path: path.resolve(__dirname, '.env')});
+dotenv.config({path: path.resolve(__dirname, '.env.test')});
 
 export default defineConfig({
   testDir: './e2e',
@@ -11,7 +10,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
+  reporter: process.env.CI ? 'html' : [['html', {open: 'never'}]],
   use: {
     baseURL: 'http://localhost:3000',
     trace: 'on-first-retry'

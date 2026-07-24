@@ -12,41 +12,36 @@ import type {Locale} from '@/lib/i18n/config';
 import {cn} from '@/lib/utils';
 import {createClient} from '@/lib/supabase/client';
 import {signOut} from '@/actions/auth';
+import {USER_ROLES} from '@/lib/supabase/constants';
+import {ROUTES, getDefaultDashboardRoute, buildRoute} from '@/config/navigation';
 
+import {UserDropdown} from '@/components/shared/UserDropdown';
 import {Button} from '@/components/ui/button';
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetClose} from '@/components/ui/sheet';
 import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu';
 import {LanguageSwitcher} from '@/components/marketing/LanguageSwitcher';
 import {ThemeToggle} from '@/components/marketing/ThemeToggle';
 
 interface NavbarProps {
   dict: Dictionary;
   locale: Locale;
+  user?: User | null;
+  role?: string | null;
 }
 
 const NAV_SCROLL_THRESHOLD = 20;
 
-export function Navbar({dict, locale}: NavbarProps) {
+export function Navbar({dict, locale, user, role}: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
-  const [isAuthLoading, setIsAuthLoading] = useState(true);
   const router = useRouter();
 
   const handleSignOut = async () => {
+    setMobileOpen(false);
     const supabase = createClient();
-    await supabase.auth.signOut(); // Clear client state
-    await signOut(); // Clear server cookies
-    router.refresh();
+    await supabase.auth.signOut();
+    await signOut();
+    router.push(buildRoute(locale, ROUTES.MARKETING.HOME));
   };
 
   useEffect(() => {
@@ -54,22 +49,6 @@ export function Navbar({dict, locale}: NavbarProps) {
     handleScroll(); // initialise on mount
     window.addEventListener('scroll', handleScroll, {passive: true});
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const supabase = createClient();
-    const fetchUser = async () => {
-      const {data} = await supabase.auth.getUser();
-      setUser(data.user);
-      setIsAuthLoading(false);
-    };
-    fetchUser();
-
-    const {data: authListener} = supabase.auth.onAuthStateChange((event, session) => {
-      setUser(session?.user ?? null);
-    });
-
-    return () => authListener.subscription.unsubscribe();
   }, []);
 
   const getInitials = (name?: string) => {
@@ -83,11 +62,13 @@ export function Navbar({dict, locale}: NavbarProps) {
   };
 
   const navLinks = [
-    {href: `/${locale}#about`, label: dict.nav.about},
-    {href: `/${locale}#disciplines`, label: dict.nav.services},
-    {href: `/${locale}#gallery`, label: dict.nav.gallery},
-    {href: `/${locale}#contact`, label: dict.nav.contact}
+    {href: buildRoute(locale, '#about'), label: dict.nav.about},
+    {href: buildRoute(locale, '#disciplines'), label: dict.nav.services},
+    {href: buildRoute(locale, '#gallery'), label: dict.nav.gallery},
+    {href: buildRoute(locale, '#contact'), label: dict.nav.contact}
   ];
+
+  const dashboardRoute = getDefaultDashboardRoute(role);
 
   return (
     <header
@@ -99,7 +80,7 @@ export function Navbar({dict, locale}: NavbarProps) {
       )}>
       <div className="mx-auto flex w-full items-center justify-between px-6 md:px-12 lg:px-16">
         {/* Logo */}
-        <Link href={`/${locale}`} className="group flex items-center gap-2.5">
+        <Link href={buildRoute(locale, '/')} className="group flex items-center gap-2.5">
           <div className="relative h-9 w-9 overflow-hidden rounded-full md:h-10 md:w-10">
             <Image
               src="/logo.png"
@@ -131,34 +112,14 @@ export function Navbar({dict, locale}: NavbarProps) {
           <LanguageSwitcher current={locale} />
           <ThemeToggle />
 
-          {isAuthLoading ? null : user ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger className="focus-visible:ring-ring relative hidden h-10 w-10 cursor-pointer rounded-full border-none bg-transparent p-0 focus:outline-none focus-visible:ring-2 lg:flex">
-                <Avatar className="h-10 w-10">
-                  <AvatarImage src={user.user_metadata?.avatar_url} alt={user.user_metadata?.full_name} />
-                  <AvatarFallback>{getInitials(user.user_metadata?.full_name)}</AvatarFallback>
-                </Avatar>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56" align="end">
-                <DropdownMenuGroup>
-                  <DropdownMenuLabel className="font-normal">
-                    <div className="flex flex-col space-y-1">
-                      <p className="text-sm leading-none font-medium">{user.user_metadata?.full_name || 'User'}</p>
-                      <p className="text-muted-foreground text-xs leading-none">{user.email}</p>
-                    </div>
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer" variant="destructive">
-                    <LogOut className="mr-2 h-4 w-4" />
-                    {dict.auth?.logout || 'Log out'}
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
+          {user ? (
+            <div className="hidden lg:block">
+              <UserDropdown user={user} role={role || USER_ROLES.CLIENT} locale={locale} dict={dict} />
+            </div>
           ) : (
             <Button
               className="hidden cursor-pointer rounded-full px-5 py-2.5 font-medium lg:inline-flex"
-              render={<Link href={`/${locale}/login`} />}
+              render={<Link href={buildRoute(locale, '/login')} />}
               nativeButton={false}>
               {dict.auth?.login || 'Log in'}
             </Button>
@@ -201,7 +162,7 @@ export function Navbar({dict, locale}: NavbarProps) {
           </nav>
 
           <div className="border-border mt-auto border-t px-6 py-5">
-            {isAuthLoading ? null : user ? (
+            {user ? (
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-3">
                   <Avatar className="h-10 w-10">
@@ -214,12 +175,17 @@ export function Navbar({dict, locale}: NavbarProps) {
                   </div>
                 </div>
                 <Button
+                  variant="outline"
+                  className="w-full cursor-pointer rounded-full font-medium"
+                  render={<Link href={buildRoute(locale, dashboardRoute)} />}
+                  nativeButton={false}
+                  onClick={() => setMobileOpen(false)}>
+                  {role === USER_ROLES.ADMIN ? dict.nav.adminPanel : dict.nav.dashboard}
+                </Button>
+                <Button
                   variant="destructive"
                   className="w-full cursor-pointer rounded-full font-medium"
-                  onClick={() => {
-                    setMobileOpen(false);
-                    handleSignOut();
-                  }}>
+                  onClick={handleSignOut}>
                   <LogOut className="mr-2 h-4 w-4" />
                   {dict.auth?.logout || 'Log out'}
                 </Button>
@@ -227,7 +193,7 @@ export function Navbar({dict, locale}: NavbarProps) {
             ) : (
               <Button
                 className="w-full cursor-pointer rounded-full font-medium"
-                render={<Link href={`/${locale}/login`} />}
+                render={<Link href={buildRoute(locale, ROUTES.AUTH.LOGIN)} />}
                 nativeButton={false}
                 onClick={() => setMobileOpen(false)}>
                 {dict.auth?.login || 'Log in'}

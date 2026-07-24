@@ -10,6 +10,8 @@ import {Eye, EyeOff} from 'lucide-react';
 import {signInWithGoogle, signInWithEmail} from '@/actions/auth';
 import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
 import {loginSchema, type LoginInput} from '@/lib/validators/auth';
+import {useRedirectUrl} from '@/hooks/useRedirectUrl';
+import {ROUTES, buildRoute, getDefaultDashboardRoute} from '@/config/navigation';
 
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Button} from '@/components/ui/button';
@@ -21,6 +23,7 @@ export default function LoginPage() {
   const [errorMsg, setErrorMsg] = useState('');
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  const redirectUrl = useRedirectUrl(locale);
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -38,7 +41,11 @@ export default function LoginPage() {
       if (res?.error) {
         setErrorMsg(dict.auth.errors.loginFailed || res.error);
       } else {
-        router.push(`/${locale}`);
+        if (redirectUrl === `/${locale}`) {
+          router.push(buildRoute(locale, getDefaultDashboardRoute(res.role || 'client')));
+        } else {
+          router.push(redirectUrl);
+        }
       }
     });
   };
@@ -126,6 +133,7 @@ export default function LoginPage() {
         </div>
 
         <form action={signInWithGoogle}>
+          <input type="hidden" name="redirectUrl" value={redirectUrl} />
           <Button
             type="submit"
             variant="outline"
@@ -149,7 +157,9 @@ export default function LoginPage() {
 
         <div className="text-muted-foreground mt-8 pb-4 text-center text-sm font-medium">
           {dict.auth.noAccount}{' '}
-          <Link href={`/${locale}/register`} className="text-primary font-bold transition-colors hover:underline">
+          <Link
+            href={buildRoute(locale, ROUTES.AUTH.REGISTER)}
+            className="text-primary font-bold transition-colors hover:underline">
             {dict.auth.register}
           </Link>
         </div>
