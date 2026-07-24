@@ -38,8 +38,7 @@ export function HeroSection({dict}: {dict: Dictionary}) {
             nativeButton={false}
             size="lg"
             className="group hover:bg-brand-balance cursor-pointer rounded-full bg-[#111111] px-8 py-7 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:shadow-xl"
-            onClick={() => analytics.trackStartTraining('hero_section')}
-          >
+            onClick={() => analytics.trackStartTraining('hero_section')}>
             {dict.hero.cta1}
             <ArrowRight className="ml-2 size-5 transition-transform group-hover:translate-x-1" />
           </Button>
@@ -48,8 +47,7 @@ export function HeroSection({dict}: {dict: Dictionary}) {
             <Button
               variant="outline"
               size="lg"
-              className="group border-border/60 hover:border-brand-balance hover:text-brand-balance bg-background cursor-pointer rounded-full border-2 px-8 py-7 text-lg font-bold shadow-sm transition-all duration-300"
-            >
+              className="group border-border/60 hover:border-brand-balance hover:text-brand-balance bg-background cursor-pointer rounded-full border-2 px-8 py-7 text-lg font-bold shadow-sm transition-all duration-300">
               <div className="bg-brand-balance/10 group-hover:bg-brand-balance/20 mr-3 flex size-8 items-center justify-center rounded-full transition-colors">
                 <Play className="text-brand-balance ml-0.5 size-4 fill-current" />
               </div>
@@ -92,8 +90,7 @@ export function HeroSection({dict}: {dict: Dictionary}) {
 
           <div
             className="bg-card border-border absolute -bottom-6 -left-6 flex animate-bounce items-center gap-4 rounded-2xl border p-4 shadow-xl md:bottom-12 md:-left-4"
-            style={{animationDuration: '3s'}}
-          >
+            style={{animationDuration: '3s'}}>
             <div className="bg-brand-balance/10 flex size-12 items-center justify-center rounded-full">
               <HeartPulse className="text-brand-balance size-6" />
             </div>

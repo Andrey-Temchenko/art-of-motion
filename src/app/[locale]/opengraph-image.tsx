@@ -28,8 +28,7 @@ export default async function Image({params}: {params: Promise<{locale: string}>
         justifyContent: 'center',
         padding: '80px',
         fontFamily: 'sans-serif'
-      }}
-    >
+      }}>
       <div
         style={{
           display: 'flex',
@@ -38,8 +37,7 @@ export default async function Image({params}: {params: Promise<{locale: string}>
           justifyContent: 'center',
           textAlign: 'center',
           gap: '24px'
-        }}
-      >
+        }}>
         <div
           style={{
             fontSize: '84px',
@@ -47,8 +45,7 @@ export default async function Image({params}: {params: Promise<{locale: string}>
             color: '#ffffff',
             letterSpacing: '-0.02em',
             lineHeight: 1.1
-          }}
-        >
+          }}>
           {dict.meta.siteName}
         </div>
         <div
@@ -58,8 +55,7 @@ export default async function Image({params}: {params: Promise<{locale: string}>
             color: '#a1a1aa', // zinc-400
             maxWidth: '800px',
             lineHeight: 1.4
-          }}
-        >
+          }}>
           {dict.meta.description}
         </div>
       </div>
@@ -70,8 +66,7 @@ export default async function Image({params}: {params: Promise<{locale: string}>
           display: 'flex',
           alignItems: 'center',
           gap: '12px'
-        }}
-      >
+        }}>
         <div style={{width: '24px', height: '24px', borderRadius: '50%', background: 'hsl(170deg 40% 30%)'}} />
         <div style={{fontSize: '24px', color: '#e4e4e7', fontWeight: 500}}>artofmotion.fit</div>
       </div>

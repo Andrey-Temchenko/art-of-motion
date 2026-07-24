@@ -76,16 +76,14 @@ export function DisciplinesSection({dict}: {dict: Dictionary}) {
   const renderCard = (item: CardItem, i: number) => (
     <div
       key={i}
-      className="group bg-card border-border relative flex h-full flex-col overflow-hidden rounded-[2rem] border p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl md:p-8"
-    >
+      className="group bg-card border-border relative flex h-full flex-col overflow-hidden rounded-[2rem] border p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl md:p-8">
       {/* Subtle background glow effect on hover */}
       <div
         className={`absolute -top-16 -right-16 h-48 w-48 rounded-full opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-40 ${item.glow}`}
       />
 
       <div
-        className={`mb-5 flex size-12 items-center justify-center rounded-2xl shadow-inner transition-transform group-hover:scale-110 ${item.bg}`}
-      >
+        className={`mb-5 flex size-12 items-center justify-center rounded-2xl shadow-inner transition-transform group-hover:scale-110 ${item.bg}`}>
         <item.icon className={`size-6 ${item.color}`} />
       </div>
 

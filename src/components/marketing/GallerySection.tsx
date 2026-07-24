@@ -67,8 +67,7 @@ export function GallerySection({dict}: {dict: Dictionary}) {
               align: 'start',
               loop: true
             }}
-            className="w-full"
-          >
+            className="w-full">
             <CarouselContent className="-ml-4">
               {siteConfig.images.gallery.map((image, index) => (
                 <CarouselItem key={index} className="basis-[85%] pl-4 sm:basis-1/2 lg:basis-1/3">
@@ -103,8 +102,7 @@ export function GallerySection({dict}: {dict: Dictionary}) {
               size="icon"
               onClick={() => api?.scrollPrev()}
               className="border-border bg-background text-foreground hover:bg-primary hover:text-primary-foreground focus-visible:bg-primary focus-visible:text-primary-foreground dark:bg-background dark:hover:bg-primary dark:hover:text-primary-foreground dark:focus-visible:bg-primary dark:focus-visible:text-primary-foreground size-10 cursor-pointer rounded-full shadow-md transition-all active:scale-95 md:hidden"
-              aria-label="Previous image"
-            >
+              aria-label="Previous image">
               <ChevronLeft className="size-5" />
             </Button>
 
@@ -128,8 +126,7 @@ export function GallerySection({dict}: {dict: Dictionary}) {
               size="icon"
               onClick={() => api?.scrollNext()}
               className="border-border bg-background text-foreground hover:bg-primary hover:text-primary-foreground focus-visible:bg-primary focus-visible:text-primary-foreground dark:bg-background dark:hover:bg-primary dark:hover:text-primary-foreground dark:focus-visible:bg-primary dark:focus-visible:text-primary-foreground size-10 cursor-pointer rounded-full shadow-md transition-all active:scale-95 md:hidden"
-              aria-label="Next image"
-            >
+              aria-label="Next image">
               <ChevronRight className="size-5" />
             </Button>
           </div>

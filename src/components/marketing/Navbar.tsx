@@ -96,8 +96,7 @@ export function Navbar({dict, locale}: NavbarProps) {
         isScrolled
           ? 'border-border/40 bg-background/70 border-b py-3 shadow-sm backdrop-blur-xl backdrop-saturate-150'
           : 'bg-transparent py-4 md:py-5'
-      )}
-    >
+      )}>
       <div className="mx-auto flex w-full items-center justify-between px-6 md:px-12 lg:px-16">
         {/* Logo */}
         <Link href={`/${locale}`} className="group flex items-center gap-2.5">
@@ -121,8 +120,7 @@ export function Navbar({dict, locale}: NavbarProps) {
             <Link
               key={link.href}
               href={link.href}
-              className="text-muted-foreground hover:text-primary text-sm font-medium tracking-wider uppercase transition-colors"
-            >
+              className="text-muted-foreground hover:text-primary text-sm font-medium tracking-wider uppercase transition-colors">
               {link.label}
             </Link>
           ))}
@@ -161,8 +159,7 @@ export function Navbar({dict, locale}: NavbarProps) {
             <Button
               className="hidden cursor-pointer rounded-full px-5 py-2.5 font-medium lg:inline-flex"
               render={<Link href={`/${locale}/login`} />}
-              nativeButton={false}
-            >
+              nativeButton={false}>
               {dict.auth?.login || 'Log in'}
             </Button>
           )}
@@ -173,8 +170,7 @@ export function Navbar({dict, locale}: NavbarProps) {
             size="icon"
             className="lg:hidden"
             onClick={() => setMobileOpen(true)}
-            aria-label="Open menu"
-          >
+            aria-label="Open menu">
             <Menu className="size-5" />
           </Button>
         </div>
@@ -223,8 +219,7 @@ export function Navbar({dict, locale}: NavbarProps) {
                   onClick={() => {
                     setMobileOpen(false);
                     handleSignOut();
-                  }}
-                >
+                  }}>
                   <LogOut className="mr-2 h-4 w-4" />
                   {dict.auth?.logout || 'Log out'}
                 </Button>
@@ -234,8 +229,7 @@ export function Navbar({dict, locale}: NavbarProps) {
                 className="w-full cursor-pointer rounded-full font-medium"
                 render={<Link href={`/${locale}/login`} />}
                 nativeButton={false}
-                onClick={() => setMobileOpen(false)}
-              >
+                onClick={() => setMobileOpen(false)}>
                 {dict.auth?.login || 'Log in'}
               </Button>
             )}

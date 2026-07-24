@@ -32,3 +32,11 @@ yarn-error.log*
 .vscode/
 .git/
 package-lock.json
+
+# Playwright
+playwright-report/
+test-results/
+playwright/.auth/
+
+# Supabase
+supabase/.temp/

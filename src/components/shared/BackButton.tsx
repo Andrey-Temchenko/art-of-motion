@@ -16,8 +16,7 @@ export function BackButton({href, ariaLabel = 'Go back', className}: BackButtonP
       <Button
         className="group bg-brand-balance ring-brand-stretch/30 hover:ring-brand-stretch/60 flex size-14 cursor-pointer items-center justify-center rounded-full text-white shadow-xl ring-4 transition-all duration-300 hover:scale-110 active:scale-95"
         render={<Link href={href} aria-label={ariaLabel} />}
-        nativeButton={false}
-      >
+        nativeButton={false}>
         <ArrowLeft className="size-6" strokeWidth={2.5} />
       </Button>
     </div>

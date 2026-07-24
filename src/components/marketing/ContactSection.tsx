@@ -17,8 +17,7 @@ function InstagramIcon({className}: {className?: string}) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={className}
-    >
+      className={className}>
       <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
       <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
@@ -52,8 +51,7 @@ export function ContactSection({dict}: {dict: Dictionary}) {
               target="_blank"
               rel="noreferrer"
               className="group border-border/50 hover:border-foreground flex items-center justify-between border-b py-5 transition-colors sm:py-7"
-              onClick={() => analytics.trackClubAlfa(siteConfig.clubs.alfa.instagram)}
-            >
+              onClick={() => analytics.trackClubAlfa(siteConfig.clubs.alfa.instagram)}>
               <div className="flex items-center gap-6">
                 <MapPin className="text-muted-foreground group-hover:text-primary size-6 transition-colors sm:size-8" />
                 <div>
@@ -73,8 +71,7 @@ export function ContactSection({dict}: {dict: Dictionary}) {
               target="_blank"
               rel="noreferrer"
               className="group border-border/50 hover:border-foreground flex items-center justify-between border-b py-5 transition-colors sm:py-7"
-              onClick={() => analytics.trackClubTopGun(siteConfig.clubs.top_gun.instagram)}
-            >
+              onClick={() => analytics.trackClubTopGun(siteConfig.clubs.top_gun.instagram)}>
               <div className="flex items-center gap-6">
                 <MapPin className="text-muted-foreground group-hover:text-primary size-6 transition-colors sm:size-8" />
                 <div>
@@ -97,8 +94,7 @@ export function ContactSection({dict}: {dict: Dictionary}) {
               href={siteConfig.links.telegram}
               target="_blank"
               rel="noreferrer"
-              className="group border-border/50 hover:border-foreground flex items-center justify-between border-b py-5 transition-colors sm:py-7"
-            >
+              className="group border-border/50 hover:border-foreground flex items-center justify-between border-b py-5 transition-colors sm:py-7">
               <div className="flex items-center gap-6">
                 <Send className="text-muted-foreground size-6 transition-colors group-hover:text-[#0088cc] sm:size-8" />
                 <h4 className="text-xl font-bold transition-colors group-hover:text-[#0088cc] sm:text-3xl">
@@ -113,8 +109,7 @@ export function ContactSection({dict}: {dict: Dictionary}) {
               target="_blank"
               rel="noreferrer"
               className="group border-border/50 hover:border-foreground flex items-center justify-between border-b py-5 transition-colors sm:py-7"
-              onClick={() => analytics.trackInstagramPersonal(siteConfig.links.instagram)}
-            >
+              onClick={() => analytics.trackInstagramPersonal(siteConfig.links.instagram)}>
               <div className="flex items-center gap-6">
                 <InstagramIcon className="text-muted-foreground size-6 transition-colors group-hover:text-pink-500 sm:size-8" />
                 <h4 className="text-xl font-bold transition-colors group-hover:text-pink-500 sm:text-3xl">

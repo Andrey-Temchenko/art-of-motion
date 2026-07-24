@@ -30,8 +30,7 @@ export default function GlobalError({error, reset}: {error: Error & {digest?: st
               fontWeight: 500,
               cursor: 'pointer',
               border: 'none'
-            }}
-          >
+            }}>
             {dict.ui.errorRetry}
           </button>
         </div>

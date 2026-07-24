@@ -43,8 +43,7 @@ export function LanguageSwitcher({current}: {current: Locale}): JSX.Element {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        render={<Button variant="outline" size="sm" className="cursor-pointer gap-1.5 rounded-full px-3" />}
-      >
+        render={<Button variant="outline" size="sm" className="cursor-pointer gap-1.5 rounded-full px-3" />}>
         <Globe className="size-3.5" />
         <span className="text-xs font-semibold">{localeShortLabels[current]}</span>
         <ChevronDown className="size-3 opacity-60" />

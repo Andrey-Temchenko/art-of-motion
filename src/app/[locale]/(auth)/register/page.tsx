@@ -105,8 +105,7 @@ export default function RegisterPage() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2 transition-colors"
-              >
+                className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2 transition-colors">
                 {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
               </button>
             </div>
@@ -121,8 +120,7 @@ export default function RegisterPage() {
             <Button
               type="submit"
               className="bg-primary hover:bg-brand-balance text-primary-foreground h-14 w-full rounded-full text-lg font-bold shadow-lg transition-all duration-300"
-              disabled={isPending}
-            >
+              disabled={isPending}>
               {isPending ? '...' : dict.auth.register}
             </Button>
           </div>
@@ -141,8 +139,7 @@ export default function RegisterPage() {
           <Button
             type="submit"
             variant="outline"
-            className="text-foreground border-border/80 bg-background hover:bg-secondary hover:border-primary/50 h-14 w-full rounded-full border font-bold shadow-sm transition-all duration-300"
-          >
+            className="text-foreground border-border/80 bg-background hover:bg-secondary hover:border-primary/50 h-14 w-full rounded-full border font-bold shadow-sm transition-all duration-300">
             <svg
               className="mr-3 h-5 w-5"
               aria-hidden="true"
@@ -151,12 +148,10 @@ export default function RegisterPage() {
               data-icon="google"
               role="img"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 488 512"
-            >
+              viewBox="0 0 488 512">
               <path
                 fill="currentColor"
-                d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"
-              ></path>
+                d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path>
             </svg>
             Continue with Google
           </Button>

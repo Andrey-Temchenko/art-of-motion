@@ -75,8 +75,7 @@ export default function ResetPasswordPage() {
             <Button
               type="submit"
               className="bg-primary hover:bg-brand-balance text-primary-foreground h-14 w-full rounded-full text-lg font-bold shadow-lg transition-all duration-300"
-              disabled={isPending}
-            >
+              disabled={isPending}>
               {isPending ? '...' : dict.auth.resetPassword}
             </Button>
           </div>

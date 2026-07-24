@@ -86,8 +86,7 @@ export default async function RootLocaleLayout({
     <html
       lang={locale}
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-      suppressHydrationWarning
-    >
+      suppressHydrationWarning>
       <body className="flex min-h-full flex-col">
         {isAnalyticsEnabled ? (
           <>
