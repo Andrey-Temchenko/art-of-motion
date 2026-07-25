@@ -38,10 +38,12 @@ export function Layout({children, navItems, dict, locale, user, role}: LayoutPro
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
 
+  const handleCloseSidebar = () => setMobileOpen(false);
+
   const renderSidebarContent = () => (
     <>
       <div className="flex h-16 shrink-0 items-center px-6">
-        <Link href={buildRoute(locale, '/')} className="group flex items-center gap-2.5">
+        <Link href={buildRoute(locale, '/')} className="group flex items-center gap-2.5" onClick={handleCloseSidebar}>
           <div className="relative h-8 w-8 overflow-hidden rounded-full">
             <Image
               src="/logo.png"
@@ -63,6 +65,7 @@ export function Layout({children, navItems, dict, locale, user, role}: LayoutPro
             <Link
               key={item.href}
               href={item.href}
+              onClick={handleCloseSidebar}
               className={cn(
                 'group flex items-center rounded-lg px-3 py-2 text-sm font-medium transition-colors',
                 isActive
@@ -79,16 +82,14 @@ export function Layout({children, navItems, dict, locale, user, role}: LayoutPro
   );
 
   return (
-    <div className="bg-background flex min-h-screen">
+    <div className="bg-background flex h-[100dvh] overflow-hidden">
       {/* Desktop Sidebar */}
-      <aside className="border-brand-stretch bg-card hidden w-64 flex-col border-r md:flex">
-        {renderSidebarContent()}
-      </aside>
+      <aside className="border-border bg-card hidden w-64 flex-col border-r md:flex">{renderSidebarContent()}</aside>
 
       {/* Main Content wrapper */}
       <div className="flex flex-1 flex-col overflow-hidden">
         {/* Top Navbar */}
-        <header className="border-brand-stretch bg-background/80 flex h-16 shrink-0 items-center justify-between border-b px-4 backdrop-blur-md md:justify-end md:px-8">
+        <header className="border-border bg-background/70 flex h-16 shrink-0 items-center justify-between border-b px-4 backdrop-blur-xl backdrop-saturate-150 md:justify-end md:px-8">
           {/* Mobile menu trigger */}
           <Button
             variant="ghost"
