@@ -763,6 +763,122 @@
         "en": "Templates"
       }
     },
+    "overviewPage": {
+      "title": {
+        "uk": "Огляд",
+        "ru": "Обзор",
+        "en": "Admin Overview"
+      },
+      "welcome": {
+        "uk": "З поверненням, {name}. Ви маєте повний доступ до управління системою.",
+        "ru": "Добро пожаловать, {name}. У вас есть полный доступ к управлению системой.",
+        "en": "Welcome back, {name}. You have full access to manage the system."
+      },
+      "totalClients": {
+        "uk": "Усього клієнтів",
+        "ru": "Всего клиентов",
+        "en": "Total Clients"
+      },
+      "activeBookings": {
+        "uk": "Активні бронювання",
+        "ru": "Активные бронирования",
+        "en": "Active Bookings"
+      },
+      "upcomingSlots": {
+        "uk": "Найближчі слоти",
+        "ru": "Ближайшие слоты",
+        "en": "Upcoming Slots"
+      },
+      "revenueEstimate": {
+        "uk": "Оцінка виторгу",
+        "ru": "Оценка выручки",
+        "en": "Revenue Estimate"
+      },
+      "revenueDisclaimer": {
+        "uk": "* оцінка на основі підтверджених бронювань, без інтеграції платежів",
+        "ru": "* оценка на основе подтвержденных броней, без интеграции платежей",
+        "en": "* estimate based on confirmed bookings, without payment integration"
+      },
+      "bookingsVolume": {
+        "uk": "Динаміка бронювань",
+        "ru": "Динамика бронирований",
+        "en": "Bookings Volume"
+      },
+      "popularWorkouts": {
+        "uk": "Популярні тренування",
+        "ru": "Популярные тренировки",
+        "en": "Popular workouts"
+      },
+      "bookingsChartLabel": {
+        "uk": "Бронювання",
+        "ru": "Бронирования",
+        "en": "Bookings"
+      }
+    },
+    "clientsPage": {
+      "title": {
+        "uk": "Клієнти",
+        "ru": "Клиенты",
+        "en": "Clients"
+      },
+      "subtitle": {
+        "uk": "Управління користувачами та клієнтами платформи.",
+        "ru": "Управление пользователями и клиентами платформы.",
+        "en": "Manage users and clients of the platform."
+      },
+      "searchPlaceholder": {
+        "uk": "Пошук за ім'ям або email...",
+        "ru": "Поиск по имени или email...",
+        "en": "Search by name or email..."
+      },
+      "table": {
+        "name": {
+          "uk": "Ім'я",
+          "ru": "Имя",
+          "en": "Name"
+        },
+        "email": {
+          "uk": "Email",
+          "ru": "Email",
+          "en": "Email"
+        },
+        "phone": {
+          "uk": "Телефон",
+          "ru": "Телефон",
+          "en": "Phone"
+        },
+        "totalBookings": {
+          "uk": "Всього броней",
+          "ru": "Всего броней",
+          "en": "Total Bookings"
+        },
+        "sessionsAttended": {
+          "uk": "Відвідав",
+          "ru": "Посетил",
+          "en": "Attended"
+        },
+        "upcomingBookings": {
+          "uk": "Майбутні",
+          "ru": "Предстоящие",
+          "en": "Upcoming"
+        },
+        "cancelledBookings": {
+          "uk": "Скасовані",
+          "ru": "Отменено",
+          "en": "Cancelled"
+        },
+        "lastBooking": {
+          "uk": "Остання бронь",
+          "ru": "Последняя бронь",
+          "en": "Last Booking"
+        },
+        "noRecords": {
+          "uk": "Поки немає клієнтів",
+          "ru": "Пока нет клиентов",
+          "en": "No clients yet"
+        }
+      }
+    },
     "slotsPage": {
       "title": {
         "uk": "Управління розкладом",

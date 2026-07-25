@@ -162,6 +162,45 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      admin_bookings_volume: {
+        Args: {weeks_back?: number};
+        Returns: {
+          bookings_count: number;
+          week_start: string;
+        }[];
+      };
+      admin_client_overview: {
+        Args: never;
+        Returns: {
+          cancelled_bookings: number;
+          client_id: string;
+          email: string;
+          full_name: string;
+          last_booking_at: string;
+          phone: string;
+          sessions_attended: number;
+          total_bookings: number;
+          upcoming_bookings: number;
+        }[];
+      };
+      admin_dashboard_kpis: {
+        Args: never;
+        Returns: {
+          active_bookings: number;
+          revenue_estimate: number;
+          total_clients: number;
+          upcoming_slots: number;
+        }[];
+      };
+      admin_popular_workout_types: {
+        Args: {limit_count?: number};
+        Returns: {
+          avg_occupancy_pct: number;
+          bookings_count: number;
+          title: string;
+          workout_type_id: string;
+        }[];
+      };
       is_admin: {Args: never; Returns: boolean};
     };
     Enums: {
