@@ -11,6 +11,11 @@ This version has breaking changes - APIs, conventions, and file structure may al
 
 - **Framework**: Next.js 16.2.0 (App Router exclusively).
 - **Metadata**: We use File-based metadata (`icon.svg`, `apple-icon.png`, `manifest.json` in `src/app/`) and the `Metadata` API in `layout.tsx`. Do not hardcode `<meta>` or `<link>` tags in the HTML.
+- **Route Segment Boundaries**: Every route segment that can fail or fetch data MUST provide the corresponding App Router boundary files where relevant:
+  - `loading.tsx` for the segment's Suspense fallback (use skeleton components matching the final layout, not a generic spinner).
+  - `error.tsx` (Client Component) for segment-level error boundaries. Never let a data-fetching failure crash the whole tree.
+  - `not-found.tsx` where a resource lookup (e.g. by slug/id) can legitimately return nothing.
+  - Do not swallow errors silently in `try/catch` inside Server Components just to avoid an `error.tsx` - let it throw and let the boundary handle it, unless there's a specific recoverable fallback UI.
 
 ## 2. Styling (Tailwind v4)
 
@@ -30,6 +35,54 @@ This version has breaking changes - APIs, conventions, and file structure may al
 - We use **Shadcn UI** (installed in `src/components/ui/`).
 - When proposing UI changes, prioritize using or adding Shadcn components via `npx shadcn@latest add <component>`.
 - **Separation of Concerns**: Do NOT mix raw database data parsing, complex formatting, or business logic (e.g., calculating remaining capacity, grouping by date, extracting titles from joined tables) directly inside UI Components or Page components. Perform data transformations in the service layer or Server Actions, and pass clean, strictly typed data to the UI.
+
+### 3.1 Server vs Client Components
+
+- **Default to Server Components.** Only add `'use client'` to a file when it genuinely needs interactivity, browser APIs, state, effects, or event handlers.
+- **Push `'use client'` to the leaves.** Never mark an entire page or a large section as a Client Component just because one small piece inside it (e.g. a toggle button) needs interactivity. Extract that piece into its own small client component and keep the surrounding layout/data-fetching as a Server Component.
+- Server Components fetch data directly (via the service layer, not Client-side `useEffect` + `fetch`). Do not fetch data in a Client Component when it could be fetched on the server and passed down as props.
+- Pass only serializable data as props from Server to Client Components (no functions, class instances, or Supabase clients).
+
+### 3.2 Component Decomposition & File Structure
+
+- **Single Responsibility**: A component should represent one coherent visual/logical unit. If a component's JSX mixes multiple distinct visual blocks (e.g. a header, a filter bar, and a list) or exceeds roughly 150-200 lines, split it into subcomponents.
+- **Folder-per-component pattern** for components with meaningful internal structure:
+  ```
+  HeroSection/
+    index.tsx              (or HeroSection.tsx - the composition/export)
+    HeroSectionHeading.tsx
+    HeroSectionActions.tsx
+    useHeroSectionAnimation.ts
+  ```
+  Simple, self-contained components (no subcomponents, no local hook) can remain a single file under `src/components/`.
+- **Presentational vs Container split**: where a component both fetches/derives data and renders significant UI, separate the two - a thin container (Server Component or hook) supplies data, a presentational component only renders it. This keeps presentational components easy to reuse and test.
+- Avoid prop-drilling more than 2-3 levels deep; prefer composition (passing `children`/render slots) or, for genuinely cross-cutting state, a small context colocated with the feature.
+
+### 3.3 Custom Hooks Extraction Rules
+
+- Extract logic into a custom hook whenever a component contains: `useEffect` with subscriptions/timers/event listeners, synchronization with an external system (window size, media queries, websockets), or reusable stateful logic shared by 2+ components.
+- **Avoid unnecessary `useEffect`.** Do not use an effect to compute a value that can be derived directly during render from props/state. Do not use an effect to reset state that can instead be controlled via a `key` prop. Reach for `useEffect` only for real synchronization with something outside React (DOM, browser APIs, subscriptions, network side effects that aren't data fetching already handled by Server Components).
+- Custom hooks must have a single, clearly named responsibility (`useClientDictionary`, not `useMisc`), a strictly typed return value (prefer a typed object over a bare array for hooks returning more than 2 values), and no direct DOM manipulation outside of `ref`-based effects.
+
+### 3.4 Props & Typing
+
+- Every component's props MUST be typed via an explicit `interface ComponentNameProps` (not `type` aliases for props, for consistency; `type` is fine for unions/utility types elsewhere).
+- Never use `any` in component props or hook signatures. Use `unknown` plus narrowing if the shape is genuinely not known ahead of time.
+- Type `children` explicitly as `React.ReactNode` when accepted; do not accept `children` unless the component is designed to render them.
+- Prefer **discriminated unions** over multiple optional boolean flags when a component has mutually exclusive visual states (e.g. `{ variant: 'loading' } | { variant: 'error'; message: string } | { variant: 'success'; data: X }` instead of `isLoading?: boolean; isError?: boolean; errorMessage?: string`).
+- Do not export component prop interfaces from the component file unless another file genuinely needs to import them.
+
+### 3.5 Forms
+
+- All forms MUST use **`react-hook-form`** for form state and **`zod`** for schema validation, wired together via `@hookform/resolvers/zod`. Do not hand-roll controlled inputs with `useState` for forms with more than 1-2 fields.
+- Validation schemas live alongside the form (or in `src/lib/validators/` if shared) and are the single source of truth for both client-side validation and, where applicable, Server Action input validation.
+- Server Actions that receive form data MUST re-validate with the same (or an equivalent) zod schema server-side. Never trust client-side validation alone.
+
+### 3.6 Memoization & Performance
+
+- Do not reach for `useMemo`/`useCallback` by default. Use them only when profiling (or an obvious case, like passing a callback to a memoized child or an expensive computation) shows they matter. Premature memoization adds noise without benefit.
+- Use `next/image` for all images (never a raw `<img>` tag) and `next/dynamic` for heavy, non-critical client components (e.g. charts, modals, rich text editors) to keep initial bundles small.
+- Lists rendered from arrays must use stable, unique `key` props (database ids), never array index, unless the list is provably static and never reordered.
 
 ## 4. Tooling & Git Flow
 
@@ -81,3 +134,18 @@ This version has breaking changes - APIs, conventions, and file structure may al
 ## 12. Server Actions
 
 - **Location**: All Next.js Server Actions MUST be placed in the `src/actions/` directory. Do NOT place server actions adjacent to page or component files (e.g. do not put them in `src/app/.../actions.ts` or `src/components/.../actions.ts`).
+- **Server-Side Authorization**: Every Server Action MUST independently verify the caller's session and permissions on the server. Never assume that because the UI hides a button or disables a control, the action is safe to run unchecked - the client cannot be trusted.
+- **Input Validation**: Every Server Action that accepts user input MUST validate it with a `zod` schema before touching the database, even if the same schema already validated the form on the client (see 3.5).
+- **Typed Return Values**: Server Actions should return a strictly typed result object (e.g. `{ success: true; data: X } | { success: false; error: string }`) rather than throwing raw errors across the server/client boundary, so the UI can handle failure states predictably.
+
+## 13. Environment Variables
+
+- All environment variables MUST be declared and validated in a single typed schema (e.g. via `zod` in `src/env.ts` or `@t3-oss/env-nextjs`), split into server-only and client-exposed (`NEXT_PUBLIC_*`) groups.
+- Never access `process.env.X` directly inside components, actions, or services. Import the validated, typed `env` object instead, so missing/misconfigured variables fail fast at build/startup rather than silently at runtime.
+
+## 14. Accessibility (a11y)
+
+- Use semantic HTML elements (`<button>`, `<nav>`, `<main>`, `<label>`, etc.) instead of `<div>`/`<span>` with click handlers wherever a native element covers the use case.
+- All interactive Shadcn/Radix-based components must keep their built-in ARIA attributes and keyboard interactions intact - do not override `role`, `tabIndex`, or ARIA props unless there's a specific, documented reason.
+- Every form input must have an associated, visible or `sr-only` `<Label>` (never a placeholder used as the only label).
+- Images MUST have meaningful `alt` text (or `alt=""` for purely decorative images) - never omit `alt` on `next/image`.
