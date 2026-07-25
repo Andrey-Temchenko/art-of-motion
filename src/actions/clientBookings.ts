@@ -10,6 +10,7 @@ import {formatKyivTime} from '@/lib/utils/timezone';
 import {getNextWeekRange} from '@/lib/utils/date';
 import {getDictionary} from '@/lib/i18n/getDictionary';
 import {Locale, defaultLocale, locales} from '@/lib/i18n/config';
+import type {Database} from '@/types/database.types';
 
 export type ActionState = {
   success: boolean;
@@ -155,4 +156,108 @@ export async function getScheduleSlots(userId: string): Promise<GroupedScheduleS
   });
 
   return groupedSlots;
+}
+
+export type CancelBookingResult =
+  {success: true} | {success: false; code: 'UNAUTHORIZED' | 'CANCELLATION_NOT_ALLOWED' | 'UNKNOWN'};
+
+export async function cancelBookingAction(bookingId: string): Promise<CancelBookingResult> {
+  let user;
+  try {
+    user = await requireUser();
+  } catch {
+    return {success: false, code: 'UNAUTHORIZED'};
+  }
+
+  const supabase = await createClient();
+  const {error} = await supabase
+    .from('bookings')
+    .update({status: 'cancelled'})
+    .eq('id', bookingId)
+    .eq('client_id', user.id);
+
+  if (error) {
+    console.error('Failed to cancel booking:', error);
+    if (error.code === 'P0002' || error.message.includes('CANCELLATION_NOT_ALLOWED')) {
+      return {success: false, code: 'CANCELLATION_NOT_ALLOWED'};
+    }
+    return {success: false, code: 'UNKNOWN'};
+  }
+
+  revalidatePath('/[locale]/dashboard/my-bookings', 'page');
+  revalidatePath('/[locale]/dashboard/schedule', 'page');
+
+  return {success: true};
+}
+
+export type ProcessedClientBooking = {
+  id: string;
+  status: Database['public']['Enums']['booking_status'];
+  slot: {
+    id: string;
+    start_time: string;
+    end_time: string;
+    location: Database['public']['Enums']['club_location'];
+    price: number;
+    cancellation_deadline_hours: number;
+    workout_title_key: string;
+  };
+};
+
+export async function getClientBookings(userId: string): Promise<ProcessedClientBooking[]> {
+  const supabase = await createClient();
+
+  const bookingsQuery = supabase
+    .from('bookings')
+    .select(
+      `
+      id,
+      status,
+      slots (
+        id,
+        start_time,
+        end_time,
+        location,
+        price,
+        cancellation_deadline_hours,
+        workout_types (title)
+      )
+    `
+    )
+    .eq('client_id', userId);
+
+  const {data, error} = await bookingsQuery;
+
+  if (error) {
+    console.error('Error fetching client bookings:', error);
+    throw new Error('Failed to load bookings');
+  }
+
+  type BookingsResult = import('@supabase/supabase-js').QueryData<typeof bookingsQuery>;
+  const rawBookings: BookingsResult = data || [];
+
+  const processedBookings: ProcessedClientBooking[] = rawBookings
+    .map(b => {
+      const slot = Array.isArray(b.slots) ? b.slots[0] : b.slots;
+      const wt = slot?.workout_types as {title: string} | {title: string}[] | null | undefined;
+      const workoutTitle = Array.isArray(wt) ? wt[0]?.title : wt?.title;
+
+      return {
+        id: b.id,
+        status: b.status,
+        slot: {
+          id: slot?.id || '',
+          start_time: slot?.start_time || '',
+          end_time: slot?.end_time || '',
+          location: slot?.location || '',
+          price: slot?.price || 0,
+          cancellation_deadline_hours: slot?.cancellation_deadline_hours || 24,
+          workout_title_key: workoutTitle || ''
+        }
+      };
+    })
+    // Sort by start_time ascending
+    .sort((a, b) => new Date(a.slot.start_time).getTime() - new Date(b.slot.start_time).getTime());
+
+  return processedBookings;
 }

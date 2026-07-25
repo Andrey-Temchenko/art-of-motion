@@ -11,8 +11,8 @@ import {uk, ru, enUS} from 'date-fns/locale';
 
 // Map enum values to dictionary keys
 const locationToDictKey: Record<string, string> = {
-  alpha: 'alfa',
-  top_gun: 'topgun'
+  [Constants.public.Enums.club_location[0]]: 'alfa',
+  [Constants.public.Enums.club_location[1]]: 'topgun'
 };
 
 export default async function AdminSlotsPage(props: {params: Promise<{locale: Locale}>}) {

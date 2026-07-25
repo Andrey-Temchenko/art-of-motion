@@ -44,7 +44,7 @@ export function SlotForm({
 
   const [, STATUS_CANCELLED] = Constants.public.Enums.slot_status;
 
-  const defaultLocation = locationOptions[0]?.value || 'alpha';
+  const defaultLocation = locationOptions[0]?.value || Constants.public.Enums.club_location[0];
 
   const form = useForm<CreateSlotInput>({
     resolver: zodResolver(createSlotSchema),

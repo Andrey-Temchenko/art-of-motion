@@ -82,6 +82,7 @@ export type Database = {
       };
       slots: {
         Row: {
+          cancellation_deadline_hours: number;
           created_at: string;
           end_time: string;
           id: string;
@@ -93,6 +94,7 @@ export type Database = {
           workout_type_id: string;
         };
         Insert: {
+          cancellation_deadline_hours?: number;
           created_at?: string;
           end_time: string;
           id?: string;
@@ -104,6 +106,7 @@ export type Database = {
           workout_type_id: string;
         };
         Update: {
+          cancellation_deadline_hours?: number;
           created_at?: string;
           end_time?: string;
           id?: string;

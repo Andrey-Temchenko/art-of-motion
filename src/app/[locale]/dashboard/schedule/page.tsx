@@ -1,18 +1,20 @@
 import React from 'react';
+import {uk, ru, enUS} from 'date-fns/locale';
 
 import {requireUser} from '@/lib/supabase/session';
 import {getDictionary} from '@/lib/i18n/getDictionary';
 import {Locale} from '@/lib/i18n/config';
 import {formatKyivTime} from '@/lib/utils/timezone';
 import {getScheduleSlots, GroupedScheduleSlots} from '@/actions/clientBookings';
-import {uk, ru, enUS} from 'date-fns/locale';
+import {Constants} from '@/types/database.types';
 
 import {BookingButton} from '@/components/dashboard/BookingButton';
+import {BookingCard} from '@/components/dashboard/BookingCard';
 
 // Map enum values to dictionary keys
 const locationToDictKey: Record<string, string> = {
-  alpha: 'alfa',
-  top_gun: 'topgun'
+  [Constants.public.Enums.club_location[0]]: 'alfa',
+  [Constants.public.Enums.club_location[1]]: 'topgun'
 };
 
 export default async function SchedulePage(props: {params: Promise<{locale: Locale}>}) {
@@ -64,34 +66,28 @@ export default async function SchedulePage(props: {params: Promise<{locale: Loca
                   // @ts-expect-error - indexing dynamic dictionary structure
                   const locationLabel = dict.contact?.clubs?.[dictKey]?.name || slot.location;
 
+                  const statsRight = (
+                    <span className={slot.is_full ? 'text-destructive font-medium' : 'text-muted-foreground'}>
+                      {slot.bookings_count} / {slot.max_capacity} {dict.dashboardArea.schedulePage.spots}
+                    </span>
+                  );
+
                   return (
-                    <div
+                    <BookingCard
                       key={slot.id}
-                      className="bg-card flex flex-col justify-between rounded-lg border p-4 shadow-sm">
-                      <div className="mb-4 space-y-2">
-                        <div className="flex items-start justify-between">
-                          <h3 className="text-lg font-medium">{localizedTitle}</h3>
-                          <span className="bg-primary/10 text-primary rounded px-2 py-1 text-sm font-semibold">
-                            {formatKyivTime(slot.start_time, 'HH:mm')}
-                          </span>
-                        </div>
-                        <p className="text-muted-foreground text-sm">{locationLabel}</p>
-                        <div className="flex items-center justify-between text-sm">
-                          <span>
-                            {slot.price} {dict.dashboardArea.schedulePage.currency}
-                          </span>
-                          <span className={slot.is_full ? 'text-destructive font-medium' : 'text-muted-foreground'}>
-                            {slot.bookings_count} / {slot.max_capacity} {dict.dashboardArea.schedulePage.spots}
-                          </span>
-                        </div>
-                      </div>
+                      localizedTitle={localizedTitle}
+                      startTime={slot.start_time}
+                      locationLabel={locationLabel}
+                      price={slot.price}
+                      currencyLabel={dict.dashboardArea.schedulePage.currency}
+                      statsRight={statsRight}>
                       <BookingButton
                         slotId={slot.id}
                         isBooked={slot.is_booked_by_user}
                         isFull={slot.is_full}
-                        isDisabled={slot.status !== 'scheduled'}
+                        isDisabled={slot.status !== Constants.public.Enums.slot_status[0]}
                       />
-                    </div>
+                    </BookingCard>
                   );
                 })}
               </div>

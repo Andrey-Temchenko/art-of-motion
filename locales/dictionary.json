@@ -963,6 +963,44 @@
         "ru": "Здесь будут отображаться ваши забронированные тренировки.",
         "en": "Here will be displayed your booked workouts."
       },
+      "tabs": {
+        "upcoming": {"uk": "Майбутні", "ru": "Предстоящие", "en": "Upcoming"},
+        "history": {"uk": "Історія", "ru": "История", "en": "History"}
+      },
+      "badges": {
+        "cancelled": {"uk": "Скасовано", "ru": "Отменено", "en": "Cancelled"},
+        "completed": {"uk": "Завершено", "ru": "Завершено", "en": "Completed"}
+      },
+      "cancelButton": {
+        "uk": "Скасувати бронь",
+        "ru": "Отменить бронь",
+        "en": "Cancel Booking"
+      },
+      "cancelUnavailablePrefix": {
+        "uk": "Скасування недоступне (менше ",
+        "ru": "Отмена недоступна (менее ",
+        "en": "Cancellation unavailable (< "
+      },
+      "cancelUnavailableSuffix": {
+        "uk": " год. до початку)",
+        "ru": " ч. до начала)",
+        "en": "h left)"
+      },
+      "cancelDialog": {
+        "title": {"uk": "Скасувати бронь?", "ru": "Отменить бронь?", "en": "Cancel Booking?"},
+        "desc": {
+          "uk": "Ви впевнені, що хочете скасувати цю бронь?",
+          "ru": "Вы уверены, что хотите отменить эту бронь?",
+          "en": "Are you sure you want to cancel this booking?"
+        },
+        "confirm": {"uk": "Скасувати", "ru": "Отменить", "en": "Cancel"},
+        "back": {"uk": "Назад", "ru": "Назад", "en": "Back"}
+      },
+      "noBookings": {
+        "uk": "Немає броней у цій категорії.",
+        "ru": "Нет броней в этой категории.",
+        "en": "No bookings in this category."
+      },
       "inDevelopment": {
         "uk": "Список броней у розробці...",
         "ru": "Список броней в разработке...",
@@ -1024,6 +1062,26 @@
         "uk": "Тренування успішно заброньовано!",
         "ru": "Тренировка успешно забронирована!",
         "en": "Slot booked successfully!"
+      },
+      "errorCancellationNotAllowedPrefix": {
+        "uk": "Скасування можливе не пізніше ніж за ",
+        "ru": "Отмена возможна не позднее чем за ",
+        "en": "Cancellation is possible no later than "
+      },
+      "errorCancellationNotAllowedSuffix": {
+        "uk": " годин до тренування",
+        "ru": " часов до тренировки",
+        "en": " hours before the workout"
+      },
+      "successCancelled": {
+        "uk": "Бронь успішно скасовано!",
+        "ru": "Бронь успешно отменена!",
+        "en": "Booking successfully cancelled!"
+      },
+      "errorCancelFailed": {
+        "uk": "Не вдалося скасувати бронь.",
+        "ru": "Не удалось отменить бронь.",
+        "en": "Failed to cancel booking."
       }
     }
   }

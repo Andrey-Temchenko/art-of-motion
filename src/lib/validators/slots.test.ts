@@ -1,10 +1,12 @@
 import {describe, it, expect} from 'vitest';
 import {createSlotSchema} from './slots';
 
+import {Constants} from '@/types/database.types';
+
 describe('createSlotSchema', () => {
   const validData = {
     workout_type_id: '123e4567-e89b-12d3-a456-426614174000',
-    location: 'alpha',
+    location: Constants.public.Enums.club_location[0],
     start_time: '2026-07-29T15:00:00.000Z',
     end_time: '2026-07-29T16:00:00.000Z',
     max_capacity: 5,
