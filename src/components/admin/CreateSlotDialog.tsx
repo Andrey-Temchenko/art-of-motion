@@ -5,16 +5,25 @@ import {Button} from '@/components/ui/button';
 import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from '@/components/ui/dialog';
 import {SlotForm, WorkoutType} from '@/components/admin/SlotForm';
 import {PlusIcon} from 'lucide-react';
+import {ProcessedAdminSlot} from '@/actions/adminSlots';
 
 interface CreateSlotDialogProps {
   workoutTypes: WorkoutType[];
   locationOptions: {value: string; label: string}[];
+  existingSlots: ProcessedAdminSlot[];
   dict: Record<string, string>;
   buttonText: string;
   title: string;
 }
 
-export function CreateSlotDialog({workoutTypes, locationOptions, dict, buttonText, title}: CreateSlotDialogProps) {
+export function CreateSlotDialog({
+  workoutTypes,
+  locationOptions,
+  existingSlots,
+  dict,
+  buttonText,
+  title
+}: CreateSlotDialogProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -30,6 +39,7 @@ export function CreateSlotDialog({workoutTypes, locationOptions, dict, buttonTex
         <SlotForm
           workoutTypes={workoutTypes}
           locationOptions={locationOptions}
+          existingSlots={existingSlots}
           dict={dict}
           onSuccess={() => setOpen(false)}
         />

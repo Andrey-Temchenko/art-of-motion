@@ -8,9 +8,9 @@ import {format, addMinutes} from 'date-fns';
 import {CalendarIcon} from 'lucide-react';
 
 import {createSlotSchema, CreateSlotInput} from '@/lib/validators/slots';
-import {createSlotAction} from '@/actions/adminSlots';
+import {createSlotAction, ProcessedAdminSlot} from '@/actions/adminSlots';
 import {cn} from '@/lib/utils';
-import {Database} from '@/types/database.types';
+import {Database, Constants} from '@/types/database.types';
 
 import {Button, buttonVariants} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
@@ -29,11 +29,20 @@ export type WorkoutType = {
 interface SlotFormProps {
   workoutTypes: WorkoutType[];
   locationOptions: {value: string; label: string}[];
+  existingSlots: ProcessedAdminSlot[];
   dict: Record<string, string>;
 }
 
-export function SlotForm({workoutTypes, locationOptions, dict, onSuccess}: SlotFormProps & {onSuccess?: () => void}) {
+export function SlotForm({
+  workoutTypes,
+  locationOptions,
+  existingSlots,
+  dict,
+  onSuccess
+}: SlotFormProps & {onSuccess?: () => void}) {
   const [isPending, startTransition] = useTransition();
+
+  const [, STATUS_CANCELLED] = Constants.public.Enums.slot_status;
 
   const defaultLocation = locationOptions[0]?.value || 'alpha';
 
@@ -95,6 +104,24 @@ export function SlotForm({workoutTypes, locationOptions, dict, onSuccess}: SlotF
   }, [date, startHour, startMinute, duration, updateStartAndEndTimes]);
 
   const onSubmit = (data: CreateSlotInput) => {
+    // Validate overlap client-side
+    const newStart = new Date(data.start_time).getTime();
+    const newEnd = new Date(data.end_time).getTime();
+
+    const isOverlap = existingSlots.some(slot => {
+      if (slot.status === STATUS_CANCELLED) return false;
+
+      const slotStart = new Date(slot.start_time).getTime();
+      const slotEnd = new Date(slot.end_time).getTime();
+
+      return newStart < slotEnd && newEnd > slotStart;
+    });
+
+    if (isOverlap) {
+      toast.error(dict.overlapError || 'Trainer is already busy at this time!');
+      return;
+    }
+
     startTransition(async () => {
       // Need FormData to match the server action signature
       const formData = new FormData();

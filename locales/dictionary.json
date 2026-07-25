@@ -844,6 +844,11 @@
           "uk": "Створити слот",
           "ru": "Создать слот",
           "en": "Create Slot"
+        },
+        "overlapError": {
+          "uk": "Тренер уже зайнятий у цей час! Перевірте розклад.",
+          "ru": "Тренер уже занят в это время! Проверьте расписание.",
+          "en": "The trainer is already busy at this time! Check the schedule."
         }
       },
       "table": {

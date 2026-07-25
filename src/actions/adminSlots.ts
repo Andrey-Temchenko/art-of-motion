@@ -8,7 +8,7 @@ import {USER_ROLES} from '@/lib/supabase/constants';
 import {createClient} from '@/lib/supabase/server';
 import {createSlotSchema} from '@/lib/validators/slots';
 import {fromKyivTime} from '@/lib/utils/timezone';
-import {Database} from '@/types/database.types';
+import {Database, Constants} from '@/types/database.types';
 
 export type ActionState = {
   success: boolean;
@@ -56,8 +56,34 @@ export async function createSlotAction(prevState: ActionState, formData: FormDat
   const utcStartTime = fromKyivTime(validData.start_time);
   const utcEndTime = fromKyivTime(validData.end_time);
 
-  // 4. Insert into DB
   const supabase = await createClient();
+
+  const [STATUS_SCHEDULED, STATUS_CANCELLED] = Constants.public.Enums.slot_status;
+
+  // 4. Check for overlapping slots
+  const {data: overlappingSlots, error: overlapError} = await supabase
+    .from('slots')
+    .select('id')
+    .neq('status', STATUS_CANCELLED)
+    .lt('start_time', utcEndTime.toISOString())
+    .gt('end_time', utcStartTime.toISOString());
+
+  if (overlapError) {
+    console.error('Failed to check overlapping slots:', overlapError);
+    return {
+      success: false,
+      message: 'Error checking time availability.'
+    };
+  }
+
+  if (overlappingSlots && overlappingSlots.length > 0) {
+    return {
+      success: false,
+      message: 'Trainer is already booked at this time!'
+    };
+  }
+
+  // 5. Insert into DB
   const {error} = await supabase.from('slots').insert({
     workout_type_id: validData.workout_type_id,
     location: validData.location as Database['public']['Enums']['club_location'],
@@ -65,7 +91,7 @@ export async function createSlotAction(prevState: ActionState, formData: FormDat
     end_time: utcEndTime.toISOString(),
     max_capacity: validData.max_capacity,
     price: validData.price,
-    status: 'scheduled'
+    status: STATUS_SCHEDULED
   });
 
   if (error) {

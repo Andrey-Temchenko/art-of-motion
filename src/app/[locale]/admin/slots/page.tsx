@@ -51,6 +51,7 @@ export default async function AdminSlotsPage(props: {params: Promise<{locale: Lo
         <CreateSlotDialog
           workoutTypes={localizedWorkoutTypes}
           locationOptions={locationOptions}
+          existingSlots={slots}
           dict={dict.admin.slotsPage.form}
           title={dict.admin.slotsPage.createSlot}
           buttonText={dict.admin.slotsPage.createSlot}
@@ -90,6 +91,8 @@ export default async function AdminSlotsPage(props: {params: Promise<{locale: Lo
                   const startDateObj = new Date(slot.start_time);
                   const endDateObj = new Date(slot.end_time);
 
+                  const [STATUS_SCHEDULED, STATUS_CANCELLED] = Constants.public.Enums.slot_status;
+
                   return (
                     <tr key={slot.id} className="hover:bg-muted/50 transition-colors">
                       <td className="px-4 py-3 font-medium">
@@ -104,9 +107,9 @@ export default async function AdminSlotsPage(props: {params: Promise<{locale: Lo
                       <td className="px-4 py-3">
                         <span
                           className={`inline-flex items-center rounded px-2 py-0.5 text-xs font-medium ${
-                            slot.status === 'scheduled'
+                            slot.status === STATUS_SCHEDULED
                               ? 'bg-blue-100 text-blue-800'
-                              : slot.status === 'cancelled'
+                              : slot.status === STATUS_CANCELLED
                                 ? 'bg-red-100 text-red-800'
                                 : 'bg-gray-100 text-gray-800'
                           }`}>
