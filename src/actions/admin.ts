@@ -1,12 +1,10 @@
 'use server';
 
 import {getRepositories} from '@/repositories';
-import {DashboardStats, AdminClientData} from '@/repositories/types';
+import type {DashboardStats, AdminClientData} from '@/repositories/types';
 import {getUserProfile} from '@/lib/supabase/session';
 
 export type ActionResponse<T> = {success: true; data: T} | {success: false; error: string};
-
-export type {DashboardStats, AdminClientData};
 
 export async function getAdminOverviewStats(): Promise<ActionResponse<DashboardStats>> {
   const {profile} = await getUserProfile();
