@@ -1,56 +1,34 @@
-import {QueryData} from '@supabase/supabase-js';
-
-import {createClient} from '@/lib/supabase/server';
-import {createAdminClient} from '@/lib/supabase/admin';
-import {formatKyivTime} from '@/lib/utils/timezone';
-import {getNextWeekRange} from '@/lib/utils/date';
 import {
-  ProcessedScheduleSlot,
   GroupedScheduleSlots,
   ProcessedClientBooking,
   CancelBookingResult,
-  DomainError
+  DomainError,
+  ProcessedScheduleSlot
 } from './types';
+import {getRepositories} from '@/repositories';
+import {formatKyivTime} from '@/lib/utils/timezone';
+import {getNextWeekRange} from '@/lib/utils/date';
 
-export async function bookSlot(slot_id: string, client_id: string): Promise<void> {
-  const supabase = await createClient();
-
-  const {error} = await supabase.from('bookings').insert({
-    slot_id,
-    client_id,
-    status: 'confirmed'
-  });
-
-  if (error) {
-    if (error.message.includes('SLOT_FULL') || error.code === 'P0001') {
+export async function bookSlot(slot_id: string, client_id: string, repos = getRepositories()): Promise<void> {
+  try {
+    await repos.booking.insertBooking(slot_id, client_id);
+  } catch (error: unknown) {
+    const err = error as {code?: string; message?: string};
+    if (err.message?.includes('SLOT_FULL') || err.code === 'P0001') {
       throw new DomainError('SLOT_FULL', 'errorSlotFull');
     }
-    if (error.code === '23505') {
+    if (err.code === '23505') {
       throw new DomainError('ALREADY_BOOKED', 'errorAlreadyBooked');
     }
     throw new DomainError('DB_ERROR', 'errorDatabase');
   }
 }
 
-export async function getScheduleSlots(userId: string): Promise<GroupedScheduleSlots> {
-  const adminClient = createAdminClient();
+export async function getScheduleSlots(userId: string, repos = getRepositories()): Promise<GroupedScheduleSlots> {
   const {startDate, endDate} = getNextWeekRange();
 
-  const slotsQuery = adminClient
-    .from('slots')
-    .select('*, workout_type:workout_types(title), bookings(client_id, status)')
-    .gte('start_time', startDate.toISOString())
-    .lte('start_time', endDate.toISOString())
-    .order('start_time', {ascending: true});
+  const rawSlots = await repos.slot.getScheduleSlotsList(startDate.toISOString(), endDate.toISOString());
 
-  type SlotsData = QueryData<typeof slotsQuery>;
-  const {data, error} = await slotsQuery;
-
-  if (error) {
-    throw new Error('Failed to load schedule slots');
-  }
-
-  const rawSlots: SlotsData = data || [];
   const groupedSlots: GroupedScheduleSlots = {};
 
   rawSlots.forEach(slot => {
@@ -86,54 +64,25 @@ export async function getScheduleSlots(userId: string): Promise<GroupedScheduleS
   return groupedSlots;
 }
 
-export async function cancelBooking(bookingId: string, userId: string): Promise<CancelBookingResult> {
-  const supabase = await createClient();
-  const {error} = await supabase
-    .from('bookings')
-    .update({status: 'cancelled'})
-    .eq('id', bookingId)
-    .eq('client_id', userId);
-
-  if (error) {
-    if (error.code === 'P0002' || error.message.includes('CANCELLATION_NOT_ALLOWED')) {
+export async function cancelBooking(
+  bookingId: string,
+  userId: string,
+  repos = getRepositories()
+): Promise<CancelBookingResult> {
+  try {
+    await repos.booking.updateBookingStatus(bookingId, userId, 'cancelled');
+    return {success: true};
+  } catch (error: unknown) {
+    const err = error as {code?: string; message?: string};
+    if (err.code === 'P0002' || err.message?.includes('CANCELLATION_NOT_ALLOWED')) {
       return {success: false, code: 'CANCELLATION_NOT_ALLOWED'};
     }
     return {success: false, code: 'UNKNOWN'};
   }
-
-  return {success: true};
 }
 
-export async function getClientBookings(userId: string): Promise<ProcessedClientBooking[]> {
-  const supabase = await createClient();
-
-  const bookingsQuery = supabase
-    .from('bookings')
-    .select(
-      `
-      id,
-      status,
-      slots (
-        id,
-        start_time,
-        end_time,
-        location,
-        price,
-        cancellation_deadline_hours,
-        workout_types (title)
-      )
-    `
-    )
-    .eq('client_id', userId);
-
-  const {data, error} = await bookingsQuery;
-
-  if (error) {
-    throw new Error('Failed to load bookings');
-  }
-
-  type BookingsResult = QueryData<typeof bookingsQuery>;
-  const rawBookings: BookingsResult = data || [];
+export async function getClientBookings(userId: string, repos = getRepositories()): Promise<ProcessedClientBooking[]> {
+  const rawBookings = await repos.booking.getClientBookingsList(userId);
 
   const processedBookings: ProcessedClientBooking[] = rawBookings
     .map(b => {
@@ -143,12 +92,12 @@ export async function getClientBookings(userId: string): Promise<ProcessedClient
 
       return {
         id: b.id,
-        status: b.status,
+        status: b.status as 'confirmed' | 'cancelled',
         slot: {
           id: slot?.id || '',
           start_time: slot?.start_time || '',
           end_time: slot?.end_time || '',
-          location: slot?.location || '',
+          location: (slot?.location || '') as ProcessedClientBooking['slot']['location'],
           price: slot?.price || 0,
           cancellation_deadline_hours: slot?.cancellation_deadline_hours || 24,
           workout_title_key: workoutTitle || ''

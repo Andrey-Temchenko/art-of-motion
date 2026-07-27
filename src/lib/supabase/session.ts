@@ -3,7 +3,7 @@ import {User} from '@supabase/supabase-js';
 
 import {createClient} from './server';
 import {UserRole, Profile} from './types';
-import {USER_ROLES} from './constants';
+import {getRepositories} from '@/repositories';
 
 /**
  * Internal helper to get the authenticated user and initialized client.
@@ -34,13 +34,14 @@ export async function requireUser(): Promise<User> {
  * Returns the current user's profile without redirecting (useful for conditional rendering).
  */
 export async function getUserProfile(): Promise<{user: User | null; profile: Profile | null}> {
-  const {supabase, user} = await getAuthenticatedUser();
+  const {user} = await getAuthenticatedUser();
 
   if (!user) {
     return {user: null, profile: null};
   }
 
-  const {data: profile} = await supabase.from('profiles').select('*').eq('id', user.id).single();
+  const repos = getRepositories();
+  const profile = await repos.profile.getProfileById(user.id);
 
   return {user, profile};
 }
@@ -50,13 +51,14 @@ export async function getUserProfile(): Promise<{user: User | null; profile: Pro
  * Redirects to login if not authenticated, or to dashboard if unauthorized.
  */
 export async function requireRole(allowedRoles: UserRole[]): Promise<{user: User; profile: Profile}> {
-  const {supabase, user, error} = await getAuthenticatedUser();
+  const {user, error} = await getAuthenticatedUser();
 
   if (error || !user) {
     redirect('/login');
   }
 
-  const {data: profile} = await supabase.from('profiles').select('*').eq('id', user.id).single();
+  const repos = getRepositories();
+  const profile = await repos.profile.getProfileById(user.id);
 
   if (!profile || !allowedRoles.includes(profile.role)) {
     // If user is authenticated but not authorized for this route
@@ -70,8 +72,6 @@ export async function requireRole(allowedRoles: UserRole[]): Promise<{user: User
  * Gets the role for a specific user ID, defaulting to CLIENT.
  */
 export async function getUserRoleServer(userId: string): Promise<UserRole> {
-  const supabase = await createClient();
-  const {data: profile} = await supabase.from('profiles').select('role').eq('id', userId).single();
-
-  return profile?.role || USER_ROLES.CLIENT;
+  const repos = getRepositories();
+  return repos.profile.getProfileRoleById(userId);
 }

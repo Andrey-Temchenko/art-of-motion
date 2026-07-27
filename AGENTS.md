@@ -131,12 +131,18 @@ This version has breaking changes - APIs, conventions, and file structure may al
 - **No Hardcoded Routes**: NEVER hardcode routing paths or URLs directly in components. All internal navigation routes must be defined in `src/config/navigation.ts`.
 - **Navigation Config**: Always use the `ROUTES` object and helpers (e.g. `buildRoute`, `getDefaultDashboardRoute`) from `src/config/navigation.ts` to construct navigation links and redirect paths.
 
-## 12. Server Actions
+## 12. Backend Architecture (Actions, Services & Repositories)
 
-- **Location**: All Next.js Server Actions MUST be placed in the `src/actions/` directory. Do NOT place server actions adjacent to page or component files (e.g. do not put them in `src/app/.../actions.ts` or `src/components/.../actions.ts`).
-- **Server-Side Authorization**: Every Server Action MUST independently verify the caller's session and permissions on the server. Never assume that because the UI hides a button or disables a control, the action is safe to run unchecked - the client cannot be trusted.
-- **Input Validation**: Every Server Action that accepts user input MUST validate it with a `zod` schema before touching the database, even if the same schema already validated the form on the client (see 3.5).
-- **Typed Return Values**: Server Actions should return a strictly typed result object (e.g. `{ success: true; data: X } | { success: false; error: string }`) rather than throwing raw errors across the server/client boundary, so the UI can handle failure states predictably.
+- **Strict Layering**: Server Actions/Components call Services. Services call Repositories. Do not put database calls directly in Server Actions or UI components.
+- **Server Actions (Entry Points)**:
+  - **Location**: MUST be placed in `src/actions/` (never adjacent to page or component files).
+  - **Authorization**: MUST independently verify the caller's session and permissions.
+  - **Validation**: MUST validate input with a `zod` schema before touching the database.
+  - **Return Values**: Should return a strictly typed result object (e.g. `{ success: true; data: X } | { success: false; error: string }`) rather than throwing raw errors across the server/client boundary.
+- **Service Layer (Domain Logic)**: All business logic, complex data transformations (e.g., grouping dates, calculating capacity), and domain error translation MUST reside in `src/services/`.
+- **Repository Layer (Data Access)**: `src/repositories/` must ONLY execute queries and return raw data. No domain logic, no complex data mapping. Throw raw database errors for the service to intercept.
+- **Dependency Injection (Testing Seam)**: Services must accept a repository registry as a default argument to allow easy mocking in unit tests (e.g., `export async function bookSlot(slotId, repos = getRepositories())`).
+- **Colocation of Types**: Interfaces and types specific to a layer MUST be colocated in a `types.ts` file within that layer's folder (e.g., `src/repositories/types.ts`, `src/services/types.ts`). Do not place them in the global `src/types/` folder, which is strictly reserved for auto-generated database types.
 
 ## 13. Environment Variables
 

@@ -4,11 +4,12 @@ import {revalidatePath} from 'next/cache';
 
 import {requireRole} from '@/lib/supabase/session';
 import {USER_ROLES} from '@/lib/supabase/constants';
-import {createClient} from '@/lib/supabase/server';
 import {createSlotSchema} from '@/lib/validators/slots';
 import {createSlot, getAdminSlots as getAdminSlotsService} from '@/services/slotService';
 import {DomainError} from '@/services/types';
 import type {ProcessedAdminSlot} from '@/services/types';
+import {WorkoutType} from '@/repositories/types';
+import {getRepositories} from '@/repositories';
 
 export type ActionState = {
   success: boolean;
@@ -75,11 +76,9 @@ export async function createSlotAction(prevState: ActionState, formData: FormDat
   };
 }
 
-export async function getWorkoutTypes() {
-  const supabase = await createClient();
-  const {data, error} = await supabase.from('workout_types').select('*').order('title');
-  if (error) throw new Error('Failed to load workout types');
-  return data;
+export async function getWorkoutTypes(): Promise<WorkoutType[]> {
+  const repos = getRepositories();
+  return repos.workoutType.getAllWorkoutTypes();
 }
 
 export async function getAdminSlots(): Promise<ProcessedAdminSlot[]> {
