@@ -6,16 +6,13 @@ import {Locale} from '@/lib/i18n/config';
 import {requireUser} from '@/lib/supabase/session';
 import {getClientBookings} from '@/actions/clientBookings';
 import {formatKyivTime} from '@/lib/utils/timezone';
+import {getLocationDictKey} from '@/lib/utils/locations';
 import {Constants} from '@/types/database.types';
 
 import {BookingCard} from '@/components/dashboard/BookingCard';
 import {MyBookingAction} from '@/components/dashboard/MyBookingAction';
 
-// Map enum values to dictionary keys
-const locationToDictKey: Record<string, string> = {
-  [Constants.public.Enums.club_location[0]]: 'alfa',
-  [Constants.public.Enums.club_location[1]]: 'topgun'
-};
+// The utility function getLocationDictKey is used instead of a local mapping
 
 export default async function MyBookingsPage(props: {params: Promise<{locale: Locale}>}) {
   const params = await props.params;
@@ -58,7 +55,7 @@ export default async function MyBookingsPage(props: {params: Promise<{locale: Lo
               const localizedTitle =
                 (dict.workouts as Record<string, string>)[booking.slot.workout_title_key] ||
                 booking.slot.workout_title_key;
-              const dictKey = locationToDictKey[booking.slot.location];
+              const dictKey = getLocationDictKey(booking.slot.location);
               // @ts-expect-error - indexing dynamic dictionary structure
               const locationLabel = dict.contact?.clubs?.[dictKey]?.name || booking.slot.location;
 
@@ -103,7 +100,7 @@ export default async function MyBookingsPage(props: {params: Promise<{locale: Lo
               const localizedTitle =
                 (dict.workouts as Record<string, string>)[booking.slot.workout_title_key] ||
                 booking.slot.workout_title_key;
-              const dictKey = locationToDictKey[booking.slot.location];
+              const dictKey = getLocationDictKey(booking.slot.location);
               // @ts-expect-error - indexing dynamic dictionary structure
               const locationLabel = dict.contact?.clubs?.[dictKey]?.name || booking.slot.location;
 

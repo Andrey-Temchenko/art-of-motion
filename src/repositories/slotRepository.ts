@@ -1,6 +1,6 @@
 import {createClient} from '@/lib/supabase/server';
 import {createAdminClient} from '@/lib/supabase/admin';
-import {CreateSlotData, RawSlotData} from './types';
+import {CreateSlotData, RawSlotData, RawAdminSlotDetails} from './types';
 
 export async function findOverlappingSlots(startTime: string, endTime: string): Promise<{id: string}[]> {
   const supabase = await createClient();
@@ -46,7 +46,7 @@ export async function getAdminSlotsList(): Promise<RawSlotData[]> {
       price,
       status,
       workout_type:workout_types(title),
-      bookings(id)
+      bookings(id, status)
     `
     )
     .gte('start_time', nowUtc)
@@ -76,4 +76,42 @@ export async function getScheduleSlotsList(startDate: string, endDate: string): 
   }
 
   return (data || []) as unknown as RawSlotData[];
+}
+
+export async function getAdminSlotDetails(slotId: string): Promise<RawAdminSlotDetails | null> {
+  const adminClient = createAdminClient();
+
+  const {data, error} = await adminClient
+    .from('slots')
+    .select(
+      `
+      id,
+      location,
+      start_time,
+      end_time,
+      max_capacity,
+      price,
+      status,
+      workout_type:workout_types(title),
+      bookings(
+        id,
+        status,
+        created_at,
+        profiles(
+          id,
+          full_name,
+          email
+        )
+      )
+    `
+    )
+    .eq('id', slotId)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') return null;
+    throw error;
+  }
+
+  return data;
 }

@@ -63,6 +63,26 @@ export type ProcessedClientBooking = {
   };
 };
 
+export type ProcessedAdminBooking = {
+  id: string;
+  status: string;
+  createdAt: string;
+  clientName: string | null;
+  clientEmail: string | null;
+};
+
+export type ProcessedAdminSlotDetails = {
+  id: string;
+  location: string;
+  start_time: string;
+  end_time: string;
+  max_capacity: number;
+  price: number;
+  status: string;
+  workout_title_key: string;
+  bookings: ProcessedAdminBooking[];
+};
+
 export type CancelBookingResult =
   {success: true} | {success: false; code: 'UNAUTHORIZED' | 'CANCELLATION_NOT_ALLOWED' | 'UNKNOWN'};
 

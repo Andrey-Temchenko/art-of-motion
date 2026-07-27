@@ -49,3 +49,12 @@ export async function getAdminClientsList(repos = getRepositories()): Promise<Ad
     throw new Error(`Failed to fetch admin clients: ${err.message}`);
   }
 }
+
+export async function cancelClientBookingAsAdmin(bookingId: string, repos = getRepositories()): Promise<void> {
+  try {
+    await repos.booking.cancelBookingAsAdmin(bookingId);
+  } catch (error: unknown) {
+    const err = error as Error;
+    throw new Error(`Failed to cancel booking: ${err.message}`);
+  }
+}

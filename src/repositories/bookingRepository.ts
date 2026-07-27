@@ -1,4 +1,5 @@
 import {createClient} from '@/lib/supabase/server';
+import {createAdminClient} from '@/lib/supabase/admin';
 import {RawBookingData} from './types';
 
 export async function insertBooking(slot_id: string, client_id: string): Promise<void> {
@@ -58,4 +59,13 @@ export async function getClientBookingsList(userId: string): Promise<RawBookingD
 
   // Cast because QueryData doesn't perfectly align with the manual interface
   return (data || []) as unknown as RawBookingData[];
+}
+
+export async function cancelBookingAsAdmin(bookingId: string): Promise<void> {
+  const adminClient = createAdminClient();
+  const {error} = await adminClient.from('bookings').update({status: 'cancelled'}).eq('id', bookingId);
+
+  if (error) {
+    throw error;
+  }
 }

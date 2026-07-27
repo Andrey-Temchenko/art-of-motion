@@ -75,7 +75,7 @@ describe('slotService', () => {
           price: 100,
           status: 'scheduled',
           workout_type: {title: 'Boxing'},
-          bookings: [{id: 'b-1'}]
+          bookings: [{id: 'b-1', status: 'confirmed'}]
         }
       ];
       mockRepos.slot.getAdminSlotsList.mockResolvedValue(mockRawSlots);

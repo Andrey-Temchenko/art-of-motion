@@ -6,6 +6,7 @@ import {requireRole} from '@/lib/supabase/session';
 import {USER_ROLES} from '@/lib/supabase/constants';
 import {createSlotSchema} from '@/lib/validators/slots';
 import {createSlot, getAdminSlots as getAdminSlotsService} from '@/services/slotService';
+import {cancelClientBookingAsAdmin} from '@/services/adminService';
 import {DomainError} from '@/services/types';
 import type {ProcessedAdminSlot} from '@/services/types';
 import {WorkoutType} from '@/repositories/types';
@@ -82,4 +83,39 @@ export async function getWorkoutTypes(): Promise<WorkoutType[]> {
 
 export async function getAdminSlots(): Promise<ProcessedAdminSlot[]> {
   return getAdminSlotsService();
+}
+
+export async function cancelBookingAction(bookingId: string): Promise<ActionState> {
+  try {
+    await requireRole([USER_ROLES.ADMIN]);
+  } catch {
+    return {
+      success: false,
+      message: 'Unauthorized access'
+    };
+  }
+
+  if (!bookingId) {
+    return {
+      success: false,
+      message: 'Booking ID is required'
+    };
+  }
+
+  try {
+    await cancelClientBookingAsAdmin(bookingId);
+  } catch (error) {
+    const err = error as Error;
+    return {
+      success: false,
+      message: err.message || 'An unexpected error occurred.'
+    };
+  }
+
+  revalidatePath('/[locale]/admin/slots/[id]', 'page');
+
+  return {
+    success: true,
+    message: 'Booking cancelled successfully!'
+  };
 }

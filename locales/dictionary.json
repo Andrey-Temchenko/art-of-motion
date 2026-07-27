@@ -994,6 +994,75 @@
           "en": "Status"
         }
       }
+    },
+    "slotDetailsPage": {
+      "title": {
+        "uk": "Деталі слоту",
+        "ru": "Детали слота",
+        "en": "Slot Details"
+      },
+      "subtitle": {
+        "uk": "Інформація про тренування та список записів.",
+        "ru": "Информация о тренировке и список записей.",
+        "en": "Workout information and list of bookings."
+      },
+      "cancelBooking": {
+        "uk": "Скасувати",
+        "ru": "Отменить",
+        "en": "Cancel"
+      },
+      "cancelDialog": {
+        "title": {
+          "uk": "Скасування запису",
+          "ru": "Отмена записи",
+          "en": "Cancel booking"
+        },
+        "desc": {
+          "uk": "Ви впевнені, що хочете скасувати цю бронь клієнта?",
+          "ru": "Вы уверены, что хотите отменить эту бронь клиента?",
+          "en": "Are you sure you want to cancel this client's booking?"
+        },
+        "back": {
+          "uk": "Назад",
+          "ru": "Назад",
+          "en": "Back"
+        },
+        "confirm": {
+          "uk": "Так, скасувати",
+          "ru": "Да, отменить",
+          "en": "Yes, cancel"
+        }
+      },
+      "noBookings": {
+        "uk": "Поки немає записів",
+        "ru": "Пока нет записей",
+        "en": "No bookings yet"
+      },
+      "clientName": {
+        "uk": "Клієнт",
+        "ru": "Клиент",
+        "en": "Client"
+      },
+      "clientEmail": {
+        "uk": "Email",
+        "ru": "Email",
+        "en": "Email"
+      },
+      "status": {
+        "uk": "Статус",
+        "ru": "Статус",
+        "en": "Status"
+      },
+      "actions": {
+        "uk": "Дії",
+        "ru": "Действия",
+        "en": "Actions"
+      },
+      "capacity": {
+        "uk": "Заповненість",
+        "ru": "Заполненность",
+        "en": "Capacity"
+      }
     }
   },
   "dashboardArea": {

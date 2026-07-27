@@ -4,16 +4,15 @@ import {getDictionary} from '@/lib/i18n/getDictionary';
 import {Locale} from '@/lib/i18n/config';
 import {formatKyivTime} from '@/lib/utils/timezone';
 import {Constants} from '@/types/database.types';
+import {getLocationDictKey} from '@/lib/utils/locations';
+import Link from 'next/link';
 
+import {ROUTES, buildRoute} from '@/config/navigation';
 import {CreateSlotDialog} from '@/components/admin/CreateSlotDialog';
 import {getWorkoutTypes, getAdminSlots} from '@/actions/adminSlots';
 import {uk, ru, enUS} from 'date-fns/locale';
 
-// Map enum values to dictionary keys
-const locationToDictKey: Record<string, string> = {
-  [Constants.public.Enums.club_location[0]]: 'alfa',
-  [Constants.public.Enums.club_location[1]]: 'topgun'
-};
+// The utility function getLocationDictKey is used instead of a local mapping
 
 export default async function AdminSlotsPage(props: {params: Promise<{locale: Locale}>}) {
   const {locale} = await props.params;
@@ -35,7 +34,7 @@ export default async function AdminSlotsPage(props: {params: Promise<{locale: Lo
 
   // Map location options
   const locationOptions = Constants.public.Enums.club_location.map(loc => {
-    const dictKey = locationToDictKey[loc] || loc;
+    const dictKey = getLocationDictKey(loc);
     // @ts-expect-error - dynamic dictionary indexing
     const label = dict.contact?.clubs?.[dictKey]?.name || loc;
     return {value: loc, label};
@@ -83,7 +82,7 @@ export default async function AdminSlotsPage(props: {params: Promise<{locale: Lo
                   const localizedWtTitle =
                     (dict.workouts as Record<string, string>)[slot.workout_title_key] || slot.workout_title_key;
 
-                  const dictKey = locationToDictKey[slot.location] || slot.location;
+                  const dictKey = getLocationDictKey(slot.location);
                   // @ts-expect-error - dynamic indexing
                   const locationLabel = dict.contact?.clubs?.[dictKey]?.name || slot.location;
 
@@ -96,8 +95,12 @@ export default async function AdminSlotsPage(props: {params: Promise<{locale: Lo
                   return (
                     <tr key={slot.id} className="hover:bg-muted/50 transition-colors">
                       <td className="px-4 py-3 font-medium">
-                        {formatKyivTime(startDateObj, 'dd MMM yyyy, HH:mm', {locale: dateFnsLocale})} -{' '}
-                        {formatKyivTime(endDateObj, 'HH:mm', {locale: dateFnsLocale})}
+                        <Link
+                          href={buildRoute(locale, `${ROUTES.ADMIN.SLOTS}/${slot.id}`)}
+                          className="text-blue-600 hover:underline">
+                          {formatKyivTime(startDateObj, 'dd MMM yyyy, HH:mm', {locale: dateFnsLocale})} -{' '}
+                          {formatKyivTime(endDateObj, 'HH:mm', {locale: dateFnsLocale})}
+                        </Link>
                       </td>
                       <td className="px-4 py-3">{localizedWtTitle}</td>
                       <td className="px-4 py-3">{locationLabel}</td>

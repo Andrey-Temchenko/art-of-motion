@@ -5,6 +5,7 @@ import {requireUser} from '@/lib/supabase/session';
 import {getDictionary} from '@/lib/i18n/getDictionary';
 import {Locale} from '@/lib/i18n/config';
 import {formatKyivTime} from '@/lib/utils/timezone';
+import {getLocationDictKey} from '@/lib/utils/locations';
 import {getScheduleSlots} from '@/actions/clientBookings';
 import {GroupedScheduleSlots} from '@/services/types';
 import {Constants} from '@/types/database.types';
@@ -12,11 +13,7 @@ import {Constants} from '@/types/database.types';
 import {BookingButton} from '@/components/dashboard/BookingButton';
 import {BookingCard} from '@/components/dashboard/BookingCard';
 
-// Map enum values to dictionary keys
-const locationToDictKey: Record<string, string> = {
-  [Constants.public.Enums.club_location[0]]: 'alfa',
-  [Constants.public.Enums.club_location[1]]: 'topgun'
-};
+// The utility function getLocationDictKey is used instead of a local mapping
 
 export default async function SchedulePage(props: {params: Promise<{locale: Locale}>}) {
   const params = await props.params;
@@ -63,7 +60,7 @@ export default async function SchedulePage(props: {params: Promise<{locale: Loca
                   const localizedTitle =
                     (dict.workouts as Record<string, string>)[slot.workout_title_key] || slot.workout_title_key;
 
-                  const dictKey = locationToDictKey[slot.location];
+                  const dictKey = getLocationDictKey(slot.location);
                   // @ts-expect-error - indexing dynamic dictionary structure
                   const locationLabel = dict.contact?.clubs?.[dictKey]?.name || slot.location;
 

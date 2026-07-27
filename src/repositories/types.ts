@@ -1,5 +1,7 @@
 import {Profile, UserRole} from '@/lib/supabase/types';
 import {Database} from '@/types/database.types';
+import {QueryData} from '@supabase/supabase-js';
+import {createAdminClient} from '@/lib/supabase/admin';
 
 export interface RawDashboardKpis {
   total_clients: number | null;
@@ -94,6 +96,7 @@ export interface IBookingRepository {
   insertBooking(slot_id: string, client_id: string): Promise<void>;
   updateBookingStatus(bookingId: string, userId: string, status: 'confirmed' | 'cancelled'): Promise<void>;
   getClientBookingsList(userId: string): Promise<RawBookingData[]>;
+  cancelBookingAsAdmin(bookingId: string): Promise<void>;
 }
 
 export interface IProfileRepository {
@@ -106,7 +109,37 @@ export interface ISlotRepository {
   insertSlot(slotData: CreateSlotData): Promise<void>;
   getAdminSlotsList(): Promise<RawSlotData[]>;
   getScheduleSlotsList(startDate: string, endDate: string): Promise<RawSlotData[]>;
+  getAdminSlotDetails(slotId: string): Promise<RawAdminSlotDetails | null>;
 }
+
+export const adminSlotDetailsQuery = () =>
+  createAdminClient()
+    .from('slots')
+    .select(
+      `
+      id,
+      location,
+      start_time,
+      end_time,
+      max_capacity,
+      price,
+      status,
+      workout_type:workout_types(title),
+      bookings(
+        id,
+        status,
+        created_at,
+        profiles(
+          id,
+          full_name,
+          email
+        )
+      )
+    `
+    )
+    .single();
+
+export type RawAdminSlotDetails = QueryData<ReturnType<typeof adminSlotDetailsQuery>>;
 
 export interface IWorkoutTypeRepository {
   getAllWorkoutTypes(): Promise<WorkoutType[]>;

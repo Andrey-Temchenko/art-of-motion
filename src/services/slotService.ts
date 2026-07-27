@@ -1,6 +1,6 @@
 import {fromKyivTime} from '@/lib/utils/timezone';
 import {Constants} from '@/types/database.types';
-import {ProcessedAdminSlot, DomainError} from './types';
+import {ProcessedAdminSlot, ProcessedAdminSlotDetails, DomainError} from './types';
 import {getRepositories} from '@/repositories';
 import {CreateSlotData} from '@/repositories/types';
 
@@ -60,10 +60,45 @@ export async function getAdminSlots(repos = getRepositories()): Promise<Processe
         price: slot.price,
         status: slot.status,
         workout_title_key: wt?.title || '',
-        bookings_count: slot.bookings ? slot.bookings.length : 0
+        bookings_count: slot.bookings?.filter(b => b.status === Constants.public.Enums.booking_status[0]).length || 0
       };
     });
   } catch {
     throw new Error('Failed to load slots');
+  }
+}
+
+export async function getSlotDetails(
+  slotId: string,
+  repos = getRepositories()
+): Promise<ProcessedAdminSlotDetails | null> {
+  try {
+    const rawSlot = await repos.slot.getAdminSlotDetails(slotId);
+    if (!rawSlot) return null;
+
+    const wt = Array.isArray(rawSlot.workout_type) ? rawSlot.workout_type[0] : rawSlot.workout_type;
+
+    return {
+      id: rawSlot.id,
+      location: rawSlot.location,
+      start_time: rawSlot.start_time,
+      end_time: rawSlot.end_time,
+      max_capacity: rawSlot.max_capacity,
+      price: rawSlot.price,
+      status: rawSlot.status,
+      workout_title_key: wt?.title || '',
+      bookings: (rawSlot.bookings || []).map(b => {
+        const profile = Array.isArray(b.profiles) ? b.profiles[0] : b.profiles;
+        return {
+          id: b.id,
+          status: b.status,
+          createdAt: b.created_at,
+          clientName: profile?.full_name || null,
+          clientEmail: profile?.email || null
+        };
+      })
+    };
+  } catch {
+    throw new Error('Failed to load slot details');
   }
 }
