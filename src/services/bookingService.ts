@@ -8,10 +8,13 @@ import {
 import {getRepositories} from '@/repositories';
 import {formatKyivTime} from '@/lib/utils/timezone';
 import {getNextWeekRange} from '@/lib/utils/date';
+import {notifyAdmin} from '@/lib/telegram/notifyAdmin';
+import {formatBookingCreatedMessage, formatBookingCancelledMessage} from '@/lib/telegram/messages';
 
 export async function bookSlot(slot_id: string, client_id: string, repos = getRepositories()): Promise<void> {
+  let bookingData;
   try {
-    await repos.booking.insertBooking(slot_id, client_id);
+    bookingData = await repos.booking.insertBooking(slot_id, client_id);
   } catch (error: unknown) {
     const err = error as {code?: string; message?: string};
     if (err.message?.includes('SLOT_FULL') || err.code === 'P0001') {
@@ -21,6 +24,22 @@ export async function bookSlot(slot_id: string, client_id: string, repos = getRe
       throw new DomainError('ALREADY_BOOKED', 'errorAlreadyBooked');
     }
     throw new DomainError('DB_ERROR', 'errorDatabase');
+  }
+
+  if (bookingData?.profiles && bookingData?.slots) {
+    const wt = Array.isArray(bookingData.slots.workout_type)
+      ? bookingData.slots.workout_type[0]
+      : bookingData.slots.workout_type;
+
+    void notifyAdmin(
+      formatBookingCreatedMessage({
+        clientName: bookingData.profiles.full_name,
+        clientPhone: bookingData.profiles.phone,
+        workoutTitle: wt?.title || 'Workout',
+        club: bookingData.slots.location,
+        startTime: bookingData.slots.start_time
+      })
+    );
   }
 }
 
@@ -69,9 +88,9 @@ export async function cancelBooking(
   userId: string,
   repos = getRepositories()
 ): Promise<CancelBookingResult> {
+  let bookingData;
   try {
-    await repos.booking.updateBookingStatus(bookingId, userId, 'cancelled');
-    return {success: true};
+    bookingData = await repos.booking.updateBookingStatus(bookingId, userId, 'cancelled');
   } catch (error: unknown) {
     const err = error as {code?: string; message?: string};
     if (err.code === 'P0002' || err.message?.includes('CANCELLATION_NOT_ALLOWED')) {
@@ -79,6 +98,23 @@ export async function cancelBooking(
     }
     return {success: false, code: 'UNKNOWN'};
   }
+
+  if (bookingData?.profiles && bookingData?.slots) {
+    const wt = Array.isArray(bookingData.slots.workout_type)
+      ? bookingData.slots.workout_type[0]
+      : bookingData.slots.workout_type;
+
+    void notifyAdmin(
+      formatBookingCancelledMessage({
+        clientName: bookingData.profiles.full_name,
+        workoutTitle: wt?.title || 'Workout',
+        club: bookingData.slots.location,
+        startTime: bookingData.slots.start_time
+      })
+    );
+  }
+
+  return {success: true};
 }
 
 export async function getClientBookings(userId: string, repos = getRepositories()): Promise<ProcessedClientBooking[]> {

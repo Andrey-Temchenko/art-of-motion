@@ -35,11 +35,13 @@ export interface SiteConfig {
   images: ImagesConfig;
 }
 
+import {env} from '@/env';
+
 export const siteConfig: SiteConfig = {
-  baseUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.artofmotion.fit',
-  gaMeasurementId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '',
-  isProd: process.env.NODE_ENV === 'production',
-  isDev: process.env.NODE_ENV === 'development',
+  baseUrl: env.NEXT_PUBLIC_SITE_URL || 'https://www.artofmotion.fit',
+  gaMeasurementId: env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '',
+  isProd: env.NODE_ENV === 'production',
+  isDev: env.NODE_ENV === 'development',
   links: {
     telegram: 'https://t.me/elena_meeva',
     instagram: 'https://www.instagram.com/elena_meeva'

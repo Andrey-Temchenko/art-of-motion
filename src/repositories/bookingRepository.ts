@@ -1,32 +1,65 @@
 import {createClient} from '@/lib/supabase/server';
 import {createAdminClient} from '@/lib/supabase/admin';
-import {RawBookingData} from './types';
+import {RawBookingData, RawBookingNotificationData} from './types';
 
-export async function insertBooking(slot_id: string, client_id: string): Promise<void> {
+export async function insertBooking(slot_id: string, client_id: string): Promise<RawBookingNotificationData> {
   const supabase = await createClient();
 
-  const {error} = await supabase.from('bookings').insert({
-    slot_id,
-    client_id,
-    status: 'confirmed'
-  });
+  const {data: insertData, error: insertError} = await supabase
+    .from('bookings')
+    .insert({
+      slot_id,
+      client_id,
+      status: 'confirmed'
+    })
+    .select('id')
+    .single();
+
+  if (insertError) {
+    throw insertError;
+  }
+
+  const {data, error} = await supabase
+    .from('bookings')
+    .select('id, profiles(full_name, phone), slots(start_time, location, workout_type:workout_types(title))')
+    .eq('id', insertData.id)
+    .single();
 
   if (error) {
     throw error;
   }
+
+  return data;
 }
 
 export async function updateBookingStatus(
   bookingId: string,
   userId: string,
   status: 'confirmed' | 'cancelled'
-): Promise<void> {
+): Promise<RawBookingNotificationData> {
   const supabase = await createClient();
-  const {error} = await supabase.from('bookings').update({status}).eq('id', bookingId).eq('client_id', userId);
+
+  const {error: updateError} = await supabase
+    .from('bookings')
+    .update({status})
+    .eq('id', bookingId)
+    .eq('client_id', userId);
+
+  if (updateError) {
+    throw updateError;
+  }
+
+  const {data, error} = await supabase
+    .from('bookings')
+    .select('id, profiles(full_name, phone), slots(start_time, location, workout_type:workout_types(title))')
+    .eq('id', bookingId)
+    .single();
 
   if (error) {
     throw error;
   }
+
+  return data;
 }
 
 export async function getClientBookingsList(userId: string): Promise<RawBookingData[]> {

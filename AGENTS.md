@@ -77,6 +77,7 @@ This version has breaking changes - APIs, conventions, and file structure may al
 - All forms MUST use **`react-hook-form`** for form state and **`zod`** for schema validation, wired together via `@hookform/resolvers/zod`. Do not hand-roll controlled inputs with `useState` for forms with more than 1-2 fields.
 - Validation schemas live alongside the form (or in `src/lib/validators/` if shared) and are the single source of truth for both client-side validation and, where applicable, Server Action input validation.
 - Server Actions that receive form data MUST re-validate with the same (or an equivalent) zod schema server-side. Never trust client-side validation alone.
+- **Zod v4 Methods**: We use Zod 4. Pay attention to deprecation warnings (e.g., use `z.url()` instead of `z.string().url()`, and `schema.extend(other.shape)` instead of `schema.merge(other)`). Always use up-to-date methods and libraries.
 
 ### 3.6 Memoization & Performance
 

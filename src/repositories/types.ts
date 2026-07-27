@@ -92,9 +92,21 @@ export interface IAdminRepository {
   getAdminClientsList(): Promise<RawAdminClientData[]>;
 }
 
+export const bookingNotificationQuery = () =>
+  createAdminClient()
+    .from('bookings')
+    .select('id, profiles(full_name, phone), slots(start_time, location, workout_type:workout_types(title))')
+    .single();
+
+export type RawBookingNotificationData = QueryData<ReturnType<typeof bookingNotificationQuery>>;
+
 export interface IBookingRepository {
-  insertBooking(slot_id: string, client_id: string): Promise<void>;
-  updateBookingStatus(bookingId: string, userId: string, status: 'confirmed' | 'cancelled'): Promise<void>;
+  insertBooking(slot_id: string, client_id: string): Promise<RawBookingNotificationData>;
+  updateBookingStatus(
+    bookingId: string,
+    userId: string,
+    status: 'confirmed' | 'cancelled'
+  ): Promise<RawBookingNotificationData>;
   getClientBookingsList(userId: string): Promise<RawBookingData[]>;
   cancelBookingAsAdmin(bookingId: string): Promise<void>;
 }

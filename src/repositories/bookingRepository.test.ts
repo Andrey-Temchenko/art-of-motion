@@ -19,7 +19,8 @@ describe('bookingRepository', () => {
       insert: vi.fn(() => mockSupabase),
       update: vi.fn(() => mockSupabase),
       eq: vi.fn(() => mockSupabase),
-      select: vi.fn(() => mockSupabase)
+      select: vi.fn(() => mockSupabase),
+      single: vi.fn(() => mockSupabase)
     };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (createClient as any).mockResolvedValue(mockSupabase);
@@ -27,9 +28,11 @@ describe('bookingRepository', () => {
 
   describe('insertBooking', () => {
     it('should insert booking successfully', async () => {
-      mockSupabase.insert.mockResolvedValue({error: null});
+      const mockData = {id: 'b-1'};
+      mockSupabase.single.mockResolvedValue({data: mockData, error: null});
 
-      await expect(insertBooking('slot-1', 'client-1')).resolves.toBeUndefined();
+      const result = await insertBooking('slot-1', 'client-1');
+      expect(result).toEqual(mockData);
       expect(mockSupabase.from).toHaveBeenCalledWith('bookings');
       expect(mockSupabase.insert).toHaveBeenCalledWith({
         slot_id: 'slot-1',
@@ -40,7 +43,7 @@ describe('bookingRepository', () => {
 
     it('should throw raw error if insert fails', async () => {
       const dbError = new Error('DB Error');
-      mockSupabase.insert.mockResolvedValue({error: dbError});
+      mockSupabase.single.mockResolvedValue({error: dbError});
 
       await expect(insertBooking('slot-1', 'client-1')).rejects.toThrow('DB Error');
     });
@@ -48,10 +51,11 @@ describe('bookingRepository', () => {
 
   describe('updateBookingStatus', () => {
     it('should update booking status successfully', async () => {
-      // The last chained method (.eq) should return the final promise on its second call
-      mockSupabase.eq.mockReturnValueOnce(mockSupabase).mockResolvedValueOnce({error: null});
+      const mockData = {id: 'b-1'};
+      mockSupabase.single.mockResolvedValue({data: mockData, error: null});
 
-      await expect(updateBookingStatus('b-1', 'u-1', 'cancelled')).resolves.toBeUndefined();
+      const result = await updateBookingStatus('b-1', 'u-1', 'cancelled');
+      expect(result).toEqual(mockData);
       expect(mockSupabase.from).toHaveBeenCalledWith('bookings');
       expect(mockSupabase.update).toHaveBeenCalledWith({status: 'cancelled'});
 
@@ -62,7 +66,7 @@ describe('bookingRepository', () => {
 
     it('should throw raw error if update fails', async () => {
       const dbError = new Error('Update Error');
-      mockSupabase.eq.mockReturnValueOnce(mockSupabase).mockResolvedValueOnce({error: dbError});
+      mockSupabase.single.mockResolvedValue({error: dbError});
 
       await expect(updateBookingStatus('b-1', 'u-1', 'cancelled')).rejects.toThrow('Update Error');
     });
