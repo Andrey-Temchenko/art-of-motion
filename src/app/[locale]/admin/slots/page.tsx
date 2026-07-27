@@ -1,9 +1,10 @@
 import {requireRole} from '@/lib/supabase/session';
-import {USER_ROLES} from '@/lib/supabase/constants';
+import {USER_ROLE} from '@/constants/roles';
 import {getDictionary} from '@/lib/i18n/getDictionary';
 import {Locale} from '@/lib/i18n/config';
 import {formatKyivTime} from '@/lib/utils/timezone';
-import {Constants} from '@/types/database.types';
+import {CLUB_LOCATION_VALUES} from '@/constants/locations';
+import {SLOT_STATUS_VALUES} from '@/constants/slotStatus';
 import {getLocationDictKey} from '@/lib/utils/locations';
 import Link from 'next/link';
 
@@ -16,7 +17,7 @@ import {uk, ru, enUS} from 'date-fns/locale';
 
 export default async function AdminSlotsPage(props: {params: Promise<{locale: Locale}>}) {
   const {locale} = await props.params;
-  await requireRole([USER_ROLES.ADMIN]);
+  await requireRole([USER_ROLE.ADMIN]);
 
   const dict = await getDictionary(locale);
 
@@ -33,7 +34,7 @@ export default async function AdminSlotsPage(props: {params: Promise<{locale: Lo
   }));
 
   // Map location options
-  const locationOptions = Constants.public.Enums.club_location.map(loc => {
+  const locationOptions = CLUB_LOCATION_VALUES.map(loc => {
     const dictKey = getLocationDictKey(loc);
     // @ts-expect-error - dynamic dictionary indexing
     const label = dict.contact?.clubs?.[dictKey]?.name || loc;
@@ -90,7 +91,7 @@ export default async function AdminSlotsPage(props: {params: Promise<{locale: Lo
                   const startDateObj = new Date(slot.start_time);
                   const endDateObj = new Date(slot.end_time);
 
-                  const [STATUS_SCHEDULED, STATUS_CANCELLED] = Constants.public.Enums.slot_status;
+                  const [STATUS_SCHEDULED, STATUS_CANCELLED] = SLOT_STATUS_VALUES;
 
                   return (
                     <tr key={slot.id} className="hover:bg-muted/50 transition-colors">

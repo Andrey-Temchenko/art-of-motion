@@ -1,5 +1,7 @@
 import {describe, it, expect, vi, beforeEach} from 'vitest';
 import {findOverlappingSlots, insertSlot, getAdminSlotsList, getScheduleSlotsList} from './slotRepository';
+import {SLOT_STATUS} from '@/constants/slotStatus';
+import {CLUB_LOCATION} from '@/constants/locations';
 
 // Mock Supabase clients
 vi.mock('@/lib/supabase/server', () => ({
@@ -54,7 +56,7 @@ describe('slotRepository', () => {
 
       expect(mockSupabase.from).toHaveBeenCalledWith('slots');
       expect(mockSupabase.select).toHaveBeenCalledWith('id');
-      expect(mockSupabase.neq).toHaveBeenCalledWith('status', 'cancelled');
+      expect(mockSupabase.neq).toHaveBeenCalledWith('status', SLOT_STATUS.CANCELLED);
       expect(mockSupabase.lt).toHaveBeenCalledWith('start_time', '2026-07-27T11:00:00Z');
       expect(mockSupabase.gt).toHaveBeenCalledWith('end_time', '2026-07-27T10:00:00Z');
       expect(result).toEqual(mockData);
@@ -78,17 +80,17 @@ describe('slotRepository', () => {
     it('should insert slot successfully', async () => {
       mockSupabase.insert.mockResolvedValue({error: null});
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await expect(insertSlot({location: 'alpha'} as any)).resolves.toBeUndefined();
+      await expect(insertSlot({location: CLUB_LOCATION.ALPHA} as any)).resolves.toBeUndefined();
 
       expect(mockSupabase.from).toHaveBeenCalledWith('slots');
-      expect(mockSupabase.insert).toHaveBeenCalledWith({location: 'alpha'});
+      expect(mockSupabase.insert).toHaveBeenCalledWith({location: CLUB_LOCATION.ALPHA});
     });
 
     it('should throw raw error if insert fails', async () => {
       const dbError = new Error('Insert Error');
       mockSupabase.insert.mockResolvedValue({error: dbError});
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await expect(insertSlot({location: 'alpha'} as any)).rejects.toThrow('Insert Error');
+      await expect(insertSlot({location: CLUB_LOCATION.ALPHA} as any)).rejects.toThrow('Insert Error');
     });
   });
 
@@ -97,23 +99,23 @@ describe('slotRepository', () => {
       const rawDbData = [
         {
           id: 's-1',
-          location: 'alpha',
+          location: CLUB_LOCATION.ALPHA,
           start_time: '2026-07-27T10:00:00Z',
           end_time: '2026-07-27T11:00:00Z',
           max_capacity: 5,
           price: 100,
-          status: 'scheduled',
+          status: SLOT_STATUS.SCHEDULED,
           workout_type: {title: 'Boxing'},
           bookings: [{id: 'b-1'}, {id: 'b-2'}]
         },
         {
           id: 's-2',
-          location: 'top_gun',
+          location: CLUB_LOCATION.TOP_GUN,
           start_time: '2026-07-28T10:00:00Z',
           end_time: '2026-07-28T11:00:00Z',
           max_capacity: 10,
           price: 200,
-          status: 'scheduled',
+          status: SLOT_STATUS.SCHEDULED,
           workout_type: [{title: 'TRX'}], // Test array extraction
           bookings: null // Test missing bookings
         }

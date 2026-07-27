@@ -19,7 +19,7 @@ import {cancelBookingAction} from '@/actions/clientBookings';
 import {canCancelBooking} from '@/lib/utils/date';
 import type {getDictionary} from '@/lib/i18n/getDictionary';
 import type {Database} from '@/types/database.types';
-import {Constants} from '@/types/database.types';
+import {BOOKING_STATUS} from '@/constants/bookingStatus';
 
 export interface MyBookingActionProps {
   bookingId: string;
@@ -33,7 +33,7 @@ export function MyBookingAction({bookingId, status, cancellationDeadlineHours, s
   const [isPending, startTransition] = useTransition();
   const [isOpen, setIsOpen] = useState(false);
 
-  if (status === Constants.public.Enums.booking_status[1]) {
+  if (status === BOOKING_STATUS.CANCELLED) {
     return (
       <div className="bg-muted text-muted-foreground w-full rounded-md py-2 text-center text-sm font-medium">
         {dict.dashboardArea.myBookingsPage.badges.cancelled}

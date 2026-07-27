@@ -1,5 +1,6 @@
 import {fromKyivTime} from '@/lib/utils/timezone';
-import {Constants} from '@/types/database.types';
+import {SLOT_STATUS} from '@/constants/slotStatus';
+import {BOOKING_STATUS} from '@/constants/bookingStatus';
 import {ProcessedAdminSlot, ProcessedAdminSlotDetails, DomainError} from './types';
 import {getRepositories} from '@/repositories';
 import {CreateSlotData} from '@/repositories/types';
@@ -17,7 +18,7 @@ export async function createSlot(validData: CreateSlotInput, repos = getReposito
   const utcStartTime = fromKyivTime(validData.start_time).toISOString();
   const utcEndTime = fromKyivTime(validData.end_time).toISOString();
 
-  const [STATUS_SCHEDULED] = Constants.public.Enums.slot_status;
+  const STATUS_SCHEDULED = SLOT_STATUS.SCHEDULED;
 
   try {
     const overlappingSlots = await repos.slot.findOverlappingSlots(utcStartTime, utcEndTime);
@@ -60,7 +61,7 @@ export async function getAdminSlots(repos = getRepositories()): Promise<Processe
         price: slot.price,
         status: slot.status,
         workout_title_key: wt?.title || '',
-        bookings_count: slot.bookings?.filter(b => b.status === Constants.public.Enums.booking_status[0]).length || 0
+        bookings_count: slot.bookings?.filter(b => b.status === BOOKING_STATUS.CONFIRMED).length || 0
       };
     });
   } catch {

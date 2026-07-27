@@ -1,6 +1,7 @@
 import {createClient} from '@/lib/supabase/server';
 import {createAdminClient} from '@/lib/supabase/admin';
 import {RawBookingData, RawBookingNotificationData} from './types';
+import {BOOKING_STATUS, BookingStatusType} from '@/constants/bookingStatus';
 
 export async function insertBooking(slot_id: string, client_id: string): Promise<RawBookingNotificationData> {
   const supabase = await createClient();
@@ -10,7 +11,7 @@ export async function insertBooking(slot_id: string, client_id: string): Promise
     .insert({
       slot_id,
       client_id,
-      status: 'confirmed'
+      status: BOOKING_STATUS.CONFIRMED
     })
     .select('id')
     .single();
@@ -35,7 +36,7 @@ export async function insertBooking(slot_id: string, client_id: string): Promise
 export async function updateBookingStatus(
   bookingId: string,
   userId: string,
-  status: 'confirmed' | 'cancelled'
+  status: BookingStatusType
 ): Promise<RawBookingNotificationData> {
   const supabase = await createClient();
 
@@ -96,7 +97,7 @@ export async function getClientBookingsList(userId: string): Promise<RawBookingD
 
 export async function cancelBookingAsAdmin(bookingId: string): Promise<void> {
   const adminClient = createAdminClient();
-  const {error} = await adminClient.from('bookings').update({status: 'cancelled'}).eq('id', bookingId);
+  const {error} = await adminClient.from('bookings').update({status: BOOKING_STATUS.CANCELLED}).eq('id', bookingId);
 
   if (error) {
     throw error;

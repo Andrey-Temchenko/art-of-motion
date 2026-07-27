@@ -6,7 +6,7 @@ import {User} from '@supabase/supabase-js';
 
 import {createClient} from '@/lib/supabase/client';
 import {signOut} from '@/actions/auth';
-import {USER_ROLES} from '@/lib/supabase/constants';
+import {USER_ROLE} from '@/constants/roles';
 import type {Dictionary} from '@/lib/i18n/types';
 import {ROUTES, getDefaultDashboardRoute, buildRoute} from '@/config/navigation';
 
@@ -70,7 +70,7 @@ export function UserDropdown({user, role, locale, dict}: UserDropdownProps) {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => router.push(buildRoute(locale, dashboardRoute))} className="cursor-pointer">
-          {role === USER_ROLES.ADMIN ? dict.nav.adminPanel : dict.nav.dashboard}
+          {role === USER_ROLE.ADMIN ? dict.nav.adminPanel : dict.nav.dashboard}
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer" variant="destructive">

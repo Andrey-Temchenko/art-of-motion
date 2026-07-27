@@ -2,7 +2,7 @@ import React from 'react';
 import {render, screen} from '@testing-library/react';
 import {describe, it, expect, vi} from 'vitest';
 import {MyBookingAction} from './MyBookingAction';
-import {Constants} from '@/types/database.types';
+import {BOOKING_STATUS} from '@/constants/bookingStatus';
 import type {Dictionary} from '@/lib/i18n/types';
 
 // Mock dependencies
@@ -44,7 +44,7 @@ describe('MyBookingAction', () => {
     render(
       <MyBookingAction
         bookingId="1"
-        status={Constants.public.Enums.booking_status[1]}
+        status={BOOKING_STATUS.CANCELLED}
         cancellationDeadlineHours={24}
         startTime={new Date(Date.now() + 86400000).toISOString()} // Future
         dict={mockDict}
@@ -57,7 +57,7 @@ describe('MyBookingAction', () => {
     render(
       <MyBookingAction
         bookingId="1"
-        status={Constants.public.Enums.booking_status[0]}
+        status={BOOKING_STATUS.CONFIRMED}
         cancellationDeadlineHours={24}
         startTime={new Date(Date.now() - 3600000).toISOString()} // Past
         dict={mockDict}
@@ -70,7 +70,7 @@ describe('MyBookingAction', () => {
     render(
       <MyBookingAction
         bookingId="1"
-        status={Constants.public.Enums.booking_status[0]}
+        status={BOOKING_STATUS.CONFIRMED}
         cancellationDeadlineHours={24}
         startTime={new Date(Date.now() + 86400000 * 2).toISOString()} // Future (48h)
         dict={mockDict}

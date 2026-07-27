@@ -1,5 +1,8 @@
 import {describe, it, expect, vi, beforeEach} from 'vitest';
 import {bookSlot, getScheduleSlots, cancelBooking, getClientBookings} from './bookingService';
+import {CLUB_LOCATION} from '@/constants/locations';
+import {SLOT_STATUS} from '@/constants/slotStatus';
+import {BOOKING_STATUS} from '@/constants/bookingStatus';
 import {DomainError} from './types';
 
 // Mock the date utility to return a stable date for schedule grouping
@@ -74,25 +77,25 @@ describe('bookingService', () => {
       mockRepos.slot.getScheduleSlotsList.mockResolvedValue([
         {
           id: 'slot-1',
-          location: 'alpha',
+          location: CLUB_LOCATION.ALPHA,
           start_time: '2026-07-27T10:00:00Z', // In Kyiv time, this is 13:00 on 2026-07-27
           end_time: '2026-07-27T11:00:00Z',
           max_capacity: 10,
           price: 500,
-          status: 'scheduled',
+          status: SLOT_STATUS.SCHEDULED,
           workout_type: {title: 'Yoga'},
-          bookings: [{client_id: 'user-1', status: 'confirmed'}]
+          bookings: [{client_id: 'user-1', status: BOOKING_STATUS.CONFIRMED}]
         },
         {
           id: 'slot-2',
-          location: 'top_gun',
+          location: CLUB_LOCATION.TOP_GUN,
           start_time: '2026-07-27T12:00:00Z', // Also 2026-07-27 Kyiv time
           end_time: '2026-07-27T13:00:00Z',
           max_capacity: 1, // small capacity
           price: 600,
-          status: 'scheduled',
+          status: SLOT_STATUS.SCHEDULED,
           workout_type: [{title: 'Crossfit'}], // handling array case
-          bookings: [{client_id: 'user-2', status: 'confirmed'}]
+          bookings: [{client_id: 'user-2', status: BOOKING_STATUS.CONFIRMED}]
         }
       ]);
 
@@ -132,7 +135,7 @@ describe('bookingService', () => {
           end_time: '2026-07-28T11:00:00Z',
           max_capacity: 5,
           price: 100,
-          status: 'scheduled',
+          status: SLOT_STATUS.SCHEDULED,
           workout_type: null,
           bookings: null // Database returns null sometimes for empty arrays via Supabase joins
         }
@@ -154,7 +157,7 @@ describe('bookingService', () => {
       mockRepos.booking.updateBookingStatus.mockResolvedValue();
       const result = await cancelBooking('b-1', 'u-1', mockRepos);
       expect(result).toEqual({success: true});
-      expect(mockRepos.booking.updateBookingStatus).toHaveBeenCalledWith('b-1', 'u-1', 'cancelled');
+      expect(mockRepos.booking.updateBookingStatus).toHaveBeenCalledWith('b-1', 'u-1', BOOKING_STATUS.CANCELLED);
     });
 
     it('should return CANCELLATION_NOT_ALLOWED for P0002 code', async () => {
@@ -187,12 +190,12 @@ describe('bookingService', () => {
       mockRepos.booking.getClientBookingsList.mockResolvedValue([
         {
           id: 'booking-B', // This should be second based on start_time
-          status: 'confirmed',
+          status: BOOKING_STATUS.CONFIRMED,
           slots: {
             id: 'slot-2',
             start_time: '2026-07-27T12:00:00Z',
             end_time: '2026-07-27T13:00:00Z',
-            location: 'top_gun',
+            location: CLUB_LOCATION.TOP_GUN,
             price: 200,
             cancellation_deadline_hours: 24,
             workout_types: [{title: 'TRX'}]
@@ -200,13 +203,13 @@ describe('bookingService', () => {
         },
         {
           id: 'booking-A', // This should be first
-          status: 'cancelled',
+          status: BOOKING_STATUS.CANCELLED,
           slots: [
             {
               id: 'slot-1',
               start_time: '2026-07-27T10:00:00Z',
               end_time: '2026-07-27T11:00:00Z',
-              location: 'alpha',
+              location: CLUB_LOCATION.ALPHA,
               price: 100,
               cancellation_deadline_hours: 12,
               workout_types: {title: 'Pilates'}
@@ -223,7 +226,7 @@ describe('bookingService', () => {
       expect(result[1].id).toBe('booking-B'); // 12:00
 
       // Check extracted fields for A
-      expect(result[0].status).toBe('cancelled');
+      expect(result[0].status).toBe(BOOKING_STATUS.CANCELLED);
       expect(result[0].slot.workout_title_key).toBe('Pilates');
       expect(result[0].slot.cancellation_deadline_hours).toBe(12);
 
@@ -235,7 +238,7 @@ describe('bookingService', () => {
       mockRepos.booking.getClientBookingsList.mockResolvedValue([
         {
           id: 'booking-C',
-          status: 'confirmed',
+          status: BOOKING_STATUS.CONFIRMED,
           slots: null // Missing slot data
         }
       ]);

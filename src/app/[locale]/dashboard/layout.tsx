@@ -2,7 +2,7 @@ import React from 'react';
 import {Calendar, ClipboardList} from 'lucide-react';
 
 import {requireRole} from '@/lib/supabase/session';
-import {USER_ROLES} from '@/lib/supabase/constants';
+import {USER_ROLE} from '@/constants/roles';
 import {getDictionary} from '@/lib/i18n/getDictionary';
 import type {Locale} from '@/lib/i18n/config';
 import {ROUTES, buildRoute} from '@/config/navigation';
@@ -20,7 +20,7 @@ export default async function DashboardLayout({
   const dict = await getDictionary(locale as Locale);
 
   // Authoritative server check: only clients (or admins) can access the dashboard.
-  const {user, profile} = await requireRole([USER_ROLES.CLIENT, USER_ROLES.ADMIN]);
+  const {user, profile} = await requireRole([USER_ROLE.CLIENT, USER_ROLE.ADMIN]);
 
   const navItems = [
     {

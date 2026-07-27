@@ -1,4 +1,4 @@
-import {USER_ROLES} from '@/lib/supabase/constants';
+import {USER_ROLE} from '@/constants/roles';
 
 export const ROUTES = {
   ADMIN: {
@@ -24,7 +24,7 @@ export const ROUTES = {
  * Returns the default dashboard route for a given user role.
  */
 export const getDefaultDashboardRoute = (role: string | null | undefined): string => {
-  if (role === USER_ROLES.ADMIN) {
+  if (role === USER_ROLE.ADMIN) {
     return ROUTES.ADMIN.DASHBOARD;
   }
   return ROUTES.DASHBOARD.SCHEDULE;

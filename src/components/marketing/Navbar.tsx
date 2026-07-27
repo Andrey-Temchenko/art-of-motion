@@ -12,7 +12,7 @@ import type {Locale} from '@/lib/i18n/config';
 import {cn} from '@/lib/utils';
 import {createClient} from '@/lib/supabase/client';
 import {signOut} from '@/actions/auth';
-import {USER_ROLES} from '@/lib/supabase/constants';
+import {USER_ROLE} from '@/constants/roles';
 import {ROUTES, getDefaultDashboardRoute, buildRoute} from '@/config/navigation';
 
 import {UserDropdown} from '@/components/shared/UserDropdown';
@@ -114,7 +114,7 @@ export function Navbar({dict, locale, user, role}: NavbarProps) {
 
           {user ? (
             <div className="hidden lg:block">
-              <UserDropdown user={user} role={role || USER_ROLES.CLIENT} locale={locale} dict={dict} />
+              <UserDropdown user={user} role={role || USER_ROLE.CLIENT} locale={locale} dict={dict} />
             </div>
           ) : (
             <Button
@@ -180,7 +180,7 @@ export function Navbar({dict, locale, user, role}: NavbarProps) {
                   render={<Link href={buildRoute(locale, dashboardRoute)} />}
                   nativeButton={false}
                   onClick={() => setMobileOpen(false)}>
-                  {role === USER_ROLES.ADMIN ? dict.nav.adminPanel : dict.nav.dashboard}
+                  {role === USER_ROLE.ADMIN ? dict.nav.adminPanel : dict.nav.dashboard}
                 </Button>
                 <Button
                   variant="destructive"

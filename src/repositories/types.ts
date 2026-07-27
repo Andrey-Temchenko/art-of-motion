@@ -2,6 +2,7 @@ import {Profile, UserRole} from '@/lib/supabase/types';
 import {Database} from '@/types/database.types';
 import {QueryData} from '@supabase/supabase-js';
 import {createAdminClient} from '@/lib/supabase/admin';
+import {BookingStatusType} from '@/constants/bookingStatus';
 
 export interface RawDashboardKpis {
   total_clients: number | null;
@@ -105,7 +106,7 @@ export interface IBookingRepository {
   updateBookingStatus(
     bookingId: string,
     userId: string,
-    status: 'confirmed' | 'cancelled'
+    status: BookingStatusType
   ): Promise<RawBookingNotificationData>;
   getClientBookingsList(userId: string): Promise<RawBookingData[]>;
   cancelBookingAsAdmin(bookingId: string): Promise<void>;

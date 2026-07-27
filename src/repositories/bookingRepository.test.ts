@@ -1,5 +1,6 @@
 import {describe, it, expect, vi, beforeEach} from 'vitest';
 import {insertBooking, updateBookingStatus, getClientBookingsList} from './bookingRepository';
+import {BOOKING_STATUS} from '@/constants/bookingStatus';
 
 // Mock the Supabase server client
 vi.mock('@/lib/supabase/server', () => ({
@@ -37,7 +38,7 @@ describe('bookingRepository', () => {
       expect(mockSupabase.insert).toHaveBeenCalledWith({
         slot_id: 'slot-1',
         client_id: 'client-1',
-        status: 'confirmed'
+        status: BOOKING_STATUS.CONFIRMED
       });
     });
 
@@ -54,10 +55,10 @@ describe('bookingRepository', () => {
       const mockData = {id: 'b-1'};
       mockSupabase.single.mockResolvedValue({data: mockData, error: null});
 
-      const result = await updateBookingStatus('b-1', 'u-1', 'cancelled');
+      const result = await updateBookingStatus('b-1', 'u-1', BOOKING_STATUS.CANCELLED);
       expect(result).toEqual(mockData);
       expect(mockSupabase.from).toHaveBeenCalledWith('bookings');
-      expect(mockSupabase.update).toHaveBeenCalledWith({status: 'cancelled'});
+      expect(mockSupabase.update).toHaveBeenCalledWith({status: BOOKING_STATUS.CANCELLED});
 
       // We expect eq to have been called twice in a chain: .eq('id', bookingId).eq('client_id', userId)
       expect(mockSupabase.eq).toHaveBeenCalledWith('id', 'b-1');
@@ -68,13 +69,13 @@ describe('bookingRepository', () => {
       const dbError = new Error('Update Error');
       mockSupabase.single.mockResolvedValue({error: dbError});
 
-      await expect(updateBookingStatus('b-1', 'u-1', 'cancelled')).rejects.toThrow('Update Error');
+      await expect(updateBookingStatus('b-1', 'u-1', BOOKING_STATUS.CANCELLED)).rejects.toThrow('Update Error');
     });
   });
 
   describe('getClientBookingsList', () => {
     it('should return bookings array on success', async () => {
-      const mockData = [{id: 'b-1', status: 'confirmed'}];
+      const mockData = [{id: 'b-1', status: BOOKING_STATUS.CONFIRMED}];
       mockSupabase.eq.mockResolvedValue({data: mockData, error: null});
 
       const result = await getClientBookingsList('u-1');

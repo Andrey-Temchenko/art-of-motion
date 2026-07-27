@@ -7,6 +7,8 @@ import {Locale} from '@/lib/i18n/config';
 import {getSlotDetails} from '@/services/slotService';
 import {formatKyivTime} from '@/lib/utils/timezone';
 import {getLocationDictKey} from '@/lib/utils/locations';
+import {BOOKING_STATUS} from '@/constants/bookingStatus';
+import {SLOT_STATUS} from '@/constants/slotStatus';
 
 import {CancelBookingButton} from '@/components/admin/CancelBookingButton';
 
@@ -44,7 +46,8 @@ export default async function SlotDetailsPage({params}: SlotDetailsPageProps) {
   // @ts-expect-error - dynamic dictionary indexing
   const locationLabel = dict.contact?.clubs?.[dictKey]?.name || slotDetails.location;
 
-  const isFull = slotDetails.bookings.filter(b => b.status === 'confirmed').length >= slotDetails.max_capacity;
+  const isFull =
+    slotDetails.bookings.filter(b => b.status === BOOKING_STATUS.CONFIRMED).length >= slotDetails.max_capacity;
 
   return (
     <div className="space-y-6">
@@ -59,13 +62,13 @@ export default async function SlotDetailsPage({params}: SlotDetailsPageProps) {
             <h2 className="text-xl font-semibold">{workoutName}</h2>
             <span
               className={`rounded-full px-2 py-1 text-xs font-medium ${
-                slotDetails.status === 'cancelled'
+                slotDetails.status === SLOT_STATUS.CANCELLED
                   ? 'bg-red-100 text-red-700'
                   : isFull
                     ? 'bg-orange-100 text-orange-700'
                     : 'bg-green-100 text-green-700'
               }`}>
-              {slotDetails.status === 'cancelled'
+              {slotDetails.status === SLOT_STATUS.CANCELLED
                 ? t.status + ': Cancelled'
                 : isFull
                   ? t.capacity + ': Full'
@@ -79,7 +82,7 @@ export default async function SlotDetailsPage({params}: SlotDetailsPageProps) {
             <p>{locationLabel}</p>
             <p>{slotDetails.price} ₴</p>
             <p>
-              {t.capacity}: {slotDetails.bookings.filter(b => b.status === 'confirmed').length} /{' '}
+              {t.capacity}: {slotDetails.bookings.filter(b => b.status === BOOKING_STATUS.CONFIRMED).length} /{' '}
               {slotDetails.max_capacity}
             </p>
           </div>
@@ -111,13 +114,15 @@ export default async function SlotDetailsPage({params}: SlotDetailsPageProps) {
                   <td className="p-4">
                     <span
                       className={`rounded-full px-2 py-1 text-xs font-medium ${
-                        booking.status === 'confirmed' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'
+                        booking.status === BOOKING_STATUS.CONFIRMED
+                          ? 'bg-green-100 text-green-700'
+                          : 'bg-gray-100 text-gray-700'
                       }`}>
                       {booking.status}
                     </span>
                   </td>
                   <td className="p-4 text-right">
-                    {booking.status === 'confirmed' && (
+                    {booking.status === BOOKING_STATUS.CONFIRMED && (
                       <CancelBookingButton
                         bookingId={booking.id}
                         dict={{

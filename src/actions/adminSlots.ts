@@ -3,7 +3,7 @@
 import {revalidatePath} from 'next/cache';
 
 import {requireRole} from '@/lib/supabase/session';
-import {USER_ROLES} from '@/lib/supabase/constants';
+import {USER_ROLE} from '@/constants/roles';
 import {createSlotSchema} from '@/lib/validators/slots';
 import {createSlot, getAdminSlots as getAdminSlotsService} from '@/services/slotService';
 import {cancelClientBookingAsAdmin} from '@/services/adminService';
@@ -21,7 +21,7 @@ export type ActionState = {
 export async function createSlotAction(prevState: ActionState, formData: FormData): Promise<ActionState> {
   // 1. Verify role server-side
   try {
-    await requireRole([USER_ROLES.ADMIN]);
+    await requireRole([USER_ROLE.ADMIN]);
   } catch {
     return {
       success: false,
@@ -87,7 +87,7 @@ export async function getAdminSlots(): Promise<ProcessedAdminSlot[]> {
 
 export async function cancelBookingAction(bookingId: string): Promise<ActionState> {
   try {
-    await requireRole([USER_ROLES.ADMIN]);
+    await requireRole([USER_ROLE.ADMIN]);
   } catch {
     return {
       success: false,

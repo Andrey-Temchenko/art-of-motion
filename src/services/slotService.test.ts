@@ -1,5 +1,8 @@
 import {describe, it, expect, vi, beforeEach} from 'vitest';
 import {createSlot, getAdminSlots} from './slotService';
+import {CLUB_LOCATION} from '@/constants/locations';
+import {SLOT_STATUS} from '@/constants/slotStatus';
+import {BOOKING_STATUS} from '@/constants/bookingStatus';
 import {DomainError} from './types';
 
 // Mock timezone util
@@ -24,7 +27,7 @@ describe('slotService', () => {
   describe('createSlot', () => {
     const validData = {
       workout_type_id: 'wt-1',
-      location: 'alpha',
+      location: CLUB_LOCATION.ALPHA,
       start_time: '2026-07-27T10:00:00',
       end_time: '2026-07-27T11:00:00',
       max_capacity: 10,
@@ -68,14 +71,14 @@ describe('slotService', () => {
       const mockRawSlots = [
         {
           id: 'slot-1',
-          location: 'alpha',
+          location: CLUB_LOCATION.ALPHA,
           start_time: '2026-07-27T10:00:00Z',
           end_time: '2026-07-27T11:00:00Z',
           max_capacity: 5,
           price: 100,
-          status: 'scheduled',
+          status: SLOT_STATUS.SCHEDULED,
           workout_type: {title: 'Boxing'},
-          bookings: [{id: 'b-1', status: 'confirmed'}]
+          bookings: [{id: 'b-1', status: BOOKING_STATUS.CONFIRMED}]
         }
       ];
       mockRepos.slot.getAdminSlotsList.mockResolvedValue(mockRawSlots);
@@ -84,12 +87,12 @@ describe('slotService', () => {
       expect(result).toHaveLength(1);
       expect(result[0]).toEqual({
         id: 'slot-1',
-        location: 'alpha',
+        location: CLUB_LOCATION.ALPHA,
         start_time: '2026-07-27T10:00:00Z',
         end_time: '2026-07-27T11:00:00Z',
         max_capacity: 5,
         price: 100,
-        status: 'scheduled',
+        status: SLOT_STATUS.SCHEDULED,
         workout_title_key: 'Boxing',
         bookings_count: 1
       });

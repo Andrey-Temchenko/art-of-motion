@@ -4,7 +4,7 @@ import {cookies} from 'next/headers';
 import {LOCALE_COOKIE} from '@/lib/i18n/config';
 import {getDefaultDashboardRoute} from '@/config/navigation';
 import {getUserRoleServer} from '@/lib/supabase/session';
-import {USER_ROLES} from '@/lib/supabase/constants';
+import {USER_ROLE} from '@/constants/roles';
 
 export async function GET(request: Request) {
   const {searchParams, origin} = new URL(request.url);
@@ -25,7 +25,7 @@ export async function GET(request: Request) {
       let finalNext = next;
 
       if (next === '/' || next === '') {
-        let role = USER_ROLES.CLIENT;
+        let role: string = USER_ROLE.CLIENT;
         if (sessionData.user) {
           role = await getUserRoleServer(sessionData.user.id);
         }

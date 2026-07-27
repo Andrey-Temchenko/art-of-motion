@@ -1,8 +1,9 @@
 import {describe, it, expect, vi, beforeEach} from 'vitest';
 import {formatBookingCreatedMessage, formatBookingCancelledMessage} from './messages';
+import {CLUB_LOCATION} from '@/constants/locations';
 
 vi.mock('@/lib/utils/locations', () => ({
-  getLocationDictKey: vi.fn((location: string) => (location === 'alpha' ? 'alfa' : 'topgun'))
+  getLocationDictKey: vi.fn((location: string) => (location === CLUB_LOCATION.ALPHA ? 'alfa' : 'topgun'))
 }));
 
 vi.mock('@/lib/utils/timezone', () => ({
@@ -20,7 +21,7 @@ describe('Telegram Messages Formatter', () => {
         clientName: 'Alice',
         clientPhone: '+380501234567',
         workoutTitle: 'stretching',
-        club: 'alpha',
+        club: CLUB_LOCATION.ALPHA,
         startTime: '2026-07-29T15:00:00Z'
       });
 
@@ -37,7 +38,7 @@ describe('Telegram Messages Formatter', () => {
         clientName: 'Bob',
         clientPhone: null,
         workoutTitle: 'hotIron',
-        club: 'top_gun',
+        club: CLUB_LOCATION.TOP_GUN,
         startTime: '2026-07-29T15:00:00Z'
       });
 
@@ -51,7 +52,7 @@ describe('Telegram Messages Formatter', () => {
       const result = formatBookingCancelledMessage({
         clientName: 'Alice',
         workoutTitle: 'stretching',
-        club: 'alpha',
+        club: CLUB_LOCATION.ALPHA,
         startTime: '2026-07-29T15:00:00Z'
       });
 

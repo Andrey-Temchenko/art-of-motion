@@ -10,7 +10,7 @@ import type {User} from '@supabase/supabase-js';
 import type {Dictionary} from '@/lib/i18n/types';
 import type {Locale} from '@/lib/i18n/config';
 import {cn} from '@/lib/utils';
-import {USER_ROLES} from '@/lib/supabase/constants';
+import {USER_ROLE} from '@/constants/roles';
 import {buildRoute, isRouteActive} from '@/config/navigation';
 
 import {UserDropdown} from '@/components/shared/UserDropdown';
@@ -105,7 +105,7 @@ export function Layout({children, navItems, dict, locale, user, role}: LayoutPro
             <LanguageSwitcher current={locale} />
             <ThemeToggle />
 
-            {user && <UserDropdown user={user} role={role || USER_ROLES.CLIENT} locale={locale} dict={dict} />}
+            {user && <UserDropdown user={user} role={role || USER_ROLE.CLIENT} locale={locale} dict={dict} />}
           </div>
         </header>
 

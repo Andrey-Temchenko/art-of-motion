@@ -7,7 +7,7 @@ import {headers} from 'next/headers';
 import {createClient} from '@/lib/supabase/server';
 import {siteConfig} from '@/config/site';
 import {getUserRoleServer} from '@/lib/supabase/session';
-import {USER_ROLES} from '@/lib/supabase/constants';
+import {USER_ROLE} from '@/constants/roles';
 
 type AuthActionResponse = {
   success?: boolean;
@@ -61,7 +61,7 @@ export async function signInWithEmail(data: {email: string; password: string}): 
     return {error: error.message};
   }
 
-  let role = USER_ROLES.CLIENT;
+  let role: string = USER_ROLE.CLIENT;
   if (authData.user) {
     role = await getUserRoleServer(authData.user.id);
   }
@@ -90,7 +90,7 @@ export async function signUpWithEmail(data: {
     return {error: error.message};
   }
 
-  let role = USER_ROLES.CLIENT;
+  let role: string = USER_ROLE.CLIENT;
   if (authData.user) {
     role = await getUserRoleServer(authData.user.id);
   }

@@ -7,7 +7,7 @@ import {requireUser} from '@/lib/supabase/session';
 import {getClientBookings} from '@/actions/clientBookings';
 import {formatKyivTime} from '@/lib/utils/timezone';
 import {getLocationDictKey} from '@/lib/utils/locations';
-import {Constants} from '@/types/database.types';
+import {BOOKING_STATUS} from '@/constants/bookingStatus';
 
 import {BookingCard} from '@/components/dashboard/BookingCard';
 import {MyBookingAction} from '@/components/dashboard/MyBookingAction';
@@ -24,10 +24,10 @@ export default async function MyBookingsPage(props: {params: Promise<{locale: Lo
 
   const now = new Date().getTime();
   const upcoming = bookings.filter(
-    b => b.status === Constants.public.Enums.booking_status[0] && new Date(b.slot.start_time).getTime() > now
+    b => b.status === BOOKING_STATUS.CONFIRMED && new Date(b.slot.start_time).getTime() > now
   );
   const history = bookings.filter(
-    b => b.status === Constants.public.Enums.booking_status[1] || new Date(b.slot.start_time).getTime() <= now
+    b => b.status === BOOKING_STATUS.CANCELLED || new Date(b.slot.start_time).getTime() <= now
   );
 
   return (

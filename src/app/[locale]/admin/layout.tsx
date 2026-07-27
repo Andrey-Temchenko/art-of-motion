@@ -2,7 +2,7 @@ import React from 'react';
 import {LayoutDashboard, Users, Calendar, LayoutTemplate} from 'lucide-react';
 
 import {requireRole} from '@/lib/supabase/session';
-import {USER_ROLES} from '@/lib/supabase/constants';
+import {USER_ROLE} from '@/constants/roles';
 import {getDictionary} from '@/lib/i18n/getDictionary';
 import type {Locale} from '@/lib/i18n/config';
 import {ROUTES, buildRoute} from '@/config/navigation';
@@ -20,7 +20,7 @@ export default async function AdminLayout({
   const dict = await getDictionary(locale as Locale);
 
   // Authoritative server check: ONLY admins can access this boundary.
-  const {user, profile} = await requireRole([USER_ROLES.ADMIN]);
+  const {user, profile} = await requireRole([USER_ROLE.ADMIN]);
 
   const navItems = [
     {

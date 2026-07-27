@@ -1,10 +1,11 @@
 import {createClient} from '@/lib/supabase/server';
 import {createAdminClient} from '@/lib/supabase/admin';
 import {CreateSlotData, RawSlotData, RawAdminSlotDetails} from './types';
+import {SLOT_STATUS} from '@/constants/slotStatus';
 
 export async function findOverlappingSlots(startTime: string, endTime: string): Promise<{id: string}[]> {
   const supabase = await createClient();
-  const STATUS_CANCELLED_STR = 'cancelled';
+  const STATUS_CANCELLED_STR = SLOT_STATUS.CANCELLED;
 
   const {data: overlappingSlots, error: overlapError} = await supabase
     .from('slots')

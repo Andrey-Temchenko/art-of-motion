@@ -11,7 +11,9 @@ import {createSlotSchema, CreateSlotInput} from '@/lib/validators/slots';
 import {createSlotAction} from '@/actions/adminSlots';
 import {ProcessedAdminSlot} from '@/services/types';
 import {cn} from '@/lib/utils';
-import {Database, Constants} from '@/types/database.types';
+import {Database} from '@/types/database.types';
+import {CLUB_LOCATION_VALUES} from '@/constants/locations';
+import {SLOT_STATUS} from '@/constants/slotStatus';
 
 import {Button, buttonVariants} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
@@ -43,9 +45,9 @@ export function SlotForm({
 }: SlotFormProps & {onSuccess?: () => void}) {
   const [isPending, startTransition] = useTransition();
 
-  const [, STATUS_CANCELLED] = Constants.public.Enums.slot_status;
+  const STATUS_CANCELLED = SLOT_STATUS.CANCELLED;
 
-  const defaultLocation = locationOptions[0]?.value || Constants.public.Enums.club_location[0];
+  const defaultLocation = locationOptions[0]?.value || CLUB_LOCATION_VALUES[0];
 
   const form = useForm<CreateSlotInput>({
     resolver: zodResolver(createSlotSchema),

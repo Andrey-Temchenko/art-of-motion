@@ -10,6 +10,7 @@ import {formatKyivTime} from '@/lib/utils/timezone';
 import {getNextWeekRange} from '@/lib/utils/date';
 import {notifyAdmin} from '@/lib/telegram/notifyAdmin';
 import {formatBookingCreatedMessage, formatBookingCancelledMessage} from '@/lib/telegram/messages';
+import {BOOKING_STATUS, BookingStatusType} from '@/constants/bookingStatus';
 
 export async function bookSlot(slot_id: string, client_id: string, repos = getRepositories()): Promise<void> {
   let bookingData;
@@ -54,7 +55,7 @@ export async function getScheduleSlots(userId: string, repos = getRepositories()
     const wt = Array.isArray(slot.workout_type) ? slot.workout_type[0] : slot.workout_type;
     const workout_title_key = wt?.title || '';
 
-    const confirmedBookings = (slot.bookings || []).filter(b => b.status === 'confirmed');
+    const confirmedBookings = (slot.bookings || []).filter(b => b.status === BOOKING_STATUS.CONFIRMED);
     const bookings_count = confirmedBookings.length;
     const is_full = bookings_count >= slot.max_capacity;
     const is_booked_by_user = confirmedBookings.some(b => b.client_id === userId);
@@ -90,7 +91,7 @@ export async function cancelBooking(
 ): Promise<CancelBookingResult> {
   let bookingData;
   try {
-    bookingData = await repos.booking.updateBookingStatus(bookingId, userId, 'cancelled');
+    bookingData = await repos.booking.updateBookingStatus(bookingId, userId, BOOKING_STATUS.CANCELLED);
   } catch (error: unknown) {
     const err = error as {code?: string; message?: string};
     if (err.code === 'P0002' || err.message?.includes('CANCELLATION_NOT_ALLOWED')) {
@@ -128,7 +129,7 @@ export async function getClientBookings(userId: string, repos = getRepositories(
 
       return {
         id: b.id,
-        status: b.status as 'confirmed' | 'cancelled',
+        status: b.status as BookingStatusType,
         slot: {
           id: slot?.id || '',
           start_time: slot?.start_time || '',

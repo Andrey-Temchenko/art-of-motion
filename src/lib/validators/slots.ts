@@ -1,10 +1,10 @@
 import {z} from 'zod';
-import {Constants} from '@/types/database.types';
+import {CLUB_LOCATION_VALUES} from '@/constants/locations';
 
 export const createSlotSchema = z
   .object({
     workout_type_id: z.string().uuid({message: 'Invalid workout type'}),
-    location: z.enum(Constants.public.Enums.club_location as unknown as [string, ...string[]]),
+    location: z.enum(CLUB_LOCATION_VALUES),
     start_time: z.string().refine(v => !isNaN(Date.parse(v)), {message: 'Invalid start time'}),
     end_time: z.string().refine(v => !isNaN(Date.parse(v)), {message: 'Invalid end time'}),
     max_capacity: z.number().int().min(1, {message: 'Capacity must be at least 1'}),

@@ -8,7 +8,7 @@ import {formatKyivTime} from '@/lib/utils/timezone';
 import {getLocationDictKey} from '@/lib/utils/locations';
 import {getScheduleSlots} from '@/actions/clientBookings';
 import {GroupedScheduleSlots} from '@/services/types';
-import {Constants} from '@/types/database.types';
+import {SLOT_STATUS} from '@/constants/slotStatus';
 
 import {BookingButton} from '@/components/dashboard/BookingButton';
 import {BookingCard} from '@/components/dashboard/BookingCard';
@@ -83,7 +83,7 @@ export default async function SchedulePage(props: {params: Promise<{locale: Loca
                         slotId={slot.id}
                         isBooked={slot.is_booked_by_user}
                         isFull={slot.is_full}
-                        isDisabled={slot.status !== Constants.public.Enums.slot_status[0]}
+                        isDisabled={slot.status !== SLOT_STATUS.SCHEDULED}
                       />
                     </BookingCard>
                   );
