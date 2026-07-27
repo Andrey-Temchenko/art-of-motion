@@ -1,8 +1,12 @@
 import React from 'react';
+import {redirect} from 'next/navigation';
+
 import {getAdminClients} from '@/actions/admin';
-import {ClientsTable} from '@/components/admin/ClientsTable';
 import {getDictionary} from '@/lib/i18n/getDictionary';
 import {Locale} from '@/lib/i18n/config';
+import {ROUTES, buildRoute} from '@/config/navigation';
+
+import {ClientsTable} from '@/components/admin/ClientsTable';
 
 export default async function AdminClientsPage(props: {params: Promise<{locale: Locale}>}) {
   const {locale} = await props.params;
@@ -10,7 +14,7 @@ export default async function AdminClientsPage(props: {params: Promise<{locale: 
   const clientsRes = await getAdminClients();
 
   if (!clientsRes.success) {
-    throw new Error(clientsRes.error);
+    redirect(buildRoute(locale, ROUTES.DASHBOARD.SCHEDULE));
   }
 
   const clients = clientsRes.data;

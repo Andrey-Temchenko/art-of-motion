@@ -5,6 +5,7 @@ const SUPABASE_HOST = `${SUPABASE_PROJECT_REF}.supabase.co`;
 
 const nextConfig: NextConfig = {
   images: {
+    unoptimized: process.env.NODE_ENV !== 'production',
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
     remotePatterns: [
