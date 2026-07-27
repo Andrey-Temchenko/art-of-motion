@@ -1,7 +1,10 @@
 'use server';
 
-import {getRepositories} from '@/repositories';
-import type {DashboardStats, AdminClientData} from '@/repositories/types';
+import {
+  getAdminDashboardStats as getAdminDashboardStatsService,
+  getAdminClientsList as getAdminClientsListService
+} from '@/services/adminService';
+import type {DashboardStats, AdminClientData} from '@/services/types';
 import {getUserProfile} from '@/lib/supabase/session';
 
 export type ActionResponse<T> = {success: true; data: T} | {success: false; error: string};
@@ -13,8 +16,7 @@ export async function getAdminOverviewStats(): Promise<ActionResponse<DashboardS
   }
 
   try {
-    const repos = getRepositories();
-    const stats = await repos.admin.getAdminDashboardStats();
+    const stats = await getAdminDashboardStatsService();
     return {
       success: true,
       data: stats
@@ -32,8 +34,7 @@ export async function getAdminClients(): Promise<ActionResponse<AdminClientData[
   }
 
   try {
-    const repos = getRepositories();
-    const clients = await repos.admin.getAdminClientsList();
+    const clients = await getAdminClientsListService();
     return {
       success: true,
       data: clients

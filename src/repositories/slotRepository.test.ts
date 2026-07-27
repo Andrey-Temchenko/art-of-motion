@@ -127,12 +127,12 @@ describe('slotRepository', () => {
       expect(mockSupabase.order).toHaveBeenCalledWith('start_time', {ascending: true});
 
       expect(result).toHaveLength(2);
-      // Verify data mapping
-      expect(result[0].workout_title_key).toBe('Boxing');
-      expect(result[0].bookings_count).toBe(2);
+      // Verify data mapping (now it returns raw slots)
+      expect(result[0].workout_type).toEqual({title: 'Boxing'});
+      expect(result[0].bookings).toEqual([{id: 'b-1'}, {id: 'b-2'}]);
 
-      expect(result[1].workout_title_key).toBe('TRX'); // Successfully extracted from array
-      expect(result[1].bookings_count).toBe(0); // Handled null bookings
+      expect(result[1].workout_type).toEqual([{title: 'TRX'}]);
+      expect(result[1].bookings).toBeNull();
     });
 
     it('should throw raw error if fetch fails', async () => {

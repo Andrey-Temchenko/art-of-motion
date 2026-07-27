@@ -64,12 +64,35 @@ describe('slotService', () => {
   });
 
   describe('getAdminSlots', () => {
-    it('should return slots list from repo', async () => {
-      const mockSlots = [{id: 'slot-1', location: 'alpha'}];
-      mockRepos.slot.getAdminSlotsList.mockResolvedValue(mockSlots);
+    it('should return mapped slots list from repo', async () => {
+      const mockRawSlots = [
+        {
+          id: 'slot-1',
+          location: 'alpha',
+          start_time: '2026-07-27T10:00:00Z',
+          end_time: '2026-07-27T11:00:00Z',
+          max_capacity: 5,
+          price: 100,
+          status: 'scheduled',
+          workout_type: {title: 'Boxing'},
+          bookings: [{id: 'b-1'}]
+        }
+      ];
+      mockRepos.slot.getAdminSlotsList.mockResolvedValue(mockRawSlots);
 
       const result = await getAdminSlots(mockRepos);
-      expect(result).toEqual(mockSlots);
+      expect(result).toHaveLength(1);
+      expect(result[0]).toEqual({
+        id: 'slot-1',
+        location: 'alpha',
+        start_time: '2026-07-27T10:00:00Z',
+        end_time: '2026-07-27T11:00:00Z',
+        max_capacity: 5,
+        price: 100,
+        status: 'scheduled',
+        workout_title_key: 'Boxing',
+        bookings_count: 1
+      });
     });
 
     it('should throw generic Error if repo fails', async () => {

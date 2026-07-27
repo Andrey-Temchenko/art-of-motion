@@ -1,26 +1,39 @@
 import {Profile, UserRole} from '@/lib/supabase/types';
 import {Database} from '@/types/database.types';
-import {ProcessedAdminSlot} from '@/services/types';
 
-export type DashboardStats = {
-  totalUsers: number;
-  activeBookings: number;
-  upcomingSlots: number;
-  revenueEstimate: number;
-  bookingsByDay: {date: string; count: number}[];
-  workoutTypePopularity: {name: string; value: number}[];
-};
+export interface RawDashboardKpis {
+  total_clients: number | null;
+  active_bookings: number | null;
+  upcoming_slots: number | null;
+  revenue_estimate: number | null;
+}
 
-export type AdminClientData = {
-  id: string;
-  fullName: string;
+export interface RawBookingsVolume {
+  week_start: string | null;
+  bookings_count: number | null;
+}
+
+export interface RawWorkoutPopularity {
+  title: string | null;
+  bookings_count: number | null;
+}
+
+export interface RawDashboardStats {
+  kpis: RawDashboardKpis;
+  volume: RawBookingsVolume[];
+  popularity: RawWorkoutPopularity[];
+}
+
+export type RawAdminClientData = {
+  client_id: string | null;
+  full_name: string | null;
   email: string | null;
   phone: string | null;
-  totalBookings: number;
-  sessionsAttended: number;
-  upcomingBookings: number;
-  cancelledBookings: number;
-  lastBookingAt: string | null;
+  total_bookings: number | null;
+  sessions_attended: number | null;
+  upcoming_bookings: number | null;
+  cancelled_bookings: number | null;
+  last_booking_at: string | null;
 };
 
 export type CreateSlotData = {
@@ -69,12 +82,12 @@ export type RawSlotData = {
   price: number;
   status: string;
   workout_type: {title: string} | {title: string}[] | null;
-  bookings: {client_id: string; status: string}[] | null;
+  bookings: {id?: string; client_id?: string; status?: string}[] | null;
 };
 
 export interface IAdminRepository {
-  getAdminDashboardStats(): Promise<DashboardStats>;
-  getAdminClientsList(): Promise<AdminClientData[]>;
+  getAdminDashboardStats(): Promise<RawDashboardStats>;
+  getAdminClientsList(): Promise<RawAdminClientData[]>;
 }
 
 export interface IBookingRepository {
@@ -91,7 +104,7 @@ export interface IProfileRepository {
 export interface ISlotRepository {
   findOverlappingSlots(startTime: string, endTime: string): Promise<{id: string}[]>;
   insertSlot(slotData: CreateSlotData): Promise<void>;
-  getAdminSlotsList(): Promise<ProcessedAdminSlot[]>;
+  getAdminSlotsList(): Promise<RawSlotData[]>;
   getScheduleSlotsList(startDate: string, endDate: string): Promise<RawSlotData[]>;
 }
 

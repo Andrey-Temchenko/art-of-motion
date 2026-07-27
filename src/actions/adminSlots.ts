@@ -9,7 +9,7 @@ import {createSlot, getAdminSlots as getAdminSlotsService} from '@/services/slot
 import {DomainError} from '@/services/types';
 import type {ProcessedAdminSlot} from '@/services/types';
 import {WorkoutType} from '@/repositories/types';
-import {getRepositories} from '@/repositories';
+import {getWorkoutTypes as getWorkoutTypesService} from '@/services/workoutTypeService';
 
 export type ActionState = {
   success: boolean;
@@ -77,8 +77,7 @@ export async function createSlotAction(prevState: ActionState, formData: FormDat
 }
 
 export async function getWorkoutTypes(): Promise<WorkoutType[]> {
-  const repos = getRepositories();
-  return repos.workoutType.getAllWorkoutTypes();
+  return getWorkoutTypesService();
 }
 
 export async function getAdminSlots(): Promise<ProcessedAdminSlot[]> {

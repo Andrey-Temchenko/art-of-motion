@@ -1,5 +1,26 @@
 import {Database} from '@/types/database.types';
 
+export type DashboardStats = {
+  totalUsers: number;
+  activeBookings: number;
+  upcomingSlots: number;
+  revenueEstimate: number;
+  bookingsByDay: {date: string; count: number}[];
+  workoutTypePopularity: {name: string; value: number}[];
+};
+
+export type AdminClientData = {
+  id: string;
+  fullName: string;
+  email: string | null;
+  phone: string | null;
+  totalBookings: number;
+  sessionsAttended: number;
+  upcomingBookings: number;
+  cancelledBookings: number;
+  lastBookingAt: string | null;
+};
+
 export type ProcessedAdminSlot = {
   id: string;
   location: string;

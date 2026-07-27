@@ -3,7 +3,7 @@
 import React from 'react';
 import {Bar, BarChart, CartesianGrid, XAxis, Pie, PieChart, Cell} from 'recharts';
 import {ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent} from '@/components/ui/chart';
-import type {DashboardStats} from '@/repositories/types';
+import type {DashboardStats} from '@/services/types';
 import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
 import {format, parseISO} from 'date-fns';
 

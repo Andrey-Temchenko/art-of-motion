@@ -3,7 +3,7 @@
 import React, {useState, useMemo} from 'react';
 import {format} from 'date-fns';
 
-import type {AdminClientData} from '@/repositories/types';
+import type {AdminClientData} from '@/services/types';
 import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
 
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table';

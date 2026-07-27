@@ -47,7 +47,22 @@ export async function createSlot(validData: CreateSlotInput, repos = getReposito
 
 export async function getAdminSlots(repos = getRepositories()): Promise<ProcessedAdminSlot[]> {
   try {
-    return await repos.slot.getAdminSlotsList();
+    const rawSlots = await repos.slot.getAdminSlotsList();
+    return rawSlots.map(slot => {
+      const wt = Array.isArray(slot.workout_type) ? slot.workout_type[0] : slot.workout_type;
+
+      return {
+        id: slot.id,
+        location: slot.location,
+        start_time: slot.start_time,
+        end_time: slot.end_time,
+        max_capacity: slot.max_capacity,
+        price: slot.price,
+        status: slot.status,
+        workout_title_key: wt?.title || '',
+        bookings_count: slot.bookings ? slot.bookings.length : 0
+      };
+    });
   } catch {
     throw new Error('Failed to load slots');
   }
