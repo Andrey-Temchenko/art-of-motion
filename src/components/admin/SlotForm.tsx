@@ -8,7 +8,8 @@ import {format, addMinutes} from 'date-fns';
 import {CalendarIcon} from 'lucide-react';
 
 import {createSlotSchema, CreateSlotInput} from '@/lib/validators/slots';
-import {createSlotAction, ProcessedAdminSlot} from '@/actions/adminSlots';
+import {createSlotAction} from '@/actions/adminSlots';
+import {ProcessedAdminSlot} from '@/services/types';
 import {cn} from '@/lib/utils';
 import {Database, Constants} from '@/types/database.types';
 

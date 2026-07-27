@@ -1,11 +1,13 @@
 'use client';
 
 import React, {useState} from 'react';
+import {PlusIcon} from 'lucide-react';
+
+import {ProcessedAdminSlot} from '@/services/types';
+
 import {Button} from '@/components/ui/button';
 import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from '@/components/ui/dialog';
 import {SlotForm, WorkoutType} from '@/components/admin/SlotForm';
-import {PlusIcon} from 'lucide-react';
-import {ProcessedAdminSlot} from '@/actions/adminSlots';
 
 interface CreateSlotDialogProps {
   workoutTypes: WorkoutType[];

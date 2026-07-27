@@ -1,14 +1,14 @@
 'use server';
 
 import {revalidatePath} from 'next/cache';
-import {QueryData} from '@supabase/supabase-js';
 
 import {requireRole} from '@/lib/supabase/session';
 import {USER_ROLES} from '@/lib/supabase/constants';
 import {createClient} from '@/lib/supabase/server';
 import {createSlotSchema} from '@/lib/validators/slots';
-import {fromKyivTime} from '@/lib/utils/timezone';
-import {Database, Constants} from '@/types/database.types';
+import {createSlot, getAdminSlots as getAdminSlotsService} from '@/services/slotService';
+import {DomainError} from '@/services/types';
+import type {ProcessedAdminSlot} from '@/services/types';
 
 export type ActionState = {
   success: boolean;
@@ -49,60 +49,23 @@ export async function createSlotAction(prevState: ActionState, formData: FormDat
 
   const validData = validationResult.data;
 
-  // 3. Timezone conversion:
-  // We assume the user inputs Kyiv time. We convert it to UTC for the DB.
-  // The validation schema already expects an ISO string, but the browser form might submit a local string
-  // (e.g. "2026-07-29T18:00"). We use our timezone util to get the correct UTC Date.
-  const utcStartTime = fromKyivTime(validData.start_time);
-  const utcEndTime = fromKyivTime(validData.end_time);
-
-  const supabase = await createClient();
-
-  const [STATUS_SCHEDULED, STATUS_CANCELLED] = Constants.public.Enums.slot_status;
-
-  // 4. Check for overlapping slots
-  const {data: overlappingSlots, error: overlapError} = await supabase
-    .from('slots')
-    .select('id')
-    .neq('status', STATUS_CANCELLED)
-    .lt('start_time', utcEndTime.toISOString())
-    .gt('end_time', utcStartTime.toISOString());
-
-  if (overlapError) {
-    console.error('Failed to check overlapping slots:', overlapError);
+  // 3. Delegate to service layer
+  try {
+    await createSlot(validData);
+  } catch (error) {
+    if (error instanceof DomainError) {
+      return {
+        success: false,
+        message: error.message
+      };
+    }
     return {
       success: false,
-      message: 'Error checking time availability.'
+      message: 'An unexpected error occurred.'
     };
   }
 
-  if (overlappingSlots && overlappingSlots.length > 0) {
-    return {
-      success: false,
-      message: 'Trainer is already booked at this time!'
-    };
-  }
-
-  // 5. Insert into DB
-  const {error} = await supabase.from('slots').insert({
-    workout_type_id: validData.workout_type_id,
-    location: validData.location as Database['public']['Enums']['club_location'],
-    start_time: utcStartTime.toISOString(),
-    end_time: utcEndTime.toISOString(),
-    max_capacity: validData.max_capacity,
-    price: validData.price,
-    status: STATUS_SCHEDULED
-  });
-
-  if (error) {
-    console.error('Failed to create slot:', error);
-    return {
-      success: false,
-      message: 'Database error occurred while creating slot.'
-    };
-  }
-
-  // 5. Revalidate admin slots and client schedule
+  // 4. Revalidate cache
   revalidatePath('/[locale]/admin/slots', 'page');
   revalidatePath('/[locale]/dashboard/schedule', 'page');
 
@@ -119,64 +82,6 @@ export async function getWorkoutTypes() {
   return data;
 }
 
-export type ProcessedAdminSlot = {
-  id: string;
-  location: string;
-  start_time: string;
-  end_time: string;
-  max_capacity: number;
-  price: number;
-  status: string;
-  workout_title_key: string;
-  bookings_count: number;
-};
-
 export async function getAdminSlots(): Promise<ProcessedAdminSlot[]> {
-  const supabase = await createClient();
-  const nowUtc = new Date().toISOString();
-
-  const slotsQuery = supabase
-    .from('slots')
-    .select(
-      `
-      id,
-      location,
-      start_time,
-      end_time,
-      max_capacity,
-      price,
-      status,
-      workout_type:workout_types(title),
-      bookings(id)
-    `
-    )
-    .gte('start_time', nowUtc)
-    .order('start_time', {ascending: true});
-
-  type SlotsData = QueryData<typeof slotsQuery>;
-
-  const {data, error} = await slotsQuery;
-
-  if (error) throw new Error('Failed to load slots');
-
-  const rawSlots: SlotsData = data || [];
-
-  return rawSlots.map(slot => {
-    // workout_type is a single object because it's a many-to-one relation,
-    // but the generated types sometimes infer it as an array if not careful.
-    // QueryData correctly handles it. We just need to extract the title.
-    const wt = Array.isArray(slot.workout_type) ? slot.workout_type[0] : slot.workout_type;
-
-    return {
-      id: slot.id,
-      location: slot.location,
-      start_time: slot.start_time,
-      end_time: slot.end_time,
-      max_capacity: slot.max_capacity,
-      price: slot.price,
-      status: slot.status,
-      workout_title_key: wt?.title || '',
-      bookings_count: slot.bookings ? slot.bookings.length : 0
-    };
-  });
+  return getAdminSlotsService();
 }

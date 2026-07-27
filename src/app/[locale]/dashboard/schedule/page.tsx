@@ -5,7 +5,8 @@ import {requireUser} from '@/lib/supabase/session';
 import {getDictionary} from '@/lib/i18n/getDictionary';
 import {Locale} from '@/lib/i18n/config';
 import {formatKyivTime} from '@/lib/utils/timezone';
-import {getScheduleSlots, GroupedScheduleSlots} from '@/actions/clientBookings';
+import {getScheduleSlots} from '@/actions/clientBookings';
+import {GroupedScheduleSlots} from '@/services/types';
 import {Constants} from '@/types/database.types';
 
 import {BookingButton} from '@/components/dashboard/BookingButton';
