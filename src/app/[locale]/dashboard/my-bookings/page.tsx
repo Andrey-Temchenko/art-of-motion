@@ -11,8 +11,7 @@ import {BOOKING_STATUS} from '@/constants/bookingStatus';
 
 import {BookingCard} from '@/components/dashboard/BookingCard';
 import {MyBookingAction} from '@/components/dashboard/MyBookingAction';
-
-// The utility function getLocationDictKey is used instead of a local mapping
+import {BookingHistoryList} from '@/components/dashboard/BookingHistoryList';
 
 export default async function MyBookingsPage(props: {params: Promise<{locale: Locale}>}) {
   const params = await props.params;
@@ -95,7 +94,7 @@ export default async function MyBookingsPage(props: {params: Promise<{locale: Lo
             <p className="text-muted-foreground">{dict.dashboardArea.myBookingsPage.noBookings}</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <BookingHistoryList loadMoreText={dict.dashboardArea.myBookingsPage.loadMore}>
             {history.map(booking => {
               const localizedTitle =
                 (dict.workouts as Record<string, string>)[booking.slot.workout_title_key] ||
@@ -125,7 +124,7 @@ export default async function MyBookingsPage(props: {params: Promise<{locale: Lo
                 </BookingCard>
               );
             })}
-          </div>
+          </BookingHistoryList>
         )}
       </div>
     </div>
