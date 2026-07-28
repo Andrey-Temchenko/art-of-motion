@@ -4,11 +4,10 @@ import React from 'react';
 import {useRouter} from 'next/navigation';
 import {User} from '@supabase/supabase-js';
 
-import {createClient} from '@/lib/supabase/client';
-import {signOut} from '@/actions/auth';
+import {useSignOut} from '@/hooks/useSignOut';
 import {USER_ROLE} from '@/constants/roles';
 import type {Dictionary} from '@/lib/i18n/types';
-import {ROUTES, getDefaultDashboardRoute, buildRoute} from '@/config/navigation';
+import {getDefaultDashboardRoute, buildRoute} from '@/config/navigation';
 
 import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
 import {
@@ -31,12 +30,7 @@ interface UserDropdownProps {
 export function UserDropdown({user, role, locale, dict}: UserDropdownProps) {
   const router = useRouter();
 
-  const handleSignOut = async () => {
-    const supabase = createClient();
-    await supabase.auth.signOut();
-    await signOut();
-    router.push(buildRoute(locale, ROUTES.MARKETING.HOME));
-  };
+  const {handleSignOut} = useSignOut();
 
   const getInitials = (name?: string) => {
     if (!name) return 'U';
@@ -73,7 +67,7 @@ export function UserDropdown({user, role, locale, dict}: UserDropdownProps) {
           {role === USER_ROLE.ADMIN ? dict.nav.adminPanel : dict.nav.dashboard}
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer" variant="destructive">
+        <DropdownMenuItem onClick={() => handleSignOut(locale)} className="cursor-pointer" variant="destructive">
           {dict.auth.logout}
         </DropdownMenuItem>
       </DropdownMenuContent>

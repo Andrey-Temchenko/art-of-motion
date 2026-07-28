@@ -1,5 +1,7 @@
 import {NextResponse, type NextRequest} from 'next/server';
+
 import {defaultLocale, locales, LOCALE_COOKIE, type Locale} from '@/lib/i18n/config';
+import {updateSession} from '@/lib/supabase/proxy';
 
 function detectLocale(request: NextRequest): Locale {
   const cookieLocale = request.cookies.get(LOCALE_COOKIE)?.value as Locale | undefined;
@@ -16,38 +18,43 @@ function detectLocale(request: NextRequest): Locale {
   return defaultLocale;
 }
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const {pathname} = request.nextUrl;
 
+  // 1. Refresh session - must be done before any redirects below, otherwise fresh cookies will be lost.
+  const {response: supabaseResponse, claims} = await updateSession(request);
+
+  // If we decide to create a new response (redirect) - transfer cookies to it,
+  // which might have been updated by updateSession. This is an explicit requirement from the official example.
+  const withAuthCookies = (response: NextResponse) => {
+    supabaseResponse.cookies.getAll().forEach(cookie => response.cookies.set(cookie));
+    return response;
+  };
+
+  // 2. Locale (logic remains unchanged)
   const hasLocalePrefix = locales.some(locale => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`));
 
   if (!hasLocalePrefix) {
     const locale = detectLocale(request);
     const url = new URL(`/${locale}${pathname}`, request.url);
-    return NextResponse.redirect(url);
+    return withAuthCookies(NextResponse.redirect(url));
   }
 
-  // Lightweight check for /admin and /(dashboard) routes:
-  // here we only check for the presence of a session cookie + redirect to /{locale}/login.
-  // Full role verification is done in the Server Component layout.
+  // 3. Protection for /admin and /(dashboard) - now based on verified claims,
+  // rather than just the presence of a cookie. Full role verification (client vs admin) remains
+  // in the Server Component layout + RLS, as before.
   const isProtectedRoute = locales.some(
     loc => pathname.startsWith(`/${loc}/dashboard`) || pathname.startsWith(`/${loc}/admin`)
   );
 
-  if (isProtectedRoute) {
-    const allCookies = request.cookies.getAll();
-    const hasAuthCookie = allCookies.some(
-      cookie => cookie.name.startsWith('sb-') && cookie.name.includes('-auth-token')
-    );
-
-    if (!hasAuthCookie) {
-      const locale = detectLocale(request);
-      const url = new URL(`/${locale}/login`, request.url);
-      return NextResponse.redirect(url);
-    }
+  if (isProtectedRoute && !claims) {
+    const locale = detectLocale(request);
+    const loginUrl = new URL(`/${locale}/login`, request.url);
+    loginUrl.searchParams.set('redirect', pathname);
+    return withAuthCookies(NextResponse.redirect(loginUrl));
   }
 
-  return NextResponse.next();
+  return supabaseResponse;
 }
 
 export const config = {

@@ -3,17 +3,15 @@
 import {useEffect, useState} from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import {useRouter} from 'next/navigation';
 import {Menu, LogOut} from 'lucide-react';
 import type {User} from '@supabase/supabase-js';
 
 import type {Dictionary} from '@/lib/i18n/types';
 import type {Locale} from '@/lib/i18n/config';
 import {cn} from '@/lib/utils';
-import {createClient} from '@/lib/supabase/client';
-import {signOut} from '@/actions/auth';
+import {useSignOut} from '@/hooks/useSignOut';
 import {USER_ROLE} from '@/constants/roles';
-import {ROUTES, getDefaultDashboardRoute, buildRoute} from '@/config/navigation';
+import {getDefaultDashboardRoute, buildRoute, ROUTES} from '@/config/navigation';
 
 import {UserDropdown} from '@/components/shared/UserDropdown';
 import {Button} from '@/components/ui/button';
@@ -34,14 +32,12 @@ const NAV_SCROLL_THRESHOLD = 20;
 export function Navbar({dict, locale, user, role}: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const router = useRouter();
 
-  const handleSignOut = async () => {
+  const {handleSignOut} = useSignOut();
+
+  const onSignOutClick = async () => {
     setMobileOpen(false);
-    const supabase = createClient();
-    await supabase.auth.signOut();
-    await signOut();
-    router.push(buildRoute(locale, ROUTES.MARKETING.HOME));
+    await handleSignOut(locale);
   };
 
   useEffect(() => {
@@ -185,7 +181,7 @@ export function Navbar({dict, locale, user, role}: NavbarProps) {
                 <Button
                   variant="destructive"
                   className="w-full cursor-pointer rounded-full font-medium"
-                  onClick={handleSignOut}>
+                  onClick={onSignOutClick}>
                   <LogOut className="mr-2 h-4 w-4" />
                   {dict.auth?.logout || 'Log out'}
                 </Button>
