@@ -8,11 +8,15 @@ export async function insertBooking(slot_id: string, client_id: string): Promise
 
   const {data: insertData, error: insertError} = await supabase
     .from('bookings')
-    .insert({
-      slot_id,
-      client_id,
-      status: BOOKING_STATUS.CONFIRMED
-    })
+    .upsert(
+      {
+        slot_id,
+        client_id,
+        status: BOOKING_STATUS.CONFIRMED,
+        created_at: new Date().toISOString()
+      },
+      {onConflict: 'slot_id,client_id'}
+    )
     .select('id')
     .single();
 

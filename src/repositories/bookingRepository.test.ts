@@ -18,6 +18,7 @@ describe('bookingRepository', () => {
     mockSupabase = {
       from: vi.fn(() => mockSupabase),
       insert: vi.fn(() => mockSupabase),
+      upsert: vi.fn(() => mockSupabase),
       update: vi.fn(() => mockSupabase),
       eq: vi.fn(() => mockSupabase),
       select: vi.fn(() => mockSupabase),
@@ -28,21 +29,25 @@ describe('bookingRepository', () => {
   });
 
   describe('insertBooking', () => {
-    it('should insert booking successfully', async () => {
+    it('should upsert booking successfully', async () => {
       const mockData = {id: 'b-1'};
       mockSupabase.single.mockResolvedValue({data: mockData, error: null});
 
       const result = await insertBooking('slot-1', 'client-1');
       expect(result).toEqual(mockData);
       expect(mockSupabase.from).toHaveBeenCalledWith('bookings');
-      expect(mockSupabase.insert).toHaveBeenCalledWith({
-        slot_id: 'slot-1',
-        client_id: 'client-1',
-        status: BOOKING_STATUS.CONFIRMED
-      });
+      expect(mockSupabase.upsert).toHaveBeenCalledWith(
+        {
+          slot_id: 'slot-1',
+          client_id: 'client-1',
+          status: BOOKING_STATUS.CONFIRMED,
+          created_at: expect.any(String)
+        },
+        {onConflict: 'slot_id,client_id'}
+      );
     });
 
-    it('should throw raw error if insert fails', async () => {
+    it('should throw raw error if upsert fails', async () => {
       const dbError = new Error('DB Error');
       mockSupabase.single.mockResolvedValue({error: dbError});
 
