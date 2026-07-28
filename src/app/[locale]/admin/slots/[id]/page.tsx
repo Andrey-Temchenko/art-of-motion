@@ -1,9 +1,9 @@
 import React from 'react';
 import {notFound} from 'next/navigation';
-import {uk, ru, enUS} from 'date-fns/locale';
 
 import {getDictionary} from '@/lib/i18n/getDictionary';
 import {Locale} from '@/lib/i18n/config';
+import {getDateFnsLocale} from '@/lib/utils/date';
 import {getSlotDetails} from '@/services/slotService';
 import {formatKyivTime} from '@/lib/utils/timezone';
 import {getLocationDictKey} from '@/lib/utils/locations';
@@ -19,10 +19,6 @@ interface SlotDetailsPageProps {
   }>;
 }
 
-import type {Locale as DateFnsLocale} from 'date-fns';
-
-const localesMap: Record<string, DateFnsLocale> = {uk, ru, en: enUS};
-
 export default async function SlotDetailsPage({params}: SlotDetailsPageProps) {
   const resolvedParams = await params;
   const {locale, id} = resolvedParams;
@@ -35,7 +31,7 @@ export default async function SlotDetailsPage({params}: SlotDetailsPageProps) {
     notFound();
   }
 
-  const dateLocale = localesMap[locale] || enUS;
+  const dateLocale = getDateFnsLocale(locale);
   const formattedDate = formatKyivTime(new Date(slotDetails.start_time), 'dd MMM yyyy, HH:mm', {locale: dateLocale});
 
   const workoutName = slotDetails.workout_title_key

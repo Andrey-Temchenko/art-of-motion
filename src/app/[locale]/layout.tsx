@@ -8,7 +8,7 @@ import {SpeedInsights} from '@vercel/speed-insights/next';
 
 import {siteConfig} from '@/config/site';
 import {isAnalyticsEnabled} from '@/lib/analytics';
-import {locales, type Locale} from '@/lib/i18n/config';
+import {locales, APP_LOCALES, type Locale} from '@/lib/i18n/config';
 import {getDictionary} from '@/lib/i18n/getDictionary';
 import {ThemeProvider} from '@/providers/themeProvider';
 
@@ -60,9 +60,9 @@ export async function generateMetadata({params}: {params: Promise<{locale: strin
     alternates: {
       canonical: `/${locale}`,
       languages: {
-        uk: '/uk',
-        ru: '/ru',
-        en: '/en',
+        [APP_LOCALES.UK]: '/uk',
+        [APP_LOCALES.RU]: '/ru',
+        [APP_LOCALES.EN]: '/en',
         'x-default': '/uk'
       }
     }

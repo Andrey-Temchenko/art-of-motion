@@ -1,6 +1,14 @@
 import {addDays} from 'date-fns';
+import type {Locale as DateFnsLocaleType} from 'date-fns';
+import {uk, ru, enUS} from 'date-fns/locale';
+
+import {APP_LOCALES} from '@/lib/i18n/config';
 
 export const SCHEDULE_DAYS_RANGE = 7;
+
+export function getDateFnsLocale(locale: string): DateFnsLocaleType {
+  return locale === APP_LOCALES.UK ? uk : locale === APP_LOCALES.RU ? ru : enUS;
+}
 
 export function getNextWeekRange(now: Date = new Date()): {startDate: Date; endDate: Date} {
   const startDate = new Date(now);

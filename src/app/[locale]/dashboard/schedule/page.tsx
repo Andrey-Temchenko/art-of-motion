@@ -1,13 +1,10 @@
-import React from 'react';
-import {uk, ru, enUS} from 'date-fns/locale';
-
 import {requireUser} from '@/lib/supabase/session';
 import {getDictionary} from '@/lib/i18n/getDictionary';
 import {Locale} from '@/lib/i18n/config';
 import {formatKyivTime} from '@/lib/utils/timezone';
 import {getLocationDictKey} from '@/lib/utils/locations';
-import {getScheduleSlots} from '@/actions/clientBookings';
-import {GroupedScheduleSlots} from '@/services/types';
+import {getDateFnsLocale} from '@/lib/utils/date';
+import {getScheduleSlots} from '@/services/bookingService';
 import {SLOT_STATUS} from '@/constants/slotStatus';
 
 import {BookingButton} from '@/components/dashboard/BookingButton';
@@ -20,19 +17,13 @@ export default async function SchedulePage(props: {params: Promise<{locale: Loca
   const locale = params.locale;
   const dict = await getDictionary(locale);
 
-  const dateFnsLocale = locale === 'uk' ? uk : locale === 'ru' ? ru : enUS;
+  const dateFnsLocale = getDateFnsLocale(locale);
 
   // 1. Authenticate user
   const user = await requireUser();
 
-  // 2. Fetch slots via server action (already grouped and processed)
-  let groupedSlots: GroupedScheduleSlots = {};
-  try {
-    groupedSlots = await getScheduleSlots(user.id);
-  } catch (err) {
-    console.error(err);
-    return <div>Error loading schedule.</div>;
-  }
+  // 2. Fetch slots directly from service (already grouped and processed)
+  const groupedSlots = await getScheduleSlots(user.id);
 
   const sortedDates = Object.keys(groupedSlots).sort();
 

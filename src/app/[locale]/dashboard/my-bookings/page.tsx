@@ -1,9 +1,9 @@
 import React from 'react';
-import {uk, ru, enUS} from 'date-fns/locale';
 
 import {getDictionary} from '@/lib/i18n/getDictionary';
 import {Locale} from '@/lib/i18n/config';
 import {requireUser} from '@/lib/supabase/session';
+import {getDateFnsLocale} from '@/lib/utils/date';
 import {getClientBookings} from '@/actions/clientBookings';
 import {formatKyivTime} from '@/lib/utils/timezone';
 import {getLocationDictKey} from '@/lib/utils/locations';
@@ -19,7 +19,7 @@ export default async function MyBookingsPage(props: {params: Promise<{locale: Lo
 
   const user = await requireUser();
   const bookings = await getClientBookings(user.id);
-  const dateFnsLocale = params.locale === 'uk' ? uk : params.locale === 'ru' ? ru : enUS;
+  const dateFnsLocale = getDateFnsLocale(params.locale);
 
   const now = new Date().getTime();
   const upcoming = bookings.filter(

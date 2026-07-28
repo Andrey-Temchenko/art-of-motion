@@ -4,7 +4,14 @@ import type {JSX} from 'react';
 import {usePathname, useRouter} from 'next/navigation';
 import {ChevronDown, Globe} from 'lucide-react';
 
-import {locales, localeNames, LOCALE_COOKIE, LOCALE_COOKIE_MAX_AGE, type Locale} from '@/lib/i18n/config';
+import {
+  locales,
+  localeNames,
+  localeShortNames,
+  LOCALE_COOKIE,
+  LOCALE_COOKIE_MAX_AGE,
+  type Locale
+} from '@/lib/i18n/config';
 import {Button} from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -13,13 +20,6 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-
-/** Short uppercase labels for the trigger button */
-const localeShortLabels: Record<Locale, string> = {
-  uk: 'UA',
-  ru: 'RU',
-  en: 'EN'
-};
 
 function setLocaleCookie(locale: string) {
   document.cookie = `${LOCALE_COOKIE}=${locale}; path=/; max-age=${LOCALE_COOKIE_MAX_AGE}`;
@@ -45,7 +45,7 @@ export function LanguageSwitcher({current}: {current: Locale}): JSX.Element {
       <DropdownMenuTrigger
         render={<Button variant="outline" size="sm" className="cursor-pointer gap-1.5 rounded-full px-3" />}>
         <Globe className="size-3.5" />
-        <span className="text-xs font-semibold">{localeShortLabels[current]}</span>
+        <span className="text-xs font-semibold">{localeShortNames[current]}</span>
         <ChevronDown className="size-3 opacity-60" />
       </DropdownMenuTrigger>
 

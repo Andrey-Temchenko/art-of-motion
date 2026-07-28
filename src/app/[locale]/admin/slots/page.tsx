@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import {requireRole} from '@/lib/supabase/session';
 import {USER_ROLE} from '@/constants/roles';
 import {getDictionary} from '@/lib/i18n/getDictionary';
@@ -6,14 +8,11 @@ import {formatKyivTime} from '@/lib/utils/timezone';
 import {CLUB_LOCATION_VALUES} from '@/constants/locations';
 import {SLOT_STATUS_VALUES} from '@/constants/slotStatus';
 import {getLocationDictKey} from '@/lib/utils/locations';
-import Link from 'next/link';
-
 import {ROUTES, buildRoute} from '@/config/navigation';
+import {getDateFnsLocale} from '@/lib/utils/date';
+
 import {CreateSlotDialog} from '@/components/admin/CreateSlotDialog';
 import {getWorkoutTypes, getAdminSlots} from '@/actions/adminSlots';
-import {uk, ru, enUS} from 'date-fns/locale';
-
-// The utility function getLocationDictKey is used instead of a local mapping
 
 export default async function AdminSlotsPage(props: {params: Promise<{locale: Locale}>}) {
   const {locale} = await props.params;
@@ -21,7 +20,7 @@ export default async function AdminSlotsPage(props: {params: Promise<{locale: Lo
 
   const dict = await getDictionary(locale);
 
-  const dateFnsLocale = locale === 'uk' ? uk : locale === 'ru' ? ru : enUS;
+  const dateFnsLocale = getDateFnsLocale(locale);
 
   // Fetch data via server actions/functions
   const workoutTypes = await getWorkoutTypes();
