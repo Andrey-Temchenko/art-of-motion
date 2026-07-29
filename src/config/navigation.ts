@@ -13,7 +13,8 @@ export const ROUTES = {
   },
   AUTH: {
     LOGIN: '/login',
-    REGISTER: '/register'
+    REGISTER: '/register',
+    RESET_PASSWORD: '/reset-password'
   },
   MARKETING: {
     HOME: '/'

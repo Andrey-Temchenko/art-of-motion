@@ -1,8 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import {Button} from '@/components/ui/button';
+
 import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
+
+import {Button} from '@/components/ui/button';
 
 export default function NotFound() {
   const {dict} = useClientDictionary();

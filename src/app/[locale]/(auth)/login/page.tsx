@@ -84,7 +84,9 @@ export default function LoginPage() {
               <Label htmlFor="password" className="font-semibold">
                 {dict.auth.password}
               </Label>
-              <Link href={`/${locale}/reset-password`} className="text-primary text-sm font-medium hover:underline">
+              <Link
+                href={buildRoute(locale, ROUTES.AUTH.RESET_PASSWORD)}
+                className="text-primary text-sm font-medium hover:underline">
                 {dict.auth.forgotPassword}
               </Link>
             </div>

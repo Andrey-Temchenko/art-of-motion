@@ -1,4 +1,5 @@
 import type {MetadataRoute} from 'next';
+
 import {locales} from '@/lib/i18n/config';
 import {siteConfig} from '@/config/site';
 
@@ -9,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'weekly' as const,
     priority: 1.0,
     alternates: {
-      languages: Object.fromEntries(locales.map(l => [l, `${siteConfig.baseUrl}/${l}`]))
+      languages: Object.fromEntries(locales.map(locale => [locale, `${siteConfig.baseUrl}/${locale}`]))
     }
   }));
 }

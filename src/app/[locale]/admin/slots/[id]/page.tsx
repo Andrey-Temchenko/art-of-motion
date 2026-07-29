@@ -26,8 +26,10 @@ interface SlotDetailsPageProps {
 export default async function SlotDetailsPage({params}: SlotDetailsPageProps) {
   const resolvedParams = await params;
   const {locale, id} = resolvedParams;
+
   const dict = await getDictionary(locale);
   const t = dict.admin.slotDetailsPage;
+
   const tWorkouts = dict.workouts as Record<string, string>;
 
   const [slotDetails, workoutTypes] = await Promise.all([getSlotDetails(id), getWorkoutTypes()]);

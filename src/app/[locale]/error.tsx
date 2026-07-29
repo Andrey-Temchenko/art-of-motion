@@ -1,10 +1,17 @@
 'use client';
 
 import {useEffect} from 'react';
+
 import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
+
 import {Button} from '@/components/ui/button';
 
-export default function Error({error, reset}: {error: Error & {digest?: string}; reset: () => void}) {
+interface ErrorProps {
+  error: Error & {digest?: string};
+  reset: () => void;
+}
+
+export default function Error({error, reset}: ErrorProps) {
   const {dict} = useClientDictionary();
 
   useEffect(() => {

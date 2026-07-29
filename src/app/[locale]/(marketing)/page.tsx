@@ -12,8 +12,9 @@ import {TestimonialsSection} from '@/components/marketing/TestimonialsSection';
 import {ContactSection} from '@/components/marketing/ContactSection';
 
 export default async function LandingPage({params}: {params: Promise<{locale: string}>}): Promise<JSX.Element> {
-  const {locale} = await params;
-  const dict = await getDictionary(locale as Locale);
+  const resolvedParams = await params;
+  const locale = resolvedParams.locale as Locale;
+  const dict = await getDictionary(locale);
 
   // JSON-LD structured data
   const baseUrl = siteConfig.baseUrl;
@@ -34,9 +35,9 @@ export default async function LandingPage({params}: {params: Promise<{locale: st
         dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd).replace(/</g, '\\u003c')}}
       />
       <div className="flex min-h-[calc(100vh-4rem)] flex-col">
-        <HeroSection locale={locale as Locale} />
-        <AboutSection locale={locale as Locale} />
-        <DisciplinesSection locale={locale as Locale} />
+        <HeroSection locale={locale} />
+        <AboutSection locale={locale} />
+        <DisciplinesSection locale={locale} />
         <GallerySection />
         <TestimonialsSection />
         <ContactSection />

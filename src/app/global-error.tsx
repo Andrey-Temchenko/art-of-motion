@@ -3,19 +3,59 @@
 // global-error does not have access to route params, we fallback to default locale (uk)
 import uk from '@/locales/generated/uk.json';
 
+interface GlobalErrorProps {
+  error: Error & {digest?: string};
+  reset: () => void;
+}
+
 // global-error must include html and body tags
-export default function GlobalError({error, reset}: {error: Error & {digest?: string}; reset: () => void}) {
+export default function GlobalError({error, reset}: GlobalErrorProps) {
   const dict = uk;
 
   return (
     <html lang="uk">
-      <body>
-        <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-[#09090b] p-6 text-center font-sans text-[#fafafa]">
-          <div className="space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight">{dict.ui.globalErrorTitle}</h2>
-            <p className="max-w-md text-[#a1a1aa]">{dict.ui.globalErrorDesc}</p>
+      <body style={{margin: 0, padding: 0, fontFamily: 'system-ui, -apple-system, sans-serif'}}>
+        <div
+          style={{
+            display: 'flex',
+            minHeight: '100vh',
+            boxSizing: 'border-box',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '1.5rem',
+            backgroundColor: '#09090b',
+            padding: '1.5rem',
+            textAlign: 'center',
+            color: '#fafafa'
+          }}>
+          <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center'}}>
+            <h2
+              style={{
+                fontSize: '1.875rem',
+                lineHeight: '2.25rem',
+                fontWeight: 'bold',
+                letterSpacing: '-0.025em',
+                margin: 0
+              }}>
+              {dict.ui.globalErrorTitle}
+            </h2>
+            <p style={{maxWidth: '28rem', color: '#a1a1aa', margin: 0, lineHeight: '1.5'}}>{dict.ui.globalErrorDesc}</p>
             {process.env.NODE_ENV === 'development' && (
-              <pre className="mt-4 max-w-2xl overflow-auto rounded bg-black/50 p-4 text-left text-sm text-red-400">
+              <pre
+                style={{
+                  marginTop: '1rem',
+                  maxWidth: '42rem',
+                  overflow: 'auto',
+                  borderRadius: '0.25rem',
+                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                  padding: '1rem',
+                  textAlign: 'left',
+                  fontSize: '0.875rem',
+                  lineHeight: '1.25rem',
+                  color: '#f87171',
+                  margin: 0
+                }}>
                 {error.message}
               </pre>
             )}
@@ -25,11 +65,13 @@ export default function GlobalError({error, reset}: {error: Error & {digest?: st
             style={{
               backgroundColor: 'hsl(170deg 40% 30%)',
               color: 'white',
-              padding: '10px 20px',
-              borderRadius: '6px',
+              padding: '0.5rem 1rem',
+              borderRadius: '0.375rem',
               fontWeight: 500,
+              fontSize: '0.875rem',
               cursor: 'pointer',
-              border: 'none'
+              border: 'none',
+              marginTop: '0.5rem'
             }}>
             {dict.ui.errorRetry}
           </button>

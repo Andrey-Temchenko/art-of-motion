@@ -1,4 +1,5 @@
 import type {MetadataRoute} from 'next';
+
 import {siteConfig} from '@/config/site';
 
 export default function robots(): MetadataRoute.Robots {
@@ -7,7 +8,19 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/admin/', '/dashboard/', '/private/']
+        disallow: [
+          '/api/',
+          '/admin/',
+          '/dashboard/',
+          '/login/',
+          '/register/',
+          '/reset-password/',
+          '/*/admin/',
+          '/*/dashboard/',
+          '/*/login/',
+          '/*/register/',
+          '/*/reset-password/'
+        ]
       }
     ],
     sitemap: `${siteConfig.baseUrl}/sitemap.xml`

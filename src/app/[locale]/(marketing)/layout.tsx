@@ -14,14 +14,15 @@ export default async function MarketingLayout({
   children: ReactNode;
   params: Promise<{locale: string}>;
 }) {
-  const {locale} = await params;
+  const resolvedParams = await params;
+  const locale = resolvedParams.locale as Locale;
   const {user, profile} = await getUserProfile();
 
   return (
     <div className="bg-background flex min-h-screen flex-col">
-      <Navbar locale={locale as Locale} user={user} role={profile?.role} />
+      <Navbar locale={locale} user={user} role={profile?.role} />
       <main className="flex-1">{children}</main>
-      <SiteFooter locale={locale as Locale} />
+      <SiteFooter locale={locale} />
       <ScrollToTop />
     </div>
   );

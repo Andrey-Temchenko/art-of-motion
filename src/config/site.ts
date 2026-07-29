@@ -22,6 +22,7 @@ export interface ImagesConfig {
 }
 
 export interface SiteConfig {
+  name: string;
   baseUrl: string;
   gaMeasurementId: string;
   isProd: boolean;
@@ -38,6 +39,7 @@ export interface SiteConfig {
 import {env} from '@/env';
 
 export const siteConfig: SiteConfig = {
+  name: 'ArtOfMotion',
   baseUrl: env.NEXT_PUBLIC_SITE_URL || 'https://www.artofmotion.fit',
   gaMeasurementId: env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '',
   isProd: env.NODE_ENV === 'production',

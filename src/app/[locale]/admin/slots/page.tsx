@@ -10,10 +10,10 @@ import {SLOT_STATUS_VALUES} from '@/constants/slotStatus';
 import {getLocationLabel} from '@/lib/utils/locations';
 import {ROUTES, buildRoute} from '@/config/navigation';
 import {getDateFnsLocale} from '@/lib/utils/date';
-
-import {CreateSlotDialog} from '@/components/admin/CreateSlotDialog';
 import {getAdminSlots} from '@/services/slotService';
 import {getWorkoutTypes} from '@/services/workoutTypeService';
+
+import {CreateSlotDialog} from '@/components/admin/CreateSlotDialog';
 
 export default async function AdminSlotsPage(props: {params: Promise<{locale: Locale}>}) {
   const {locale} = await props.params;
@@ -23,7 +23,6 @@ export default async function AdminSlotsPage(props: {params: Promise<{locale: Lo
 
   const dateFnsLocale = getDateFnsLocale(locale);
 
-  // Fetch data via service layer directly (Server Component - no action overhead)
   const workoutTypes = await getWorkoutTypes();
   const slots = await getAdminSlots();
 
@@ -33,7 +32,6 @@ export default async function AdminSlotsPage(props: {params: Promise<{locale: Lo
     title: (dict.workouts as Record<string, string>)[wt.title] || wt.title
   }));
 
-  // Map location options
   const locationOptions = CLUB_LOCATION_VALUES.map(loc => ({
     value: loc,
     label: getLocationLabel(dict, loc)

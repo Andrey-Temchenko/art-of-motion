@@ -1,25 +1,18 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-import {redirect} from 'next/navigation';
 
 import {getUserProfile} from '@/lib/supabase/session';
-import {getAdminOverviewStats} from '@/actions/admin';
+import {getAdminDashboardStats} from '@/services/adminService';
 import {getDictionary} from '@/lib/i18n/getDictionary';
 import {Locale} from '@/lib/i18n/config';
-import {ROUTES, buildRoute} from '@/config/navigation';
 
 const OverviewCharts = dynamic(() => import('@/components/admin/OverviewCharts').then(mod => mod.OverviewCharts));
 
 export default async function AdminPage(props: {params: Promise<{locale: Locale}>}) {
   const {locale} = await props.params;
   const {profile} = await getUserProfile();
-  const statsRes = await getAdminOverviewStats();
 
-  if (!statsRes.success) {
-    redirect(buildRoute(locale, ROUTES.DASHBOARD.SCHEDULE));
-  }
-
-  const stats = statsRes.data;
+  const stats = await getAdminDashboardStats();
 
   const dict = await getDictionary(locale);
 

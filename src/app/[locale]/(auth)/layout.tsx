@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {BackButton} from '@/components/shared/BackButton';
 
 export default async function AuthLayout({
@@ -15,7 +16,6 @@ export default async function AuthLayout({
       {/* Background abstract element */}
       <div className="from-primary/10 via-brand-stretch/5 absolute inset-0 -z-10 h-full w-full bg-gradient-to-br to-transparent opacity-70" />
 
-      {/* Back button */}
       <BackButton href={`/${locale}`} ariaLabel="Back to home" />
 
       <div className="z-10 w-full max-w-md">{children}</div>

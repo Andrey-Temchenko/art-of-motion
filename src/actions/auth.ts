@@ -8,7 +8,7 @@ import {createClient} from '@/lib/supabase/server';
 import {siteConfig} from '@/config/site';
 import {getUserRoleServer} from '@/lib/supabase/session';
 import {USER_ROLE} from '@/constants/roles';
-import {buildRevalidatePath} from '@/config/navigation';
+import {buildRevalidatePath, ROUTES} from '@/config/navigation';
 
 type AuthActionResponse = {
   success?: boolean;
@@ -106,7 +106,7 @@ export async function resetPassword(data: {email: string}): Promise<AuthActionRe
   const origin = headersList.get('origin') || siteConfig.baseUrl;
 
   const {error} = await supabase.auth.resetPasswordForEmail(data.email, {
-    redirectTo: `${origin}/api/auth/callback?next=/reset-password/update`
+    redirectTo: `${origin}/api/auth/callback?next=${ROUTES.AUTH.RESET_PASSWORD}/update`
   });
 
   if (error) {

@@ -38,7 +38,7 @@ export async function generateMetadata({params}: {params: Promise<{locale: strin
   return {
     title: {
       default: dict.meta.siteName,
-      template: `%s | ArtOfMotion`
+      template: `%s | ${siteConfig.name}`
     },
     description: dict.meta.description,
     metadataBase: new URL(baseUrl),
@@ -46,7 +46,7 @@ export async function generateMetadata({params}: {params: Promise<{locale: strin
       title: dict.meta.siteName,
       description: dict.meta.description,
       url: `${baseUrl}/${locale}`,
-      siteName: 'ArtOfMotion',
+      siteName: siteConfig.name,
       locale: locale,
       type: 'website'
     },
@@ -56,16 +56,14 @@ export async function generateMetadata({params}: {params: Promise<{locale: strin
       description: dict.meta.description
     },
     appleWebApp: {
-      title: 'ArtOfMotion',
+      title: siteConfig.name,
       statusBarStyle: 'default'
     },
     alternates: {
       canonical: `/${locale}`,
       languages: {
-        [APP_LOCALES.UK]: '/uk',
-        [APP_LOCALES.RU]: '/ru',
-        [APP_LOCALES.EN]: '/en',
-        'x-default': '/uk'
+        ...Object.fromEntries(locales.map(loc => [loc, `/${loc}`])),
+        'x-default': `/${APP_LOCALES.UK}`
       }
     }
   };
@@ -79,12 +77,13 @@ export default async function RootLocaleLayout({
   params: Promise<{locale: string}>;
 }) {
   const {locale} = await params;
+  const validLocale = locale as Locale;
 
-  if (!locales.includes(locale as Locale)) {
+  if (!locales.includes(validLocale)) {
     notFound();
   }
 
-  const dict = await getDictionary(locale as Locale);
+  const dict = await getDictionary(validLocale);
 
   return (
     <html

@@ -10,8 +10,6 @@ import {SLOT_STATUS} from '@/constants/slotStatus';
 import {BookingButton} from '@/components/dashboard/BookingButton';
 import {BookingCard} from '@/components/dashboard/BookingCard';
 
-// The utility function getLocationDictKey is used instead of a local mapping
-
 export default async function SchedulePage(props: {params: Promise<{locale: Locale}>}) {
   const params = await props.params;
   const locale = params.locale;
