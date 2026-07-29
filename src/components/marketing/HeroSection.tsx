@@ -5,7 +5,7 @@ import Link from 'next/link';
 import {ArrowRight, HeartPulse, Play} from 'lucide-react';
 import {useEffect, useState} from 'react';
 
-import type {Dictionary} from '@/lib/i18n/types';
+import {useDictionary} from '@/providers/dictionaryProvider';
 import type {Locale} from '@/lib/i18n/config';
 import {createClient} from '@/lib/supabase/client';
 import {ROUTES, buildRoute} from '@/config/navigation';
@@ -15,7 +15,8 @@ import {siteConfig} from '@/config/site';
 import {Button} from '@/components/ui/button';
 import {DemoVideoModal} from '@/components/marketing/DemoVideoModal';
 
-export function HeroSection({dict, locale}: {dict: Dictionary; locale: Locale}) {
+export function HeroSection({locale}: {locale: Locale}) {
+  const dict = useDictionary();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -65,7 +66,7 @@ export function HeroSection({dict, locale}: {dict: Dictionary; locale: Locale}) 
             <ArrowRight className="ml-2 size-5 transition-transform group-hover:translate-x-1" />
           </Button>
 
-          <DemoVideoModal dict={dict.videoModal}>
+          <DemoVideoModal>
             <Button
               variant="outline"
               size="lg"

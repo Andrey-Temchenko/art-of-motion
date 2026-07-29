@@ -118,18 +118,7 @@ export default async function SlotDetailsPage({params}: SlotDetailsPageProps) {
                     </span>
                   </td>
                   <td className="p-4 text-right">
-                    {booking.status === BOOKING_STATUS.CONFIRMED && (
-                      <CancelBookingButton
-                        bookingId={booking.id}
-                        dict={{
-                          buttonText: t.cancelBooking,
-                          dialogTitle: t.cancelDialog.title,
-                          dialogDesc: t.cancelDialog.desc,
-                          dialogBack: t.cancelDialog.back,
-                          dialogConfirm: t.cancelDialog.confirm
-                        }}
-                      />
-                    )}
+                    {booking.status === BOOKING_STATUS.CONFIRMED && <CancelBookingButton bookingId={booking.id} />}
                   </td>
                 </tr>
               ))

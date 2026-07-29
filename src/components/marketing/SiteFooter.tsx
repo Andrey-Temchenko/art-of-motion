@@ -1,6 +1,8 @@
-import type {Dictionary} from '@/lib/i18n/types';
+import {getDictionary} from '@/lib/i18n/getDictionary';
+import type {Locale} from '@/lib/i18n/config';
 
-export function SiteFooter({dict}: {dict: Dictionary}) {
+export async function SiteFooter({locale}: {locale: Locale}) {
+  const dict = await getDictionary(locale);
   const currentYear = new Date().getFullYear();
 
   return (

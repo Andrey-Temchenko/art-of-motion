@@ -16,19 +16,15 @@ import {
 } from '@/components/ui/alert-dialog';
 import {Button} from '@/components/ui/button';
 import {cancelBookingAction} from '@/actions/adminSlots';
+import {useDictionary} from '@/providers/dictionaryProvider';
 
 interface CancelBookingButtonProps {
   bookingId: string;
-  dict: {
-    buttonText: string;
-    dialogTitle: string;
-    dialogDesc: string;
-    dialogBack: string;
-    dialogConfirm: string;
-  };
 }
 
-export function CancelBookingButton({bookingId, dict}: CancelBookingButtonProps) {
+export function CancelBookingButton({bookingId}: CancelBookingButtonProps) {
+  const dictionary = useDictionary();
+  const dict = dictionary.admin.slotDetailsPage;
   const [isPending, startTransition] = useTransition();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -51,15 +47,15 @@ export function CancelBookingButton({bookingId, dict}: CancelBookingButtonProps)
 
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-      <AlertDialogTrigger render={<Button variant="destructive" size="sm" />}>{dict.buttonText}</AlertDialogTrigger>
+      <AlertDialogTrigger render={<Button variant="destructive" size="sm" />}>{dict.cancelBooking}</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>{dict.dialogTitle}</AlertDialogTitle>
-          <AlertDialogDescription>{dict.dialogDesc}</AlertDialogDescription>
+          <AlertDialogTitle>{dict.cancelDialog.title}</AlertDialogTitle>
+          <AlertDialogDescription>{dict.cancelDialog.desc}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel onClick={() => setIsOpen(false)} disabled={isPending}>
-            {dict.dialogBack}
+            {dict.cancelDialog.back}
           </AlertDialogCancel>
           <AlertDialogAction
             variant="destructive"
@@ -68,7 +64,7 @@ export function CancelBookingButton({bookingId, dict}: CancelBookingButtonProps)
               e.preventDefault();
               handleCancel();
             }}>
-            {isPending ? '...' : dict.dialogConfirm}
+            {isPending ? '...' : dict.cancelDialog.confirm}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

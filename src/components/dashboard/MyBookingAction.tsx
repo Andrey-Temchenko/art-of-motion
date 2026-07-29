@@ -17,7 +17,7 @@ import {
 import {Button} from '@/components/ui/button';
 import {cancelBookingAction} from '@/actions/clientBookings';
 import {canCancelBooking} from '@/lib/utils/date';
-import type {getDictionary} from '@/lib/i18n/getDictionary';
+import {useDictionary} from '@/providers/dictionaryProvider';
 import type {Database} from '@/types/database.types';
 import {BOOKING_STATUS} from '@/constants/bookingStatus';
 
@@ -26,10 +26,10 @@ export interface MyBookingActionProps {
   status: Database['public']['Enums']['booking_status'];
   cancellationDeadlineHours: number;
   startTime: string; // ISO string
-  dict: Awaited<ReturnType<typeof getDictionary>>; // The dictionary object for translations
 }
 
-export function MyBookingAction({bookingId, status, cancellationDeadlineHours, startTime, dict}: MyBookingActionProps) {
+export function MyBookingAction({bookingId, status, cancellationDeadlineHours, startTime}: MyBookingActionProps) {
+  const dict = useDictionary();
   const [isPending, startTransition] = useTransition();
   const [isOpen, setIsOpen] = useState(false);
 

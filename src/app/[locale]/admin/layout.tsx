@@ -46,7 +46,7 @@ export default async function AdminLayout({
   ];
 
   return (
-    <Layout navItems={navItems} dict={dict} locale={locale as Locale} user={user} role={profile?.role}>
+    <Layout navItems={navItems} locale={locale as Locale} user={user} role={profile?.role}>
       {children}
     </Layout>
   );

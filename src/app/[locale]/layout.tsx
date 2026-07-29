@@ -11,6 +11,7 @@ import {isAnalyticsEnabled} from '@/lib/analytics';
 import {locales, APP_LOCALES, type Locale} from '@/lib/i18n/config';
 import {getDictionary} from '@/lib/i18n/getDictionary';
 import {ThemeProvider} from '@/providers/themeProvider';
+import {DictionaryProvider} from '@/providers/dictionaryProvider';
 
 import '../globals.css';
 
@@ -82,6 +83,8 @@ export default async function RootLocaleLayout({
     notFound();
   }
 
+  const dict = await getDictionary(locale as Locale);
+
   return (
     <html
       lang={locale}
@@ -97,7 +100,7 @@ export default async function RootLocaleLayout({
         ) : null}
 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
+          <DictionaryProvider dict={dict}>{children}</DictionaryProvider>
         </ThemeProvider>
       </body>
     </html>

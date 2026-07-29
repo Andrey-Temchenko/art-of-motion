@@ -2,6 +2,7 @@ import React from 'react';
 import {render, screen} from '@testing-library/react';
 import {describe, it, expect, vi} from 'vitest';
 import {Layout} from './Layout';
+import {DictionaryProvider} from '@/providers/dictionaryProvider';
 import type {Dictionary} from '@/lib/i18n/types';
 import type {Locale} from '@/lib/i18n/config';
 
@@ -34,9 +35,11 @@ const mockDict = {
 describe('Layout component', () => {
   it('renders children correctly', () => {
     render(
-      <Layout navItems={[]} dict={mockDict} locale={'en' as Locale}>
-        <div data-testid="child-content">Test Child Content</div>
-      </Layout>
+      <DictionaryProvider dict={mockDict}>
+        <Layout navItems={[]} locale={'en' as Locale}>
+          <div data-testid="child-content">Test Child Content</div>
+        </Layout>
+      </DictionaryProvider>
     );
 
     expect(screen.getByTestId('child-content')).toBeInTheDocument();
@@ -49,9 +52,11 @@ describe('Layout component', () => {
     ];
 
     render(
-      <Layout navItems={navItems} dict={mockDict} locale={'en' as Locale}>
-        <div>Content</div>
-      </Layout>
+      <DictionaryProvider dict={mockDict}>
+        <Layout navItems={navItems} locale={'en' as Locale}>
+          <div>Content</div>
+        </Layout>
+      </DictionaryProvider>
     );
 
     // Desktop sidebar has these links

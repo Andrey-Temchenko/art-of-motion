@@ -1,12 +1,13 @@
 'use client';
 
 import React, {useState} from 'react';
-import type {Dictionary} from '@/lib/i18n/types';
+import {useDictionary} from '@/providers/dictionaryProvider';
 import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
 import {Quote, Star} from 'lucide-react';
 import {cn} from '@/lib/utils';
 
-export function TestimonialsSection({dict}: {dict: Dictionary}) {
+export function TestimonialsSection() {
+  const dict = useDictionary();
   const allReviews = Object.values(dict.testimonials.reviews);
 
   // Split reviews into two halves for the two rows

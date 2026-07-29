@@ -14,6 +14,7 @@ import {cn} from '@/lib/utils';
 import {Database} from '@/types/database.types';
 import {CLUB_LOCATION_VALUES} from '@/constants/locations';
 import {SLOT_STATUS} from '@/constants/slotStatus';
+import {useDictionary} from '@/providers/dictionaryProvider';
 
 import {Button, buttonVariants} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
@@ -33,16 +34,16 @@ interface SlotFormProps {
   workoutTypes: WorkoutType[];
   locationOptions: {value: string; label: string}[];
   existingSlots: ProcessedAdminSlot[];
-  dict: Record<string, string>;
 }
 
 export function SlotForm({
   workoutTypes,
   locationOptions,
   existingSlots,
-  dict,
   onSuccess
 }: SlotFormProps & {onSuccess?: () => void}) {
+  const dictionary = useDictionary();
+  const dict = dictionary.admin.slotsPage.form;
   const [isPending, startTransition] = useTransition();
 
   const STATUS_CANCELLED = SLOT_STATUS.CANCELLED;

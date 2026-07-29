@@ -1,6 +1,6 @@
 'use client';
 
-import React, {useState, JSX} from 'react';
+import React, {useState, useMemo, JSX} from 'react';
 
 import {Button} from '@/components/ui/button';
 
@@ -13,7 +13,7 @@ interface BookingHistoryListProps {
 
 export function BookingHistoryList({children, loadMoreText}: BookingHistoryListProps): JSX.Element {
   const [visibleCount, setVisibleCount] = useState(HISTORY_BATCH_SIZE);
-  const childrenArray = React.Children.toArray(children);
+  const childrenArray = useMemo(() => React.Children.toArray(children), [children]);
 
   return (
     <div className="space-y-6">

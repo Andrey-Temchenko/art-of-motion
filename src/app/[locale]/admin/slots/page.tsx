@@ -51,9 +51,6 @@ export default async function AdminSlotsPage(props: {params: Promise<{locale: Lo
           workoutTypes={localizedWorkoutTypes}
           locationOptions={locationOptions}
           existingSlots={slots}
-          dict={dict.admin.slotsPage.form}
-          title={dict.admin.slotsPage.createSlot}
-          buttonText={dict.admin.slotsPage.createSlot}
         />
       </div>
 

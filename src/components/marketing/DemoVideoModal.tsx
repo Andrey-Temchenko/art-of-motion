@@ -4,17 +4,17 @@ import React, {useState} from 'react';
 import {Loader2, AlertCircle} from 'lucide-react';
 
 import {siteConfig} from '@/config/site';
-import type {Dictionary} from '@/lib/i18n/types';
+import {useDictionary} from '@/providers/dictionaryProvider';
 
 import {Dialog, DialogContent, DialogTitle, DialogTrigger} from '@/components/ui/dialog';
 
 interface DemoVideoModalProps {
   children?: React.ReactNode;
   trigger?: React.ReactNode;
-  dict: Dictionary['videoModal'];
 }
 
-export function DemoVideoModal({children, trigger, dict}: DemoVideoModalProps) {
+export function DemoVideoModal({children, trigger}: DemoVideoModalProps) {
+  const dict = useDictionary().videoModal;
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);

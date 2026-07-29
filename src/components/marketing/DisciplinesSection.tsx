@@ -1,4 +1,5 @@
-import type {Dictionary} from '@/lib/i18n/types';
+import {getDictionary} from '@/lib/i18n/getDictionary';
+import type {Locale} from '@/lib/i18n/config';
 import {User, Users, Dumbbell, Activity, Heart, Shield, Flame, Target} from 'lucide-react';
 
 interface CardItem {
@@ -10,7 +11,8 @@ interface CardItem {
   glow: string;
 }
 
-export function DisciplinesSection({dict}: {dict: Dictionary}) {
+export async function DisciplinesSection({locale}: {locale: Locale}) {
+  const dict = await getDictionary(locale);
   const personalCards: CardItem[] = [
     {
       ...dict.disciplines.personal.items.stretching,

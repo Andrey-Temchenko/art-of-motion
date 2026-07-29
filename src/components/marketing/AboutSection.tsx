@@ -1,11 +1,13 @@
 import Image from 'next/image';
 import {Award, Activity, Heart} from 'lucide-react';
 
-import type {Dictionary} from '@/lib/i18n/types';
+import {getDictionary} from '@/lib/i18n/getDictionary';
+import type {Locale} from '@/lib/i18n/config';
 
 import {siteConfig} from '@/config/site';
 
-export function AboutSection({dict}: {dict: Dictionary}) {
+export async function AboutSection({locale}: {locale: Locale}) {
+  const dict = await getDictionary(locale);
   const achievements = [
     {
       icon: Award,

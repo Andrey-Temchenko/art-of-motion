@@ -4,7 +4,7 @@ import React, {useState, useEffect, useCallback} from 'react';
 import Image from 'next/image';
 import {Camera, ChevronLeft, ChevronRight} from 'lucide-react';
 
-import type {Dictionary} from '@/lib/i18n/types';
+import {useDictionary} from '@/providers/dictionaryProvider';
 import {
   Carousel,
   CarouselContent,
@@ -17,7 +17,8 @@ import {siteConfig} from '@/config/site';
 import {cn} from '@/lib/utils';
 import {Button} from '@/components/ui/button';
 
-export function GallerySection({dict}: {dict: Dictionary}) {
+export function GallerySection() {
+  const dict = useDictionary();
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);

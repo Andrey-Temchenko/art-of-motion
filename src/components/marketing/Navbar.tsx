@@ -6,7 +6,7 @@ import Link from 'next/link';
 import {Menu, LogOut} from 'lucide-react';
 import type {User} from '@supabase/supabase-js';
 
-import type {Dictionary} from '@/lib/i18n/types';
+import {useDictionary} from '@/providers/dictionaryProvider';
 import type {Locale} from '@/lib/i18n/config';
 import {cn} from '@/lib/utils';
 import {useSignOut} from '@/hooks/useSignOut';
@@ -21,7 +21,6 @@ import {LanguageSwitcher} from '@/components/marketing/LanguageSwitcher';
 import {ThemeToggle} from '@/components/marketing/ThemeToggle';
 
 interface NavbarProps {
-  dict: Dictionary;
   locale: Locale;
   user?: User | null;
   role?: string | null;
@@ -29,7 +28,8 @@ interface NavbarProps {
 
 const NAV_SCROLL_THRESHOLD = 20;
 
-export function Navbar({dict, locale, user, role}: NavbarProps) {
+export function Navbar({locale, user, role}: NavbarProps) {
+  const dict = useDictionary();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -110,7 +110,7 @@ export function Navbar({dict, locale, user, role}: NavbarProps) {
 
           {user ? (
             <div className="hidden lg:block">
-              <UserDropdown user={user} role={role || USER_ROLE.CLIENT} locale={locale} dict={dict} />
+              <UserDropdown user={user} role={role || USER_ROLE.CLIENT} locale={locale} />
             </div>
           ) : (
             <Button

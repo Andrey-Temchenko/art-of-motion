@@ -2,6 +2,7 @@ import React from 'react';
 import {render, screen} from '@testing-library/react';
 import {describe, it, expect, vi} from 'vitest';
 import {MyBookingAction} from './MyBookingAction';
+import {DictionaryProvider} from '@/providers/dictionaryProvider';
 import {BOOKING_STATUS} from '@/constants/bookingStatus';
 import type {Dictionary} from '@/lib/i18n/types';
 
@@ -42,39 +43,42 @@ const mockDict = {
 describe('MyBookingAction', () => {
   it('renders cancelled badge if status is cancelled', () => {
     render(
-      <MyBookingAction
-        bookingId="1"
-        status={BOOKING_STATUS.CANCELLED}
-        cancellationDeadlineHours={24}
-        startTime={new Date(Date.now() + 86400000).toISOString()} // Future
-        dict={mockDict}
-      />
+      <DictionaryProvider dict={mockDict}>
+        <MyBookingAction
+          bookingId="1"
+          status={BOOKING_STATUS.CANCELLED}
+          cancellationDeadlineHours={24}
+          startTime={new Date(Date.now() + 86400000).toISOString()} // Future
+        />
+      </DictionaryProvider>
     );
     expect(screen.getByText('Отменено')).toBeInTheDocument();
   });
 
   it('renders completed badge if start time is in the past', () => {
     render(
-      <MyBookingAction
-        bookingId="1"
-        status={BOOKING_STATUS.CONFIRMED}
-        cancellationDeadlineHours={24}
-        startTime={new Date(Date.now() - 3600000).toISOString()} // Past
-        dict={mockDict}
-      />
+      <DictionaryProvider dict={mockDict}>
+        <MyBookingAction
+          bookingId="1"
+          status={BOOKING_STATUS.CONFIRMED}
+          cancellationDeadlineHours={24}
+          startTime={new Date(Date.now() - 3600000).toISOString()} // Past
+        />
+      </DictionaryProvider>
     );
     expect(screen.getByText('Завершено')).toBeInTheDocument();
   });
 
   it('renders cancel button if booking is upcoming', () => {
     render(
-      <MyBookingAction
-        bookingId="1"
-        status={BOOKING_STATUS.CONFIRMED}
-        cancellationDeadlineHours={24}
-        startTime={new Date(Date.now() + 86400000 * 2).toISOString()} // Future (48h)
-        dict={mockDict}
-      />
+      <DictionaryProvider dict={mockDict}>
+        <MyBookingAction
+          bookingId="1"
+          status={BOOKING_STATUS.CONFIRMED}
+          cancellationDeadlineHours={24}
+          startTime={new Date(Date.now() + 86400000 * 2).toISOString()} // Future (48h)
+        />
+      </DictionaryProvider>
     );
     expect(screen.getByText('Отменить бронь')).toBeInTheDocument();
   });

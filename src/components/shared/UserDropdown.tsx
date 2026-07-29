@@ -6,7 +6,7 @@ import {User} from '@supabase/supabase-js';
 
 import {useSignOut} from '@/hooks/useSignOut';
 import {USER_ROLE} from '@/constants/roles';
-import type {Dictionary} from '@/lib/i18n/types';
+import {useDictionary} from '@/providers/dictionaryProvider';
 import {getDefaultDashboardRoute, buildRoute} from '@/config/navigation';
 
 import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
@@ -24,10 +24,10 @@ interface UserDropdownProps {
   user: User;
   role: string;
   locale: string;
-  dict: Dictionary;
 }
 
-export function UserDropdown({user, role, locale, dict}: UserDropdownProps) {
+export function UserDropdown({user, role, locale}: UserDropdownProps) {
+  const dict = useDictionary();
   const router = useRouter();
 
   const {handleSignOut} = useSignOut();

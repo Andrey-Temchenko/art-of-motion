@@ -7,7 +7,6 @@ import {usePathname} from 'next/navigation';
 import {Menu} from 'lucide-react';
 import type {User} from '@supabase/supabase-js';
 
-import type {Dictionary} from '@/lib/i18n/types';
 import type {Locale} from '@/lib/i18n/config';
 import {cn} from '@/lib/utils';
 import {USER_ROLE} from '@/constants/roles';
@@ -28,13 +27,12 @@ export interface NavItem {
 export interface LayoutProps {
   children: React.ReactNode;
   navItems: NavItem[];
-  dict: Dictionary;
   locale: Locale;
   user?: User | null;
   role?: string | null;
 }
 
-export function Layout({children, navItems, dict, locale, user, role}: LayoutProps) {
+export function Layout({children, navItems, locale, user, role}: LayoutProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
 
@@ -105,7 +103,7 @@ export function Layout({children, navItems, dict, locale, user, role}: LayoutPro
             <LanguageSwitcher current={locale} />
             <ThemeToggle />
 
-            {user && <UserDropdown user={user} role={role || USER_ROLE.CLIENT} locale={locale} dict={dict} />}
+            {user && <UserDropdown user={user} role={role || USER_ROLE.CLIENT} locale={locale} />}
           </div>
         </header>
 

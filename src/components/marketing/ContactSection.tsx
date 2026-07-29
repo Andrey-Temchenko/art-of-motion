@@ -1,6 +1,6 @@
 'use client';
 
-import type {Dictionary} from '@/lib/i18n/types';
+import {useDictionary} from '@/providers/dictionaryProvider';
 import {analytics} from '@/lib/analytics';
 import {siteConfig} from '@/config/site';
 import {MapPin, Send, ArrowUpRight} from 'lucide-react';
@@ -25,7 +25,8 @@ function InstagramIcon({className}: {className?: string}) {
   );
 }
 
-export function ContactSection({dict}: {dict: Dictionary}) {
+export function ContactSection() {
+  const dict = useDictionary();
   return (
     <section id="contact" className="bg-secondary relative pt-12 pb-6 md:pt-20 md:pb-12">
       <div className="mx-auto w-full max-w-7xl px-6 md:px-10">

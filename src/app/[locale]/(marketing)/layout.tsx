@@ -1,6 +1,5 @@
 import type {ReactNode} from 'react';
 
-import {getDictionary} from '@/lib/i18n/getDictionary';
 import type {Locale} from '@/lib/i18n/config';
 import {getUserProfile} from '@/lib/supabase/session';
 
@@ -16,14 +15,13 @@ export default async function MarketingLayout({
   params: Promise<{locale: string}>;
 }) {
   const {locale} = await params;
-  const dict = await getDictionary(locale as Locale);
   const {user, profile} = await getUserProfile();
 
   return (
     <div className="bg-background flex min-h-screen flex-col">
-      <Navbar dict={dict} locale={locale as Locale} user={user} role={profile?.role} />
+      <Navbar locale={locale as Locale} user={user} role={profile?.role} />
       <main className="flex-1">{children}</main>
-      <SiteFooter dict={dict} />
+      <SiteFooter locale={locale as Locale} />
       <ScrollToTop />
     </div>
   );
