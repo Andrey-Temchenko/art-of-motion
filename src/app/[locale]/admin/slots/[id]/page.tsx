@@ -5,12 +5,16 @@ import {getDictionary} from '@/lib/i18n/getDictionary';
 import {Locale} from '@/lib/i18n/config';
 import {getDateFnsLocale} from '@/lib/utils/date';
 import {getSlotDetails} from '@/services/slotService';
+import {getWorkoutTypes} from '@/services/workoutTypeService';
 import {formatKyivTime} from '@/lib/utils/timezone';
-import {getLocationDictKey} from '@/lib/utils/locations';
+import {getLocationLabel} from '@/lib/utils/locations';
+import {CLUB_LOCATION_VALUES} from '@/constants/locations';
 import {BOOKING_STATUS} from '@/constants/bookingStatus';
 import {SLOT_STATUS} from '@/constants/slotStatus';
 
 import {CancelBookingButton} from '@/components/admin/CancelBookingButton';
+import {EditSlotDialog} from '@/components/admin/EditSlotDialog';
+import {CancelSlotButton} from '@/components/admin/CancelSlotButton';
 
 interface SlotDetailsPageProps {
   params: Promise<{
@@ -26,10 +30,22 @@ export default async function SlotDetailsPage({params}: SlotDetailsPageProps) {
   const t = dict.admin.slotDetailsPage;
   const tWorkouts = dict.workouts as Record<string, string>;
 
-  const slotDetails = await getSlotDetails(id);
+  const [slotDetails, workoutTypes] = await Promise.all([getSlotDetails(id), getWorkoutTypes()]);
+
   if (!slotDetails) {
     notFound();
   }
+
+  // Map workout types with localized title
+  const localizedWorkoutTypes = workoutTypes.map(wt => ({
+    ...wt,
+    title: tWorkouts[wt.title] || wt.title
+  }));
+
+  const locationOptions = CLUB_LOCATION_VALUES.map(loc => ({
+    value: loc,
+    label: getLocationLabel(dict, loc)
+  }));
 
   const dateLocale = getDateFnsLocale(locale);
   const formattedDate = formatKyivTime(new Date(slotDetails.start_time), 'dd MMM yyyy, HH:mm', {locale: dateLocale});
@@ -38,18 +54,25 @@ export default async function SlotDetailsPage({params}: SlotDetailsPageProps) {
     ? tWorkouts[slotDetails.workout_title_key] || slotDetails.workout_title_key
     : '';
 
-  const dictKey = getLocationDictKey(slotDetails.location);
-  // @ts-expect-error - dynamic dictionary indexing
-  const locationLabel = dict.contact?.clubs?.[dictKey]?.name || slotDetails.location;
+  const locationLabel = getLocationLabel(dict, slotDetails.location);
 
   const isFull =
     slotDetails.bookings.filter(b => b.status === BOOKING_STATUS.CONFIRMED).length >= slotDetails.max_capacity;
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">{t.title}</h1>
-        <p className="text-muted-foreground">{t.subtitle}</p>
+      <div className="flex items-start justify-between">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">{t.title}</h1>
+          <p className="text-muted-foreground">{t.subtitle}</p>
+        </div>
+
+        {slotDetails.status !== SLOT_STATUS.CANCELLED && (
+          <div className="flex items-center gap-2">
+            <EditSlotDialog slot={slotDetails} workoutTypes={localizedWorkoutTypes} locationOptions={locationOptions} />
+            <CancelSlotButton slotId={slotDetails.id} />
+          </div>
+        )}
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
@@ -65,10 +88,10 @@ export default async function SlotDetailsPage({params}: SlotDetailsPageProps) {
                     : 'bg-green-100 text-green-700'
               }`}>
               {slotDetails.status === SLOT_STATUS.CANCELLED
-                ? t.status + ': Cancelled'
+                ? t.statusCancelled
                 : isFull
-                  ? t.capacity + ': Full'
-                  : t.status + ': Active'}
+                  ? t.statusFull
+                  : t.statusActive}
             </span>
           </div>
           <div className="text-muted-foreground grid gap-1 text-sm">

@@ -112,10 +112,23 @@ insert into public.slots (id, workout_type_id, start_time, end_time, location, p
 -- Near future slot (cannot cancel, deadline 24h, starts in 2h)
 ('aaaa0000-0000-0000-0000-000000000002', '393035ad-ff6d-4c1e-9b13-8658e3aed383', now() + interval '2 hours', now() + interval '3 hours', 'top_gun', 0, 10, 24, 'scheduled'),
 -- Far future slot (can cancel, deadline 24h, starts in 7 days)
-('aaaa0000-0000-0000-0000-000000000003', '80042596-f3f3-42d4-a64a-0792d2575832', now() + interval '7 days', now() + interval '7 days' + interval '1 hour', 'alpha', 0, 10, 24, 'scheduled');
+('aaaa0000-0000-0000-0000-000000000003', '80042596-f3f3-42d4-a64a-0792d2575832', now() + interval '7 days', now() + interval '7 days' + interval '1 hour', 'alpha', 0, 10, 24, 'scheduled'),
+-- E2E Test: Slot for Cancel test
+('aaaa0000-0000-0000-0000-000000000004', '2335f652-e898-40d7-9486-a6a20f05b91a', now() + interval '14 days', now() + interval '14 days' + interval '1 hour', 'top_gun', 0, 10, 24, 'scheduled'),
+-- E2E Test: Slot for Edit Time test
+('aaaa0000-0000-0000-0000-000000000005', '393035ad-ff6d-4c1e-9b13-8658e3aed383', now() + interval '15 days', now() + interval '15 days' + interval '1 hour', 'alpha', 0, 10, 24, 'scheduled'),
+-- E2E Test: Slot for Edit Capacity test
+('aaaa0000-0000-0000-0000-000000000006', '569043db-1bb8-4e5f-aed6-0ad7150e2151', now() + interval '16 days', now() + interval '16 days' + interval '1 hour', 'top_gun', 0, 2, 24, 'scheduled');
 
 -- 5. Create Bookings for the Test User
 insert into public.bookings (id, client_id, slot_id, status) values
 ('bbbb0000-0000-0000-0000-000000000001', '11111111-1111-1111-1111-111111111111', 'aaaa0000-0000-0000-0000-000000000001', 'confirmed'),
 ('bbbb0000-0000-0000-0000-000000000002', '11111111-1111-1111-1111-111111111111', 'aaaa0000-0000-0000-0000-000000000002', 'confirmed'),
-('bbbb0000-0000-0000-0000-000000000003', '11111111-1111-1111-1111-111111111111', 'aaaa0000-0000-0000-0000-000000000003', 'confirmed');
+('bbbb0000-0000-0000-0000-000000000003', '11111111-1111-1111-1111-111111111111', 'aaaa0000-0000-0000-0000-000000000003', 'confirmed'),
+-- E2E Test Bookings
+('bbbb0000-0000-0000-0000-000000000004', '11111111-1111-1111-1111-111111111111', 'aaaa0000-0000-0000-0000-000000000004', 'confirmed'),
+('bbbb0000-0000-0000-0000-000000000005', '11111111-1111-1111-1111-111111111111', 'aaaa0000-0000-0000-0000-000000000005', 'confirmed'),
+-- Two bookings for the capacity test (using user 1 and user 2/admin)
+('bbbb0000-0000-0000-0000-000000000006', '11111111-1111-1111-1111-111111111111', 'aaaa0000-0000-0000-0000-000000000006', 'confirmed'),
+('bbbb0000-0000-0000-0000-000000000007', '22222222-2222-2222-2222-222222222222', 'aaaa0000-0000-0000-0000-000000000006', 'confirmed');
+

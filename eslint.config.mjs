@@ -17,7 +17,9 @@ const eslintConfig = defineConfig([
     // Playwright generated files:
     'playwright-report/**',
     'test-results/**',
-    'playwright/.auth/**'
+    'playwright/.auth/**',
+    // Supabase generated files
+    'supabase/**'
   ])
 ]);
 

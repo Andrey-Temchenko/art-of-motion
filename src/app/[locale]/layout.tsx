@@ -12,6 +12,7 @@ import {locales, APP_LOCALES, type Locale} from '@/lib/i18n/config';
 import {getDictionary} from '@/lib/i18n/getDictionary';
 import {ThemeProvider} from '@/providers/themeProvider';
 import {DictionaryProvider} from '@/providers/dictionaryProvider';
+import {Toaster} from '@/components/ui/sonner';
 
 import '../globals.css';
 
@@ -100,7 +101,10 @@ export default async function RootLocaleLayout({
         ) : null}
 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <DictionaryProvider dict={dict}>{children}</DictionaryProvider>
+          <DictionaryProvider dict={dict}>
+            {children}
+            <Toaster />
+          </DictionaryProvider>
         </ThemeProvider>
       </body>
     </html>

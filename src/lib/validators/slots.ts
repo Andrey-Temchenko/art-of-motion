@@ -1,9 +1,9 @@
 import {z} from 'zod';
 import {CLUB_LOCATION_VALUES} from '@/constants/locations';
 
-export const createSlotSchema = z
+export const slotSchema = z
   .object({
-    workout_type_id: z.string().uuid({message: 'Invalid workout type'}),
+    workout_type_id: z.uuid({message: 'Invalid workout type'}),
     location: z.enum(CLUB_LOCATION_VALUES),
     start_time: z.string().refine(v => !isNaN(Date.parse(v)), {message: 'Invalid start time'}),
     end_time: z.string().refine(v => !isNaN(Date.parse(v)), {message: 'Invalid end time'}),
@@ -22,4 +22,7 @@ export const createSlotSchema = z
     }
   );
 
-export type CreateSlotInput = z.infer<typeof createSlotSchema>;
+/** @deprecated Use `slotSchema` instead - this schema is used for both create and edit. */
+export const createSlotSchema = slotSchema;
+
+export type CreateSlotInput = z.infer<typeof slotSchema>;

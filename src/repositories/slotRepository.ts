@@ -1,18 +1,28 @@
 import {createClient} from '@/lib/supabase/server';
 import {createAdminClient} from '@/lib/supabase/admin';
-import {CreateSlotData, RawSlotData, RawAdminSlotDetails} from './types';
-import {SLOT_STATUS} from '@/constants/slotStatus';
+import {CreateSlotData, RawSlotData, RawAdminSlotDetails, UpdateSlotData} from './types';
+import {SLOT_STATUS, SlotStatusType} from '@/constants/slotStatus';
 
-export async function findOverlappingSlots(startTime: string, endTime: string): Promise<{id: string}[]> {
+export async function findOverlappingSlots(
+  startTime: string,
+  endTime: string,
+  excludeSlotId?: string
+): Promise<{id: string}[]> {
   const supabase = await createClient();
   const STATUS_CANCELLED_STR = SLOT_STATUS.CANCELLED;
 
-  const {data: overlappingSlots, error: overlapError} = await supabase
+  let query = supabase
     .from('slots')
     .select('id')
     .neq('status', STATUS_CANCELLED_STR)
     .lt('start_time', endTime)
     .gt('end_time', startTime);
+
+  if (excludeSlotId) {
+    query = query.neq('id', excludeSlotId);
+  }
+
+  const {data: overlappingSlots, error: overlapError} = await query;
 
   if (overlapError) {
     throw overlapError;
@@ -25,6 +35,26 @@ export async function insertSlot(slotData: CreateSlotData): Promise<void> {
   const supabase = await createClient();
 
   const {error} = await supabase.from('slots').insert(slotData);
+
+  if (error) {
+    throw error;
+  }
+}
+
+export async function updateSlotStatus(slotId: string, status: SlotStatusType): Promise<void> {
+  const adminClient = createAdminClient();
+
+  const {error} = await adminClient.from('slots').update({status}).eq('id', slotId);
+
+  if (error) {
+    throw error;
+  }
+}
+
+export async function updateSlot(slotId: string, slotData: UpdateSlotData): Promise<void> {
+  const adminClient = createAdminClient();
+
+  const {error} = await adminClient.from('slots').update(slotData).eq('id', slotId);
 
   if (error) {
     throw error;
@@ -93,6 +123,7 @@ export async function getAdminSlotDetails(slotId: string): Promise<RawAdminSlotD
       max_capacity,
       price,
       status,
+      workout_type_id,
       workout_type:workout_types(title),
       bookings(
         id,

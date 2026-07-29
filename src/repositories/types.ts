@@ -3,6 +3,8 @@ import {Database} from '@/types/database.types';
 import {QueryData} from '@supabase/supabase-js';
 import {createAdminClient} from '@/lib/supabase/admin';
 import {BookingStatusType} from '@/constants/bookingStatus';
+import {ClubLocationType} from '@/constants/locations';
+import {SlotStatusType} from '@/constants/slotStatus';
 
 export interface RawDashboardKpis {
   total_clients: number | null;
@@ -41,13 +43,15 @@ export type RawAdminClientData = {
 
 export type CreateSlotData = {
   workout_type_id: string;
-  location: Database['public']['Enums']['club_location'];
+  location: ClubLocationType;
   start_time: string; // ISO string
   end_time: string; // ISO string
   max_capacity: number;
   price: number;
-  status: Database['public']['Enums']['slot_status'];
+  status: SlotStatusType;
 };
+
+export type UpdateSlotData = Partial<CreateSlotData>;
 
 export type WorkoutType = Database['public']['Tables']['workout_types']['Row'];
 
@@ -83,7 +87,7 @@ export type RawSlotData = {
   end_time: string;
   max_capacity: number;
   price: number;
-  status: string;
+  status: SlotStatusType;
   workout_type: {title: string} | {title: string}[] | null;
   bookings: {id?: string; client_id?: string; status?: string}[] | null;
 };
@@ -118,8 +122,10 @@ export interface IProfileRepository {
 }
 
 export interface ISlotRepository {
-  findOverlappingSlots(startTime: string, endTime: string): Promise<{id: string}[]>;
+  findOverlappingSlots(startTime: string, endTime: string, excludeSlotId?: string): Promise<{id: string}[]>;
   insertSlot(slotData: CreateSlotData): Promise<void>;
+  updateSlotStatus(slotId: string, status: SlotStatusType): Promise<void>;
+  updateSlot(slotId: string, slotData: UpdateSlotData): Promise<void>;
   getAdminSlotsList(): Promise<RawSlotData[]>;
   getScheduleSlotsList(startDate: string, endDate: string): Promise<RawSlotData[]>;
   getAdminSlotDetails(slotId: string): Promise<RawAdminSlotDetails | null>;
@@ -137,6 +143,7 @@ export const adminSlotDetailsQuery = () =>
       max_capacity,
       price,
       status,
+      workout_type_id,
       workout_type:workout_types(title),
       bookings(
         id,

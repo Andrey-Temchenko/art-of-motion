@@ -7,12 +7,13 @@ import {Locale} from '@/lib/i18n/config';
 import {formatKyivTime} from '@/lib/utils/timezone';
 import {CLUB_LOCATION_VALUES} from '@/constants/locations';
 import {SLOT_STATUS_VALUES} from '@/constants/slotStatus';
-import {getLocationDictKey} from '@/lib/utils/locations';
+import {getLocationLabel} from '@/lib/utils/locations';
 import {ROUTES, buildRoute} from '@/config/navigation';
 import {getDateFnsLocale} from '@/lib/utils/date';
 
 import {CreateSlotDialog} from '@/components/admin/CreateSlotDialog';
-import {getWorkoutTypes, getAdminSlots} from '@/actions/adminSlots';
+import {getAdminSlots} from '@/services/slotService';
+import {getWorkoutTypes} from '@/services/workoutTypeService';
 
 export default async function AdminSlotsPage(props: {params: Promise<{locale: Locale}>}) {
   const {locale} = await props.params;
@@ -22,7 +23,7 @@ export default async function AdminSlotsPage(props: {params: Promise<{locale: Lo
 
   const dateFnsLocale = getDateFnsLocale(locale);
 
-  // Fetch data via server actions/functions
+  // Fetch data via service layer directly (Server Component - no action overhead)
   const workoutTypes = await getWorkoutTypes();
   const slots = await getAdminSlots();
 
@@ -33,12 +34,10 @@ export default async function AdminSlotsPage(props: {params: Promise<{locale: Lo
   }));
 
   // Map location options
-  const locationOptions = CLUB_LOCATION_VALUES.map(loc => {
-    const dictKey = getLocationDictKey(loc);
-    // @ts-expect-error - dynamic dictionary indexing
-    const label = dict.contact?.clubs?.[dictKey]?.name || loc;
-    return {value: loc, label};
-  });
+  const locationOptions = CLUB_LOCATION_VALUES.map(loc => ({
+    value: loc,
+    label: getLocationLabel(dict, loc)
+  }));
 
   return (
     <div className="space-y-8">
@@ -47,11 +46,7 @@ export default async function AdminSlotsPage(props: {params: Promise<{locale: Lo
           <h1 className="text-3xl font-bold tracking-tight">{dict.admin.slotsPage.title}</h1>
           <p className="text-muted-foreground">{dict.admin.slotsPage.subtitle}</p>
         </div>
-        <CreateSlotDialog
-          workoutTypes={localizedWorkoutTypes}
-          locationOptions={locationOptions}
-          existingSlots={slots}
-        />
+        <CreateSlotDialog workoutTypes={localizedWorkoutTypes} locationOptions={locationOptions} />
       </div>
 
       <div className="space-y-4">
@@ -79,9 +74,7 @@ export default async function AdminSlotsPage(props: {params: Promise<{locale: Lo
                   const localizedWtTitle =
                     (dict.workouts as Record<string, string>)[slot.workout_title_key] || slot.workout_title_key;
 
-                  const dictKey = getLocationDictKey(slot.location);
-                  // @ts-expect-error - dynamic indexing
-                  const locationLabel = dict.contact?.clubs?.[dictKey]?.name || slot.location;
+                  const locationLabel = getLocationLabel(dict, slot.location);
 
                   // Convert UTC to Kyiv time for display
                   const startDateObj = new Date(slot.start_time);

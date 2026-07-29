@@ -15,8 +15,8 @@
     "format": "prettier --write .",
     "locales:split": "tsx scripts/split-locales.ts",
     "test:unit": "vitest",
-    "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui",
+    "test:e2e": "supabase db reset && playwright test",
+    "test:e2e:ui": "supabase db reset && playwright test --ui",
     "types:generate": "supabase gen types typescript --project-id ofasewgyeurvywflhctd --schema public > src/types/database.types.ts && prettier --write src/types/database.types.ts",
     "prepare": "husky"
   },

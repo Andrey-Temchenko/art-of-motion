@@ -3,7 +3,6 @@
 import React, {useState} from 'react';
 import {PlusIcon} from 'lucide-react';
 
-import {ProcessedAdminSlot} from '@/services/types';
 import {useDictionary} from '@/providers/dictionaryProvider';
 
 import {Button} from '@/components/ui/button';
@@ -13,10 +12,9 @@ import {SlotForm, WorkoutType} from '@/components/admin/SlotForm';
 interface CreateSlotDialogProps {
   workoutTypes: WorkoutType[];
   locationOptions: {value: string; label: string}[];
-  existingSlots: ProcessedAdminSlot[];
 }
 
-export function CreateSlotDialog({workoutTypes, locationOptions, existingSlots}: CreateSlotDialogProps) {
+export function CreateSlotDialog({workoutTypes, locationOptions}: CreateSlotDialogProps) {
   const dictionary = useDictionary();
   const dict = dictionary.admin.slotsPage;
   const [open, setOpen] = useState(false);
@@ -31,12 +29,7 @@ export function CreateSlotDialog({workoutTypes, locationOptions, existingSlots}:
         <DialogHeader>
           <DialogTitle>{dict.createSlot}</DialogTitle>
         </DialogHeader>
-        <SlotForm
-          workoutTypes={workoutTypes}
-          locationOptions={locationOptions}
-          existingSlots={existingSlots}
-          onSuccess={() => setOpen(false)}
-        />
+        <SlotForm workoutTypes={workoutTypes} locationOptions={locationOptions} onSuccess={() => setOpen(false)} />
       </DialogContent>
     </Dialog>
   );

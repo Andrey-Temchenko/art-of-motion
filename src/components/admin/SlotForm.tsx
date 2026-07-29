@@ -8,12 +8,9 @@ import {format, addMinutes} from 'date-fns';
 import {CalendarIcon} from 'lucide-react';
 
 import {createSlotSchema, CreateSlotInput} from '@/lib/validators/slots';
-import {createSlotAction} from '@/actions/adminSlots';
-import {ProcessedAdminSlot} from '@/services/types';
+import {createSlotAction, editSlotAction} from '@/actions/adminSlots';
 import {cn} from '@/lib/utils';
-import {Database} from '@/types/database.types';
-import {CLUB_LOCATION_VALUES} from '@/constants/locations';
-import {SLOT_STATUS} from '@/constants/slotStatus';
+import {CLUB_LOCATION_VALUES, ClubLocationType} from '@/constants/locations';
 import {useDictionary} from '@/providers/dictionaryProvider';
 
 import {Button, buttonVariants} from '@/components/ui/button';
@@ -33,28 +30,23 @@ export type WorkoutType = {
 interface SlotFormProps {
   workoutTypes: WorkoutType[];
   locationOptions: {value: string; label: string}[];
-  existingSlots: ProcessedAdminSlot[];
+  slotId?: string;
+  initialData?: CreateSlotInput;
+  onSuccess?: () => void;
 }
 
-export function SlotForm({
-  workoutTypes,
-  locationOptions,
-  existingSlots,
-  onSuccess
-}: SlotFormProps & {onSuccess?: () => void}) {
+export function SlotForm({workoutTypes, locationOptions, slotId, initialData, onSuccess}: SlotFormProps) {
   const dictionary = useDictionary();
   const dict = dictionary.admin.slotsPage.form;
   const [isPending, startTransition] = useTransition();
-
-  const STATUS_CANCELLED = SLOT_STATUS.CANCELLED;
 
   const defaultLocation = locationOptions[0]?.value || CLUB_LOCATION_VALUES[0];
 
   const form = useForm<CreateSlotInput>({
     resolver: zodResolver(createSlotSchema),
-    defaultValues: {
+    defaultValues: initialData || {
       workout_type_id: '',
-      location: defaultLocation as Database['public']['Enums']['club_location'],
+      location: defaultLocation as ClubLocationType,
       max_capacity: 1,
       price: 0,
       start_time: '',
@@ -66,10 +58,12 @@ export function SlotForm({
   const watchLocation = useWatch({control: form.control, name: 'location'});
 
   // Derived state for DatePicker + Time fields
-  const [date, setDate] = useState<Date>();
-  const [startHour, setStartHour] = useState('18');
-  const [startMinute, setStartMinute] = useState('00');
-  const [duration, setDuration] = useState<number>(60);
+  const [date, setDate] = useState<Date | undefined>(initialData ? new Date(initialData.start_time) : undefined);
+  const [startHour, setStartHour] = useState(initialData ? format(new Date(initialData.start_time), 'HH') : '18');
+  const [startMinute, setStartMinute] = useState(initialData ? format(new Date(initialData.start_time), 'mm') : '00');
+  const [duration, setDuration] = useState<number>(
+    initialData ? (new Date(initialData.end_time).getTime() - new Date(initialData.start_time).getTime()) / 60000 : 60
+  );
 
   // When workout type changes, we pre-fill price and end time (based on duration)
   const handleWorkoutTypeChange = (id: string) => {
@@ -108,24 +102,6 @@ export function SlotForm({
   }, [date, startHour, startMinute, duration, updateStartAndEndTimes]);
 
   const onSubmit = (data: CreateSlotInput) => {
-    // Validate overlap client-side
-    const newStart = new Date(data.start_time).getTime();
-    const newEnd = new Date(data.end_time).getTime();
-
-    const isOverlap = existingSlots.some(slot => {
-      if (slot.status === STATUS_CANCELLED) return false;
-
-      const slotStart = new Date(slot.start_time).getTime();
-      const slotEnd = new Date(slot.end_time).getTime();
-
-      return newStart < slotEnd && newEnd > slotStart;
-    });
-
-    if (isOverlap) {
-      toast.error(dict.overlapError || 'Trainer is already busy at this time!');
-      return;
-    }
-
     startTransition(async () => {
       // Need FormData to match the server action signature
       const formData = new FormData();
@@ -133,14 +109,22 @@ export function SlotForm({
         formData.append(key, value.toString());
       });
 
-      const result = await createSlotAction({success: false}, formData);
+      let result;
+      if (slotId) {
+        result = await editSlotAction(slotId, {success: false}, formData);
+      } else {
+        result = await createSlotAction({success: false}, formData);
+      }
+
       if (result.success) {
         toast.success(result.message);
-        form.reset();
-        setDate(undefined);
+        if (!slotId) {
+          form.reset();
+          setDate(undefined);
+        }
         if (onSuccess) onSuccess();
       } else {
-        toast.error(result.message || 'Error creating slot');
+        toast.error(result.message || (slotId ? 'Error updating slot' : 'Error creating slot'));
       }
     });
   };
@@ -183,9 +167,7 @@ export function SlotForm({
           <Label>{dict.location}</Label>
           <Select
             value={watchLocation || ''}
-            onValueChange={v =>
-              v && form.setValue('location', v as Database['public']['Enums']['club_location'], {shouldValidate: true})
-            }>
+            onValueChange={v => v && form.setValue('location', v as ClubLocationType, {shouldValidate: true})}>
             <SelectTrigger className="w-full">
               <SelectValue placeholder={dict.selectLocation}>
                 {watchLocation ? locationOptions.find(o => o.value === watchLocation)?.label : undefined}
@@ -262,7 +244,12 @@ export function SlotForm({
         {/* Capacity */}
         <div className="space-y-2">
           <Label>{dict.capacity}</Label>
-          <Input type="number" min={1} {...form.register('max_capacity', {valueAsNumber: true})} />
+          <Input
+            type="number"
+            min={1}
+            data-testid="slot-form-capacity"
+            {...form.register('max_capacity', {valueAsNumber: true})}
+          />
           {form.formState.errors.max_capacity && (
             <p className="text-sm text-red-500">{form.formState.errors.max_capacity.message}</p>
           )}
@@ -276,8 +263,14 @@ export function SlotForm({
         </div>
       </div>
 
-      <Button type="submit" disabled={isPending}>
-        {isPending ? dict.buttonCreating : dict.buttonCreate}
+      <Button type="submit" disabled={isPending} data-testid="slot-form-submit-btn">
+        {slotId
+          ? isPending
+            ? dictionary.admin.slotDetailsPage.editDialog.saving
+            : dictionary.admin.slotDetailsPage.editDialog.save
+          : isPending
+            ? dict.buttonCreating
+            : dict.buttonCreate}
       </Button>
     </form>
   );

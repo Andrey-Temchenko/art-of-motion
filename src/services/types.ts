@@ -1,4 +1,6 @@
-import {Database} from '@/types/database.types';
+import {BookingStatusType} from '@/constants/bookingStatus';
+import {ClubLocationType} from '@/constants/locations';
+import {SlotStatusType} from '@/constants/slotStatus';
 
 export type DashboardStats = {
   totalUsers: number;
@@ -28,7 +30,7 @@ export type ProcessedAdminSlot = {
   end_time: string;
   max_capacity: number;
   price: number;
-  status: string;
+  status: SlotStatusType;
   workout_title_key: string;
   bookings_count: number;
 };
@@ -40,7 +42,7 @@ export type ProcessedScheduleSlot = {
   end_time: string;
   max_capacity: number;
   price: number;
-  status: string;
+  status: SlotStatusType;
   workout_title_key: string;
   bookings_count: number;
   is_full: boolean;
@@ -51,12 +53,12 @@ export type GroupedScheduleSlots = Record<string, ProcessedScheduleSlot[]>;
 
 export type ProcessedClientBooking = {
   id: string;
-  status: Database['public']['Enums']['booking_status'];
+  status: BookingStatusType;
   slot: {
     id: string;
     start_time: string;
     end_time: string;
-    location: Database['public']['Enums']['club_location'];
+    location: ClubLocationType;
     price: number;
     cancellation_deadline_hours: number;
     workout_title_key: string;
@@ -78,9 +80,19 @@ export type ProcessedAdminSlotDetails = {
   end_time: string;
   max_capacity: number;
   price: number;
-  status: string;
+  status: SlotStatusType;
+  workout_type_id: string;
   workout_title_key: string;
   bookings: ProcessedAdminBooking[];
+};
+
+export type UpdateSlotInput = {
+  workout_type_id?: string;
+  location?: string;
+  start_time?: string;
+  end_time?: string;
+  max_capacity?: number;
+  price?: number;
 };
 
 export type CancelBookingResult =

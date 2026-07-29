@@ -1011,6 +1011,70 @@
         "ru": "Отменить",
         "en": "Cancel"
       },
+      "editSlot": {
+        "uk": "Редагувати",
+        "ru": "Редактировать",
+        "en": "Edit Slot"
+      },
+      "cancelSlotBtn": {
+        "uk": "Скасувати слот",
+        "ru": "Отменить слот",
+        "en": "Cancel Slot"
+      },
+      "editDialog": {
+        "title": {
+          "uk": "Редагування слоту",
+          "ru": "Редактирование слота",
+          "en": "Edit Slot"
+        },
+        "desc": {
+          "uk": "Внесіть зміни до тренування.",
+          "ru": "Внесите изменения в тренировку.",
+          "en": "Make changes to the workout slot."
+        },
+        "timeWarning": {
+          "uk": "Увага: у цього слоту вже є записи. Зміна часу вимагатиме від вас ручного повідомлення клієнтів.",
+          "ru": "Внимание: у этого слота уже есть записи. Изменение времени потребует от вас ручного уведомления клиентов.",
+          "en": "Warning: this slot already has bookings. Changing the time will require you to manually notify the clients."
+        },
+        "priceWarning": {
+          "uk": "Увага: зміна ціни для слоту з існуючими записами змінить історичні показники доходу.",
+          "ru": "Внимание: изменение цены для слота с существующими записями изменит исторические показатели дохода.",
+          "en": "Warning: changing the price for a slot with existing bookings will alter historical revenue metrics."
+        },
+        "save": {
+          "uk": "Зберегти зміни",
+          "ru": "Сохранить изменения",
+          "en": "Save Changes"
+        },
+        "saving": {
+          "uk": "Збереження...",
+          "ru": "Сохранение...",
+          "en": "Saving..."
+        }
+      },
+      "cancelSlotDialog": {
+        "title": {
+          "uk": "Скасування слоту",
+          "ru": "Отмена слота",
+          "en": "Cancel Slot"
+        },
+        "desc": {
+          "uk": "Ви впевнені, що хочете повністю скасувати цей слот? Усі існуючі записи клієнтів будуть автоматично скасовані.",
+          "ru": "Вы уверены, что хотите полностью отменить этот слот? Все существующие записи клиентов будут автоматически отменены.",
+          "en": "Are you sure you want to completely cancel this slot? All existing client bookings will be automatically cancelled."
+        },
+        "confirm": {
+          "uk": "Так, скасувати слот",
+          "ru": "Да, отменить слот",
+          "en": "Yes, cancel slot"
+        },
+        "back": {
+          "uk": "Назад",
+          "ru": "Назад",
+          "en": "Back"
+        }
+      },
       "cancelDialog": {
         "title": {
           "uk": "Скасування запису",
@@ -1062,6 +1126,21 @@
         "uk": "Заповненість",
         "ru": "Заполненность",
         "en": "Capacity"
+      },
+      "statusCancelled": {
+        "uk": "Скасовано",
+        "ru": "Отменено",
+        "en": "Cancelled"
+      },
+      "statusFull": {
+        "uk": "Заповнено",
+        "ru": "Заполнено",
+        "en": "Full"
+      },
+      "statusActive": {
+        "uk": "Активний",
+        "ru": "Активен",
+        "en": "Active"
       }
     }
   },
