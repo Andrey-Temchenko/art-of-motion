@@ -9,6 +9,8 @@ import {ROUTES, buildRoute} from '@/config/navigation';
 
 import {Layout} from '@/components/shared/Layout';
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminLayout({
   children,
   params
