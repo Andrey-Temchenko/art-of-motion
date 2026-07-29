@@ -1,18 +1,15 @@
 'use server';
 
 import {revalidatePath} from 'next/cache';
+import {User} from '@supabase/supabase-js';
 
 import {requireUser} from '@/lib/supabase/session';
 import {getDictionary} from '@/lib/i18n/getDictionary';
 import {Locale, defaultLocale, locales} from '@/lib/i18n/config';
-import {
-  bookSlot,
-  getScheduleSlots as getScheduleSlotsService,
-  cancelBooking as cancelBookingService,
-  getClientBookings as getClientBookingsService
-} from '@/services/bookingService';
+import {bookSlot, cancelBooking as cancelBookingService} from '@/services/bookingService';
 import {DomainError} from '@/services/types';
-import type {GroupedScheduleSlots, CancelBookingResult, ProcessedClientBooking} from '@/services/types';
+import type {CancelBookingResult} from '@/services/types';
+import {ROUTES, buildRevalidatePath} from '@/config/navigation';
 
 export type ActionState = {
   success: boolean;
@@ -24,7 +21,7 @@ export async function bookSlotAction(prevState: ActionState, formData: FormData)
   const locale = locales.includes(localeForm as Locale) ? (localeForm as Locale) : defaultLocale;
   const dict = await getDictionary(locale);
 
-  let user;
+  let user: User;
   try {
     user = await requireUser();
   } catch {
@@ -59,16 +56,12 @@ export async function bookSlotAction(prevState: ActionState, formData: FormData)
     };
   }
 
-  revalidatePath('/[locale]/dashboard/schedule', 'page');
+  revalidatePath(buildRevalidatePath(ROUTES.DASHBOARD.SCHEDULE), 'page');
 
   return {
     success: true,
     message: dict.dashboardArea.booking.successBooked
   };
-}
-
-export async function getScheduleSlots(userId: string): Promise<GroupedScheduleSlots> {
-  return getScheduleSlotsService(userId);
 }
 
 export async function cancelBookingAction(bookingId: string): Promise<CancelBookingResult> {
@@ -82,13 +75,9 @@ export async function cancelBookingAction(bookingId: string): Promise<CancelBook
   const result = await cancelBookingService(bookingId, user.id);
 
   if (result.success) {
-    revalidatePath('/[locale]/dashboard/my-bookings', 'page');
-    revalidatePath('/[locale]/dashboard/schedule', 'page');
+    revalidatePath(buildRevalidatePath(ROUTES.DASHBOARD.MY_BOOKINGS), 'page');
+    revalidatePath(buildRevalidatePath(ROUTES.DASHBOARD.SCHEDULE), 'page');
   }
 
   return result;
-}
-
-export async function getClientBookings(userId: string): Promise<ProcessedClientBooking[]> {
-  return getClientBookingsService(userId);
 }

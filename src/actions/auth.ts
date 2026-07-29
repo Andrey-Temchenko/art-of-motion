@@ -8,6 +8,7 @@ import {createClient} from '@/lib/supabase/server';
 import {siteConfig} from '@/config/site';
 import {getUserRoleServer} from '@/lib/supabase/session';
 import {USER_ROLE} from '@/constants/roles';
+import {buildRevalidatePath} from '@/config/navigation';
 
 type AuthActionResponse = {
   success?: boolean;
@@ -15,7 +16,7 @@ type AuthActionResponse = {
   role?: string;
 };
 
-export async function signInWithGoogle(formData?: FormData) {
+export async function signInWithGoogle(formData?: FormData): Promise<void> {
   const supabase = await createClient();
   const headersList = await headers();
   const origin = headersList.get('origin') || siteConfig.baseUrl;
@@ -120,7 +121,7 @@ export async function signOut(): Promise<AuthActionResponse> {
 
   await supabase.auth.signOut();
 
-  revalidatePath('/', 'layout');
+  revalidatePath(buildRevalidatePath('/'), 'layout');
 
   return {success: true};
 }

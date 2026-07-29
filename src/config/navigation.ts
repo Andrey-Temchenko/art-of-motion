@@ -50,3 +50,12 @@ export const isRouteActive = (pathname: string, href: string, locale: string): b
   const isBaseRoute = href === buildRoute(locale, ROUTES.ADMIN.DASHBOARD) || href === `/${locale}/dashboard`;
   return pathname === href || (!isBaseRoute && pathname.startsWith(`${href}/`));
 };
+
+/**
+ * Helper to build a cache revalidation path for Next.js App Router.
+ * Next.js revalidatePath requires the folder segment pattern (e.g. '/[locale]/admin/slots').
+ */
+export const buildRevalidatePath = (route: string): string => {
+  if (route === '/') return '/';
+  return `/[locale]${route}`;
+};
