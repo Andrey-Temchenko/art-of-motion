@@ -11,7 +11,9 @@ import {useRedirectUrl} from '@/hooks/useRedirectUrl';
 import {signInWithGoogle, signUpWithEmail} from '@/actions/auth';
 import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
 import {registerSchema, type RegisterInput} from '@/lib/validators/auth';
+import {useAuthFormError} from '@/hooks/useAuthFormError';
 import {ROUTES, buildRoute, getDefaultDashboardRoute} from '@/config/navigation';
+import {USER_ROLE} from '@/constants/roles';
 
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Button} from '@/components/ui/button';
@@ -19,12 +21,14 @@ import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 
 export default function RegisterPage() {
-  const {dict, locale} = useClientDictionary();
-  const [errorMsg, setErrorMsg] = useState('');
-  const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  const {dict, locale} = useClientDictionary();
   const redirectUrl = useRedirectUrl(locale);
-  const [showPassword, setShowPassword] = useState(false);
+  const {getErrorMessage} = useAuthFormError();
+
+  const [errorMsg, setErrorMsg] = useState<string>('');
+  const [isPending, startTransition] = useTransition();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const {
     register,
@@ -36,13 +40,15 @@ export default function RegisterPage() {
 
   const onSubmit = (data: RegisterInput) => {
     setErrorMsg('');
+
     startTransition(async () => {
       const res = await signUpWithEmail(data);
+
       if (res?.error) {
         setErrorMsg(dict.auth.errors.registerFailed || res.error);
       } else {
         if (redirectUrl === `/${locale}`) {
-          router.push(buildRoute(locale, getDefaultDashboardRoute(res.role || 'client')));
+          router.push(buildRoute(locale, getDefaultDashboardRoute(res.role || USER_ROLE.CLIENT)));
         } else {
           router.push(redirectUrl);
         }
@@ -73,9 +79,7 @@ export default function RegisterPage() {
               className="bg-background/50 focus-visible:ring-ring h-12 rounded-xl"
             />
             {errors.fullName && (
-              <p className="text-destructive text-sm font-medium">
-                {dict.auth.errors[errors.fullName.message as keyof typeof dict.auth.errors]}
-              </p>
+              <p className="text-destructive text-sm font-medium">{getErrorMessage(errors.fullName.message)}</p>
             )}
           </div>
           <div className="space-y-2">
@@ -91,9 +95,7 @@ export default function RegisterPage() {
               className="bg-background/50 focus-visible:ring-ring h-12 rounded-xl"
             />
             {errors.email && (
-              <p className="text-destructive text-sm font-medium">
-                {dict.auth.errors[errors.email.message as keyof typeof dict.auth.errors]}
-              </p>
+              <p className="text-destructive text-sm font-medium">{getErrorMessage(errors.email.message)}</p>
             )}
           </div>
           <div className="space-y-2">
@@ -112,14 +114,13 @@ export default function RegisterPage() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2 transition-colors">
+                aria-label={showPassword ? dict.auth.hidePassword : dict.auth.showPassword}
+                className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer transition-colors">
                 {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
               </button>
             </div>
             {errors.password && (
-              <p className="text-destructive text-sm font-medium">
-                {dict.auth.errors[errors.password.message as keyof typeof dict.auth.errors]}
-              </p>
+              <p className="text-destructive text-sm font-medium">{getErrorMessage(errors.password.message)}</p>
             )}
           </div>
           {errorMsg && <p className="text-destructive text-center text-sm font-medium">{errorMsg}</p>}

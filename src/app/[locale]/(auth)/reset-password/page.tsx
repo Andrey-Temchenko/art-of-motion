@@ -8,6 +8,8 @@ import {zodResolver} from '@hookform/resolvers/zod';
 import {resetPassword} from '@/actions/auth';
 import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
 import {resetPasswordSchema, type ResetPasswordInput} from '@/lib/validators/auth';
+import {buildRoute, ROUTES} from '@/config/navigation';
+import {useAuthFormError} from '@/hooks/useAuthFormError';
 
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Button} from '@/components/ui/button';
@@ -16,8 +18,10 @@ import {Label} from '@/components/ui/label';
 
 export default function ResetPasswordPage() {
   const {dict, locale} = useClientDictionary();
-  const [errorMsg, setErrorMsg] = useState('');
-  const [successMsg, setSuccessMsg] = useState('');
+  const {getErrorMessage} = useAuthFormError();
+
+  const [errorMsg, setErrorMsg] = useState<string>('');
+  const [successMsg, setSuccessMsg] = useState<string>('');
   const [isPending, startTransition] = useTransition();
 
   const {
@@ -64,9 +68,7 @@ export default function ResetPasswordPage() {
               className="bg-background/50 focus-visible:ring-ring h-12 rounded-xl"
             />
             {errors.email && (
-              <p className="text-destructive text-sm font-medium">
-                {dict.auth.errors[errors.email.message as keyof typeof dict.auth.errors]}
-              </p>
+              <p className="text-destructive text-sm font-medium">{getErrorMessage(errors.email.message)}</p>
             )}
           </div>
           {errorMsg && <p className="text-destructive text-center text-sm font-medium">{errorMsg}</p>}
@@ -82,7 +84,9 @@ export default function ResetPasswordPage() {
         </form>
 
         <div className="text-muted-foreground mt-8 pb-4 text-center text-sm font-medium">
-          <Link href={`/${locale}/login`} className="text-primary font-bold transition-colors hover:underline">
+          <Link
+            href={buildRoute(locale, ROUTES.AUTH.LOGIN)}
+            className="text-primary font-bold transition-colors hover:underline">
             {dict.auth.backToLogin}
           </Link>
         </div>

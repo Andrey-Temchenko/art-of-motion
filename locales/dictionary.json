@@ -627,6 +627,16 @@
       "ru": "Пароль",
       "en": "Password"
     },
+    "showPassword": {
+      "uk": "Показати пароль",
+      "ru": "Показать пароль",
+      "en": "Show password"
+    },
+    "hidePassword": {
+      "uk": "Приховати пароль",
+      "ru": "Скрыть пароль",
+      "en": "Hide password"
+    },
     "fullName": {
       "uk": "Ім'я та прізвище",
       "ru": "Имя и фамилия",

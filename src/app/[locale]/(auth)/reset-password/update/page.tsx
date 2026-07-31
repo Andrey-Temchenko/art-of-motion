@@ -10,20 +10,24 @@ import {Eye, EyeOff} from 'lucide-react';
 import {updatePassword} from '@/actions/auth';
 import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
 import {updatePasswordSchema, type UpdatePasswordInput} from '@/lib/validators/auth';
+import {useAuthFormError} from '@/hooks/useAuthFormError';
 
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
+import {buildRoute, ROUTES} from '@/config/navigation';
 
 export default function UpdatePasswordPage() {
-  const {dict, locale} = useClientDictionary();
-  const [errorMsg, setErrorMsg] = useState('');
-  const [successMsg, setSuccessMsg] = useState('');
-  const [isPending, startTransition] = useTransition();
   const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const {dict, locale} = useClientDictionary();
+  const {getErrorMessage} = useAuthFormError();
+
+  const [errorMsg, setErrorMsg] = useState<string>('');
+  const [successMsg, setSuccessMsg] = useState<string>('');
+  const [isPending, startTransition] = useTransition();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
 
   const {
     register,
@@ -43,7 +47,7 @@ export default function UpdatePasswordPage() {
       } else {
         setSuccessMsg(dict.auth.updatePasswordSuccess);
         setTimeout(() => {
-          router.push(`/${locale}/login`);
+          router.push(buildRoute(locale, ROUTES.AUTH.LOGIN));
         }, 2000);
       }
     });
@@ -75,14 +79,13 @@ export default function UpdatePasswordPage() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2 transition-colors">
+                aria-label={showPassword ? dict.auth.hidePassword : dict.auth.showPassword}
+                className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer transition-colors">
                 {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
               </button>
             </div>
             {errors.password && (
-              <p className="text-destructive text-sm font-medium">
-                {dict.auth.errors[errors.password.message as keyof typeof dict.auth.errors]}
-              </p>
+              <p className="text-destructive text-sm font-medium">{getErrorMessage(errors.password.message)}</p>
             )}
           </div>
           <div className="space-y-2">
@@ -101,14 +104,13 @@ export default function UpdatePasswordPage() {
               <button
                 type="button"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2 transition-colors">
+                aria-label={showConfirmPassword ? dict.auth.hidePassword : dict.auth.showPassword}
+                className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer transition-colors">
                 {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
               </button>
             </div>
             {errors.confirmPassword && (
-              <p className="text-destructive text-sm font-medium">
-                {dict.auth.errors[errors.confirmPassword.message as keyof typeof dict.auth.errors]}
-              </p>
+              <p className="text-destructive text-sm font-medium">{getErrorMessage(errors.confirmPassword.message)}</p>
             )}
           </div>
           {errorMsg && <p className="text-destructive text-center text-sm font-medium">{errorMsg}</p>}
@@ -124,7 +126,9 @@ export default function UpdatePasswordPage() {
         </form>
 
         <div className="text-muted-foreground mt-8 pb-4 text-center text-sm font-medium">
-          <Link href={`/${locale}/login`} className="text-primary font-bold transition-colors hover:underline">
+          <Link
+            href={buildRoute(locale, ROUTES.AUTH.LOGIN)}
+            className="text-primary font-bold transition-colors hover:underline">
             {dict.auth.backToLogin}
           </Link>
         </div>
