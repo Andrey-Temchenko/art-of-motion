@@ -1,8 +1,9 @@
 'use client';
 
 import React, {useState} from 'react';
-import {format} from 'date-fns';
 
+import {DATE_FORMATS} from '@/constants/dateFormats';
+import {formatDate} from '@/lib/utils/date';
 import {ProcessedUpcomingOccurrence} from '@/services/types';
 import {useDictionary} from '@/providers/dictionaryProvider';
 import {ClubLocationType} from '@/constants/locations';
@@ -54,7 +55,8 @@ export function ConfirmOccurrenceDialog({occurrence, workoutTypes, locationOptio
 
         <div className="bg-muted/50 text-muted-foreground mb-4 rounded-md border p-3 text-sm">
           <p className="text-foreground mb-1 font-medium">
-            {format(new Date(occurrence.occurrenceDate), 'dd.MM.yyyy')} - {occurrence.start_time_local.slice(0, 5)}
+            {formatDate(new Date(occurrence.occurrenceDate), DATE_FORMATS.DISPLAY_DATE_SHORT)} -{' '}
+            {occurrence.start_time_local.slice(0, 5)}
           </p>
           <p>{occurrence.workout_title_key}</p>
         </div>

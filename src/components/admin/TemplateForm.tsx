@@ -4,16 +4,16 @@ import React, {useState, useTransition} from 'react';
 import {useForm, useWatch} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {toast} from 'sonner';
-import {format} from 'date-fns';
 import {CalendarIcon} from 'lucide-react';
 
+import {DATE_FORMATS} from '@/constants/dateFormats';
 import {slotTemplateSchema, SlotTemplateInput} from '@/lib/validators/slotTemplates';
 import {createSlotTemplateAction, updateSlotTemplateAction} from '@/actions/adminSlotTemplates';
 import {cn} from '@/lib/utils';
 import {CLUB_LOCATION_VALUES, ClubLocationType} from '@/constants/locations';
 import {DAY_OF_WEEK_VALUES} from '@/constants/dayOfWeek';
 import {useDictionary} from '@/providers/dictionaryProvider';
-import {parseLocalDate} from '@/lib/utils/date';
+import {parseLocalDate, formatDate} from '@/lib/utils/date';
 
 import {Button, buttonVariants} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
@@ -45,7 +45,7 @@ export function TemplateForm({workoutTypes, locationOptions, templateId, initial
 
   const defaultLocation = locationOptions[0]?.value || CLUB_LOCATION_VALUES[0];
 
-  const todayStr = format(new Date(), 'yyyy-MM-dd');
+  const todayStr = formatDate(new Date(), DATE_FORMATS.ISO_DATE);
 
   const form = useForm<SlotTemplateInput>({
     resolver: zodResolver(slotTemplateSchema),
@@ -261,7 +261,7 @@ export function TemplateForm({workoutTypes, locationOptions, templateId, initial
                 !recStartDate && 'text-muted-foreground'
               )}>
               <CalendarIcon className="mr-2 h-4 w-4" />
-              {recStartDate ? format(recStartDate, 'PPP') : <span>{dict.pickDate}</span>}
+              {recStartDate ? formatDate(recStartDate, DATE_FORMATS.DISPLAY_DATE_LONG) : <span>{dict.pickDate}</span>}
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar
@@ -270,7 +270,9 @@ export function TemplateForm({workoutTypes, locationOptions, templateId, initial
                 onSelect={d => {
                   setRecStartDate(d);
                   if (d) {
-                    form.setValue('recurrence_start_date', format(d, 'yyyy-MM-dd'), {shouldValidate: true});
+                    form.setValue('recurrence_start_date', formatDate(d, DATE_FORMATS.ISO_DATE), {
+                      shouldValidate: true
+                    });
                   }
                 }}
               />
@@ -292,7 +294,9 @@ export function TemplateForm({workoutTypes, locationOptions, templateId, initial
                 if (checked) {
                   form.setValue('recurrence_end_date', null, {shouldValidate: true});
                 } else if (recEndDate) {
-                  form.setValue('recurrence_end_date', format(recEndDate, 'yyyy-MM-dd'), {shouldValidate: true});
+                  form.setValue('recurrence_end_date', formatDate(recEndDate, DATE_FORMATS.ISO_DATE), {
+                    shouldValidate: true
+                  });
                 }
               }}
               className="h-4 w-4"
@@ -310,7 +314,7 @@ export function TemplateForm({workoutTypes, locationOptions, templateId, initial
                   !recEndDate && 'text-muted-foreground'
                 )}>
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                {recEndDate ? format(recEndDate, 'PPP') : <span>{dict.pickDate}</span>}
+                {recEndDate ? formatDate(recEndDate, DATE_FORMATS.DISPLAY_DATE_LONG) : <span>{dict.pickDate}</span>}
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0" align="start">
                 <Calendar
@@ -319,7 +323,9 @@ export function TemplateForm({workoutTypes, locationOptions, templateId, initial
                   onSelect={d => {
                     setRecEndDate(d);
                     if (d && !isIndefinite) {
-                      form.setValue('recurrence_end_date', format(d, 'yyyy-MM-dd'), {shouldValidate: true});
+                      form.setValue('recurrence_end_date', formatDate(d, DATE_FORMATS.ISO_DATE), {
+                        shouldValidate: true
+                      });
                     }
                   }}
                 />

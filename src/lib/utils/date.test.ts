@@ -1,6 +1,6 @@
 import {describe, it, expect} from 'vitest';
 import {differenceInDays} from 'date-fns';
-import {canCancelBooking, getNextWeekRange, SCHEDULE_DAYS_RANGE} from './date';
+import {canCancelBooking, getNextWeekRange, SCHEDULE_DAYS_RANGE, formatDate} from './date';
 
 describe('getNextWeekRange', () => {
   it('should return a range of exactly SCHEDULE_DAYS_RANGE days from the given date', () => {
@@ -49,5 +49,25 @@ describe('canCancelBooking', () => {
     const deadlineHours = 0;
 
     expect(canCancelBooking(startTime, deadlineHours, now)).toBe(true);
+  });
+});
+
+describe('formatDate', () => {
+  it('formats date with default locale (en-US fallback or current)', () => {
+    const date = new Date('2026-08-01T12:00:00Z');
+    const formatted = formatDate(date, 'yyyy-MM-dd');
+    expect(formatted).toBe('2026-08-01');
+  });
+
+  it('formats date correctly with given locale string', () => {
+    const date = new Date('2026-08-01T12:00:00Z');
+    // For 'uk' locale, month should be localized
+    const formatted = formatDate(date, 'MMM', 'uk');
+    expect(formatted).toBe('серп.'); // серпня/серп. in uk
+  });
+
+  it('supports formatting from string input', () => {
+    const formatted = formatDate('2026-08-01T12:00:00Z', 'yyyy-MM-dd');
+    expect(formatted).toBe('2026-08-01');
   });
 });

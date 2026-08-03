@@ -1,12 +1,12 @@
 'use client';
 
 import React, {useTransition} from 'react';
-import {format} from 'date-fns';
+import {DATE_FORMATS} from '@/constants/dateFormats';
 import {useRouter, usePathname} from 'next/navigation';
 
 import {ProcessedUpcomingOccurrence} from '@/services/types';
 import {useDictionary} from '@/providers/dictionaryProvider';
-import {parseLocalDate} from '@/lib/utils/date';
+import {parseLocalDate, formatDate} from '@/lib/utils/date';
 import {ConfirmOccurrenceDialog} from './ConfirmOccurrenceDialog';
 import {WorkoutType} from '@/components/admin/SlotForm';
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/select';
@@ -91,7 +91,7 @@ export function UpcomingOccurrences({
 
                   return (
                     <tr key={`${occ.templateId}-${occ.occurrenceDate}`} className="hover:bg-muted/50 transition-colors">
-                      <td className="p-4 font-medium">{format(dateObj, 'dd.MM.yyyy')}</td>
+                      <td className="p-4 font-medium">{formatDate(dateObj, DATE_FORMATS.DISPLAY_DATE_SHORT)}</td>
                       <td className="text-muted-foreground p-4">{daysOfWeek[dateObj.getDay().toString()]}</td>
                       <td className="p-4">{occ.start_time_local.slice(0, 5)}</td>
                       <td className="p-4">{occ.workout_title_key}</td>

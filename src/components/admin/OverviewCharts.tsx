@@ -1,11 +1,15 @@
 'use client';
 
 import React from 'react';
+import {parseISO} from 'date-fns';
 import {Bar, BarChart, CartesianGrid, XAxis, YAxis, Pie, PieChart, Cell, Label} from 'recharts';
-import {ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent} from '@/components/ui/chart';
+
 import type {DashboardStats} from '@/services/types';
 import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
-import {format, parseISO} from 'date-fns';
+import {DATE_FORMATS} from '@/constants/dateFormats';
+import {formatDate} from '@/lib/utils/date';
+
+import {ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent} from '@/components/ui/chart';
 
 type OverviewChartsProps = {
   bookingsByDay: DashboardStats['bookingsByDay'];
@@ -41,7 +45,7 @@ export function OverviewCharts({bookingsByDay, workoutTypePopularity}: OverviewC
     let formattedDate = d.date;
     try {
       const parsed = typeof d.date === 'string' ? parseISO(d.date) : new Date(d.date);
-      formattedDate = format(parsed, 'MMM dd');
+      formattedDate = formatDate(parsed, DATE_FORMATS.MONTH_DAY);
     } catch {
       // keep original if parse fails
     }

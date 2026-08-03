@@ -4,9 +4,11 @@ import React, {useState, useEffect, useCallback, useTransition} from 'react';
 import {useForm, useWatch} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {toast} from 'sonner';
-import {format, addMinutes} from 'date-fns';
+import {addMinutes} from 'date-fns';
 import {CalendarIcon} from 'lucide-react';
 
+import {DATE_FORMATS} from '@/constants/dateFormats';
+import {formatDate} from '@/lib/utils/date';
 import {createSlotSchema, CreateSlotInput} from '@/lib/validators/slots';
 import {createSlotAction, editSlotAction} from '@/actions/adminSlots';
 import {cn} from '@/lib/utils';
@@ -59,8 +61,12 @@ export function SlotForm({workoutTypes, locationOptions, slotId, initialData, on
 
   // Derived state for DatePicker + Time fields
   const [date, setDate] = useState<Date | undefined>(initialData ? new Date(initialData.start_time) : undefined);
-  const [startHour, setStartHour] = useState(initialData ? format(new Date(initialData.start_time), 'HH') : '18');
-  const [startMinute, setStartMinute] = useState(initialData ? format(new Date(initialData.start_time), 'mm') : '00');
+  const [startHour, setStartHour] = useState(
+    initialData ? formatDate(new Date(initialData.start_time), DATE_FORMATS.HOUR_ONLY) : '18'
+  );
+  const [startMinute, setStartMinute] = useState(
+    initialData ? formatDate(new Date(initialData.start_time), DATE_FORMATS.MINUTE_ONLY) : '00'
+  );
   const [duration, setDuration] = useState<number>(
     initialData ? (new Date(initialData.end_time).getTime() - new Date(initialData.start_time).getTime()) / 60000 : 60
   );
@@ -81,7 +87,7 @@ export function SlotForm({workoutTypes, locationOptions, slotId, initialData, on
 
       // Create timezone-agnostic strings (e.g. 2026-07-29T18:00:00) to ensure the
       // server correctly interprets it as Kyiv time instead of browser's local time.
-      const dateStr = format(selectedDate, 'yyyy-MM-dd');
+      const dateStr = formatDate(selectedDate, DATE_FORMATS.ISO_DATE);
       const startStr = `${dateStr}T${hour}:${minute}:00`;
 
       // For end time calculation, we can use a local Date to add minutes safely
@@ -89,7 +95,7 @@ export function SlotForm({workoutTypes, locationOptions, slotId, initialData, on
       startObj.setHours(parseInt(hour, 10), parseInt(minute, 10), 0, 0);
       const endObj = addMinutes(startObj, durationMins);
 
-      const endStr = `${format(endObj, 'yyyy-MM-dd')}T${format(endObj, 'HH:mm')}:00`;
+      const endStr = `${formatDate(endObj, DATE_FORMATS.ISO_DATE)}T${formatDate(endObj, DATE_FORMATS.TIME_ONLY)}:00`;
 
       form.setValue('start_time', startStr, {shouldValidate: true});
       form.setValue('end_time', endStr, {shouldValidate: true});
@@ -198,7 +204,7 @@ export function SlotForm({workoutTypes, locationOptions, slotId, initialData, on
                   !date && 'text-muted-foreground'
                 )}>
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                {date ? format(date, 'PPP') : <span>{dict.pickDate}</span>}
+                {date ? formatDate(date, DATE_FORMATS.DISPLAY_DATE_LONG) : <span>{dict.pickDate}</span>}
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0" align="start">
                 <Calendar mode="single" selected={date} onSelect={setDate} />

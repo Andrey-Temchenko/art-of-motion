@@ -1,4 +1,4 @@
-import {addDays} from 'date-fns';
+import {addDays, format as formatFn} from 'date-fns';
 import type {Locale as DateFnsLocaleType} from 'date-fns';
 import {uk, ru, enUS} from 'date-fns/locale';
 
@@ -37,4 +37,18 @@ export function canCancelBooking(
 export function parseLocalDate(dateStr: string): Date {
   const [y, m, d] = dateStr.split('-').map(Number);
   return new Date(y, m - 1, d);
+}
+
+/**
+ * Formats a given date (Date, string, or number) into a localized string using date-fns.
+ * @param date The date to format
+ * @param formatStr The format string
+ * @param localeStr Optional locale string (e.g. 'uk', 'ru', 'en')
+ * @returns The formatted date string
+ */
+export function formatDate(date: Date | string | number, formatStr: string, localeStr?: string): string {
+  const dateObj = new Date(date);
+  return formatFn(dateObj, formatStr, {
+    locale: localeStr ? getDateFnsLocale(localeStr) : undefined
+  });
 }

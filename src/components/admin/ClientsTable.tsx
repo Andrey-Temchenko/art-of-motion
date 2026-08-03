@@ -1,8 +1,9 @@
 'use client';
 
 import React, {useState, useMemo} from 'react';
-import {format} from 'date-fns';
 
+import {DATE_FORMATS} from '@/constants/dateFormats';
+import {formatDate} from '@/lib/utils/date';
 import type {AdminClientData} from '@/services/types';
 import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
 
@@ -125,7 +126,9 @@ export function ClientsTable({data}: ClientsTableProps) {
                   <TableCell className="text-center font-medium">{client.upcomingBookings}</TableCell>
                   <TableCell className="text-center font-medium text-red-600">{client.cancelledBookings}</TableCell>
                   <TableCell>
-                    {client.lastBookingAt ? format(new Date(client.lastBookingAt), 'dd.MM.yyyy HH:mm') : '-'}
+                    {client.lastBookingAt
+                      ? formatDate(new Date(client.lastBookingAt), DATE_FORMATS.DATETIME_SHORT)
+                      : '-'}
                   </TableCell>
                 </TableRow>
               ))

@@ -156,3 +156,8 @@ This version has breaking changes - APIs, conventions, and file structure may al
 - All interactive Shadcn/Radix-based components must keep their built-in ARIA attributes and keyboard interactions intact - do not override `role`, `tabIndex`, or ARIA props unless there's a specific, documented reason.
 - Every form input must have an associated, visible or `sr-only` `<Label>` (never a placeholder used as the only label).
 - Images MUST have meaningful `alt` text (or `alt=""` for purely decorative images) - never omit `alt` on `next/image`.
+
+## 15. Date Formatting
+
+- **Centralized Formatting**: NEVER use `date-fns` formatting methods (like `format()`) directly inside UI components or services. Always use the centralized wrapper `formatDate()` from `src/lib/utils/date.ts` to ensure consistent localization behavior.
+- **Format Constants**: NEVER hardcode date format string literals (e.g., `'yyyy-MM-dd'`, `'PPP'`) in components. Always import them from `src/constants/dateFormats.ts` (e.g., `DATE_FORMATS.ISO_DATE`, `DATE_FORMATS.DISPLAY_DATE_LONG`).

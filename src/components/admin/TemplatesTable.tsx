@@ -1,10 +1,11 @@
 'use client';
 
 import React, {useTransition} from 'react';
-import {format} from 'date-fns';
 import {Trash2Icon} from 'lucide-react';
 import {toast} from 'sonner';
 
+import {DATE_FORMATS} from '@/constants/dateFormats';
+import {formatDate} from '@/lib/utils/date';
 import {ProcessedSlotTemplate} from '@/services/types';
 import {useDictionary} from '@/providers/dictionaryProvider';
 import {toggleSlotTemplateActiveAction, deleteSlotTemplateAction} from '@/actions/adminSlotTemplates';
@@ -99,11 +100,11 @@ export function TemplatesTable({templates, workoutTypes, locationOptions}: Templ
                   <td className="p-4">{template.max_capacity}</td>
                   <td className="p-4">{template.price} ₴</td>
                   <td className="text-muted-foreground p-4 text-xs whitespace-nowrap">
-                    <div>{format(new Date(template.recurrence_start_date), 'dd.MM.yyyy')}</div>
+                    <div>{formatDate(new Date(template.recurrence_start_date), DATE_FORMATS.DISPLAY_DATE_SHORT)}</div>
                     <div>
                       -{' '}
                       {template.recurrence_end_date
-                        ? format(new Date(template.recurrence_end_date), 'dd.MM.yyyy')
+                        ? formatDate(new Date(template.recurrence_end_date), DATE_FORMATS.DISPLAY_DATE_SHORT)
                         : dict.indefinite}
                     </div>
                   </td>
