@@ -1,15 +1,17 @@
-import {QueryData, SupabaseClient} from '@supabase/supabase-js';
+import type {QueryData, SupabaseClient} from '@supabase/supabase-js';
 
-import {Profile, UserRole} from '@/lib/supabase/types';
-import {Database} from '@/types/database.types';
+import type {BookingStatusType} from '@/constants/bookingStatus';
+import type {DayOfWeekType} from '@/constants/dayOfWeek';
+import type {ClubLocationType} from '@/constants/locations';
+import type {SlotStatusType} from '@/constants/slotStatus';
+
+import type {Database} from '@/types/database.types';
+
 import {createAdminClient} from '@/lib/supabase/admin';
-import {BookingStatusType} from '@/constants/bookingStatus';
-import {ClubLocationType} from '@/constants/locations';
-import {SlotStatusType} from '@/constants/slotStatus';
-import {DayOfWeekType} from '@/constants/dayOfWeek';
+import type {Profile, UserRole} from '@/lib/supabase/types';
 
-import {adminSlotsListQuery, scheduleSlotsListQuery} from './slotRepository';
-import {clientBookingsListQuery} from './bookingRepository';
+import type {clientBookingsListQuery} from './bookingRepository';
+import type {adminSlotsListQuery, scheduleSlotsListQuery} from './slotRepository';
 
 export interface RawDashboardKpis {
   total_clients: number | null;

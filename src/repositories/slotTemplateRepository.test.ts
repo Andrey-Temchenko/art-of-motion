@@ -1,4 +1,8 @@
 import {describe, it, expect, vi, beforeEach} from 'vitest';
+
+import {DAY_OF_WEEK} from '@/constants/dayOfWeek';
+import {CLUB_LOCATION} from '@/constants/locations';
+
 import {
   getAllSlotTemplates,
   insertSlotTemplate,
@@ -7,8 +11,6 @@ import {
   deleteSlotTemplate,
   getMaterializedDatesForTemplates
 } from './slotTemplateRepository';
-import {CLUB_LOCATION} from '@/constants/locations';
-import {DAY_OF_WEEK} from '@/constants/dayOfWeek';
 
 vi.mock('@/lib/supabase/server', () => ({
   createClient: vi.fn()

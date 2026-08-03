@@ -1,24 +1,29 @@
 'use client';
 
-import {useEffect, useState} from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import {Menu, LogOut} from 'lucide-react';
-import type {User} from '@supabase/supabase-js';
+import {useEffect, useState} from 'react';
 
-import {useDictionary} from '@/providers/dictionaryProvider';
-import type {Locale} from '@/lib/i18n/config';
-import {cn} from '@/lib/utils';
-import {useSignOut} from '@/hooks/useSignOut';
-import {USER_ROLE} from '@/constants/roles';
+import type {User} from '@supabase/supabase-js';
+import {Menu, LogOut} from 'lucide-react';
+
 import {getDefaultDashboardRoute, buildRoute, ROUTES} from '@/config/navigation';
 
-import {UserDropdown} from '@/components/shared/UserDropdown';
-import {Button} from '@/components/ui/button';
-import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetClose} from '@/components/ui/sheet';
-import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
+import {USER_ROLE} from '@/constants/roles';
+
+import type {Locale} from '@/lib/i18n/config';
+import {cn} from '@/lib/utils';
+
+import {useDictionary} from '@/providers/dictionaryProvider';
+
+import {useSignOut} from '@/hooks/useSignOut';
+
 import {LanguageSwitcher} from '@/components/shared/LanguageSwitcher';
 import {ThemeToggle} from '@/components/shared/ThemeToggle';
+import {UserDropdown} from '@/components/shared/UserDropdown';
+import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
+import {Button} from '@/components/ui/button';
+import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetClose} from '@/components/ui/sheet';
 
 interface NavbarProps {
   locale: Locale;

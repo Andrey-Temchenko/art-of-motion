@@ -1,10 +1,14 @@
-import {SupabaseClient} from '@supabase/supabase-js';
+import type {SupabaseClient} from '@supabase/supabase-js';
 
-import {Database} from '@/types/database.types';
-import {createClient} from '@/lib/supabase/server';
+import type {BookingStatusType} from '@/constants/bookingStatus';
+import {BOOKING_STATUS} from '@/constants/bookingStatus';
+
+import type {Database} from '@/types/database.types';
+
 import {createAdminClient} from '@/lib/supabase/admin';
-import {RawBookingData, RawBookingNotificationData} from './types';
-import {BOOKING_STATUS, BookingStatusType} from '@/constants/bookingStatus';
+import {createClient} from '@/lib/supabase/server';
+
+import type {RawBookingData, RawBookingNotificationData} from './types';
 
 export async function insertBooking(slot_id: string, client_id: string): Promise<RawBookingNotificationData> {
   const supabase = await createClient();

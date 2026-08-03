@@ -1,5 +1,7 @@
 import {describe, it, expect, vi, afterEach} from 'vitest';
-import {computeUpcomingOccurrences, SlotTemplateLike} from './templateOccurrences';
+
+import type {SlotTemplateLike} from './templateOccurrences';
+import {computeUpcomingOccurrences} from './templateOccurrences';
 
 // Fix "now" to a known Wednesday: 2026-08-05 (Wednesday) at 10:00 Kyiv time
 // In UTC that is 2026-08-05T07:00:00Z (Kyiv is UTC+3 in summer)

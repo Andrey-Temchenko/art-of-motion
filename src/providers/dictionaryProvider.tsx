@@ -1,6 +1,8 @@
 'use client';
 
-import React, {createContext, useContext, useState, ReactNode} from 'react';
+import type {ReactNode} from 'react';
+import React, {createContext, useContext, useState} from 'react';
+
 import {createStore, useStore} from 'zustand';
 
 import type {getDictionary} from '@/lib/i18n/getDictionary';

@@ -1,6 +1,8 @@
 import {describe, it, expect, vi, beforeEach} from 'vitest';
-import {insertBooking, updateBookingStatus, getClientBookingsList} from './bookingRepository';
+
 import {BOOKING_STATUS} from '@/constants/bookingStatus';
+
+import {insertBooking, updateBookingStatus, getClientBookingsList} from './bookingRepository';
 
 // Mock the Supabase server client
 vi.mock('@/lib/supabase/server', () => ({

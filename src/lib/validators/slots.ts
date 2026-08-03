@@ -1,4 +1,5 @@
 import {z} from 'zod';
+
 import {CLUB_LOCATION_VALUES} from '@/constants/locations';
 
 export const slotSchema = z

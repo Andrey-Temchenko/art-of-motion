@@ -1,11 +1,13 @@
 import React from 'react';
 
+import {BOOKING_STATUS} from '@/constants/bookingStatus';
+
+import type {Locale} from '@/lib/i18n/config';
 import {getDictionary} from '@/lib/i18n/getDictionary';
-import {Locale} from '@/lib/i18n/config';
 import {requireUser} from '@/lib/supabase/session';
 import {getDateFnsLocale} from '@/lib/utils/date';
+
 import {getClientBookings} from '@/services/bookingService';
-import {BOOKING_STATUS} from '@/constants/bookingStatus';
 
 import {BookingHistoryList} from '@/components/dashboard/my_bookings/BookingHistoryList';
 import {BookingsList} from '@/components/dashboard/my_bookings/BookingsList';

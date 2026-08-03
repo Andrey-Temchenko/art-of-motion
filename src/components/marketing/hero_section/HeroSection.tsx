@@ -2,18 +2,21 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import {ArrowRight, HeartPulse, Play} from 'lucide-react';
 import {useEffect, useState} from 'react';
 
-import {useDictionary} from '@/providers/dictionaryProvider';
-import type {Locale} from '@/lib/i18n/config';
-import {createClient} from '@/lib/supabase/client';
+import {ArrowRight, HeartPulse, Play} from 'lucide-react';
+
 import {ROUTES, buildRoute} from '@/config/navigation';
-import {analytics} from '@/lib/analytics';
 import {siteConfig} from '@/config/site';
 
-import {Button} from '@/components/ui/button';
+import {analytics} from '@/lib/analytics';
+import type {Locale} from '@/lib/i18n/config';
+import {createClient} from '@/lib/supabase/client';
+
+import {useDictionary} from '@/providers/dictionaryProvider';
+
 import {DemoVideoModal} from '@/components/marketing/hero_section/components/DemoVideoModal';
+import {Button} from '@/components/ui/button';
 
 export function HeroSection({locale}: {locale: Locale}) {
   const dict = useDictionary();

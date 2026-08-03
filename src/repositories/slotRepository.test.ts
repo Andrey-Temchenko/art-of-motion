@@ -1,7 +1,9 @@
 import {describe, it, expect, vi, beforeEach} from 'vitest';
-import {findOverlappingSlots, insertSlot, getAdminSlotsList, getScheduleSlotsList} from './slotRepository';
-import {SLOT_STATUS} from '@/constants/slotStatus';
+
 import {CLUB_LOCATION} from '@/constants/locations';
+import {SLOT_STATUS} from '@/constants/slotStatus';
+
+import {findOverlappingSlots, insertSlot, getAdminSlotsList, getScheduleSlotsList} from './slotRepository';
 
 // Mock Supabase clients
 vi.mock('@/lib/supabase/server', () => ({
@@ -11,8 +13,8 @@ vi.mock('@/lib/supabase/admin', () => ({
   createAdminClient: vi.fn()
 }));
 
-import {createClient} from '@/lib/supabase/server';
 import {createAdminClient} from '@/lib/supabase/admin';
+import {createClient} from '@/lib/supabase/server';
 
 describe('slotRepository', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

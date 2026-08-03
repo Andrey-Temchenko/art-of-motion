@@ -1,6 +1,8 @@
 import {describe, it, expect, vi, beforeEach} from 'vitest';
+
+import type {RawDashboardStats, RawAdminClientData} from '@/repositories/types';
+
 import {getAdminDashboardStats, getAdminClientsList} from './adminService';
-import {RawDashboardStats, RawAdminClientData} from '@/repositories/types';
 
 describe('adminService', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

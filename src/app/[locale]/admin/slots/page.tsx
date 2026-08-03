@@ -1,15 +1,18 @@
 import Link from 'next/link';
 
-import {requireRole} from '@/lib/supabase/session';
-import {USER_ROLE} from '@/constants/roles';
-import {getDictionary} from '@/lib/i18n/getDictionary';
-import {Locale} from '@/lib/i18n/config';
-import {formatKyivTime} from '@/lib/utils/timezone';
-import {CLUB_LOCATION_VALUES} from '@/constants/locations';
-import {SLOT_STATUS_VALUES} from '@/constants/slotStatus';
-import {getLocationLabel} from '@/lib/utils/locations';
 import {ROUTES, buildRoute} from '@/config/navigation';
+
+import {CLUB_LOCATION_VALUES} from '@/constants/locations';
+import {USER_ROLE} from '@/constants/roles';
+import {SLOT_STATUS_VALUES} from '@/constants/slotStatus';
+
+import type {Locale} from '@/lib/i18n/config';
+import {getDictionary} from '@/lib/i18n/getDictionary';
+import {requireRole} from '@/lib/supabase/session';
 import {getDateFnsLocale} from '@/lib/utils/date';
+import {getLocationLabel} from '@/lib/utils/locations';
+import {formatKyivTime} from '@/lib/utils/timezone';
+
 import {getAdminSlots} from '@/services/slotService';
 import {getWorkoutTypes} from '@/services/workoutTypeService';
 

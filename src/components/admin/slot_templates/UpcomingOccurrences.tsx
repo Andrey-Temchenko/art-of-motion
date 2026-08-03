@@ -1,15 +1,20 @@
 'use client';
 
-import React, {useTransition} from 'react';
-import {DATE_FORMATS} from '@/constants/dateFormats';
 import {useRouter, usePathname} from 'next/navigation';
+import React, {useTransition} from 'react';
 
-import {ProcessedUpcomingOccurrence} from '@/services/types';
-import {useDictionary} from '@/providers/dictionaryProvider';
+import {DATE_FORMATS} from '@/constants/dateFormats';
+
 import {parseLocalDate, formatDate} from '@/lib/utils/date';
-import {ConfirmOccurrenceDialog} from './components/ConfirmOccurrenceDialog';
-import {WorkoutType} from '@/components/shared/SlotForm';
+
+import {useDictionary} from '@/providers/dictionaryProvider';
+
+import type {ProcessedUpcomingOccurrence} from '@/services/types';
+
+import type {WorkoutType} from '@/components/shared/SlotForm';
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/select';
+
+import {ConfirmOccurrenceDialog} from './components/ConfirmOccurrenceDialog';
 
 interface UpcomingOccurrencesProps {
   occurrences: ProcessedUpcomingOccurrence[];

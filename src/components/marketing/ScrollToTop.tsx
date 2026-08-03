@@ -1,7 +1,8 @@
 'use client';
 
-import {ArrowUp} from 'lucide-react';
 import {useEffect, useState} from 'react';
+
+import {ArrowUp} from 'lucide-react';
 
 export function ScrollToTop() {
   const [show, setShow] = useState(false);

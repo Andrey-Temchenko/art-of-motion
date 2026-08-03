@@ -1,10 +1,15 @@
 import React from 'react';
+
 import {render, screen} from '@testing-library/react';
 import {describe, it, expect, vi} from 'vitest';
-import {MyBookingAction} from './MyBookingAction';
-import {DictionaryProvider} from '@/providers/dictionaryProvider';
+
 import {BOOKING_STATUS} from '@/constants/bookingStatus';
+
 import type {Dictionary} from '@/lib/i18n/types';
+
+import {DictionaryProvider} from '@/providers/dictionaryProvider';
+
+import {MyBookingAction} from './MyBookingAction';
 
 // Mock dependencies
 vi.mock('@/actions/clientBookings', () => ({

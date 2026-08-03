@@ -4,8 +4,8 @@ import type {Locale} from '@/lib/i18n/config';
 import {getUserProfile} from '@/lib/supabase/session';
 
 import {Navbar} from '@/components/marketing/Navbar';
-import {SiteFooter} from '@/components/marketing/SiteFooter';
 import {ScrollToTop} from '@/components/marketing/ScrollToTop';
+import {SiteFooter} from '@/components/marketing/SiteFooter';
 
 export default async function MarketingLayout({
   children,

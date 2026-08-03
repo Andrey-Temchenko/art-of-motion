@@ -1,6 +1,6 @@
 import {createClient} from '@/lib/supabase/server';
 
-import {RawDashboardStats, RawAdminClientData, RawDashboardKpis} from './types';
+import type {RawDashboardStats, RawAdminClientData, RawDashboardKpis} from './types';
 
 export async function getAdminDashboardStats(): Promise<RawDashboardStats> {
   const supabase = await createClient();

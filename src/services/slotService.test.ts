@@ -1,8 +1,10 @@
 import {describe, it, expect, vi, beforeEach} from 'vitest';
-import {createSlot, getAdminSlots} from './slotService';
+
+import {BOOKING_STATUS} from '@/constants/bookingStatus';
 import {CLUB_LOCATION} from '@/constants/locations';
 import {SLOT_STATUS} from '@/constants/slotStatus';
-import {BOOKING_STATUS} from '@/constants/bookingStatus';
+
+import {createSlot, getAdminSlots} from './slotService';
 import {DomainError} from './types';
 
 // Mock timezone util

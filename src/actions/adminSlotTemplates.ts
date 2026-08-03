@@ -1,12 +1,17 @@
 'use server';
 
 import {revalidatePath} from 'next/cache';
+
 import {flattenError} from 'zod';
 
-import {requireRole} from '@/lib/supabase/session';
+import {buildRevalidatePath, ROUTES} from '@/config/navigation';
+
 import {USER_ROLE} from '@/constants/roles';
-import {slotTemplateSchema} from '@/lib/validators/slotTemplates';
+
+import {requireRole} from '@/lib/supabase/session';
 import {uuidSchema} from '@/lib/validators/common';
+import {slotTemplateSchema} from '@/lib/validators/slotTemplates';
+
 import {
   createSlotTemplate,
   updateSlotTemplate,
@@ -14,7 +19,6 @@ import {
   deleteSlotTemplate
 } from '@/services/slotTemplateService';
 import {DomainError} from '@/services/types';
-import {buildRevalidatePath, ROUTES} from '@/config/navigation';
 
 import type {ActionState} from './types';
 

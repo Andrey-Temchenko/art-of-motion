@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+
 import {AlertCircleIcon, RefreshCcwIcon} from 'lucide-react';
 
 import {useClientDictionary} from '@/lib/i18n/useClientDictionary';

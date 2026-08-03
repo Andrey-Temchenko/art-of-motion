@@ -1,10 +1,14 @@
-import {toKyivTime} from '@/lib/utils/timezone';
+import type {DayOfWeekType} from '@/constants/dayOfWeek';
+import type {ClubLocationType} from '@/constants/locations';
+
 import {computeUpcomingOccurrences} from '@/lib/utils/templateOccurrences';
+import {toKyivTime} from '@/lib/utils/timezone';
+
 import {getRepositories} from '@/repositories';
-import {CreateSlotTemplateData, UpdateSlotTemplateData} from '@/repositories/types';
-import {ProcessedSlotTemplate, ProcessedUpcomingOccurrence, DomainError} from './types';
-import {ClubLocationType} from '@/constants/locations';
-import {DayOfWeekType} from '@/constants/dayOfWeek';
+import type {CreateSlotTemplateData, UpdateSlotTemplateData} from '@/repositories/types';
+
+import type {ProcessedSlotTemplate, ProcessedUpcomingOccurrence} from './types';
+import {DomainError} from './types';
 
 interface SlotTemplateInput {
   workout_type_id: string;

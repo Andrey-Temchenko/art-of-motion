@@ -1,5 +1,6 @@
 import {getRepositories} from '@/repositories';
-import {DashboardStats, AdminClientData} from './types';
+
+import type {DashboardStats, AdminClientData} from './types';
 
 export async function getAdminDashboardStats(repos = getRepositories()): Promise<DashboardStats> {
   try {

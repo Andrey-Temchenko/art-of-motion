@@ -1,11 +1,13 @@
 'use client';
 
 import React, {useState, useTransition} from 'react';
-import {toast} from 'sonner';
+
 import {TrashIcon} from 'lucide-react';
+import {toast} from 'sonner';
+
+import {useDictionary} from '@/providers/dictionaryProvider';
 
 import {cancelSlotAction} from '@/actions/adminSlots';
-import {useDictionary} from '@/providers/dictionaryProvider';
 
 import {Button} from '@/components/ui/button';
 import {

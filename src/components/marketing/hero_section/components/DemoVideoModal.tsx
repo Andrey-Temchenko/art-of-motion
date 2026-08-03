@@ -1,9 +1,11 @@
 'use client';
 
 import React, {useState} from 'react';
+
 import {Loader2, AlertCircle} from 'lucide-react';
 
 import {siteConfig} from '@/config/site';
+
 import {useDictionary} from '@/providers/dictionaryProvider';
 
 import {Dialog, DialogContent, DialogTitle, DialogTrigger} from '@/components/ui/dialog';

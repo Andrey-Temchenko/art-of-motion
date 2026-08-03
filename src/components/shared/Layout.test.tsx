@@ -1,10 +1,14 @@
 import React from 'react';
+
 import {render, screen} from '@testing-library/react';
 import {describe, it, expect, vi} from 'vitest';
-import {Layout} from './Layout';
-import {DictionaryProvider} from '@/providers/dictionaryProvider';
-import type {Dictionary} from '@/lib/i18n/types';
+
 import type {Locale} from '@/lib/i18n/config';
+import type {Dictionary} from '@/lib/i18n/types';
+
+import {DictionaryProvider} from '@/providers/dictionaryProvider';
+
+import {Layout} from './Layout';
 
 // Mock dependencies
 vi.mock('next/navigation', () => ({

@@ -1,8 +1,8 @@
 import {addDays, isAfter, startOfDay} from 'date-fns';
 import {fromZonedTime, toZonedTime} from 'date-fns-tz';
 
-import {KYIV_TIMEZONE} from '@/lib/utils/timezone';
 import {parseLocalDate} from '@/lib/utils/date';
+import {KYIV_TIMEZONE} from '@/lib/utils/timezone';
 
 export interface SlotTemplateLike {
   id: string;

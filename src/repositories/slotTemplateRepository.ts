@@ -1,5 +1,7 @@
 import {createClient} from '@/lib/supabase/server';
-import {RawSlotTemplateData, CreateSlotTemplateData, UpdateSlotTemplateData, allSlotTemplatesQuery} from './types';
+
+import type {RawSlotTemplateData, CreateSlotTemplateData, UpdateSlotTemplateData} from './types';
+import {allSlotTemplatesQuery} from './types';
 
 // Uses standard client for DB operations (RLS enforced)
 

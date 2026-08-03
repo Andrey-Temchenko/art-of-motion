@@ -1,20 +1,22 @@
-import React from 'react';
 import {notFound} from 'next/navigation';
+import React from 'react';
 
-import {getDictionary} from '@/lib/i18n/getDictionary';
-import {Locale} from '@/lib/i18n/config';
-import {getDateFnsLocale} from '@/lib/utils/date';
-import {getSlotDetails} from '@/services/slotService';
-import {getWorkoutTypes} from '@/services/workoutTypeService';
-import {formatKyivTime} from '@/lib/utils/timezone';
-import {getLocationLabel} from '@/lib/utils/locations';
-import {CLUB_LOCATION_VALUES} from '@/constants/locations';
 import {BOOKING_STATUS} from '@/constants/bookingStatus';
+import {CLUB_LOCATION_VALUES} from '@/constants/locations';
 import {SLOT_STATUS} from '@/constants/slotStatus';
 
+import type {Locale} from '@/lib/i18n/config';
+import {getDictionary} from '@/lib/i18n/getDictionary';
+import {getDateFnsLocale} from '@/lib/utils/date';
+import {getLocationLabel} from '@/lib/utils/locations';
+import {formatKyivTime} from '@/lib/utils/timezone';
+
+import {getSlotDetails} from '@/services/slotService';
+import {getWorkoutTypes} from '@/services/workoutTypeService';
+
 import {CancelBookingButton} from '@/components/admin/slots/CancelBookingButton';
-import {EditSlotDialog} from '@/components/admin/slots/EditSlotDialog';
 import {CancelSlotButton} from '@/components/admin/slots/CancelSlotButton';
+import {EditSlotDialog} from '@/components/admin/slots/EditSlotDialog';
 
 interface SlotDetailsPageProps {
   params: Promise<{

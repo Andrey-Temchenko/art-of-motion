@@ -1,15 +1,19 @@
 'use client';
 
 import React from 'react';
+
 import {parseISO} from 'date-fns';
 import {Bar, BarChart, CartesianGrid, XAxis, YAxis, Pie, PieChart, Cell, Label} from 'recharts';
 
-import type {DashboardStats} from '@/services/types';
-import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
 import {DATE_FORMATS} from '@/constants/dateFormats';
+
+import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
 import {formatDate} from '@/lib/utils/date';
 
-import {ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent} from '@/components/ui/chart';
+import type {DashboardStats} from '@/services/types';
+
+import type {ChartConfig} from '@/components/ui/chart';
+import {ChartContainer, ChartTooltip, ChartTooltipContent} from '@/components/ui/chart';
 
 interface OverviewChartsProps {
   bookingsByDay: DashboardStats['bookingsByDay'];

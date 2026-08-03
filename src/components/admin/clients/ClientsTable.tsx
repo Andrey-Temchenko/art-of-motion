@@ -3,12 +3,14 @@
 import React, {useState, useMemo} from 'react';
 
 import {DATE_FORMATS} from '@/constants/dateFormats';
-import {formatDate} from '@/lib/utils/date';
-import type {AdminClientData} from '@/services/types';
-import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
 
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table';
+import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
+import {formatDate} from '@/lib/utils/date';
+
+import type {AdminClientData} from '@/services/types';
+
 import {Input} from '@/components/ui/input';
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table';
 
 interface ClientsTableProps {
   data: AdminClientData[];

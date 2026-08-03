@@ -1,4 +1,5 @@
 import {sendGAEvent} from '@next/third-parties/google';
+
 import {siteConfig} from '@/config/site';
 
 export const isAnalyticsEnabled = siteConfig.isProd && Boolean(siteConfig.gaMeasurementId);

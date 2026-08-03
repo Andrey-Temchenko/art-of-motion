@@ -1,6 +1,6 @@
-import {BookingStatusType} from '@/constants/bookingStatus';
-import {ClubLocationType} from '@/constants/locations';
-import {SlotStatusType} from '@/constants/slotStatus';
+import type {BookingStatusType} from '@/constants/bookingStatus';
+import type {ClubLocationType} from '@/constants/locations';
+import type {SlotStatusType} from '@/constants/slotStatus';
 
 export type DashboardStats = {
   totalUsers: number;

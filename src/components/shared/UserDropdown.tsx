@@ -1,13 +1,17 @@
 'use client';
 
-import React from 'react';
 import {useRouter} from 'next/navigation';
-import {User} from '@supabase/supabase-js';
+import React from 'react';
+
+import type {User} from '@supabase/supabase-js';
+
+import {getDefaultDashboardRoute, buildRoute} from '@/config/navigation';
+
+import {USER_ROLE} from '@/constants/roles';
+
+import {useDictionary} from '@/providers/dictionaryProvider';
 
 import {useSignOut} from '@/hooks/useSignOut';
-import {USER_ROLE} from '@/constants/roles';
-import {useDictionary} from '@/providers/dictionaryProvider';
-import {getDefaultDashboardRoute, buildRoute} from '@/config/navigation';
 
 import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
 import {

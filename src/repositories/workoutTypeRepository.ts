@@ -1,5 +1,6 @@
+import type {Database} from '@/types/database.types';
+
 import {createClient} from '@/lib/supabase/server';
-import {Database} from '@/types/database.types';
 
 export type WorkoutType = Database['public']['Tables']['workout_types']['Row'];
 

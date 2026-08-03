@@ -1,8 +1,10 @@
 import {useRouter} from 'next/navigation';
 
-import {createClient} from '@/lib/supabase/client';
-import {signOut} from '@/actions/auth';
 import {ROUTES, buildRoute} from '@/config/navigation';
+
+import {createClient} from '@/lib/supabase/client';
+
+import {signOut} from '@/actions/auth';
 
 export const useSignOut = () => {
   const router = useRouter();

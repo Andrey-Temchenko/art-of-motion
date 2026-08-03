@@ -1,8 +1,10 @@
 import {describe, it, expect, vi, beforeEach} from 'vitest';
-import {bookSlot, getScheduleSlots, cancelBooking, getClientBookings} from './bookingService';
+
+import {BOOKING_STATUS} from '@/constants/bookingStatus';
 import {CLUB_LOCATION} from '@/constants/locations';
 import {SLOT_STATUS} from '@/constants/slotStatus';
-import {BOOKING_STATUS} from '@/constants/bookingStatus';
+
+import {bookSlot, getScheduleSlots, cancelBooking, getClientBookings} from './bookingService';
 import {DomainError} from './types';
 
 // Mock the date utility to return a stable date for schedule grouping

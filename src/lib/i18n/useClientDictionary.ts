@@ -1,12 +1,13 @@
 'use client';
 
 import {useParams} from 'next/navigation';
-import type {Dictionary} from '@/lib/i18n/types';
-import {defaultLocale, locales, APP_LOCALES, type Locale} from '@/lib/i18n/config';
 
-import uk from '@/locales/generated/uk.json';
-import ru from '@/locales/generated/ru.json';
+import {defaultLocale, locales, APP_LOCALES, type Locale} from '@/lib/i18n/config';
+import type {Dictionary} from '@/lib/i18n/types';
+
 import en from '@/locales/generated/en.json';
+import ru from '@/locales/generated/ru.json';
+import uk from '@/locales/generated/uk.json';
 
 const dicts: Record<Locale, Dictionary> = {
   [APP_LOCALES.UK]: uk as Dictionary,

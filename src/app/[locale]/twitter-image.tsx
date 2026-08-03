@@ -1,7 +1,7 @@
 import {ImageResponse} from 'next/og';
 
-import {getDictionary} from '@/lib/i18n/getDictionary';
 import type {Locale} from '@/lib/i18n/config';
+import {getDictionary} from '@/lib/i18n/getDictionary';
 
 export const runtime = 'edge';
 

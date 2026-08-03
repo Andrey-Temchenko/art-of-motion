@@ -1,6 +1,7 @@
 import {z} from 'zod';
-import {CLUB_LOCATION_VALUES} from '@/constants/locations';
+
 import {DAY_OF_WEEK_VALUES} from '@/constants/dayOfWeek';
+import {CLUB_LOCATION_VALUES} from '@/constants/locations';
 
 export const slotTemplateSchema = z
   .object({

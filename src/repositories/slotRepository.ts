@@ -1,10 +1,14 @@
-import {SupabaseClient} from '@supabase/supabase-js';
+import type {SupabaseClient} from '@supabase/supabase-js';
 
-import {createClient} from '@/lib/supabase/server';
+import type {SlotStatusType} from '@/constants/slotStatus';
+import {SLOT_STATUS} from '@/constants/slotStatus';
+
+import type {Database} from '@/types/database.types';
+
 import {createAdminClient} from '@/lib/supabase/admin';
-import {CreateSlotData, RawSlotData, RawScheduleSlotData, RawAdminSlotDetails, UpdateSlotData} from './types';
-import {SLOT_STATUS, SlotStatusType} from '@/constants/slotStatus';
-import {Database} from '@/types/database.types';
+import {createClient} from '@/lib/supabase/server';
+
+import type {CreateSlotData, RawSlotData, RawScheduleSlotData, RawAdminSlotDetails, UpdateSlotData} from './types';
 
 export async function findOverlappingSlots(
   startTime: string,

@@ -1,10 +1,11 @@
-import React from 'react';
 import dynamic from 'next/dynamic';
+import React from 'react';
 
-import {getUserProfile} from '@/lib/supabase/session';
-import {getAdminDashboardStats} from '@/services/adminService';
+import type {Locale} from '@/lib/i18n/config';
 import {getDictionary} from '@/lib/i18n/getDictionary';
-import {Locale} from '@/lib/i18n/config';
+import {getUserProfile} from '@/lib/supabase/session';
+
+import {getAdminDashboardStats} from '@/services/adminService';
 
 const OverviewCharts = dynamic(() => import('@/components/admin/OverviewCharts').then(mod => mod.OverviewCharts));
 

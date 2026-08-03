@@ -1,16 +1,20 @@
 'use client';
 
 import React, {useTransition} from 'react';
+
 import {Trash2Icon} from 'lucide-react';
 import {toast} from 'sonner';
 
 import {DATE_FORMATS} from '@/constants/dateFormats';
+
 import {formatDate} from '@/lib/utils/date';
-import {ProcessedSlotTemplate} from '@/services/types';
+
 import {useDictionary} from '@/providers/dictionaryProvider';
+
+import type {ProcessedSlotTemplate} from '@/services/types';
+
 import {toggleSlotTemplateActiveAction, deleteSlotTemplateAction} from '@/actions/adminSlotTemplates';
 
-import {Button} from '@/components/ui/button';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -22,10 +26,12 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from '@/components/ui/alert-dialog';
-import {Switch} from '@/components/ui/switch';
 import {Badge} from '@/components/ui/badge';
+import {Button} from '@/components/ui/button';
+import {Switch} from '@/components/ui/switch';
+
 import {EditTemplateDialog} from './components/EditTemplateDialog';
-import {WorkoutTypeOption} from './components/TemplateForm';
+import type {WorkoutTypeOption} from './components/TemplateForm';
 
 interface TemplatesTableProps {
   templates: ProcessedSlotTemplate[];

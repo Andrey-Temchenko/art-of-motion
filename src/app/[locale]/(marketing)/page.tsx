@@ -1,15 +1,16 @@
 import type {JSX} from 'react';
 
-import {getDictionary} from '@/lib/i18n/getDictionary';
-import type {Locale} from '@/lib/i18n/config';
 import {siteConfig} from '@/config/site';
 
-import {HeroSection} from '@/components/marketing/hero_section/HeroSection';
+import type {Locale} from '@/lib/i18n/config';
+import {getDictionary} from '@/lib/i18n/getDictionary';
+
 import {AboutSection} from '@/components/marketing/AboutSection';
+import {ContactSection} from '@/components/marketing/ContactSection';
 import {DisciplinesSection} from '@/components/marketing/DisciplinesSection';
 import {GallerySection} from '@/components/marketing/GallerySection';
+import {HeroSection} from '@/components/marketing/hero_section/HeroSection';
 import {TestimonialsSection} from '@/components/marketing/TestimonialsSection';
-import {ContactSection} from '@/components/marketing/ContactSection';
 
 export default async function LandingPage({params}: {params: Promise<{locale: string}>}): Promise<JSX.Element> {
   const resolvedParams = await params;

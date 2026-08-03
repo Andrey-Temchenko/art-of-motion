@@ -1,10 +1,12 @@
 'use client';
 
 import React, {useTransition} from 'react';
+
 import {toast} from 'sonner';
 
-import {bookSlotAction} from '@/actions/clientBookings';
 import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
+
+import {bookSlotAction} from '@/actions/clientBookings';
 
 import {Button} from '@/components/ui/button';
 

@@ -1,5 +1,5 @@
-import {toZonedTime, fromZonedTime, formatInTimeZone} from 'date-fns-tz';
 import {format as formatFn} from 'date-fns';
+import {toZonedTime, fromZonedTime, formatInTimeZone} from 'date-fns-tz';
 
 export const KYIV_TIMEZONE = 'Europe/Kyiv';
 
@@ -23,7 +23,7 @@ export function toKyivTime(date: Date | string | number): Date {
   return toZonedTime(date, KYIV_TIMEZONE);
 }
 
-import {Locale} from 'date-fns';
+import type {Locale} from 'date-fns';
 
 /**
  * Formats a given date (UTC or local) directly into a string representation in Kyiv timezone.

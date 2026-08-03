@@ -1,4 +1,8 @@
 import {describe, it, expect, vi, beforeEach} from 'vitest';
+
+import {DAY_OF_WEEK} from '@/constants/dayOfWeek';
+import {CLUB_LOCATION} from '@/constants/locations';
+
 import {
   getAllSlotTemplates,
   createSlotTemplate,
@@ -7,8 +11,6 @@ import {
   deleteSlotTemplate,
   getUpcomingOccurrences
 } from './slotTemplateService';
-import {CLUB_LOCATION} from '@/constants/locations';
-import {DAY_OF_WEEK} from '@/constants/dayOfWeek';
 
 // Mock dependencies
 vi.mock('@/lib/utils/timezone', () => ({

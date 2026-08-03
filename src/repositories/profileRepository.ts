@@ -1,6 +1,7 @@
-import {createClient} from '@/lib/supabase/server';
-import {Profile, UserRole} from '@/lib/supabase/types';
 import {USER_ROLE} from '@/constants/roles';
+
+import {createClient} from '@/lib/supabase/server';
+import type {Profile, UserRole} from '@/lib/supabase/types';
 
 export async function getProfileById(userId: string): Promise<Profile | null> {
   const supabase = await createClient();

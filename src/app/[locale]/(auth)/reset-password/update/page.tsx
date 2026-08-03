@@ -1,22 +1,26 @@
 'use client';
 
-import React, {useState, useTransition} from 'react';
 import Link from 'next/link';
-import {useForm} from 'react-hook-form';
-import {zodResolver} from '@hookform/resolvers/zod';
 import {useRouter} from 'next/navigation';
-import {Eye, EyeOff} from 'lucide-react';
+import React, {useState, useTransition} from 'react';
 
-import {updatePassword} from '@/actions/auth';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {Eye, EyeOff} from 'lucide-react';
+import {useForm} from 'react-hook-form';
+
+import {buildRoute, ROUTES} from '@/config/navigation';
+
 import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
 import {updatePasswordSchema, type UpdatePasswordInput} from '@/lib/validators/auth';
+
+import {updatePassword} from '@/actions/auth';
+
 import {useAuthFormError} from '@/hooks/useAuthFormError';
 
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Button} from '@/components/ui/button';
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
-import {buildRoute, ROUTES} from '@/config/navigation';
 
 export default function UpdatePasswordPage() {
   const router = useRouter();

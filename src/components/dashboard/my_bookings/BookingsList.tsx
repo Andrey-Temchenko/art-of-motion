@@ -1,13 +1,14 @@
 import React from 'react';
 
-import type {ProcessedClientBooking} from '@/services/types';
 import type {getDictionary} from '@/lib/i18n/getDictionary';
 import type {getDateFnsLocale} from '@/lib/utils/date';
 import {getLocationDictKey} from '@/lib/utils/locations';
 import {formatKyivTime} from '@/lib/utils/timezone';
 
-import {BookingCard} from '@/components/shared/BookingCard';
+import type {ProcessedClientBooking} from '@/services/types';
+
 import {MyBookingAction} from '@/components/dashboard/my_bookings/MyBookingAction';
+import {BookingCard} from '@/components/shared/BookingCard';
 
 export interface BookingsListProps {
   bookings: ProcessedClientBooking[];

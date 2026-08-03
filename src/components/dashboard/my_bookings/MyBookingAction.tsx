@@ -1,7 +1,18 @@
 'use client';
 
 import React, {useState, useTransition} from 'react';
+
 import {toast} from 'sonner';
+
+import {BOOKING_STATUS} from '@/constants/bookingStatus';
+
+import type {Database} from '@/types/database.types';
+
+import {canCancelBooking} from '@/lib/utils/date';
+
+import {useDictionary} from '@/providers/dictionaryProvider';
+
+import {cancelBookingAction} from '@/actions/clientBookings';
 
 import {
   AlertDialog,
@@ -15,11 +26,6 @@ import {
   AlertDialogTrigger
 } from '@/components/ui/alert-dialog';
 import {Button} from '@/components/ui/button';
-import {cancelBookingAction} from '@/actions/clientBookings';
-import {canCancelBooking} from '@/lib/utils/date';
-import {useDictionary} from '@/providers/dictionaryProvider';
-import type {Database} from '@/types/database.types';
-import {BOOKING_STATUS} from '@/constants/bookingStatus';
 
 export interface MyBookingActionProps {
   bookingId: string;

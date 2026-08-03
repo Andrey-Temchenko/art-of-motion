@@ -1,22 +1,27 @@
 'use client';
 
-import React, {useState, useTransition} from 'react';
-import {useRouter} from 'next/navigation';
 import Link from 'next/link';
-import {useForm} from 'react-hook-form';
+import {useRouter} from 'next/navigation';
+import React, {useState, useTransition} from 'react';
+
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Eye, EyeOff} from 'lucide-react';
+import {useForm} from 'react-hook-form';
 
-import {signInWithGoogle, signInWithEmail} from '@/actions/auth';
-import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
-import {loginSchema, type LoginInput} from '@/lib/validators/auth';
-import {useRedirectUrl} from '@/hooks/useRedirectUrl';
-import {useAuthFormError} from '@/hooks/useAuthFormError';
 import {ROUTES, buildRoute, getDefaultDashboardRoute} from '@/config/navigation';
+
 import {USER_ROLE} from '@/constants/roles';
 
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
+import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
+import {loginSchema, type LoginInput} from '@/lib/validators/auth';
+
+import {signInWithGoogle, signInWithEmail} from '@/actions/auth';
+
+import {useAuthFormError} from '@/hooks/useAuthFormError';
+import {useRedirectUrl} from '@/hooks/useRedirectUrl';
+
 import {Button} from '@/components/ui/button';
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 

@@ -1,7 +1,8 @@
 import {describe, it, expect} from 'vitest';
-import {createSlotSchema} from './slots';
 
 import {CLUB_LOCATION} from '@/constants/locations';
+
+import {createSlotSchema} from './slots';
 
 describe('createSlotSchema', () => {
   const validData = {

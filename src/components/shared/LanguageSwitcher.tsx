@@ -1,7 +1,8 @@
 'use client';
 
-import type {JSX} from 'react';
 import {usePathname, useRouter} from 'next/navigation';
+import type {JSX} from 'react';
+
 import {ChevronDown, Globe} from 'lucide-react';
 
 import {
@@ -12,6 +13,7 @@ import {
   LOCALE_COOKIE_MAX_AGE,
   type Locale
 } from '@/lib/i18n/config';
+
 import {Button} from '@/components/ui/button';
 import {
   DropdownMenu,

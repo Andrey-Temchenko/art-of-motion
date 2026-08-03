@@ -1,15 +1,19 @@
 'use server';
 
 import {revalidatePath} from 'next/cache';
-import {User} from '@supabase/supabase-js';
 
-import {requireUser} from '@/lib/supabase/session';
-import {getDictionary} from '@/lib/i18n/getDictionary';
-import {Locale, defaultLocale, locales} from '@/lib/i18n/config';
-import {bookSlot, cancelBooking as cancelBookingService} from '@/services/bookingService';
-import {DomainError} from '@/services/types';
-import type {CancelBookingResult} from '@/services/types';
+import type {User} from '@supabase/supabase-js';
+
 import {ROUTES, buildRevalidatePath} from '@/config/navigation';
+
+import type {Locale} from '@/lib/i18n/config';
+import {defaultLocale, locales} from '@/lib/i18n/config';
+import {getDictionary} from '@/lib/i18n/getDictionary';
+import {requireUser} from '@/lib/supabase/session';
+
+import {bookSlot, cancelBooking as cancelBookingService} from '@/services/bookingService';
+import type {CancelBookingResult} from '@/services/types';
+import {DomainError} from '@/services/types';
 
 import type {ActionState} from './types';
 

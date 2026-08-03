@@ -1,15 +1,18 @@
 'use server';
 
-import {redirect} from 'next/navigation';
 import {revalidatePath} from 'next/cache';
 import {headers} from 'next/headers';
+import {redirect} from 'next/navigation';
+
+import {buildRevalidatePath, ROUTES} from '@/config/navigation';
+import {siteConfig} from '@/config/site';
+
+import {USER_ROLE, type UserRoleType} from '@/constants/roles';
 
 import {createClient} from '@/lib/supabase/server';
-import {siteConfig} from '@/config/site';
 import {getUserRoleServer} from '@/lib/supabase/session';
-import {USER_ROLE, type UserRoleType} from '@/constants/roles';
-import {buildRevalidatePath, ROUTES} from '@/config/navigation';
-import {AuthActionResponse} from './types';
+
+import type {AuthActionResponse} from './types';
 
 export async function signInWithGoogle(formData?: FormData): Promise<void> {
   const supabase = await createClient();

@@ -1,26 +1,32 @@
 'use client';
 
 import React, {useState, useTransition} from 'react';
-import {useForm, useWatch} from 'react-hook-form';
+
 import {zodResolver} from '@hookform/resolvers/zod';
-import {toast} from 'sonner';
 import {CalendarIcon} from 'lucide-react';
+import {useForm, useWatch} from 'react-hook-form';
+import {toast} from 'sonner';
 
 import {DATE_FORMATS} from '@/constants/dateFormats';
-import {slotTemplateSchema, SlotTemplateInput} from '@/lib/validators/slotTemplates';
-import {createSlotTemplateAction, updateSlotTemplateAction} from '@/actions/adminSlotTemplates';
-import {cn} from '@/lib/utils';
-import {CLUB_LOCATION_VALUES, ClubLocationType} from '@/constants/locations';
 import {DAY_OF_WEEK_VALUES} from '@/constants/dayOfWeek';
-import {useDictionary} from '@/providers/dictionaryProvider';
+import type {ClubLocationType} from '@/constants/locations';
+import {CLUB_LOCATION_VALUES} from '@/constants/locations';
+
+import {cn} from '@/lib/utils';
 import {parseLocalDate, formatDate} from '@/lib/utils/date';
+import type {SlotTemplateInput} from '@/lib/validators/slotTemplates';
+import {slotTemplateSchema} from '@/lib/validators/slotTemplates';
+
+import {useDictionary} from '@/providers/dictionaryProvider';
+
+import {createSlotTemplateAction, updateSlotTemplateAction} from '@/actions/adminSlotTemplates';
 
 import {Button, buttonVariants} from '@/components/ui/button';
+import {Calendar} from '@/components/ui/calendar';
 import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/select';
 import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover';
-import {Calendar} from '@/components/ui/calendar';
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/select';
 
 export type WorkoutTypeOption = {
   id: string;

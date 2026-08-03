@@ -1,6 +1,7 @@
 'use client';
 
-import React, {useState, useMemo, JSX} from 'react';
+import type {JSX} from 'react';
+import React, {useState, useMemo} from 'react';
 
 import {Button} from '@/components/ui/button';
 

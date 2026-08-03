@@ -1,11 +1,13 @@
-import {NextResponse} from 'next/server';
 import {cookies} from 'next/headers';
+import {NextResponse} from 'next/server';
 
-import {createClient} from '@/lib/supabase/server';
-import {LOCALE_COOKIE, defaultLocale} from '@/lib/i18n/config';
-import {getUserRoleServer} from '@/lib/supabase/session';
 import {getDefaultDashboardRoute, ROUTES, buildRoute} from '@/config/navigation';
+
 import {USER_ROLE} from '@/constants/roles';
+
+import {LOCALE_COOKIE, defaultLocale} from '@/lib/i18n/config';
+import {createClient} from '@/lib/supabase/server';
+import {getUserRoleServer} from '@/lib/supabase/session';
 
 export async function GET(request: Request): Promise<Response> {
   const {searchParams} = new URL(request.url);

@@ -1,5 +1,6 @@
-import {test as setup} from '@playwright/test';
 import path from 'path';
+
+import {test as setup} from '@playwright/test';
 
 const authFileUser = path.join(__dirname, '../playwright/.auth/user.json');
 

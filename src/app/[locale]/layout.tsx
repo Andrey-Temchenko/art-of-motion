@@ -1,17 +1,21 @@
 import type {Metadata} from 'next';
-import type {ReactNode} from 'react';
-import {notFound} from 'next/navigation';
 import {Geist, Geist_Mono} from 'next/font/google';
+import {notFound} from 'next/navigation';
+import type {ReactNode} from 'react';
+
 import {GoogleAnalytics} from '@next/third-parties/google';
 import {Analytics} from '@vercel/analytics/next';
 import {SpeedInsights} from '@vercel/speed-insights/next';
 
 import {siteConfig} from '@/config/site';
+
 import {isAnalyticsEnabled} from '@/lib/analytics';
 import {locales, APP_LOCALES, type Locale} from '@/lib/i18n/config';
 import {getDictionary} from '@/lib/i18n/getDictionary';
-import {ThemeProvider} from '@/providers/themeProvider';
+
 import {DictionaryProvider} from '@/providers/dictionaryProvider';
+import {ThemeProvider} from '@/providers/themeProvider';
+
 import {Toaster} from '@/components/ui/sonner';
 
 import '../globals.css';

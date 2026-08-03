@@ -1,6 +1,7 @@
-import {getDictionary} from '@/lib/i18n/getDictionary';
-import type {Locale} from '@/lib/i18n/config';
 import {User, Users, Dumbbell, Activity, Heart, Shield, Flame, Target} from 'lucide-react';
+
+import type {Locale} from '@/lib/i18n/config';
+import {getDictionary} from '@/lib/i18n/getDictionary';
 
 interface CardItem {
   title: string;

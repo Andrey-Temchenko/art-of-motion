@@ -1,16 +1,15 @@
-import {
-  GroupedScheduleSlots,
-  ProcessedClientBooking,
-  CancelBookingResult,
-  DomainError,
-  ProcessedScheduleSlot
-} from './types';
-import {getRepositories} from '@/repositories';
-import {formatKyivTime} from '@/lib/utils/timezone';
-import {getNextWeekRange} from '@/lib/utils/date';
-import {notifyAdmin} from '@/lib/telegram/notifyAdmin';
+import type {BookingStatusType} from '@/constants/bookingStatus';
+import {BOOKING_STATUS} from '@/constants/bookingStatus';
+
 import {formatBookingCreatedMessage, formatBookingCancelledMessage} from '@/lib/telegram/messages';
-import {BOOKING_STATUS, BookingStatusType} from '@/constants/bookingStatus';
+import {notifyAdmin} from '@/lib/telegram/notifyAdmin';
+import {getNextWeekRange} from '@/lib/utils/date';
+import {formatKyivTime} from '@/lib/utils/timezone';
+
+import {getRepositories} from '@/repositories';
+
+import type {GroupedScheduleSlots, ProcessedClientBooking, CancelBookingResult, ProcessedScheduleSlot} from './types';
+import {DomainError} from './types';
 
 export async function bookSlot(slot_id: string, client_id: string, repos = getRepositories()): Promise<void> {
   let bookingData;

@@ -3,12 +3,17 @@
 import React, {useState} from 'react';
 
 import {DATE_FORMATS} from '@/constants/dateFormats';
-import {formatDate} from '@/lib/utils/date';
-import {ProcessedUpcomingOccurrence} from '@/services/types';
-import {useDictionary} from '@/providers/dictionaryProvider';
-import {ClubLocationType} from '@/constants/locations';
-import {CreateSlotInput} from '@/lib/validators/slots';
+import type {ClubLocationType} from '@/constants/locations';
 
+import {formatDate} from '@/lib/utils/date';
+import type {CreateSlotInput} from '@/lib/validators/slots';
+
+import {useDictionary} from '@/providers/dictionaryProvider';
+
+import type {ProcessedUpcomingOccurrence} from '@/services/types';
+
+import type {WorkoutType} from '@/components/shared/SlotForm';
+import {SlotForm} from '@/components/shared/SlotForm';
 import {Button} from '@/components/ui/button';
 import {
   Dialog,
@@ -18,7 +23,6 @@ import {
   DialogTrigger,
   DialogDescription
 } from '@/components/ui/dialog';
-import {SlotForm, WorkoutType} from '@/components/shared/SlotForm';
 
 interface ConfirmOccurrenceDialogProps {
   occurrence: ProcessedUpcomingOccurrence;

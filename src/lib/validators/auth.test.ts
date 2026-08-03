@@ -1,4 +1,5 @@
 import {describe, it, expect} from 'vitest';
+
 import {loginSchema, updatePasswordSchema} from './auth';
 
 describe('Auth Validators', () => {

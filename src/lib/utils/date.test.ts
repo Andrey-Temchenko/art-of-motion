@@ -1,5 +1,6 @@
-import {describe, it, expect} from 'vitest';
 import {differenceInDays} from 'date-fns';
+import {describe, it, expect} from 'vitest';
+
 import {canCancelBooking, getNextWeekRange, SCHEDULE_DAYS_RANGE, formatDate} from './date';
 
 describe('getNextWeekRange', () => {

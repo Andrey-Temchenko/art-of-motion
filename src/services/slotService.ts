@@ -1,10 +1,14 @@
-import {fromKyivTime} from '@/lib/utils/timezone';
-import {SLOT_STATUS} from '@/constants/slotStatus';
 import {BOOKING_STATUS} from '@/constants/bookingStatus';
-import {ClubLocationType} from '@/constants/locations';
-import {ProcessedAdminSlot, ProcessedAdminSlotDetails, DomainError, UpdateSlotInput} from './types';
+import type {ClubLocationType} from '@/constants/locations';
+import {SLOT_STATUS} from '@/constants/slotStatus';
+
+import {fromKyivTime} from '@/lib/utils/timezone';
+
 import {getRepositories} from '@/repositories';
-import {CreateSlotData, UpdateSlotData} from '@/repositories/types';
+import type {CreateSlotData, UpdateSlotData} from '@/repositories/types';
+
+import type {ProcessedAdminSlot, ProcessedAdminSlotDetails, UpdateSlotInput} from './types';
+import {DomainError} from './types';
 
 interface CreateSlotInput {
   workout_type_id: string;

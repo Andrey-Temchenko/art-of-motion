@@ -1,10 +1,17 @@
 'use client';
 
-import React, {useState, useEffect, useCallback} from 'react';
 import Image from 'next/image';
+import React, {useState, useEffect, useCallback} from 'react';
+
 import {Camera, ChevronLeft, ChevronRight} from 'lucide-react';
 
+import {siteConfig} from '@/config/site';
+
+import {cn} from '@/lib/utils';
+
 import {useDictionary} from '@/providers/dictionaryProvider';
+
+import {Button} from '@/components/ui/button';
 import {
   Carousel,
   CarouselContent,
@@ -13,9 +20,6 @@ import {
   CarouselPrevious,
   type CarouselApi
 } from '@/components/ui/carousel';
-import {siteConfig} from '@/config/site';
-import {cn} from '@/lib/utils';
-import {Button} from '@/components/ui/button';
 
 export function GallerySection() {
   const dict = useDictionary();

@@ -1,5 +1,5 @@
-import {formatKyivTime} from '@/lib/utils/timezone';
 import {getLocationDictKey} from '@/lib/utils/locations';
+import {formatKyivTime} from '@/lib/utils/timezone';
 
 const WORKOUT_TITLES_RU: Record<string, string> = {
   strength: 'Силовая',

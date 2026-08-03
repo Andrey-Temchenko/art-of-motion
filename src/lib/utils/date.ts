@@ -1,5 +1,5 @@
-import {addDays, format as formatFn} from 'date-fns';
 import type {Locale as DateFnsLocaleType} from 'date-fns';
+import {addDays, format as formatFn} from 'date-fns';
 import {uk, ru, enUS} from 'date-fns/locale';
 
 import {APP_LOCALES} from '@/lib/i18n/config';

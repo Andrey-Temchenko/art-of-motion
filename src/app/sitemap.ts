@@ -1,7 +1,8 @@
 import type {MetadataRoute} from 'next';
 
-import {locales} from '@/lib/i18n/config';
 import {siteConfig} from '@/config/site';
+
+import {locales} from '@/lib/i18n/config';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return locales.map(locale => ({

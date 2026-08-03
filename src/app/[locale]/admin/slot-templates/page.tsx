@@ -1,16 +1,19 @@
 import React from 'react';
 
-import {requireRole} from '@/lib/supabase/session';
-import {USER_ROLE} from '@/constants/roles';
-import {getDictionary} from '@/lib/i18n/getDictionary';
-import {Locale} from '@/lib/i18n/config';
-import {getRepositories} from '@/repositories';
-import {getAllSlotTemplates, getUpcomingOccurrences} from '@/services/slotTemplateService';
 import {CLUB_LOCATION_VALUES} from '@/constants/locations';
+import {USER_ROLE} from '@/constants/roles';
+
+import type {Locale} from '@/lib/i18n/config';
+import {getDictionary} from '@/lib/i18n/getDictionary';
+import {requireRole} from '@/lib/supabase/session';
 import {getLocationLabel} from '@/lib/utils/locations';
 
-import {TemplatesTable} from '@/components/admin/slot_templates/TemplatesTable';
+import {getRepositories} from '@/repositories';
+
+import {getAllSlotTemplates, getUpcomingOccurrences} from '@/services/slotTemplateService';
+
 import {CreateTemplateDialog} from '@/components/admin/slot_templates/CreateTemplateDialog';
+import {TemplatesTable} from '@/components/admin/slot_templates/TemplatesTable';
 import {UpcomingOccurrences} from '@/components/admin/slot_templates/UpcomingOccurrences';
 
 interface PageProps {

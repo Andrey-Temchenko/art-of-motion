@@ -1,9 +1,11 @@
 'use client';
 
 import React, {useState} from 'react';
+
 import {PlusIcon} from 'lucide-react';
 
 import {useDictionary} from '@/providers/dictionaryProvider';
+
 import {Button} from '@/components/ui/button';
 import {
   Dialog,
@@ -13,7 +15,9 @@ import {
   DialogTrigger,
   DialogDescription
 } from '@/components/ui/dialog';
-import {TemplateForm, WorkoutTypeOption} from './components/TemplateForm';
+
+import type {WorkoutTypeOption} from './components/TemplateForm';
+import {TemplateForm} from './components/TemplateForm';
 
 interface CreateTemplateDialogProps {
   workoutTypes: WorkoutTypeOption[];

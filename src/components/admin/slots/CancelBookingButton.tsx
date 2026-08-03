@@ -1,7 +1,12 @@
 'use client';
 
 import React, {useState, useTransition} from 'react';
+
 import {toast} from 'sonner';
+
+import {useDictionary} from '@/providers/dictionaryProvider';
+
+import {cancelBookingAction} from '@/actions/adminSlots';
 
 import {
   AlertDialog,
@@ -15,8 +20,6 @@ import {
   AlertDialogTrigger
 } from '@/components/ui/alert-dialog';
 import {Button} from '@/components/ui/button';
-import {cancelBookingAction} from '@/actions/adminSlots';
-import {useDictionary} from '@/providers/dictionaryProvider';
 
 interface CancelBookingButtonProps {
   bookingId: string;

@@ -1,10 +1,14 @@
 'use client';
 
 import React, {useState} from 'react';
-import {useDictionary} from '@/providers/dictionaryProvider';
-import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
+
 import {Quote, Star} from 'lucide-react';
+
 import {cn} from '@/lib/utils';
+
+import {useDictionary} from '@/providers/dictionaryProvider';
+
+import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
 
 export function TestimonialsSection() {
   const dict = useDictionary();

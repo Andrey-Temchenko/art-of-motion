@@ -1,9 +1,12 @@
 'use client';
 
-import {useDictionary} from '@/providers/dictionaryProvider';
-import {analytics} from '@/lib/analytics';
-import {siteConfig} from '@/config/site';
 import {MapPin, Send, ArrowUpRight} from 'lucide-react';
+
+import {siteConfig} from '@/config/site';
+
+import {analytics} from '@/lib/analytics';
+
+import {useDictionary} from '@/providers/dictionaryProvider';
 
 function InstagramIcon({className}: {className?: string}) {
   return (

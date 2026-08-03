@@ -1,22 +1,25 @@
 'use client';
 
-import React, {useState} from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 import {usePathname} from 'next/navigation';
-import {Menu} from 'lucide-react';
+import React, {useState} from 'react';
+
 import type {User} from '@supabase/supabase-js';
+import {Menu} from 'lucide-react';
+
+import {buildRoute, isRouteActive} from '@/config/navigation';
+
+import {USER_ROLE} from '@/constants/roles';
 
 import type {Locale} from '@/lib/i18n/config';
 import {cn} from '@/lib/utils';
-import {USER_ROLE} from '@/constants/roles';
-import {buildRoute, isRouteActive} from '@/config/navigation';
 
+import {LanguageSwitcher} from '@/components/shared/LanguageSwitcher';
+import {ThemeToggle} from '@/components/shared/ThemeToggle';
 import {UserDropdown} from '@/components/shared/UserDropdown';
 import {Button} from '@/components/ui/button';
 import {Sheet, SheetContent} from '@/components/ui/sheet';
-import {LanguageSwitcher} from '@/components/shared/LanguageSwitcher';
-import {ThemeToggle} from '@/components/shared/ThemeToggle';
 
 export interface NavItem {
   label: string;

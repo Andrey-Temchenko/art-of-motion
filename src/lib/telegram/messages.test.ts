@@ -1,6 +1,8 @@
 import {describe, it, expect, vi, beforeEach} from 'vitest';
-import {formatBookingCreatedMessage, formatBookingCancelledMessage} from './messages';
+
 import {CLUB_LOCATION} from '@/constants/locations';
+
+import {formatBookingCreatedMessage, formatBookingCancelledMessage} from './messages';
 
 vi.mock('@/lib/utils/locations', () => ({
   getLocationDictKey: vi.fn((location: string) => (location === CLUB_LOCATION.ALPHA ? 'alfa' : 'topgun'))

@@ -1,12 +1,17 @@
 'use client';
 
 import React, {useState} from 'react';
+
 import {PencilIcon} from 'lucide-react';
 
-import {ProcessedAdminSlotDetails} from '@/services/types';
-import {useDictionary} from '@/providers/dictionaryProvider';
-import {ClubLocationType} from '@/constants/locations';
+import type {ClubLocationType} from '@/constants/locations';
 
+import {useDictionary} from '@/providers/dictionaryProvider';
+
+import type {ProcessedAdminSlotDetails} from '@/services/types';
+
+import type {WorkoutType} from '@/components/shared/SlotForm';
+import {SlotForm} from '@/components/shared/SlotForm';
 import {Button} from '@/components/ui/button';
 import {
   Dialog,
@@ -16,7 +21,6 @@ import {
   DialogTrigger,
   DialogDescription
 } from '@/components/ui/dialog';
-import {SlotForm, WorkoutType} from '@/components/shared/SlotForm';
 
 interface EditSlotDialogProps {
   slot: ProcessedAdminSlotDetails;

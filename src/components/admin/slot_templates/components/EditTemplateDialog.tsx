@@ -1,9 +1,15 @@
 'use client';
 
 import React, {useState} from 'react';
+
 import {PencilIcon} from 'lucide-react';
 
+import type {ClubLocationType} from '@/constants/locations';
+
 import {useDictionary} from '@/providers/dictionaryProvider';
+
+import type {ProcessedSlotTemplate} from '@/services/types';
+
 import {Button} from '@/components/ui/button';
 import {
   Dialog,
@@ -13,9 +19,9 @@ import {
   DialogTrigger,
   DialogDescription
 } from '@/components/ui/dialog';
-import {TemplateForm, WorkoutTypeOption} from './TemplateForm';
-import {ProcessedSlotTemplate} from '@/services/types';
-import {ClubLocationType} from '@/constants/locations';
+
+import type {WorkoutTypeOption} from './TemplateForm';
+import {TemplateForm} from './TemplateForm';
 
 interface EditTemplateDialogProps {
   template: ProcessedSlotTemplate;

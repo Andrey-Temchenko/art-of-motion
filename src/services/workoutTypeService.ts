@@ -1,5 +1,5 @@
 import {getRepositories} from '@/repositories';
-import {WorkoutType} from '@/repositories/types';
+import type {WorkoutType} from '@/repositories/types';
 
 export async function getWorkoutTypes(repos = getRepositories()): Promise<WorkoutType[]> {
   try {

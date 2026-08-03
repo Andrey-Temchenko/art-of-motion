@@ -1,11 +1,14 @@
 import React from 'react';
+
 import {LayoutDashboard, Users, Calendar, LayoutTemplate} from 'lucide-react';
 
-import {requireRole} from '@/lib/supabase/session';
-import {USER_ROLE} from '@/constants/roles';
-import {getDictionary} from '@/lib/i18n/getDictionary';
-import type {Locale} from '@/lib/i18n/config';
 import {ROUTES, buildRoute} from '@/config/navigation';
+
+import {USER_ROLE} from '@/constants/roles';
+
+import type {Locale} from '@/lib/i18n/config';
+import {getDictionary} from '@/lib/i18n/getDictionary';
+import {requireRole} from '@/lib/supabase/session';
 
 import {Layout} from '@/components/shared/Layout';
 

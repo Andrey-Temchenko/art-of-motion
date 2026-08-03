@@ -1,9 +1,11 @@
 import {redirect} from 'next/navigation';
-import {User} from '@supabase/supabase-js';
+
+import type {User} from '@supabase/supabase-js';
+
+import {getRepositories} from '@/repositories';
 
 import {createClient} from './server';
-import {UserRole, Profile} from './types';
-import {getRepositories} from '@/repositories';
+import type {UserRole, Profile} from './types';
 
 /**
  * Internal helper to get the authenticated user and initialized client.

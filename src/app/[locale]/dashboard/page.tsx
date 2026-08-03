@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {getUserProfile} from '@/lib/supabase/session';
+import type {Locale} from '@/lib/i18n/config';
 import {getDictionary} from '@/lib/i18n/getDictionary';
-import {Locale} from '@/lib/i18n/config';
+import {getUserProfile} from '@/lib/supabase/session';
 
 export default async function DashboardPage(props: {params: Promise<{locale: Locale}>}) {
   const params = await props.params;

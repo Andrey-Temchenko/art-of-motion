@@ -1,8 +1,9 @@
 import React from 'react';
 
-import {getAdminClientsList} from '@/services/adminService';
+import type {Locale} from '@/lib/i18n/config';
 import {getDictionary} from '@/lib/i18n/getDictionary';
-import {Locale} from '@/lib/i18n/config';
+
+import {getAdminClientsList} from '@/services/adminService';
 
 import {ClientsTable} from '@/components/admin/clients/ClientsTable';
 

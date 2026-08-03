@@ -1,11 +1,13 @@
-import {requireUser} from '@/lib/supabase/session';
-import {getDictionary} from '@/lib/i18n/getDictionary';
-import {Locale} from '@/lib/i18n/config';
-import {formatKyivTime} from '@/lib/utils/timezone';
-import {getLocationDictKey} from '@/lib/utils/locations';
-import {getDateFnsLocale} from '@/lib/utils/date';
-import {getScheduleSlots} from '@/services/bookingService';
 import {SLOT_STATUS} from '@/constants/slotStatus';
+
+import type {Locale} from '@/lib/i18n/config';
+import {getDictionary} from '@/lib/i18n/getDictionary';
+import {requireUser} from '@/lib/supabase/session';
+import {getDateFnsLocale} from '@/lib/utils/date';
+import {getLocationDictKey} from '@/lib/utils/locations';
+import {formatKyivTime} from '@/lib/utils/timezone';
+
+import {getScheduleSlots} from '@/services/bookingService';
 
 import {BookingButton} from '@/components/dashboard/schedule/BookingButton';
 import {BookingCard} from '@/components/shared/BookingCard';

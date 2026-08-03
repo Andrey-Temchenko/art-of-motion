@@ -1,5 +1,5 @@
-import {getSupabasePublicUrl} from '@/lib/supabase/storage';
 import {SUPABASE_BUCKETS} from '@/lib/supabase/constants';
+import {getSupabasePublicUrl} from '@/lib/supabase/storage';
 
 export interface SocialLinks {
   telegram: string;

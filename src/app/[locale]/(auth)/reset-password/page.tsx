@@ -1,18 +1,22 @@
 'use client';
 
-import React, {useState, useTransition} from 'react';
 import Link from 'next/link';
-import {useForm} from 'react-hook-form';
-import {zodResolver} from '@hookform/resolvers/zod';
+import React, {useState, useTransition} from 'react';
 
-import {resetPassword} from '@/actions/auth';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {useForm} from 'react-hook-form';
+
+import {buildRoute, ROUTES} from '@/config/navigation';
+
 import {useClientDictionary} from '@/lib/i18n/useClientDictionary';
 import {resetPasswordSchema, type ResetPasswordInput} from '@/lib/validators/auth';
-import {buildRoute, ROUTES} from '@/config/navigation';
+
+import {resetPassword} from '@/actions/auth';
+
 import {useAuthFormError} from '@/hooks/useAuthFormError';
 
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Button} from '@/components/ui/button';
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 
