@@ -108,3 +108,36 @@ export class DomainError extends Error {
     this.name = 'DomainError';
   }
 }
+
+// Slot Templates
+
+export type ProcessedSlotTemplate = {
+  id: string;
+  workout_type_id: string;
+  workout_title_key: string;
+  location: string;
+  day_of_week: number;
+  start_time_local: string;
+  duration_minutes: number;
+  max_capacity: number;
+  price: number;
+  cancellation_deadline_hours: number;
+  is_active: boolean;
+  recurrence_start_date: string;
+  recurrence_end_date: string | null;
+};
+
+export type ProcessedUpcomingOccurrence = {
+  templateId: string;
+  occurrenceDate: string;
+  startUtc: string; // ISO string for serialization to client
+  endUtc: string; // ISO string for serialization to client
+  workout_type_id: string;
+  workout_title_key: string;
+  location: string;
+  max_capacity: number;
+  price: number;
+  duration_minutes: number;
+  cancellation_deadline_hours: number;
+  start_time_local: string;
+};

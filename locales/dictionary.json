@@ -1005,6 +1005,316 @@
         }
       }
     },
+    "slotTemplatesPage": {
+      "title": {
+        "uk": "Шаблони тренувань",
+        "ru": "Шаблоны тренировок",
+        "en": "Workout Templates"
+      },
+      "subtitle": {
+        "uk": "Створюйте шаблони для регулярних тренувань та підтверджуйте заняття.",
+        "ru": "Создавайте шаблоны для регулярных тренировок и подтверждайте занятия.",
+        "en": "Create templates for recurring workouts and confirm sessions."
+      },
+      "createTemplate": {
+        "uk": "Створити шаблон",
+        "ru": "Создать шаблон",
+        "en": "Create Template"
+      },
+      "editTemplate": {
+        "uk": "Редагувати шаблон",
+        "ru": "Редактировать шаблон",
+        "en": "Edit Template"
+      },
+      "deleteTemplate": {
+        "uk": "Видалити шаблон",
+        "ru": "Удалить шаблон",
+        "en": "Delete Template"
+      },
+      "deleteConfirmTitle": {
+        "uk": "Видалити шаблон?",
+        "ru": "Удалить шаблон?",
+        "en": "Delete Template?"
+      },
+      "deleteConfirmDesc": {
+        "uk": "Вже створені слоти залишаться без змін. Цю дію не можна скасувати.",
+        "ru": "Уже созданные слоты останутся без изменений. Это действие нельзя отменить.",
+        "en": "Already created slots remain unchanged. This action cannot be undone."
+      },
+      "cancel": {
+        "uk": "Скасувати",
+        "ru": "Отменить",
+        "en": "Cancel"
+      },
+      "noTemplates": {
+        "uk": "Немає шаблонів",
+        "ru": "Нет шаблонов",
+        "en": "No templates"
+      },
+      "active": {
+        "uk": "Активний",
+        "ru": "Активный",
+        "en": "Active"
+      },
+      "inactive": {
+        "uk": "Неактивний",
+        "ru": "Неактивный",
+        "en": "Inactive"
+      },
+      "indefinite": {
+        "uk": "Безстроково",
+        "ru": "Бессрочно",
+        "en": "Indefinite"
+      },
+      "table": {
+        "workout": {
+          "uk": "Тренування",
+          "ru": "Тренировка",
+          "en": "Workout"
+        },
+        "location": {
+          "uk": "Локація",
+          "ru": "Локация",
+          "en": "Location"
+        },
+        "day": {
+          "uk": "День",
+          "ru": "День",
+          "en": "Day"
+        },
+        "time": {
+          "uk": "Час",
+          "ru": "Время",
+          "en": "Time"
+        },
+        "duration": {
+          "uk": "Тривалість",
+          "ru": "Длительность",
+          "en": "Duration"
+        },
+        "capacity": {
+          "uk": "Місця",
+          "ru": "Места",
+          "en": "Capacity"
+        },
+        "price": {
+          "uk": "Ціна",
+          "ru": "Цена",
+          "en": "Price"
+        },
+        "period": {
+          "uk": "Період",
+          "ru": "Период",
+          "en": "Period"
+        },
+        "status": {
+          "uk": "Статус",
+          "ru": "Статус",
+          "en": "Status"
+        },
+        "actions": {
+          "uk": "Дії",
+          "ru": "Действия",
+          "en": "Actions"
+        }
+      },
+      "form": {
+        "workoutType": {
+          "uk": "Тип тренування",
+          "ru": "Тип тренировки",
+          "en": "Workout Type"
+        },
+        "selectWorkout": {
+          "uk": "Оберіть тип тренування",
+          "ru": "Выберите тип тренировки",
+          "en": "Select workout type"
+        },
+        "location": {
+          "uk": "Локація",
+          "ru": "Локация",
+          "en": "Location"
+        },
+        "selectLocation": {
+          "uk": "Оберіть локацію",
+          "ru": "Выберите локацию",
+          "en": "Select location"
+        },
+        "dayOfWeek": {
+          "uk": "День тижня",
+          "ru": "День недели",
+          "en": "Day of Week"
+        },
+        "selectDay": {
+          "uk": "Оберіть день",
+          "ru": "Выберите день",
+          "en": "Select day"
+        },
+        "startTime": {
+          "uk": "Час початку",
+          "ru": "Время начала",
+          "en": "Start Time"
+        },
+        "duration": {
+          "uk": "Тривалість (хвилин)",
+          "ru": "Длительность (минут)",
+          "en": "Duration (minutes)"
+        },
+        "capacity": {
+          "uk": "Максимальна кількість місць",
+          "ru": "Максимальное количество мест",
+          "en": "Max Capacity"
+        },
+        "price": {
+          "uk": "Ціна",
+          "ru": "Цена",
+          "en": "Price"
+        },
+        "cancellationDeadline": {
+          "uk": "Дедлайн скасування (годин)",
+          "ru": "Дедлайн отмены (часов)",
+          "en": "Cancellation Deadline (hours)"
+        },
+        "recurrenceStart": {
+          "uk": "Дата початку",
+          "ru": "Дата начала",
+          "en": "Start Date"
+        },
+        "recurrenceEnd": {
+          "uk": "Дата завершення",
+          "ru": "Дата окончания",
+          "en": "End Date"
+        },
+        "indefiniteCheckbox": {
+          "uk": "Безстроково",
+          "ru": "Бессрочно",
+          "en": "Indefinite"
+        },
+        "pickDate": {
+          "uk": "Оберіть дату",
+          "ru": "Выберите дату",
+          "en": "Pick a date"
+        },
+        "buttonCreate": {
+          "uk": "Створити шаблон",
+          "ru": "Создать шаблон",
+          "en": "Create Template"
+        },
+        "buttonCreating": {
+          "uk": "Створення...",
+          "ru": "Создание...",
+          "en": "Creating..."
+        },
+        "buttonSave": {
+          "uk": "Зберегти",
+          "ru": "Сохранить",
+          "en": "Save"
+        },
+        "buttonSaving": {
+          "uk": "Збереження...",
+          "ru": "Сохранение...",
+          "en": "Saving..."
+        }
+      },
+      "daysOfWeek": {
+        "0": {
+          "uk": "Неділя",
+          "ru": "Воскресенье",
+          "en": "Sunday"
+        },
+        "1": {
+          "uk": "Понеділок",
+          "ru": "Понедельник",
+          "en": "Monday"
+        },
+        "2": {
+          "uk": "Вівторок",
+          "ru": "Вторник",
+          "en": "Tuesday"
+        },
+        "3": {
+          "uk": "Середа",
+          "ru": "Среда",
+          "en": "Wednesday"
+        },
+        "4": {
+          "uk": "Четвер",
+          "ru": "Четверг",
+          "en": "Thursday"
+        },
+        "5": {
+          "uk": "П'ятниця",
+          "ru": "Пятница",
+          "en": "Friday"
+        },
+        "6": {
+          "uk": "Субота",
+          "ru": "Суббота",
+          "en": "Saturday"
+        }
+      },
+      "upcoming": {
+        "title": {
+          "uk": "Майбутні заняття",
+          "ru": "Предстоящие занятия",
+          "en": "Upcoming Sessions"
+        },
+        "weeksAhead": {
+          "uk": "Показати на {n} тижнів вперед",
+          "ru": "Показать на {n} недель вперед",
+          "en": "Show {n} weeks ahead"
+        },
+        "noOccurrences": {
+          "uk": "Немає запланованих занять",
+          "ru": "Нет запланированных занятий",
+          "en": "No upcoming sessions"
+        },
+        "confirm": {
+          "uk": "Підтвердити",
+          "ru": "Подтвердить",
+          "en": "Confirm"
+        },
+        "confirmTitle": {
+          "uk": "Підтвердити заняття",
+          "ru": "Подтвердить занятие",
+          "en": "Confirm Session"
+        },
+        "confirmDesc": {
+          "uk": "Перевірте та за потреби змініть дані перед створенням слоту.",
+          "ru": "Проверьте и при необходимости измените данные перед созданием слота.",
+          "en": "Review and optionally modify the data before creating the slot."
+        },
+        "date": {
+          "uk": "Дата",
+          "ru": "Дата",
+          "en": "Date"
+        },
+        "day": {
+          "uk": "День",
+          "ru": "День",
+          "en": "Day"
+        },
+        "time": {
+          "uk": "Час",
+          "ru": "Время",
+          "en": "Time"
+        },
+        "workout": {
+          "uk": "Тренування",
+          "ru": "Тренировка",
+          "en": "Workout"
+        },
+        "location": {
+          "uk": "Локація",
+          "ru": "Локация",
+          "en": "Location"
+        },
+        "capacity": {
+          "uk": "Місця",
+          "ru": "Места",
+          "en": "Capacity"
+        }
+      }
+    },
     "slotDetailsPage": {
       "title": {
         "uk": "Деталі слоту",

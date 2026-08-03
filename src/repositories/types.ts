@@ -1,10 +1,11 @@
 import {Profile, UserRole} from '@/lib/supabase/types';
 import {Database} from '@/types/database.types';
-import {QueryData} from '@supabase/supabase-js';
+import {QueryData, SupabaseClient} from '@supabase/supabase-js';
 import {createAdminClient} from '@/lib/supabase/admin';
 import {BookingStatusType} from '@/constants/bookingStatus';
 import {ClubLocationType} from '@/constants/locations';
 import {SlotStatusType} from '@/constants/slotStatus';
+import {DayOfWeekType} from '@/constants/dayOfWeek';
 
 export interface RawDashboardKpis {
   total_clients: number | null;
@@ -49,6 +50,8 @@ export type CreateSlotData = {
   max_capacity: number;
   price: number;
   status: SlotStatusType;
+  cancellation_deadline_hours?: number;
+  slot_template_id?: string;
 };
 
 export type UpdateSlotData = Partial<CreateSlotData>;
@@ -163,4 +166,53 @@ export type RawAdminSlotDetails = QueryData<ReturnType<typeof adminSlotDetailsQu
 
 export interface IWorkoutTypeRepository {
   getAllWorkoutTypes(): Promise<WorkoutType[]>;
+}
+
+// Slot Templates
+
+export const allSlotTemplatesQuery = (client: SupabaseClient<Database> = createAdminClient()) =>
+  client.from('slot_templates').select(
+    `
+      id,
+      workout_type_id,
+      location,
+      day_of_week,
+      start_time_local,
+      duration_minutes,
+      max_capacity,
+      price,
+      cancellation_deadline_hours,
+      is_active,
+      recurrence_start_date,
+      recurrence_end_date,
+      created_at,
+      workout_type:workout_types(title)
+    `
+  );
+
+export type RawSlotTemplateData = QueryData<ReturnType<typeof allSlotTemplatesQuery>>[number];
+
+export type CreateSlotTemplateData = {
+  workout_type_id: string;
+  location: ClubLocationType;
+  day_of_week: DayOfWeekType;
+  start_time_local: string;
+  duration_minutes: number;
+  max_capacity: number;
+  price: number;
+  cancellation_deadline_hours: number;
+  is_active: boolean;
+  recurrence_start_date: string;
+  recurrence_end_date: string | null;
+};
+
+export type UpdateSlotTemplateData = Partial<CreateSlotTemplateData>;
+
+export interface ISlotTemplateRepository {
+  getAllSlotTemplates(): Promise<RawSlotTemplateData[]>;
+  insertSlotTemplate(data: CreateSlotTemplateData): Promise<void>;
+  updateSlotTemplate(id: string, data: UpdateSlotTemplateData): Promise<void>;
+  toggleSlotTemplateActive(id: string): Promise<boolean>;
+  deleteSlotTemplate(id: string): Promise<void>;
+  getMaterializedDatesForTemplates(templateIds: string[]): Promise<{slot_template_id: string; start_time: string}[]>;
 }

@@ -80,6 +80,62 @@ export type Database = {
         };
         Relationships: [];
       };
+      slot_templates: {
+        Row: {
+          cancellation_deadline_hours: number;
+          created_at: string;
+          day_of_week: number;
+          duration_minutes: number;
+          id: string;
+          is_active: boolean;
+          location: Database['public']['Enums']['club_location'];
+          max_capacity: number;
+          price: number;
+          recurrence_end_date: string | null;
+          recurrence_start_date: string;
+          start_time_local: string;
+          workout_type_id: string;
+        };
+        Insert: {
+          cancellation_deadline_hours?: number;
+          created_at?: string;
+          day_of_week: number;
+          duration_minutes?: number;
+          id?: string;
+          is_active?: boolean;
+          location: Database['public']['Enums']['club_location'];
+          max_capacity?: number;
+          price: number;
+          recurrence_end_date?: string | null;
+          recurrence_start_date: string;
+          start_time_local: string;
+          workout_type_id: string;
+        };
+        Update: {
+          cancellation_deadline_hours?: number;
+          created_at?: string;
+          day_of_week?: number;
+          duration_minutes?: number;
+          id?: string;
+          is_active?: boolean;
+          location?: Database['public']['Enums']['club_location'];
+          max_capacity?: number;
+          price?: number;
+          recurrence_end_date?: string | null;
+          recurrence_start_date?: string;
+          start_time_local?: string;
+          workout_type_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'slot_templates_workout_type_id_fkey';
+            columns: ['workout_type_id'];
+            isOneToOne: false;
+            referencedRelation: 'workout_types';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
       slots: {
         Row: {
           cancellation_deadline_hours: number;
@@ -89,6 +145,7 @@ export type Database = {
           location: Database['public']['Enums']['club_location'];
           max_capacity: number;
           price: number;
+          slot_template_id: string | null;
           start_time: string;
           status: Database['public']['Enums']['slot_status'];
           workout_type_id: string;
@@ -101,6 +158,7 @@ export type Database = {
           location: Database['public']['Enums']['club_location'];
           max_capacity?: number;
           price: number;
+          slot_template_id?: string | null;
           start_time: string;
           status?: Database['public']['Enums']['slot_status'];
           workout_type_id: string;
@@ -113,11 +171,19 @@ export type Database = {
           location?: Database['public']['Enums']['club_location'];
           max_capacity?: number;
           price?: number;
+          slot_template_id?: string | null;
           start_time?: string;
           status?: Database['public']['Enums']['slot_status'];
           workout_type_id?: string;
         };
         Relationships: [
+          {
+            foreignKeyName: 'slots_slot_template_id_fkey';
+            columns: ['slot_template_id'];
+            isOneToOne: false;
+            referencedRelation: 'slot_templates';
+            referencedColumns: ['id'];
+          },
           {
             foreignKeyName: 'slots_workout_type_id_fkey';
             columns: ['workout_type_id'];

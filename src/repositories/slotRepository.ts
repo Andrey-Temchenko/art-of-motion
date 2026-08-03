@@ -2,6 +2,7 @@ import {createClient} from '@/lib/supabase/server';
 import {createAdminClient} from '@/lib/supabase/admin';
 import {CreateSlotData, RawSlotData, RawAdminSlotDetails, UpdateSlotData} from './types';
 import {SLOT_STATUS, SlotStatusType} from '@/constants/slotStatus';
+import {Database} from '@/types/database.types';
 
 export async function findOverlappingSlots(
   startTime: string,
@@ -34,9 +35,27 @@ export async function findOverlappingSlots(
 export async function insertSlot(slotData: CreateSlotData): Promise<void> {
   const supabase = await createClient();
 
-  const {error} = await supabase.from('slots').insert(slotData);
+  const insertPayload: Database['public']['Tables']['slots']['Insert'] = {
+    workout_type_id: slotData.workout_type_id,
+    location: slotData.location,
+    start_time: slotData.start_time,
+    end_time: slotData.end_time,
+    max_capacity: slotData.max_capacity,
+    price: slotData.price,
+    status: slotData.status
+  };
+
+  if (slotData.cancellation_deadline_hours !== undefined) {
+    insertPayload.cancellation_deadline_hours = slotData.cancellation_deadline_hours;
+  }
+  if (slotData.slot_template_id) {
+    insertPayload.slot_template_id = slotData.slot_template_id;
+  }
+
+  const {error} = await supabase.from('slots').insert(insertPayload);
 
   if (error) {
+    // Rethrow with the original error code so the service layer can detect exclusion_violation (23P01)
     throw error;
   }
 }

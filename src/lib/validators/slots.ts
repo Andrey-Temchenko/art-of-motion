@@ -8,7 +8,9 @@ export const slotSchema = z
     start_time: z.string().refine(v => !isNaN(Date.parse(v)), {message: 'Invalid start time'}),
     end_time: z.string().refine(v => !isNaN(Date.parse(v)), {message: 'Invalid end time'}),
     max_capacity: z.number().int().min(1, {message: 'Capacity must be at least 1'}),
-    price: z.number().min(0, {message: 'Price cannot be negative'})
+    price: z.number().min(0, {message: 'Price cannot be negative'}),
+    cancellation_deadline_hours: z.number().int().min(0).optional(),
+    slot_template_id: z.uuid().optional()
   })
   .refine(
     data => {

@@ -133,13 +133,18 @@ export async function cancelBookingAction(bookingId: string): Promise<ActionStat
 // helper methods
 
 function parseSlotFormData(formData: FormData) {
+  const slotTemplateId = formData.get('slot_template_id') as string | null;
+  const cancellationDeadlineRaw = formData.get('cancellation_deadline_hours') as string | null;
+
   return {
     workout_type_id: formData.get('workout_type_id'),
     location: formData.get('location'),
     start_time: formData.get('start_time'),
     end_time: formData.get('end_time'),
     max_capacity: parseInt(formData.get('max_capacity') as string, 10),
-    price: parseFloat(formData.get('price') as string)
+    price: parseFloat(formData.get('price') as string),
+    ...(cancellationDeadlineRaw ? {cancellation_deadline_hours: parseInt(cancellationDeadlineRaw, 10)} : {}),
+    ...(slotTemplateId ? {slot_template_id: slotTemplateId} : {})
   };
 }
 
@@ -148,6 +153,7 @@ function revalidateSlotPaths() {
   revalidatePath(buildRevalidatePath(ROUTES.DASHBOARD.SCHEDULE), 'page');
   revalidatePath(buildRevalidatePath(ROUTES.DASHBOARD.MY_BOOKINGS), 'page');
   revalidatePath(`${buildRevalidatePath(ROUTES.ADMIN.SLOTS)}/[id]`, 'page');
+  revalidatePath(buildRevalidatePath(ROUTES.ADMIN.TEMPLATES), 'page');
 }
 
 function getErrorMessage(error: unknown): string {

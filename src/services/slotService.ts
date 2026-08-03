@@ -13,6 +13,8 @@ type CreateSlotInput = {
   end_time: string;
   max_capacity: number;
   price: number;
+  cancellation_deadline_hours?: number;
+  slot_template_id?: string;
 };
 
 export async function createSlot(validData: CreateSlotInput, repos = getRepositories()): Promise<void> {
@@ -40,9 +42,15 @@ export async function createSlot(validData: CreateSlotInput, repos = getReposito
       end_time: utcEndTime,
       max_capacity: validData.max_capacity,
       price: validData.price,
-      status: STATUS_SCHEDULED
+      status: STATUS_SCHEDULED,
+      cancellation_deadline_hours: validData.cancellation_deadline_hours,
+      slot_template_id: validData.slot_template_id
     });
-  } catch {
+  } catch (error) {
+    // Handle DB exclusion_violation from the EXCLUDE constraint (code 23P01)
+    if (error && typeof error === 'object' && 'code' in error && (error as {code: string}).code === '23P01') {
+      throw new DomainError('OVERLAP', 'Trainer is already booked at this time!');
+    }
     throw new DomainError('DB_ERROR', 'Database error occurred while creating slot.');
   }
 }

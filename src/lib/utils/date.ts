@@ -29,3 +29,12 @@ export function canCancelBooking(
   const deadline = start - cancellationDeadlineHours * 60 * 60 * 1000;
   return now.getTime() < deadline;
 }
+
+/**
+ * Safely parses a YYYY-MM-DD string into a local Date object.
+ * Prevents the timezone shifting issues that occur when using new Date('YYYY-MM-DD').
+ */
+export function parseLocalDate(dateStr: string): Date {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
