@@ -9,9 +9,9 @@ import {getAllSlotTemplates, getUpcomingOccurrences} from '@/services/slotTempla
 import {CLUB_LOCATION_VALUES} from '@/constants/locations';
 import {getLocationLabel} from '@/lib/utils/locations';
 
-import {TemplatesTable} from '@/components/admin/TemplatesTable';
-import {CreateTemplateDialog} from '@/components/admin/CreateTemplateDialog';
-import {UpcomingOccurrences} from '@/components/admin/UpcomingOccurrences';
+import {TemplatesTable} from '@/components/admin/slot_templates/TemplatesTable';
+import {CreateTemplateDialog} from '@/components/admin/slot_templates/CreateTemplateDialog';
+import {UpcomingOccurrences} from '@/components/admin/slot_templates/UpcomingOccurrences';
 
 interface PageProps {
   params: Promise<{locale: Locale}>;

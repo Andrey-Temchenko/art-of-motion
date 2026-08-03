@@ -4,7 +4,7 @@ import {getAdminClientsList} from '@/services/adminService';
 import {getDictionary} from '@/lib/i18n/getDictionary';
 import {Locale} from '@/lib/i18n/config';
 
-import {ClientsTable} from '@/components/admin/ClientsTable';
+import {ClientsTable} from '@/components/admin/clients/ClientsTable';
 
 export default async function AdminClientsPage(props: {params: Promise<{locale: Locale}>}) {
   const {locale} = await props.params;

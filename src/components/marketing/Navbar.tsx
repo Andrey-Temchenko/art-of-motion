@@ -17,8 +17,8 @@ import {UserDropdown} from '@/components/shared/UserDropdown';
 import {Button} from '@/components/ui/button';
 import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetClose} from '@/components/ui/sheet';
 import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
-import {LanguageSwitcher} from '@/components/marketing/LanguageSwitcher';
-import {ThemeToggle} from '@/components/marketing/ThemeToggle';
+import {LanguageSwitcher} from '@/components/shared/LanguageSwitcher';
+import {ThemeToggle} from '@/components/shared/ThemeToggle';
 
 interface NavbarProps {
   locale: Locale;

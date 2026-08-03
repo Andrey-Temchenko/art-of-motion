@@ -7,8 +7,8 @@ import {useRouter, usePathname} from 'next/navigation';
 import {ProcessedUpcomingOccurrence} from '@/services/types';
 import {useDictionary} from '@/providers/dictionaryProvider';
 import {parseLocalDate, formatDate} from '@/lib/utils/date';
-import {ConfirmOccurrenceDialog} from './ConfirmOccurrenceDialog';
-import {WorkoutType} from '@/components/admin/SlotForm';
+import {ConfirmOccurrenceDialog} from './components/ConfirmOccurrenceDialog';
+import {WorkoutType} from '@/components/shared/SlotForm';
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/select';
 
 interface UpcomingOccurrencesProps {

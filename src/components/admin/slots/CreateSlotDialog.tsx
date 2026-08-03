@@ -7,7 +7,7 @@ import {useDictionary} from '@/providers/dictionaryProvider';
 
 import {Button} from '@/components/ui/button';
 import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from '@/components/ui/dialog';
-import {SlotForm, WorkoutType} from '@/components/admin/SlotForm';
+import {SlotForm, WorkoutType} from '@/components/shared/SlotForm';
 
 interface CreateSlotDialogProps {
   workoutTypes: WorkoutType[];

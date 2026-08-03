@@ -6,8 +6,8 @@ import type {getDateFnsLocale} from '@/lib/utils/date';
 import {getLocationDictKey} from '@/lib/utils/locations';
 import {formatKyivTime} from '@/lib/utils/timezone';
 
-import {BookingCard} from '@/components/dashboard/BookingCard';
-import {MyBookingAction} from '@/components/dashboard/MyBookingAction';
+import {BookingCard} from '@/components/shared/BookingCard';
+import {MyBookingAction} from '@/components/dashboard/my_bookings/MyBookingAction';
 
 export interface BookingsListProps {
   bookings: ProcessedClientBooking[];

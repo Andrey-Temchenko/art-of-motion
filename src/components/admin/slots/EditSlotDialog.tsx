@@ -16,7 +16,7 @@ import {
   DialogTrigger,
   DialogDescription
 } from '@/components/ui/dialog';
-import {SlotForm, WorkoutType} from '@/components/admin/SlotForm';
+import {SlotForm, WorkoutType} from '@/components/shared/SlotForm';
 
 interface EditSlotDialogProps {
   slot: ProcessedAdminSlotDetails;

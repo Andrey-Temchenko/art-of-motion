@@ -15,8 +15,8 @@ import {buildRoute, isRouteActive} from '@/config/navigation';
 import {UserDropdown} from '@/components/shared/UserDropdown';
 import {Button} from '@/components/ui/button';
 import {Sheet, SheetContent} from '@/components/ui/sheet';
-import {LanguageSwitcher} from '@/components/marketing/LanguageSwitcher';
-import {ThemeToggle} from '@/components/marketing/ThemeToggle';
+import {LanguageSwitcher} from '@/components/shared/LanguageSwitcher';
+import {ThemeToggle} from '@/components/shared/ThemeToggle';
 
 export interface NavItem {
   label: string;

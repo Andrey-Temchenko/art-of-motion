@@ -13,7 +13,7 @@ import {getDateFnsLocale} from '@/lib/utils/date';
 import {getAdminSlots} from '@/services/slotService';
 import {getWorkoutTypes} from '@/services/workoutTypeService';
 
-import {CreateSlotDialog} from '@/components/admin/CreateSlotDialog';
+import {CreateSlotDialog} from '@/components/admin/slots/CreateSlotDialog';
 
 export default async function AdminSlotsPage(props: {params: Promise<{locale: Locale}>}) {
   const {locale} = await props.params;

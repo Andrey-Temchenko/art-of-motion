@@ -12,9 +12,9 @@ import {CLUB_LOCATION_VALUES} from '@/constants/locations';
 import {BOOKING_STATUS} from '@/constants/bookingStatus';
 import {SLOT_STATUS} from '@/constants/slotStatus';
 
-import {CancelBookingButton} from '@/components/admin/CancelBookingButton';
-import {EditSlotDialog} from '@/components/admin/EditSlotDialog';
-import {CancelSlotButton} from '@/components/admin/CancelSlotButton';
+import {CancelBookingButton} from '@/components/admin/slots/CancelBookingButton';
+import {EditSlotDialog} from '@/components/admin/slots/EditSlotDialog';
+import {CancelSlotButton} from '@/components/admin/slots/CancelSlotButton';
 
 interface SlotDetailsPageProps {
   params: Promise<{

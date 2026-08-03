@@ -13,7 +13,7 @@ import {analytics} from '@/lib/analytics';
 import {siteConfig} from '@/config/site';
 
 import {Button} from '@/components/ui/button';
-import {DemoVideoModal} from '@/components/marketing/DemoVideoModal';
+import {DemoVideoModal} from '@/components/marketing/hero_section/components/DemoVideoModal';
 
 export function HeroSection({locale}: {locale: Locale}) {
   const dict = useDictionary();

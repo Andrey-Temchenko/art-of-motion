@@ -7,8 +7,8 @@ import {getDateFnsLocale} from '@/lib/utils/date';
 import {getScheduleSlots} from '@/services/bookingService';
 import {SLOT_STATUS} from '@/constants/slotStatus';
 
-import {BookingButton} from '@/components/dashboard/BookingButton';
-import {BookingCard} from '@/components/dashboard/BookingCard';
+import {BookingButton} from '@/components/dashboard/schedule/BookingButton';
+import {BookingCard} from '@/components/shared/BookingCard';
 
 export default async function SchedulePage(props: {params: Promise<{locale: Locale}>}) {
   const params = await props.params;

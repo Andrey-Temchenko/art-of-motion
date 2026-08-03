@@ -24,8 +24,8 @@ import {
 } from '@/components/ui/alert-dialog';
 import {Switch} from '@/components/ui/switch';
 import {Badge} from '@/components/ui/badge';
-import {EditTemplateDialog} from './EditTemplateDialog';
-import {WorkoutTypeOption} from './TemplateForm';
+import {EditTemplateDialog} from './components/EditTemplateDialog';
+import {WorkoutTypeOption} from './components/TemplateForm';
 
 interface TemplatesTableProps {
   templates: ProcessedSlotTemplate[];

@@ -13,7 +13,7 @@ import {
   DialogTrigger,
   DialogDescription
 } from '@/components/ui/dialog';
-import {TemplateForm, WorkoutTypeOption} from './TemplateForm';
+import {TemplateForm, WorkoutTypeOption} from './components/TemplateForm';
 
 interface CreateTemplateDialogProps {
   workoutTypes: WorkoutTypeOption[];

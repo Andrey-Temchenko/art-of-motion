@@ -7,8 +7,8 @@ import {getDateFnsLocale} from '@/lib/utils/date';
 import {getClientBookings} from '@/services/bookingService';
 import {BOOKING_STATUS} from '@/constants/bookingStatus';
 
-import {BookingHistoryList} from '@/components/dashboard/BookingHistoryList';
-import {BookingsList} from '@/components/dashboard/BookingsList';
+import {BookingHistoryList} from '@/components/dashboard/my_bookings/BookingHistoryList';
+import {BookingsList} from '@/components/dashboard/my_bookings/BookingsList';
 
 export default async function MyBookingsPage(props: {params: Promise<{locale: Locale}>}) {
   const params = await props.params;

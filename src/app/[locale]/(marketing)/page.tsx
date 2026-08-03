@@ -4,7 +4,7 @@ import {getDictionary} from '@/lib/i18n/getDictionary';
 import type {Locale} from '@/lib/i18n/config';
 import {siteConfig} from '@/config/site';
 
-import {HeroSection} from '@/components/marketing/HeroSection';
+import {HeroSection} from '@/components/marketing/hero_section/HeroSection';
 import {AboutSection} from '@/components/marketing/AboutSection';
 import {DisciplinesSection} from '@/components/marketing/DisciplinesSection';
 import {GallerySection} from '@/components/marketing/GallerySection';
