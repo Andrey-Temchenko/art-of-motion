@@ -11,10 +11,10 @@ import {formatDate} from '@/lib/utils/date';
 
 import {ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent} from '@/components/ui/chart';
 
-type OverviewChartsProps = {
+interface OverviewChartsProps {
   bookingsByDay: DashboardStats['bookingsByDay'];
   workoutTypePopularity: DashboardStats['workoutTypePopularity'];
-};
+}
 
 const COLORS = ['var(--chart-1)', 'var(--chart-2)', 'var(--chart-3)', 'var(--chart-4)', 'var(--chart-5)'];
 

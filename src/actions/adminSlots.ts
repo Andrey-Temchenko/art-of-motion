@@ -12,11 +12,7 @@ import {cancelClientBookingAsAdmin} from '@/services/adminService';
 import {DomainError} from '@/services/types';
 import {ROUTES, buildRevalidatePath} from '@/config/navigation';
 
-export type ActionState = {
-  success: boolean;
-  message?: string;
-  errors?: Record<string, string[]>;
-};
+import type {ActionState} from './types';
 
 export async function createSlotAction(prevState: ActionState, formData: FormData): Promise<ActionState> {
   try {

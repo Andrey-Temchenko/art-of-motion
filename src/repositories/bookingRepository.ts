@@ -1,3 +1,6 @@
+import {SupabaseClient} from '@supabase/supabase-js';
+
+import {Database} from '@/types/database.types';
 import {createClient} from '@/lib/supabase/server';
 import {createAdminClient} from '@/lib/supabase/admin';
 import {RawBookingData, RawBookingNotificationData} from './types';
@@ -67,10 +70,8 @@ export async function updateBookingStatus(
   return data;
 }
 
-export async function getClientBookingsList(userId: string): Promise<RawBookingData[]> {
-  const supabase = await createClient();
-
-  const bookingsQuery = supabase
+export const clientBookingsListQuery = (client: SupabaseClient<Database>, userId: string) =>
+  client
     .from('bookings')
     .select(
       `
@@ -89,14 +90,17 @@ export async function getClientBookingsList(userId: string): Promise<RawBookingD
     )
     .eq('client_id', userId);
 
+export async function getClientBookingsList(userId: string): Promise<RawBookingData[]> {
+  const supabase = await createClient();
+  const bookingsQuery = clientBookingsListQuery(supabase, userId);
+
   const {data, error} = await bookingsQuery;
 
   if (error) {
     throw error;
   }
 
-  // Cast because QueryData doesn't perfectly align with the manual interface
-  return (data || []) as unknown as RawBookingData[];
+  return data || [];
 }
 
 export async function cancelBookingAsAdmin(bookingId: string): Promise<void> {

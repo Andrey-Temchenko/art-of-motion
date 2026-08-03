@@ -16,11 +16,7 @@ import {
 import {DomainError} from '@/services/types';
 import {buildRevalidatePath, ROUTES} from '@/config/navigation';
 
-export type ActionState = {
-  success: boolean;
-  message?: string;
-  errors?: Record<string, string[]>;
-};
+import type {ActionState} from './types';
 
 export async function createSlotTemplateAction(input: unknown): Promise<ActionState> {
   try {

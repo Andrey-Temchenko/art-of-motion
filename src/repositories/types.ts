@@ -1,11 +1,15 @@
+import {QueryData, SupabaseClient} from '@supabase/supabase-js';
+
 import {Profile, UserRole} from '@/lib/supabase/types';
 import {Database} from '@/types/database.types';
-import {QueryData, SupabaseClient} from '@supabase/supabase-js';
 import {createAdminClient} from '@/lib/supabase/admin';
 import {BookingStatusType} from '@/constants/bookingStatus';
 import {ClubLocationType} from '@/constants/locations';
 import {SlotStatusType} from '@/constants/slotStatus';
 import {DayOfWeekType} from '@/constants/dayOfWeek';
+
+import {adminSlotsListQuery, scheduleSlotsListQuery} from './slotRepository';
+import {clientBookingsListQuery} from './bookingRepository';
 
 export interface RawDashboardKpis {
   total_clients: number | null;
@@ -30,7 +34,7 @@ export interface RawDashboardStats {
   popularity: RawWorkoutPopularity[];
 }
 
-export type RawAdminClientData = {
+export interface RawAdminClientData {
   client_id: string | null;
   full_name: string | null;
   email: string | null;
@@ -40,9 +44,9 @@ export type RawAdminClientData = {
   upcoming_bookings: number | null;
   cancelled_bookings: number | null;
   last_booking_at: string | null;
-};
+}
 
-export type CreateSlotData = {
+export interface CreateSlotData {
   workout_type_id: string;
   location: ClubLocationType;
   start_time: string; // ISO string
@@ -52,48 +56,15 @@ export type CreateSlotData = {
   status: SlotStatusType;
   cancellation_deadline_hours?: number;
   slot_template_id?: string;
-};
+}
 
 export type UpdateSlotData = Partial<CreateSlotData>;
 
 export type WorkoutType = Database['public']['Tables']['workout_types']['Row'];
 
-export type RawBookingData = {
-  id: string;
-  status: string;
-  slots:
-    | {
-        id: string;
-        start_time: string;
-        end_time: string;
-        location: string;
-        price: number;
-        cancellation_deadline_hours: number;
-        workout_types: {title: string} | {title: string}[] | null;
-      }
-    | {
-        id: string;
-        start_time: string;
-        end_time: string;
-        location: string;
-        price: number;
-        cancellation_deadline_hours: number;
-        workout_types: {title: string} | {title: string}[] | null;
-      }[]
-    | null;
-};
-
-export type RawSlotData = {
-  id: string;
-  location: string;
-  start_time: string;
-  end_time: string;
-  max_capacity: number;
-  price: number;
-  status: SlotStatusType;
-  workout_type: {title: string} | {title: string}[] | null;
-  bookings: {id?: string; client_id?: string; status?: string}[] | null;
-};
+export type RawSlotData = QueryData<ReturnType<typeof adminSlotsListQuery>>[number];
+export type RawScheduleSlotData = QueryData<ReturnType<typeof scheduleSlotsListQuery>>[number];
+export type RawBookingData = QueryData<ReturnType<typeof clientBookingsListQuery>>[number];
 
 export interface IAdminRepository {
   getAdminDashboardStats(): Promise<RawDashboardStats>;
@@ -130,7 +101,7 @@ export interface ISlotRepository {
   updateSlotStatus(slotId: string, status: SlotStatusType): Promise<void>;
   updateSlot(slotId: string, slotData: UpdateSlotData): Promise<void>;
   getAdminSlotsList(): Promise<RawSlotData[]>;
-  getScheduleSlotsList(startDate: string, endDate: string): Promise<RawSlotData[]>;
+  getScheduleSlotsList(startDate: string, endDate: string): Promise<RawScheduleSlotData[]>;
   getAdminSlotDetails(slotId: string): Promise<RawAdminSlotDetails | null>;
 }
 
@@ -192,7 +163,7 @@ export const allSlotTemplatesQuery = (client: SupabaseClient<Database> = createA
 
 export type RawSlotTemplateData = QueryData<ReturnType<typeof allSlotTemplatesQuery>>[number];
 
-export type CreateSlotTemplateData = {
+export interface CreateSlotTemplateData {
   workout_type_id: string;
   location: ClubLocationType;
   day_of_week: DayOfWeekType;
@@ -204,7 +175,7 @@ export type CreateSlotTemplateData = {
   is_active: boolean;
   recurrence_start_date: string;
   recurrence_end_date: string | null;
-};
+}
 
 export type UpdateSlotTemplateData = Partial<CreateSlotTemplateData>;
 

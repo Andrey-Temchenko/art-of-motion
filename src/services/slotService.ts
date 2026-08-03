@@ -6,7 +6,7 @@ import {ProcessedAdminSlot, ProcessedAdminSlotDetails, DomainError, UpdateSlotIn
 import {getRepositories} from '@/repositories';
 import {CreateSlotData, UpdateSlotData} from '@/repositories/types';
 
-type CreateSlotInput = {
+interface CreateSlotInput {
   workout_type_id: string;
   location: string;
   start_time: string;
@@ -15,7 +15,7 @@ type CreateSlotInput = {
   price: number;
   cancellation_deadline_hours?: number;
   slot_template_id?: string;
-};
+}
 
 export async function createSlot(validData: CreateSlotInput, repos = getRepositories()): Promise<void> {
   const utcStartTime = fromKyivTime(validData.start_time).toISOString();

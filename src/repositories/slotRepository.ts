@@ -1,6 +1,8 @@
+import {SupabaseClient} from '@supabase/supabase-js';
+
 import {createClient} from '@/lib/supabase/server';
 import {createAdminClient} from '@/lib/supabase/admin';
-import {CreateSlotData, RawSlotData, RawAdminSlotDetails, UpdateSlotData} from './types';
+import {CreateSlotData, RawSlotData, RawScheduleSlotData, RawAdminSlotDetails, UpdateSlotData} from './types';
 import {SLOT_STATUS, SlotStatusType} from '@/constants/slotStatus';
 import {Database} from '@/types/database.types';
 
@@ -80,11 +82,9 @@ export async function updateSlot(slotId: string, slotData: UpdateSlotData): Prom
   }
 }
 
-export async function getAdminSlotsList(): Promise<RawSlotData[]> {
-  const supabase = await createClient();
+export const adminSlotsListQuery = (client: SupabaseClient<Database>) => {
   const nowUtc = new Date().toISOString();
-
-  const slotsQuery = supabase
+  return client
     .from('slots')
     .select(
       `
@@ -101,23 +101,30 @@ export async function getAdminSlotsList(): Promise<RawSlotData[]> {
     )
     .gte('start_time', nowUtc)
     .order('start_time', {ascending: true});
+};
+
+export async function getAdminSlotsList(): Promise<RawSlotData[]> {
+  const supabase = await createClient();
+  const slotsQuery = adminSlotsListQuery(supabase);
 
   const {data, error} = await slotsQuery;
 
   if (error) throw error;
 
-  return (data || []) as unknown as RawSlotData[];
+  return data || [];
 }
 
-export async function getScheduleSlotsList(startDate: string, endDate: string): Promise<RawSlotData[]> {
-  const adminClient = createAdminClient();
-
-  const slotsQuery = adminClient
+export const scheduleSlotsListQuery = (client: SupabaseClient<Database>, startDate: string, endDate: string) =>
+  client
     .from('slots')
     .select('*, workout_type:workout_types(title), bookings(client_id, status)')
     .gte('start_time', startDate)
     .lte('start_time', endDate)
     .order('start_time', {ascending: true});
+
+export async function getScheduleSlotsList(startDate: string, endDate: string): Promise<RawScheduleSlotData[]> {
+  const adminClient = createAdminClient();
+  const slotsQuery = scheduleSlotsListQuery(adminClient, startDate, endDate);
 
   const {data, error} = await slotsQuery;
 
@@ -125,7 +132,7 @@ export async function getScheduleSlotsList(startDate: string, endDate: string): 
     throw error;
   }
 
-  return (data || []) as unknown as RawSlotData[];
+  return data || [];
 }
 
 export async function getAdminSlotDetails(slotId: string): Promise<RawAdminSlotDetails | null> {

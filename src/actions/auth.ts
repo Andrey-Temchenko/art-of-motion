@@ -9,12 +9,7 @@ import {siteConfig} from '@/config/site';
 import {getUserRoleServer} from '@/lib/supabase/session';
 import {USER_ROLE, type UserRoleType} from '@/constants/roles';
 import {buildRevalidatePath, ROUTES} from '@/config/navigation';
-
-type AuthActionResponse = {
-  success?: boolean;
-  error?: string;
-  role?: UserRoleType;
-};
+import {AuthActionResponse} from './types';
 
 export async function signInWithGoogle(formData?: FormData): Promise<void> {
   const supabase = await createClient();

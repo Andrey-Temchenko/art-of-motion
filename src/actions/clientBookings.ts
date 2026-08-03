@@ -11,10 +11,7 @@ import {DomainError} from '@/services/types';
 import type {CancelBookingResult} from '@/services/types';
 import {ROUTES, buildRevalidatePath} from '@/config/navigation';
 
-export type ActionState = {
-  success: boolean;
-  message?: string;
-};
+import type {ActionState} from './types';
 
 export async function bookSlotAction(prevState: ActionState, formData: FormData): Promise<ActionState> {
   const localeForm = formData.get('locale') as string;

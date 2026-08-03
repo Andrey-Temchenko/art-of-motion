@@ -13,10 +13,10 @@ import {TemplatesTable} from '@/components/admin/TemplatesTable';
 import {CreateTemplateDialog} from '@/components/admin/CreateTemplateDialog';
 import {UpcomingOccurrences} from '@/components/admin/UpcomingOccurrences';
 
-type PageProps = {
+interface PageProps {
   params: Promise<{locale: Locale}>;
   searchParams: Promise<{weeks?: string}>;
-};
+}
 
 export default async function SlotTemplatesPage({params, searchParams}: PageProps) {
   await requireRole([USER_ROLE.ADMIN]);

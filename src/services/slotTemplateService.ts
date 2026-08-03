@@ -6,7 +6,7 @@ import {ProcessedSlotTemplate, ProcessedUpcomingOccurrence, DomainError} from '.
 import {ClubLocationType} from '@/constants/locations';
 import {DayOfWeekType} from '@/constants/dayOfWeek';
 
-type SlotTemplateInput = {
+interface SlotTemplateInput {
   workout_type_id: string;
   location: string;
   day_of_week: number;
@@ -17,7 +17,7 @@ type SlotTemplateInput = {
   cancellation_deadline_hours: number;
   recurrence_start_date: string;
   recurrence_end_date: string | null;
-};
+}
 
 export async function getAllSlotTemplates(repos = getRepositories()): Promise<ProcessedSlotTemplate[]> {
   try {
