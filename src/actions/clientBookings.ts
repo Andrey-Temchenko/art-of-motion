@@ -1,6 +1,7 @@
 'use server';
 
 import {revalidatePath} from 'next/cache';
+import {isRedirectError} from 'next/dist/client/components/redirect-error';
 
 import type {User} from '@supabase/supabase-js';
 
@@ -25,7 +26,8 @@ export async function bookSlotAction(prevState: ActionState, formData: FormData)
   let user: User;
   try {
     user = await requireUser();
-  } catch {
+  } catch (error) {
+    if (isRedirectError(error)) throw error;
     return {
       success: false,
       message: dict.dashboardArea.booking.errorUnauthorized
@@ -69,7 +71,8 @@ export async function cancelBookingAction(bookingId: string): Promise<CancelBook
   let user;
   try {
     user = await requireUser();
-  } catch {
+  } catch (error) {
+    if (isRedirectError(error)) throw error;
     return {success: false, code: 'UNAUTHORIZED'};
   }
 

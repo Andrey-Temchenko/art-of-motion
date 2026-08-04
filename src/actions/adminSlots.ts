@@ -1,6 +1,7 @@
 'use server';
 
 import {revalidatePath} from 'next/cache';
+import {isRedirectError} from 'next/dist/client/components/redirect-error';
 
 import {flattenError} from 'zod';
 
@@ -21,7 +22,8 @@ import type {ActionState} from './types';
 export async function createSlotAction(prevState: ActionState, formData: FormData): Promise<ActionState> {
   try {
     await requireRole([USER_ROLE.ADMIN]);
-  } catch {
+  } catch (error) {
+    if (isRedirectError(error)) throw error;
     return {success: false, message: 'Unauthorized access'};
   }
 
@@ -53,7 +55,8 @@ export async function createSlotAction(prevState: ActionState, formData: FormDat
 export async function editSlotAction(slotId: string, prevState: ActionState, formData: FormData): Promise<ActionState> {
   try {
     await requireRole([USER_ROLE.ADMIN]);
-  } catch {
+  } catch (error) {
+    if (isRedirectError(error)) throw error;
     return {success: false, message: 'Unauthorized access'};
   }
 
@@ -89,7 +92,8 @@ export async function editSlotAction(slotId: string, prevState: ActionState, for
 export async function cancelSlotAction(slotId: string): Promise<ActionState> {
   try {
     await requireRole([USER_ROLE.ADMIN]);
-  } catch {
+  } catch (error) {
+    if (isRedirectError(error)) throw error;
     return {success: false, message: 'Unauthorized access'};
   }
 
@@ -111,7 +115,8 @@ export async function cancelSlotAction(slotId: string): Promise<ActionState> {
 export async function cancelBookingAction(bookingId: string): Promise<ActionState> {
   try {
     await requireRole([USER_ROLE.ADMIN]);
-  } catch {
+  } catch (error) {
+    if (isRedirectError(error)) throw error;
     return {success: false, message: 'Unauthorized access'};
   }
 

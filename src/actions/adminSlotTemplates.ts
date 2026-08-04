@@ -1,6 +1,7 @@
 'use server';
 
 import {revalidatePath} from 'next/cache';
+import {isRedirectError} from 'next/dist/client/components/redirect-error';
 
 import {flattenError} from 'zod';
 
@@ -25,7 +26,8 @@ import type {ActionState} from './types';
 export async function createSlotTemplateAction(input: unknown): Promise<ActionState> {
   try {
     await requireRole([USER_ROLE.ADMIN]);
-  } catch {
+  } catch (error) {
+    if (isRedirectError(error)) throw error;
     return {success: false, message: 'Unauthorized access'};
   }
 
@@ -56,7 +58,8 @@ export async function createSlotTemplateAction(input: unknown): Promise<ActionSt
 export async function updateSlotTemplateAction(templateId: string, input: unknown): Promise<ActionState> {
   try {
     await requireRole([USER_ROLE.ADMIN]);
-  } catch {
+  } catch (error) {
+    if (isRedirectError(error)) throw error;
     return {success: false, message: 'Unauthorized access'};
   }
 
@@ -91,7 +94,8 @@ export async function updateSlotTemplateAction(templateId: string, input: unknow
 export async function toggleSlotTemplateActiveAction(templateId: string): Promise<ActionState> {
   try {
     await requireRole([USER_ROLE.ADMIN]);
-  } catch {
+  } catch (error) {
+    if (isRedirectError(error)) throw error;
     return {success: false, message: 'Unauthorized access'};
   }
 
@@ -114,7 +118,8 @@ export async function toggleSlotTemplateActiveAction(templateId: string): Promis
 export async function deleteSlotTemplateAction(templateId: string): Promise<ActionState> {
   try {
     await requireRole([USER_ROLE.ADMIN]);
-  } catch {
+  } catch (error) {
+    if (isRedirectError(error)) throw error;
     return {success: false, message: 'Unauthorized access'};
   }
 
