@@ -39,7 +39,7 @@ export async function AboutSection({locale}: {locale: Locale}) {
             <div className="group border-border/50 relative aspect-[4/5] overflow-hidden rounded-[2rem] border shadow-2xl">
               <Image
                 src={siteConfig.images.about}
-                alt="Trainer portrait"
+                alt={dict.meta.aboutImageAlt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover object-center transition-transform duration-700 group-hover:scale-105"

@@ -74,23 +74,28 @@ export function GallerySection() {
             }}
             className="w-full">
             <CarouselContent className="-ml-4">
-              {siteConfig.images.gallery.map((image, index) => (
-                <CarouselItem key={index} className="basis-[85%] pl-4 sm:basis-1/2 lg:basis-1/3">
-                  {/* bg-muted/50 acts as a skeleton placeholder while the image loads */}
-                  <div className="group border-border/50 bg-muted/50 relative aspect-[4/5] overflow-hidden rounded-[2rem] border shadow-md transition-all hover:shadow-xl">
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      priority={index < 3}
-                      sizes="(max-width: 768px) 85vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                    />
-                    {/* Dark gradient overlay for a premium feel */}
-                    <div className="from-foreground/50 pointer-events-none absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  </div>
-                </CarouselItem>
-              ))}
+              {siteConfig.images.gallery.map((image, index) => {
+                const altKey = `alt${index + 1}` as keyof typeof dict.gallery.alts;
+                const localizedAlt = dict.gallery.alts?.[altKey] ?? image.alt;
+
+                return (
+                  <CarouselItem key={index} className="basis-[85%] pl-4 sm:basis-1/2 lg:basis-1/3">
+                    {/* bg-muted/50 acts as a skeleton placeholder while the image loads */}
+                    <div className="group border-border/50 bg-muted/50 relative aspect-[4/5] overflow-hidden rounded-[2rem] border shadow-md transition-all hover:shadow-xl">
+                      <Image
+                        src={image.src}
+                        alt={localizedAlt}
+                        fill
+                        priority={index < 3}
+                        sizes="(max-width: 768px) 85vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                      />
+                      {/* Dark gradient overlay for a premium feel */}
+                      <div className="from-foreground/50 pointer-events-none absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    </div>
+                  </CarouselItem>
+                );
+              })}
             </CarouselContent>
 
             {/* Custom positioned desktop navigation buttons */}

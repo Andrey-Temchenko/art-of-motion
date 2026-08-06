@@ -45,6 +45,7 @@ export async function generateMetadata({params}: {params: Promise<{locale: strin
       template: `%s | ${siteConfig.name}`
     },
     description: dict.meta.description,
+    keywords: dict.meta.keywords,
     metadataBase: new URL(baseUrl),
     openGraph: {
       title: dict.meta.siteName,

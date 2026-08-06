@@ -62,9 +62,9 @@ export function ContactSection() {
                   <h4 className="group-hover:text-primary text-xl font-bold transition-colors sm:text-3xl">
                     {dict.contact.clubs.alfa.name}
                   </h4>
-                  <p className="text-muted-foreground mt-1 text-sm font-medium tracking-wider uppercase">
+                  <address className="text-muted-foreground mt-1 text-sm font-medium tracking-wider uppercase not-italic">
                     {dict.contact.clubs.alfa.address}
-                  </p>
+                  </address>
                 </div>
               </div>
               <ArrowUpRight className="text-muted-foreground group-hover:text-foreground size-8 -translate-x-4 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
@@ -82,9 +82,9 @@ export function ContactSection() {
                   <h4 className="group-hover:text-primary text-xl font-bold transition-colors sm:text-3xl">
                     {dict.contact.clubs.topgun.name}
                   </h4>
-                  <p className="text-muted-foreground mt-1 text-sm font-medium tracking-wider uppercase">
+                  <address className="text-muted-foreground mt-1 text-sm font-medium tracking-wider uppercase not-italic">
                     {dict.contact.clubs.topgun.address}
-                  </p>
+                  </address>
                 </div>
               </div>
               <ArrowUpRight className="text-muted-foreground group-hover:text-foreground size-8 -translate-x-4 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />

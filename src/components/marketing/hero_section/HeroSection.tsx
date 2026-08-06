@@ -105,7 +105,7 @@ export function HeroSection({locale}: {locale: Locale}) {
           <div className="group border-border/50 relative aspect-[4/5] overflow-hidden rounded-[2rem] border shadow-2xl">
             <Image
               src={siteConfig.images.hero}
-              alt="Trainer in action"
+              alt={dict.meta.heroImageAlt}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               priority

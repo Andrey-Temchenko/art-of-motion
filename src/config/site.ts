@@ -8,6 +8,15 @@ export interface SocialLinks {
 
 export interface ClubLocation {
   instagram: string;
+  geo?: {
+    latitude: number;
+    longitude: number;
+  };
+  openingHours: Array<{
+    dayOfWeek: string[];
+    opens: string;
+    closes: string;
+  }>;
 }
 
 export interface DemoVideoConfig {
@@ -50,10 +59,33 @@ export const siteConfig: SiteConfig = {
   },
   clubs: {
     alfa: {
-      instagram: 'https://www.instagram.com/alfa_elitfitness/'
+      instagram: 'https://www.instagram.com/alfa_elitfitness/',
+      geo: {
+        latitude: 48.5113,
+        longitude: 34.9897
+      },
+      openingHours: [
+        {
+          dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+          opens: '07:00',
+          closes: '21:00'
+        },
+        {
+          dayOfWeek: ['Saturday'],
+          opens: '09:00',
+          closes: '18:00'
+        }
+      ]
     },
     top_gun: {
-      instagram: 'https://www.instagram.com/top_gun_fitness_club'
+      instagram: 'https://www.instagram.com/top_gun_fitness_club',
+      openingHours: [
+        {
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          opens: '08:00',
+          closes: '21:00'
+        }
+      ]
     }
   },
   demoVideo: {

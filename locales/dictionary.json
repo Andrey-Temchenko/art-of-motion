@@ -1,14 +1,49 @@
 {
   "meta": {
     "siteName": {
-      "uk": "ArtOfMotion - персональний тренер",
-      "ru": "ArtOfMotion - персональный тренер",
-      "en": "ArtOfMotion - Personal Trainer"
+      "uk": "Персональний тренер для жінок у Дніпрі | ArtOfMotion",
+      "ru": "Персональный тренер для женщин в Днепре | ArtOfMotion",
+      "en": "Personal Trainer for Women in Dnipro | ArtOfMotion"
     },
     "description": {
-      "uk": "Персональні офлайн-тренування. Трансформація жіночого стану через тіло та увагу. Рух для легкості та відчуття життя.",
-      "ru": "Персональные офлайн-тренировки. Трансформация женского состояния через тело и внимание. Движение для легкости и ощущения жизни.",
-      "en": "Personal offline training. Transformation of the female state through the body and attention. Movement for lightness and feeling alive."
+      "uk": "Персональний тренер для жінок у Дніпрі. Стретчинг, Hot Iron, функціональні та групові тренування. Трансформація стану через тіло без болю. Записатися онлайн.",
+      "ru": "Персональный тренер для женщин в Днепре. Стретчинг, Hot Iron, функциональные и групповые тренировки. Трансформация состояния через тело без боли. Записаться онлайн.",
+      "en": "Personal trainer for women in Dnipro. Stretching, Hot Iron, functional and group training. Body transformation without pain. Book online."
+    },
+    "keywords": {
+      "uk": "персональний тренер, Дніпро, стретчинг, hot iron, тренування для жінок, групові заняття, фітнес, розтяжка, МФР, TRX",
+      "ru": "персональный тренер, Днепр, стретчинг, hot iron, тренировки для женщин, групповые занятия, фитнес, растяжка, МФР, TRX",
+      "en": "personal trainer, Dnipro, stretching, hot iron, workouts for women, group classes, fitness, MFR, TRX"
+    },
+    "heroImageAlt": {
+      "uk": "Персональний тренер Олена Михеєва - тренування для жінок у Дніпрі",
+      "ru": "Персональный тренер Елена Михеева - тренировки для женщин в Днепре",
+      "en": "Personal trainer Elena Mikheeva - workouts for women in Dnipro"
+    },
+    "aboutImageAlt": {
+      "uk": "Тренер Олена Михеєва - 10 років досвіду персональних тренувань",
+      "ru": "Тренер Елена Михеева - 10 лет опыта персональных тренировок",
+      "en": "Trainer Elena Mikheeva - 10 years of personal training experience"
+    },
+    "trainerName": {
+      "uk": "Олена Михеєва",
+      "ru": "Елена Михеева",
+      "en": "Elena Mikheeva"
+    },
+    "trainerTitle": {
+      "uk": "Персональний тренер",
+      "ru": "Персональный тренер",
+      "en": "Personal Trainer"
+    },
+    "city": {
+      "uk": "Дніпро",
+      "ru": "Днепр",
+      "en": "Dnipro"
+    },
+    "address": {
+      "uk": "Донецьке шосе, 7",
+      "ru": "Донецкое шоссе, 7",
+      "en": "Donetske Shose, 7"
     }
   },
   "nav": {
@@ -295,6 +330,53 @@
       "uk": "Подивіться, як проходять наші тренування, та відчуйте енергію бережного руху.",
       "ru": "Посмотрите, как проходят наши тренировки, и почувствуйте энергию бережного движения.",
       "en": "Take a look at our workouts and feel the energy of mindful movement."
+    },
+    "alts": {
+      "alt1": {
+        "uk": "Персональне тренування стретчинг з тренером у Дніпрі",
+        "ru": "Персональная тренировка стретчинг с тренером в Днепре",
+        "en": "Personal stretching session with a trainer in Dnipro"
+      },
+      "alt2": {
+        "uk": "Групове силове тренування для жінок ArtOfMotion",
+        "ru": "Групповая силовая тренировка для женщин ArtOfMotion",
+        "en": "Group strength training for women ArtOfMotion"
+      },
+      "alt3": {
+        "uk": "Функціональне тренування Hot Iron у фітнес-залі Дніпра",
+        "ru": "Функциональная тренировка Hot Iron в фитнес-зале Днепра",
+        "en": "Hot Iron functional training at a gym in Dnipro"
+      },
+      "alt4": {
+        "uk": "Тренування на балансбордах для стабілізації кора",
+        "ru": "Тренировка на балансбордах для стабилизации кора",
+        "en": "Balance board training for core stabilization"
+      },
+      "alt5": {
+        "uk": "Заняття з розтяжки та гнучкості для жінок",
+        "ru": "Занятие по растяжке и гибкости для женщин",
+        "en": "Stretching and flexibility class for women"
+      },
+      "alt6": {
+        "uk": "Персональне тренування в тренажерному залі Дніпра",
+        "ru": "Персональная тренировка в тренажерном зале Днепра",
+        "en": "Personal gym training session in Dnipro"
+      },
+      "alt7": {
+        "uk": "TRX підвісні тренування з власною вагою",
+        "ru": "TRX подвесные тренировки с собственным весом",
+        "en": "TRX suspension training with body weight"
+      },
+      "alt8": {
+        "uk": "Міофасціальний реліз для відновлення м'язів",
+        "ru": "Миофасциальный релиз для восстановления мышц",
+        "en": "Myofascial release for muscle recovery"
+      },
+      "alt9": {
+        "uk": "Атмосфера тренувань ArtOfMotion у Дніпрі",
+        "ru": "Атмосфера тренировок ArtOfMotion в Днепре",
+        "en": "ArtOfMotion training atmosphere in Dnipro"
+      }
     }
   },
   "testimonials": {
@@ -508,6 +590,31 @@
       "uk": "Нагору",
       "ru": "Наверх",
       "en": "Back to top"
+    },
+    "brandTagline": {
+      "uk": "Трансформація жіночого стану через тіло та увагу. Персональні та групові тренування у Дніпрі.",
+      "ru": "Трансформация женского состояния через тело и внимание. Персональные и групповые тренировки в Днепре.",
+      "en": "Transformation of the female state through the body and attention. Personal and group training in Dnipro."
+    },
+    "navTitle": {
+      "uk": "Навігація",
+      "ru": "Навигация",
+      "en": "Navigation"
+    },
+    "socialTitle": {
+      "uk": "Соцмережі",
+      "ru": "Соцсети",
+      "en": "Social"
+    },
+    "telegram": {
+      "uk": "Telegram",
+      "ru": "Telegram",
+      "en": "Telegram"
+    },
+    "instagram": {
+      "uk": "Instagram",
+      "ru": "Instagram",
+      "en": "Instagram"
     }
   },
   "videoModal": {
