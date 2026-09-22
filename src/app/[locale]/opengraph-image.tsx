@@ -3,8 +3,6 @@ import {ImageResponse} from 'next/og';
 import type {Locale} from '@/lib/i18n/config';
 import {getDictionary} from '@/lib/i18n/getDictionary';
 
-export const runtime = 'edge';
-
 export const alt = 'Art Of Motion';
 export const size = {
   width: 1200,
